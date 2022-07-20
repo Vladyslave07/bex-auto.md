@@ -1,0 +1,96 @@
+.section-swiper {
+    overflow: hidden;
+    margin-bottom: 70px;
+    .nav-tabs {
+        margin-top: 46px;
+    }
+    .swiper-btn {
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+}
+.swiper-nav {
+    display: flex;
+    .swiper-button-prev {
+        cursor: pointer;
+        svg {
+            transform: rotate(90deg);
+        }
+    }
+    .swiper-button-next {
+        cursor: pointer;
+        svg {
+            transform: rotate(-90deg);
+        }
+    }
+    .swiper-bullets {
+        margin: 0 5px;
+        ul {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            li {
+                cursor: pointer;
+                list-style: none;
+                font-weight: 600;
+                font-size: 16px;
+                line-height: 24px;
+                padding: 2px 0;
+                user-select: none;
+                min-width: 42px;
+                text-align: center;
+                &.active {
+                    color: var(--red);
+                    cursor: auto;
+                }
+                &.hide {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+.swiper-pagination {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    .swiper-pagination-bullet {
+        background: var(--bg);
+        margin: 0 5px;
+        cursor: pointer;
+        border-radius: 50%;
+        height: 10px;
+        width: 10px;
+        &-active {
+            background: var(--red);
+        }
+    }
+    &-lock {
+        display: none;
+    }
+}
+.swiper-button-lock {
+    display: none;
+}
+@media (min-width: 992px) {
+    .swiper-nav {
+        position: absolute;
+        right: 6px;
+        top: -60px;
+    }
+}
+@media (max-width: 991px) {
+    .section-swiper {
+        .nav-tabs {
+            margin-top: 36px;
+        }
+        .swiper-btn {
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+    }
+    .swiper-nav {
+        margin-top: 30px;
+        justify-content: center;
+    }
+}

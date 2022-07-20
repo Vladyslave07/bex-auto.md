@@ -1,0 +1,128 @@
+.banner {
+    min-height: 670px;
+    position: relative;
+    display: flex;
+    .container {
+        & > *:not(.img) {
+            position: relative;
+            z-index: 1;
+        }
+    }
+    .h1 {
+        font-weight: 600;
+        font-size: 76px;
+        line-height: 91px;
+        text-transform: uppercase;
+        margin: 0 0 19px;
+        padding: 0;
+    }
+    .h2 {
+        font-size: 36px;
+        line-height: 45px;
+    }
+    .h3 {
+        font-size: 36px;
+        line-height: 45px;
+    }
+    .line {
+        background: var(--red);
+        display: table;
+        margin-top: 58px;
+        margin-bottom: 40px;
+        height: 5px;
+        width: 143px;
+    }
+    .img {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+}
+.form-choose-car {
+    background: #fff;
+    box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    max-width: 932px;
+    padding: 20px 40px 30px;
+    margin: -80px auto 80px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    .title {
+        color: var(--blue);
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 30px;
+        text-align: center;
+        margin-bottom: 40px;
+        width: 100%;
+    }
+    .form-group {
+        margin-right: 30px;
+        margin-bottom: 0;
+        max-width: 280px;
+        flex: 1;
+    }
+}
+@media (max-width: 972px) {
+    .form-choose-car {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+@media (max-width: 767px) {
+    .banner {
+        min-height: auto;
+        padding-top: 30px;
+        padding-bottom: 160px;
+        margin-bottom: -160px;
+        text-align: center;
+        br {
+            display: none;
+        }
+        .h1 {
+            font-size: 36px;
+            line-height: 43px;
+            margin-bottom: 10px;
+        }
+        .h2 {
+            font-weight: 600;
+            font-size: 24px;
+            line-height: 27px;
+            margin: 0 20px 26px;
+        }
+        .h3 {
+            font-size: 22px;
+            line-height: 30px;
+            margin: 10px 0 13px;
+        }
+        .img {
+            margin: 0 -20px;
+            display: block;
+            position: static;
+            img {
+                display: block;
+            }
+        }
+    }
+    .form-choose-car {
+        margin: 8px 20px 52px;
+        .title {
+            color: var(--blue);
+            font-size: 16px;
+            line-height: 24px;
+            max-width: 290px;
+            margin-bottom: 17px;
+        }
+        .form-group {
+            margin: 0 0 28px;
+            max-width: 100%;
+            flex: 100%;
+        }
+        .btn {
+            width: 100%;
+        }
+    }
+}

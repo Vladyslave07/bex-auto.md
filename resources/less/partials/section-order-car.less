@@ -1,0 +1,128 @@
+.section-order-car {
+    position: relative;
+    margin-bottom: 230px;
+    .row {
+        display: flex;
+    }
+    .text {
+        margin-top: 78px;
+        .main-title {
+            line-height: 46px;
+            margin-bottom: 33px;
+        }
+        p {
+            margin: 0 0 9px;
+            font-size: 20px;
+        }
+    }
+    .img {
+        margin-top: 100px;
+        margin-left: 13px;
+        .map {
+            position: absolute;
+            top: 230px;
+            right: 0;
+            z-index: -1;
+        }
+    }
+    .form {
+        margin-top: 44px;
+        width: 480px;
+        margin-left: 10%;
+        flex: none;
+        &-body {
+            background: var(--bg);
+            padding: 55px 60px 110px;
+            border-radius: 5px;
+            box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 32px;
+            strong {
+                font-size: 16px;
+                font-weight: 600;
+                display: block;
+                margin-bottom: 2px;
+            }
+            span {
+                font-weight: 400;
+            }
+        }
+        .btn {
+            margin: 25px auto 0;
+            display: flex;
+        }
+    }
+}
+@media (max-width: 991px) {
+    .section-order-car {
+        margin-bottom: 80px;
+        .main-title {
+            &.line-left {
+                &::after {
+                    left: 50%;
+                    margin-left: -38px;
+                }
+            }
+        }
+        .row {
+            display: block;
+        }
+        .text {
+            text-align: center;
+            margin-top: 28px;
+            .main-title {
+                font-size: 23px;
+                line-height: 33px;
+                margin: 0 0 25px;
+            }
+            p {
+                font-size: 18px;
+            }
+        }
+        .img {
+            position: relative;
+            margin-top: 40px;
+            margin-left: 0;
+            .map {
+                top: -2px;
+                left: -20px;
+                right: -20px;
+                max-width: none;
+                width: 100vw;
+            }
+        }
+        .form {
+            background: var(--bg);
+            margin-left: 0;
+            margin-top: 25px;
+            width: 100%;
+            border-radius: 5px;
+            padding: 30px 15px 40px;
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+            .header {
+                margin-bottom: 20px;
+                strong {
+                    font-weight: 400;
+                }
+                span {
+                    font-size: 16px;
+                    line-height: 24px;
+                }
+            }
+            &-body {
+                background: transparent;
+                border-radius: 0;
+                box-shadow: none;
+                padding: 0;
+            }
+            .form-group {
+                margin: 0 24px 28px;
+            }
+            .btn {
+                width: calc(100% - 48px);
+            }
+        }
+    }
+}

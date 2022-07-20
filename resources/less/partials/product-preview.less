@@ -1,0 +1,103 @@
+.product-preview {
+    box-shadow: 3px 3px 9px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    padding: 23px 15px 20px;
+    .img {
+        position: relative;
+        border-radius: 8px;
+        overflow: hidden;
+        margin-bottom: 5px;
+        &:hover {
+            a {
+                img {
+                    transform: scale(1.05);
+                }
+            }
+        }
+        .icons {
+            position: absolute;
+            left: 20px;
+            top: 13px;
+            z-index: 1;
+        }
+        .stickers {
+            position: absolute;
+            right: 0;
+            top: 0;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            z-index: 1;
+            span {
+                background: var(--blue);
+                padding: 7px 19px;
+                display: block;
+            }
+        }
+        img {
+            width: 100%;
+            display: block;
+            transition: all 0.5s linear;
+        }
+    }
+    .title {
+        color: var(--blue);
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 24px;
+        margin-bottom: 4px;
+        display: table;
+    }
+    .year {
+        .title();
+        color: var(--red);
+        margin-bottom: 7px;
+    }
+    .features {
+        .tr {
+            display: flex;
+            justify-content: space-between;
+        }
+        .item {
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 19px;
+            margin-bottom: 11px;
+            display: flex;
+            align-items: center;
+            img {
+                margin-right: 13px;
+            }
+        }
+    }
+    .price-new {
+        color: var(--red);
+        font-weight: 700;
+        font-size: 23px;
+        line-height: 28px;
+        white-space: nowrap;
+    }
+    .price {
+        display: flex;
+        .tooltip {
+            margin: -10px 0 0 1px;
+        }
+    }
+    .btn {
+        font-size: 14px;
+        line-height: 17px;
+        padding: 8px 30px;
+    }
+    .footer {
+        border-top: 1px solid #D8D8D8;
+        padding-top: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+@media (max-width: 768px) {
+
+}

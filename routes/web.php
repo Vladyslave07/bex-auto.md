@@ -14,5 +14,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
+});
+
+// Роуты на вёрстку
+Route::group(['prefix' => 'html'], function () {
+    Route::get('/links', function () {return view('html.links');})->name('html.links');
+    Route::get('/index', function () {return view('html.index');})->name('html.index');
 });

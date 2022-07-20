@@ -1,0 +1,85 @@
+.section-services {
+    overflow: hidden;
+    .main-title {
+        margin-bottom: 30px;
+    }
+    .h3 {
+        margin: 60px 0;
+    }
+}
+.services-swiper {
+    margin-bottom: 140px;
+    overflow: visible;
+    .swiper-slide {
+        height: auto;
+        box-shadow: 3px 3px 9.5px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        padding: 17px 25px 0;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        .title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 30px;
+            text-align: center;
+            margin-bottom: 9px;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            font-weight: 400;
+        }
+        ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            font-weight: 400;
+            li {
+                display: flex;
+                &::before {
+                    content: "";
+                    background: var(--gray);
+                    display: block;
+                    border-radius: 50%;
+                    margin: 9px 9px 0 0;
+                    height: 2px;
+                    width: 2px;
+                    flex: none;
+                }
+            }
+        }
+        img {
+            display: block;
+            margin: 15px auto;
+        }
+        a {
+            font-size: 12px;
+            line-height: 15px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: auto;
+            display: block;
+            margin: auto -25px 0;
+            padding: 17px 0;
+            text-decoration: underline;
+            box-shadow: 0 3px 9.5px rgba(0, 0, 0, 0.1);
+            &:hover {
+                text-decoration: none;
+            }
+        }
+    }
+}
+@media (max-width: 991px) {
+    .section-services {
+        .main-title {
+            margin-bottom: 17px;
+        }
+        .h3 {
+            margin: 45px 0;
+        }
+    }
+    .services-swiper {
+        margin-bottom: 80px;
+    }
+}
