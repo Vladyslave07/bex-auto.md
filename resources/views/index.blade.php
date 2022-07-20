@@ -1680,8 +1680,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_10.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_10.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -1725,8 +1725,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_11.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_11.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -1773,8 +1773,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_16.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_16.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_12.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_12.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -1821,8 +1821,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_17.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_17.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_13.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_13.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -1866,8 +1866,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_11.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_11.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -1914,8 +1914,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_16.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_16.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_12.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_12.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -1962,8 +1962,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_10.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_10.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -2007,8 +2007,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_11.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_11.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -2055,8 +2055,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_16.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_16.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_12.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_12.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -2103,8 +2103,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_17.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_17.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_13.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_13.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -2151,8 +2151,8 @@
                     </div>
                     <a href="#" aria-label="img product">
                         <picture>
-                            <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
-                            <img width="289" height="218" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
+                            <source type="image/webp" srcset="{{ asset('img/example/img_10.webp') }}">
+                            <img width="289" height="218" src="{{ asset('img/example/img_10.png') }}" loading="lazy" alt="">
                         </picture>
                     </a>
                 </div>
@@ -2237,12 +2237,12 @@
                 <p class="color-red">США, Канади, Кореї, Китаю, Грузії.</p>
                 <div class="img">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_8.webp') }}">
-                        <img width="607" height="314" src="{{ asset('img/example/img_8.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/section-order-car.webp') }}">
+                        <img width="607" height="314" src="{{ asset('img/section-order-car.png') }}" loading="lazy" alt="">
                     </picture>
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_9.webp') }}">
-                        <img class="map" width="1232" height="631" src="{{ asset('img/example/img_9.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/section-order-car-map.webp') }}">
+                        <img class="map" width="1232" height="631" src="{{ asset('img/section-order-car-map.png') }}" loading="lazy" alt="">
                     </picture>
                 </div>
             </div>
@@ -2278,15 +2278,15 @@
 <div class="section-social">
     <div class="container">
         <picture class="img hidden-sm">
-            <source type="image/webp" srcset="{{ asset('img/example/img_10.webp') }}">
-            <img width="855" height="604" src="{{ asset('img/example/img_10.png') }}" loading="lazy" alt="">
+            <source type="image/webp" srcset="{{ asset('img/section-social.webp') }}">
+            <img width="855" height="604" src="{{ asset('img/section-social.png') }}" loading="lazy" alt="">
         </picture>
         <div class="text">
             <div class="main-title noline">Отримуй першим вигідні<br> <span class="color-red">пропозиції авто!</span></div>
             <p>Публікуємо розрахунки вартості, відеоогляди<br> та відгуки клієнтів в наших спільнотах.</p>
             <picture class="img visible-sm">
-                <source type="image/webp" srcset="{{ asset('img/example/img_11.webp') }}">
-                <img width="855" height="604" src="{{ asset('img/example/img_11.png') }}" loading="lazy" alt="">
+                <source type="image/webp" srcset="{{ asset('img/section-social-mob.webp') }}">
+                <img width="855" height="604" src="{{ asset('img/section-social-mob.png') }}" loading="lazy" alt="">
             </picture>
             <div class="social-list">
                 <a href="#" aria-label="telegram">
@@ -2310,8 +2310,8 @@
         <div class="main-title text-center noline"><span class="color-red">Bexhill</span> <span class="color-blue">Trading</span> Auto – офіційний партнер американських<br> аукціонів  Copart и IAAI</div>
         <div class="text-center">
             <picture>
-                <source type="image/webp" srcset="{{ asset('img/example/img_12.webp') }}">
-                <img width="548" height="92" src="{{ asset('img/example/img_12.png') }}" loading="lazy" alt="">
+                <source type="image/webp" srcset="{{ asset('img/example/img_8.webp') }}">
+                <img width="548" height="92" src="{{ asset('img/example/img_8.png') }}" loading="lazy" alt="">
             </picture>
             <div class="h3">Надаємо послуги під ключ:</div>
         </div>
@@ -2330,8 +2330,8 @@
                     <div class="title color-red">Доставка</div>
                     <p>Мы купим понравившееся авто из США (поможет выбрать при желании, подскажем нюансы), отправим его из порта в Америке (Нью-Йорк, Чикаго, Саванна, Майами, Лос-Анджелес, Норфолк или Торонто). Транспортируем по морю, застрахуем груз от неприятностей в дороге, оформим таможенные и другие документы.</p>
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_13.webp') }}">
-                        <img width="272" height="36" src="{{ asset('img/example/img_13.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_9.webp') }}">
+                        <img width="272" height="36" src="{{ asset('img/example/img_9.png') }}" loading="lazy" alt="">
                     </picture>
                     <a href="#">Детальніше</a>
                 </div>
@@ -2365,8 +2365,8 @@
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Іванов М.</div>
@@ -2386,15 +2386,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Петров В.</div>
@@ -2415,15 +2415,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Сидоров М.</div>
@@ -2443,15 +2443,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Іванов М.</div>
@@ -2471,15 +2471,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Петров В.</div>
@@ -2500,15 +2500,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Сидоров М.</div>
@@ -2528,15 +2528,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Іванов М.</div>
@@ -2556,15 +2556,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Петров В.</div>
@@ -2585,15 +2585,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Сидоров М.</div>
@@ -2613,15 +2613,15 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
             <div class="swiper-slide">
                 <div class="header">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}">
-                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_18.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/example/img_14.webp') }}">
+                        <img class="review-avatar" width="54" height="56" src="{{ asset('img/example/img_14.png') }}" loading="lazy" alt="">
                     </picture>
                     <div>
                         <div class="review-author">Іванов М.</div>
@@ -2641,8 +2641,8 @@
                     <p>Sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</p>
                 </div>
                 <picture>
-                    <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}">
-                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_19.png') }}" loading="lazy" alt="">
+                    <source type="image/webp" srcset="{{ asset('img/example/img_15.webp') }}">
+                    <img class="review-logo" width="101" height="39" src="{{ asset('img/example/img_15.png') }}" loading="lazy" alt="">
                 </picture>
             </div>
         </div>
@@ -2857,7 +2857,7 @@
         <h3>Купити авто з США</h3>
         <p>Компанія Bexhill Trading Auto з радістю допоможе вибрати, придбати і отримати автомобіль мрії з США. Менеджери врахують всі вимоги та побажання, звернуть увагу на нюанси покупки конкретної моделі і будуть на зв’язку 24 години на добу, щоб проконсультувати з питань, пов’язаних з роботою компанії.</p>
     </div>
-    <span class="toggle-btn">Детальніше</span>
+    <span class="toggle-btn" data-text="Згорнути">Детальніше</span>
 </div>
 <!-- ///:end/// -->
 
