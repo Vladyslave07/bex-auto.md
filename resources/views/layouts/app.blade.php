@@ -6,7 +6,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <meta name="Description" content="Put your description here.">
 
-        <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon" />
+        <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNUq5n3HwAEUQJBudQtMwAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon" />
         <title>@yield('title')</title>
 
         @stack('styles')
@@ -234,6 +234,9 @@
             </symbol>
             <symbol id="star-icon" viewBox="0 0 22 19">
                 <path fill-rule="evenodd" clip-rule="evenodd" d="M10.9847 15.0781L16.4594 18.1634C16.8618 18.3908 17.3595 18.0546 17.2537 17.6294L15.8029 11.8148L20.6317 7.90868C20.9812 7.6219 20.8011 7.07802 20.3246 7.03846L13.9603 6.53413L11.4718 1.05573C11.2918 0.650288 10.6776 0.650288 10.4976 1.05573L8.00903 6.53413L1.64475 7.03846C1.17881 7.07802 0.9882 7.6219 1.34824 7.90868L6.17705 11.8148L4.72629 17.6294C4.62039 18.0546 5.1181 18.3908 5.5205 18.1634L10.9847 15.0781Z"/>
+            </symbol>
+            <symbol id="close-icon" viewBox="0 0 10 10" fill="none">
+                <path d="M1 1L9 9M1 9L9 1L1 9Z" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
             </symbol>
         </svg>
 

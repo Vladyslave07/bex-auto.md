@@ -1,0 +1,92 @@
+.dropdown {
+    position: relative;
+    &.open {
+        .dropdown-menu {
+            display: block;
+        }
+    }
+    &-toggle {
+        font-weight: 600;
+        background-image: url("data:image/svg+xml,%3Csvg width='13' height='7' viewBox='0 0 13 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M6.28991 4.61541L10.5547 0.348549C10.7325 0.18278 10.9677 0.0925341 11.2107 0.0968237C11.4537 0.101113 11.6856 0.199604 11.8575 0.371545C12.0293 0.543488 12.1278 0.775456 12.1321 1.01858C12.1363 1.26171 12.0461 1.497 11.8805 1.6749L7.50307 6.05438L7.25293 6.30463L6.95277 6.60494C6.77689 6.78068 6.53848 6.87939 6.28991 6.87939C6.04133 6.87939 5.80292 6.78068 5.62704 6.60494L0.699359 1.6749C0.533669 1.497 0.443465 1.26171 0.447753 1.01858C0.452041 0.775456 0.550484 0.543488 0.722344 0.371545C0.894204 0.199604 1.12606 0.101113 1.36907 0.0968237C1.61208 0.0925341 1.84727 0.18278 2.02508 0.348549L6.28991 4.61541Z' fill='%233B3B3B' fill-opacity='0.98'/%3E%3C/svg%3E ");
+        background-repeat: no-repeat;
+        background-position: right center;
+        cursor: pointer;
+        padding-right: 22px;
+    }
+    &-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        display: none;
+        padding: 16px 0;
+        margin: 0;
+        text-align: left;
+        list-style: none;
+        background-color: #fff;
+        box-shadow: 4px 6px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 5px;
+        min-width: 220px;
+        width: 100%;
+        z-index: 1000;
+        ul {
+            list-style: none;
+            padding: 8px 20px;
+            margin: 0;
+            max-height: 400px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            scrollbar-color: #E0E2E7 transparent;
+            scrollbar-width: thin;
+            &::-webkit-scrollbar-track {
+                display: none;
+            }
+            &::-webkit-scrollbar {
+                width: 11px;
+            }
+            &::-webkit-scrollbar-button {
+                display: none;
+            }
+            &::-webkit-scrollbar-thumb {
+                box-shadow: inset 0 0 14px 14px #E0E2E7;
+                border: solid 4px transparent;
+                border-radius: 14px;
+            }
+            & > * {
+                font-weight: 400;
+                line-height: 16px;
+                display: table;
+                margin-bottom: 30px;
+                padding-right: 27px;
+                cursor: pointer;
+                width: 100%;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                &.selected {
+                    color: var(--blue);
+                    background-image: url("data:image/svg+xml,%3Csvg width='10' height='8' viewBox='0 0 10 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M9.12981 0.862183C9.25479 0.987202 9.325 1.15674 9.325 1.33352C9.325 1.51029 9.25479 1.67983 9.12981 1.80485L3.79647 7.13818C3.67146 7.26316 3.50192 7.33337 3.32514 7.33337C3.14837 7.33337 2.97883 7.26316 2.85381 7.13818L0.187141 4.47152C0.0657025 4.34578 -0.00149374 4.17738 2.52018e-05 4.00258C0.00154415 3.82778 0.0716568 3.66058 0.195262 3.53697C0.318868 3.41337 0.486076 3.34325 0.660874 3.34173C0.835672 3.34021 1.00407 3.40741 1.12981 3.52885L3.32514 5.72418L8.18714 0.862183C8.31216 0.737203 8.4817 0.666992 8.65847 0.666992C8.83525 0.666992 9.00479 0.737203 9.12981 0.862183Z' fill='%232A3D68'/%3E%3C/svg%3E%0A");
+                    background-repeat: no-repeat;
+                    background-position: right center;
+                }
+                label {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+    &-check {
+        ul {
+            & > * {
+                padding-right: 0;
+            }
+        }
+    }
+    .form-control {
+        padding: 7px 20px 7px 11px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        background-position: calc(100% - 8px) center;
+    }
+}

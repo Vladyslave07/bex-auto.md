@@ -17,6 +17,8 @@ mix.ImageWebp({
     to: 'public/img'
 })
 mix.js('resources/js/index.js', 'public/js')
+    .js('resources/js/catalog.js', 'public/js')
 mix.less('resources/less/index.less', 'public/css')
+    .less('resources/less/catalog.less', 'public/css')
 mix.version()
 mix.disableNotifications()

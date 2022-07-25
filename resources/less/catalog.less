@@ -1,0 +1,27 @@
+@import "../../node_modules/swiper/swiper";
+@import "partials/swiper-navigation.less";
+@import "partials/common.less";
+@import "partials/breadcrumb.less";
+@import "partials/dropdown.less";
+@import "partials/filter-side.less";
+@import "partials/section-catalog.less";
+@import "partials/product-preview.less";
+@import "partials/product-swiper.less";
+@import "partials/popular-brands.less";
+@import "partials/section-faq.less";
+@import "partials/section-seo.less";
+@import "partials/section-order-calculation.less";
+
+.main .h1 {
+    margin-top: 100px;
+}
+@media (max-width: 767px) {
+    .main .h1 {
+        line-height: 37px;
+        margin: 40px 25px 0;
+        &::after {
+            left: 50%;
+            margin-left: -38px;
+        }
+    }
+}
