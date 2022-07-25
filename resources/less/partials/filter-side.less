@@ -1,0 +1,122 @@
+.filter-side {
+    width: 24%;
+    .form-check {
+        line-height: 16px;
+        margin-bottom: 28px;
+        width: 100%;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        label {
+            display: flex;
+        }
+    }
+    .label {
+        font-weight: 400;
+        display: table;
+        margin-bottom: 3px;
+    }
+    .title {
+        font-weight: 600;
+        margin-bottom: 9px;
+        margin-top: 24px;
+        display: table;
+    }
+    .form-control {
+        width: 156px;
+    }
+    .dropdown {
+        margin-bottom: 20px;
+        &-select {
+            margin-bottom: 10px;
+        }
+        .chosen:not(.form-control) {
+            color: var(--blue);
+        }
+    }
+    .row {
+        display: flex;
+        .dropdown {
+            width: 50%;
+        }
+    }
+    .tab-links {
+        margin-bottom: 27px;
+        input {
+            display: none;
+        }
+    }
+    .table {
+        margin-bottom: 20px;
+        display: table;
+        .form-check {
+            position: relative;
+            margin-bottom: 15px;
+            width: 100%;
+            label {
+                padding-right: 50px;
+            }
+            input {
+                position: absolute;
+                right: 0;
+                top: 0;
+            }
+        }
+    }
+    .hr {
+        margin: 30px 0;
+    }
+    .btn {
+        margin-top: 30px;
+    }
+    .clear-filter {
+        display: table;
+        margin-top: 20px;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 20px;
+        text-decoration: underline;
+        &:hover {
+            text-decoration: none;
+        }
+    }
+}
+@media (max-width: 991px) {
+    .filter-side {
+        margin-top: 37px;
+        width: 100%;
+        .title {
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .form-control {
+            text-align: center;
+            padding: 11px 20px 8px 11px;
+            width: 100%;
+        }
+        .dropdown {
+            margin-bottom: 23px;
+            &-select {
+                margin-bottom: 10px;
+            }
+        }
+        .dropdown-toggle {
+            font-size: 16px;
+            line-height: 20px;
+        }
+        .row {
+            .dropdown {
+                width: 31%;
+            }
+        }
+        .btn {
+            margin: 44px auto 0;
+            max-width: 290px;
+            width: 100%;
+            display: flex;
+        }
+        .clear-filter {
+            margin: 28px auto 0;
+        }
+    }
+}

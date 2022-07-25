@@ -2659,7 +2659,7 @@
 <!-- ///ЧОМУ НАС ОБРАЛИ/// -->
 <div class="section-advantages">
     <div class="container">
-        <div class="main-title text-center noline">Чому нас обрали понад <span class="color-blue"><span class="bline">5000</span> клиєнтів</span></div>
+        <div class="main-title text-center noline">Чому нас обрали понад <span class="color-blue"><span class="bline">5000</span> клієнтів</span></div>
     </div>
     <div class="advantages-list">
         <div class="container">
