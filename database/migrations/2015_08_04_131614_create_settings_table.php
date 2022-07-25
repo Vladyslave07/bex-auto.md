@@ -14,7 +14,7 @@ class CreateSettingsTable extends Migration
     {
         Schema::create(config('backpack.settings.table_name'), function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key')->unique();
+            $table->string('slug')->unique();
             $table->string('name');
             $table->string('description')->nullable();
             $table->text('value')->nullable();
