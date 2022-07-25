@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\SettingRequest;
+use App\Http\Requests\MenuRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class SettingCrudController
+ * Class MenuCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class SettingCrudController extends CrudController
+class MenuCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class SettingCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Setting::class);
-        CRUD::setRoute(backpack_url('setting'));
-        CRUD::setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
+        CRUD::setModel(\App\Models\Menu::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/menu');
+        CRUD::setEntityNameStrings('меню', 'меню');
     }
 
     /**
@@ -40,14 +40,8 @@ class SettingCrudController extends CrudController
     protected function setupListOperation()
     {
         CRUD::column('active');
-        CRUD::column('name');
-        CRUD::column('value');
-
-        /**
-         * Columns can be defined using the fluent syntax or array syntax:
-         * - CRUD::column('price')->type('number');
-         * - CRUD::addColumn(['name' => 'price', 'type' => 'number']); 
-         */
+        CRUD::column('title');
+        CRUD::column('sort');
     }
 
     /**
@@ -58,7 +52,7 @@ class SettingCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(SettingRequest::class);
+        CRUD::setValidation(MenuRequest::class);
 
         CRUD::addField([
             'name'       => 'active',
@@ -67,7 +61,7 @@ class SettingCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name'       => 'name',
+            'name'       => 'title',
             'label'      => trans('backpack::settings.name'),
             'type'       => 'text',
         ]);
@@ -79,18 +73,15 @@ class SettingCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name'       => 'value',
-            'label'      => trans('backpack::settings.value'),
-            'type'       => 'text',
-        ]);
-
-        CRUD::addField([
-            'name'       => 'field',
-            'label'      => trans('backpack::fields.field_type'),
-            'options'     => ['text' => 'Текст', 'image' => 'Картинка'],
-            'allows_null' => false,
-            'default'     => 'text',
-            'type'       => 'select_from_array',
+            'name' => 'items',
+            'label' => trans('backpack::fields.menu_items'),
+            'type' => 'table',
+            'entity_singular' => trans('backpack::fields.menu_item'),
+            'columns' => [
+                'name'  => trans('backpack::fields.title'),
+                'url'  => trans('backpack::fields.link'),
+            ],
+            'min' => 0,
         ]);
     }
 
