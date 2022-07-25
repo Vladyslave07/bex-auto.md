@@ -42,87 +42,8 @@
                 <a href="#">Рус</a>
             </div>
 
-            <nav class="main-menu">
-                <ul>
-                    <li>
-                        <a href="#">Каталог</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Авто з США</a>
-                                <a href="#">Авто з Кореї</a>
-                                <a href="#">Електрокари</a>
-                                <a href="#">Нові електрокари</a>
-                                <a href="#">Мотоцикли з США</a>
-                                <a href="#">Навантажувачі</a>
-                                <a href="#">Ділерські послуги</a>
-                            </div>
-                            <div class="menu-img">
-                                <picture>
-                                    <source type="image/webp" srcset="{{ asset('img/example/img_1.webp') }}">
-                                    <img width="290" height="202" src="{{ asset('img/example/img_1.png') }}" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="toggle-btn">Послуги</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Доставка авто з США</a>
-                                <a href="#">Митне оформлення авто з США</a>
-                                <a href="#">Підбір запчастин та ремонт автомобіля з США</a>
-                                <a href="#">Сертифікація і постановка на облік авто з США</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#">Продати авто</a>
-                    </li>
-                    <li>
-                        <a href="#" class="toggle-btn">Калькулятор</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Розрахунок доставки авто з США</a>
-                                <a href="#">Розрахунок доставки авто з Кореї</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="toggle-btn">Про компанію</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Про нас</a>
-                                <a href="#">Відгуки</a>
-                                <a href="#">Гарантії</a>
-                                <a href="#">Новини</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#">Авто під замовлення</a>
-                    </li>
-                    <li>
-                        <a href="#">Авто в кредит</a>
-                    </li>
-                </ul>
-                <div class="location-list visible-sm">
-                    <a href="#">Одеса</a>
-                    <a href="#">Київ</a>
-                    <a href="#">Миколаїв</a>
-                    <a href="#">Харків</a>
-                    <a href="#">Херсон</a>
-                    <a href="#">Кривий Ріг</a>
-                    <a href="#">Полтава</a>
-                    <a href="#">Черкаси</a>
-                    <a href="#">Дніпро</a>
-                    <a href="#">Вінниця</a>
-                    <a href="#">Запоріжжя</a>
-                </div>
-            </nav>
+            @include('partials.header.main-menu', ['items' => \App\Models\Menu::menuItems()])
+
         </header>
 
         <main class="main">

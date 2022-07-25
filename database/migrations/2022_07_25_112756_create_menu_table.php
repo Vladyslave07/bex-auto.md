@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title');
             $table->text('items')->nullable();
             $table->integer('sort')->default(500);
+            $table->text('image')->nullable();
             $table->timestamps();
         });
     }

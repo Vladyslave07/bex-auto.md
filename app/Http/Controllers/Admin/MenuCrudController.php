@@ -73,6 +73,20 @@ class MenuCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name'       => 'sort',
+            'label'      => trans('backpack::fields.sort'),
+            'type'       => 'number',
+            'default'    => '500',
+        ]);
+
+        CRUD::addField([
+            'name'       => 'image',
+            'label'      => trans('backpack::fields.image'),
+            'type'       => 'image',
+            'disk' => 'public',
+        ]);
+
+        CRUD::addField([
             'name' => 'items',
             'label' => trans('backpack::fields.menu_items'),
             'type' => 'table',
