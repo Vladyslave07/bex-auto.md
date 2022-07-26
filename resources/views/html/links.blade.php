@@ -21,6 +21,7 @@
                 <ul>
                     <li><a target="_blank" href="{{ route('html.index') }}">Главная</a></li>
                     <li><a target="_blank" href="{{ route('html.catalog') }}">Каталог</a></li>
+                    <li><a target="_blank" href="{{ route('html.card') }}">Карточка товара</a></li>
                 </ul>
                 <br>
                 <br>

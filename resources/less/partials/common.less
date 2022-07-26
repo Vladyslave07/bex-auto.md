@@ -87,10 +87,18 @@ svg {
     text-align: center;
     padding: 9px 30px;
     display: inline-flex;
+    align-items: center;
     justify-content: center;
     &:hover {
         color: #fff;
         background: var(--blue);
+    }
+    &-blue {
+        background: var(--blue);
+        &:hover {
+            color: #fff;
+            background: var(--red);
+        }
     }
 }
 .main-title {
