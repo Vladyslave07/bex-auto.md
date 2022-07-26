@@ -32,16 +32,13 @@
                 <span></span>
             </div>
 
-            <a href="#" class="account">
-                <svg width="14" height="19"><use xlink:href="#account-icon"></use></svg>
-                Кабінет
-            </a>
+            {{-- cabinet link --}}
+            @include('partials.header.cabinet')
 
-            <div class="lang-switcher">
-                <span>Укр</span>
-                <a href="#">Рус</a>
-            </div>
+            {{-- select site lang --}}
+            @include('partials.header.lang-button')
 
+            {{-- menu --}}
             @include('partials.header.main-menu', ['items' => \App\Models\Menu::menuItems()])
 
         </header>

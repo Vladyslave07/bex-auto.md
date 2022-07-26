@@ -39,7 +39,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Migration file name
+/    | Migration file name
     |--------------------------------------------------------------------------
     |
     | The file name for the settings migration file. It will be created in database_path('/migrations/%name_you_choose%.php)
