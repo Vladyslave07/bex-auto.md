@@ -25,8 +25,9 @@
                     <svg width="20" height="19"><use xlink:href="#search-icon"></use></svg>
                 </button>
             </form>
-            
-            <a href="tel:08001000101" class="phone">0 800 100 01 01</a>
+
+            {{-- main phone --}}
+            @include('partials.header.phone')
 
             <div class="burger toggle-btn visible-sm">
                 <span></span>
@@ -75,28 +76,9 @@
                         <a href="tel:380674707600">+38 (067) 47 07 600</a>
                     </li>
                 </ul>
-                <div class="footer-bottom">
-                    <div class="social-list">
-                        <a href="#" aria-label="telegram">
-                            <svg width="18" height="17"><use xlink:href="#telegram-icon"></use></svg>
-                        </a>
-                        <a href="#" aria-label="tiktok">
-                            <svg width="16" height="19"><use xlink:href="#tiktok-icon"></use></svg>
-                        </a>
-                        <a href="#" aria-label="viber">
-                            <svg width="16" height="18"><use xlink:href="#viber-icon"></use></svg>
-                        </a>
-                    </div>
-                    <ul class="contacts">
-                        <li class="contact-mail">
-                            <a href="mailto:welcome@bexhilltrading.net">welcome@bexhilltrading.net</a>
-                        </li>
-                        <li>
-                            <div class="color-red">Опт</div>
-                            <a href="tel:380671565359">+38 (067) 156 53 59</a>
-                        </li>
-                    </ul>
-                </div>
+
+                {{-- footer bottom --}}
+                @include('partials.footer.footer-bottom')
             </div>
         </footer>
 

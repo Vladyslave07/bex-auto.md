@@ -19,7 +19,7 @@ class Setting extends Model
     */
 
     protected $table = 'settings';
-    protected $fillable = ['value', 'image', 'slug', 'name', 'active'];
+    protected $fillable = ['value', 'image', 'key', 'name', 'active'];
     protected $translatable = ['value'];
     public static $images = ['image'];
 
