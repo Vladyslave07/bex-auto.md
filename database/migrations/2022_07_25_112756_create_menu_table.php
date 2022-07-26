@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
             $table->tinyInteger('active')->default(0);
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->string('title');
             $table->text('items')->nullable();
             $table->integer('sort')->default(500);

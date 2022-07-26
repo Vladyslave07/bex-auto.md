@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Menu;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -18,7 +19,7 @@ class MenuTableSeeder extends Seeder
         DB::table('menus')->insert([
             [
                 'active' => '1',
-                'slug' => 'catalog',
+                'slug' => Menu::CATALOG_MENU_SLUG,
                 'title' => '{"ru":"\u041a\u0430\u0442\u0430\u043b\u043e\u0433","uk":"\u041a\u0430\u0442\u0430\u043b\u043e\u0433","en":"Catalog"}',
                 'items' => '{"uk":[{"name":"\u0410\u0432\u0442\u043e \u0437 \u0421\u0428\u0410","url":"#"},{"name":"\u0410\u0432\u0442\u043e \u0437 \u041a\u043e\u0440\u0435\u0457","url":"#"},{"name":" \u0415\u043b\u0435\u043a\u0442\u0440\u043e\u043a\u0430\u0440\u0438","url":"#"},{"name":"\u041d\u043e\u0432\u0456 \u0435\u043b\u0435\u043a\u0442\u0440\u043e\u043a\u0430\u0440\u0438 ","url":"#"},{"name":"\u041c\u043e\u0442\u043e\u0446\u0438\u043a\u043b\u0438 \u0437 \u0421\u0428\u0410 ","url":"#"},{"name":"\u041d\u0430\u0432\u0430\u043d\u0442\u0430\u0436\u0443\u0432\u0430\u0447\u0456 ","url":"#"},{"name":"\u0414\u0456\u043b\u0435\u0440\u0441\u044c\u043a\u0456 \u043f\u043e\u0441\u043b\u0443\u0433\u0438","url":"#"}],"ru":[{"name":"\u0410\u0432\u0442\u043e \u0438\u0437 \u0421\u0428\u0410","url":"#"},{"name":"\u0410\u0432\u0442\u043e \u0438\u0437 \u041a\u043e\u0440\u0435\u0438","url":"#"},{"name":"\u042d\u043b\u0435\u043a\u0442\u0440\u043e\u043a\u0430\u0440\u044b","url":"#"},{"name":"\u041d\u043e\u0432\u044b\u0435 \u044d\u043b\u0435\u043a\u0442\u0440\u043e\u043a\u0430\u0440\u044b","url":"#"},{"name":"\u041c\u043e\u0442\u043e\u0446\u0438\u043a\u043b\u044b \u0438\u0437 \u0421\u0428\u0410","url":"#"},{"name":"\u041f\u043e\u0433\u0440\u0443\u0437\u0447\u0438\u043a\u0438","url":"#"},{"name":"\u0414\u0438\u043b\u0435\u0440\u0441\u043a\u0438\u0435 \u0443\u0441\u043b\u0443\u0433\u0438","url":"#"}],"en":[{"name":"Cars from the USA","url":"#"},{"name":"Car from Korea","url":"#"},{"name":"Electric cars","url":"#"},{"name":"New electric cars","url":"#"},{"name":"Motorcycles from the USA","url":"#"},{"name":"Loaders","url":"#"},{"name":"Dealer services","url":"#"}]}',
             ],
@@ -42,7 +43,7 @@ class MenuTableSeeder extends Seeder
             ],
             [
                 'active' => '1',
-                'slug' => 'about',
+                'slug' => Menu::ABOUT_MENU_SLUG,
                 'title' => '{"ru":"\u041f\u0440\u043e \u043a\u043e\u043c\u043f\u0430\u043d\u0456\u044e","uk":"\u041f\u0440\u043e \u043a\u043e\u043c\u043f\u0430\u043d\u0456\u044e","en":"About company"}',
                 'items' => '{"ru":[{"name":"\u041e \u043d\u0430\u0441","url":"#"},{"name":"\u041e\u0442\u0437\u044b\u0432\u044b","url":"#"},{"name":"\u0413\u0430\u0440\u0430\u043d\u0442\u0438\u0438","url":"#"},{"name":"\u041d\u043e\u0432\u043e\u0441\u0442\u0438","url":"#"}],"uk":[{"name":"\u041f\u0440\u043e \u043d\u0430\u0441","url":"#"},{"name":"\u0412\u0456\u0434\u0433\u0443\u043a\u0438","url":"#"},{"name":"\u0413\u0430\u0440\u0430\u043d\u0442\u0456\u0457","url":"#"},{"name":"\u041d\u043e\u0432\u0438\u043d\u0438","url":"#"}],"en":[{"name":"About us","url":"#"},{"name":"Reviews","url":"#"},{"name":"Guarantees","url":"#"},{"name":"News","url":"#"}]}',
             ],

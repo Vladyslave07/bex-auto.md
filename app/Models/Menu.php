@@ -24,6 +24,9 @@ class Menu extends Model
 
     const ACTIVE_STATUS_ID = 1;
 
+    const CATALOG_MENU_SLUG = 'catalog';
+    const ABOUT_MENU_SLUG = 'about';
+
     protected $table = 'menus';
     protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image'];
     protected $casts = ['items' => 'array', 'active' => 'bool'];
@@ -58,10 +61,24 @@ class Menu extends Model
      */
     public static function menuItems()
     {
-        return self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image']);
-//        return Cache::remember('main_menu_items', 86400, function () {
-//            return  self::query()->orderBy('sort', 'desc')->active()->get(['slug', 'title', 'items']);
-//        });
+        return Cache::remember('main_menu_items', 86400, function () {
+            return  self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image']);
+        });
+    }
+
+    public static function footerMenu()
+    {
+        return Cache::remember('footer_menu_items', 86400, function () {
+            $collectionMenu = self::query()
+                ->active()
+                ->whereIn('slug', [self::CATALOG_MENU_SLUG, self::ABOUT_MENU_SLUG])
+                ->get(['slug', 'title', 'items']);
+
+            return [
+                'about' => $collectionMenu->where('slug', self::ABOUT_MENU_SLUG)->first(),
+                'catalog' => $collectionMenu->where('slug', self::CATALOG_MENU_SLUG)->first(),
+            ];
+        });
     }
 
     /*

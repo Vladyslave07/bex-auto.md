@@ -49,35 +49,10 @@
 
         <footer class="main-footer">
             <div class="container">
-                <div class="menu-footer">
-                    <a href="#">Про компанію</a>
-                    <a href="#">Контакти</a>
-                    <a href="#">Відгуки</a>
-                    <a href="#">Гарантії</a>
-                    <a href="#">Послуги покупки і доставки авто</a>
-                </div>
-                <div class="location-list">
-                    <a href="#">Одеса</a>
-                    <a href="#">Київ</a>
-                    <a href="#">Миколаїв</a>
-                    <a href="#">Харків</a>
-                    <a href="#">Херсон</a>
-                    <a href="#">Кривий Ріг</a>
-                    <a href="#">Полтава</a>
-                    <a href="#">Черкаси</a>
-                    <a href="#">Дніпро</a>
-                    <a href="#">Вінниця</a>
-                    <a href="#">Запоріжжя</a>
-                </div>
-                <div class="menu-footer">
-                    <a href="#">Авто з США</a>
-                    <a href="#">Авто з Кореї</a>
-                    <a href="#">Електромобвілі з Кореї</a>
-                    <a href="#">Нові електромобілі</a>
-                    <a href="#">Мотоцикли з США</a>
-                    <a href="#">Погрузчики</a>
-                    <a href="#">Ділерські послуги</a>
-                </div>
+
+                {{-- footer menu --}}
+                @include('partials.footer.menu')
+
                 <ul class="contacts">
                     <li>
                         <div class="color-red">Київ</div>
