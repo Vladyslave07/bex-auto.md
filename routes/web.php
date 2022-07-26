@@ -22,4 +22,5 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/links', function () {return view('html.links');})->name('html.links');
     Route::get('/index', function () {return view('html.index');})->name('html.index');
     Route::get('/catalog', function () {return view('html.catalog');})->name('html.catalog');
+    Route::get('/card', function () {return view('html.card');})->name('html.card');
 });

@@ -40,6 +40,7 @@
             <div class="lang-switcher">
                 <span>Укр</span>
                 <a href="#">Рус</a>
+                <a href="#">Eng</a>
             </div>
 
             <nav class="main-menu">
@@ -206,6 +207,29 @@
                 </div>
             </div>
         </footer>
+
+        <!-- Modals -->
+        <div id="modalDiscount" class="modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <svg class="close-modal" width="10" height="10"><use xlink:href="#close-icon"></use></svg>
+                    <div class="modal-body">
+                        <p class="text-center">Залиш контактні дані прямо зараз і отримай знижку 50% на послуги компанії при замовленні седанів з США</p>
+                        <form action="#" novalidate autocomplete="off">
+                            <div class="form-group">
+                                <input class="form-control" placeholder="Им`я" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
+                                <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
+                            </div>
+                            <div class="form-group">
+                                <input class="form-control" type="text" placeholder="+380 ( _____ )" data-type="tel" required>
+                                <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
+                            </div>
+                            <button class="btn" type="submit">Надiслати</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Иконки svg -->
         <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
