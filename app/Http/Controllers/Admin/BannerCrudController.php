@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Requests\BranchRequest;
+use App\Http\Requests\BannerRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
 /**
- * Class BranchCrudController
+ * Class BannerCrudController
  * @package App\Http\Controllers\Admin
  * @property-read \Backpack\CRUD\app\Library\CrudPanel\CrudPanel $crud
  */
-class BranchCrudController extends CrudController
+class BannerCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
@@ -26,9 +26,9 @@ class BranchCrudController extends CrudController
      */
     public function setup()
     {
-        CRUD::setModel(\App\Models\Branch::class);
-        CRUD::setRoute(config('backpack.base.route_prefix') . '/branch');
-        CRUD::setEntityNameStrings(trans('backpack::crud.branch'), trans('backpack::crud.branches'));
+        CRUD::setModel(\App\Models\Banner::class);
+        CRUD::setRoute(config('backpack.base.route_prefix') . '/banner');
+        CRUD::setEntityNameStrings('banner', 'banners');
     }
 
     /**
@@ -41,9 +41,9 @@ class BranchCrudController extends CrudController
     {
         CRUD::column('id');
         CRUD::column('active');
-        CRUD::column('city');
-        CRUD::column('address');
+        CRUD::column('title');
         CRUD::column('sort');
+
     }
 
     /**
@@ -54,7 +54,8 @@ class BranchCrudController extends CrudController
      */
     protected function setupCreateOperation()
     {
-        CRUD::setValidation(BranchRequest::class);
+        CRUD::setValidation(BannerRequest::class);
+
 
         CRUD::addField([
             'name'       => 'active',
@@ -70,21 +71,28 @@ class BranchCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name'       => 'city',
-            'label'      => trans('backpack::fields.city'),
+            'name'       => 'title',
+            'label'      => trans('backpack::fields.title'),
             'type'       => 'text',
         ]);
 
         CRUD::addField([
-            'name'       => 'address',
-            'label'      => trans('backpack::fields.address'),
-            'type'       => 'text',
+            'name'       => 'subtitle',
+            'label'      => trans('backpack::fields.subtitle'),
+            'type'       => 'summernote',
         ]);
 
         CRUD::addField([
-            'name'       => 'phone',
-            'label'      => trans('backpack::fields.phone'),
-            'type'       => 'text',
+            'name'       => 'text',
+            'label'      => trans('backpack::fields.text'),
+            'type'       => 'summernote',
+        ]);
+
+        CRUD::addField([
+            'name'       => 'image',
+            'label'      => trans('backpack::fields.image'),
+            'type'       => 'image',
+            'disk' => 'public',
         ]);
     }
 

@@ -11,29 +11,8 @@
 @endpush
 
 @section('content')
-<!-- ///БАННЕР/// -->
-<div class="banner bg">
-    <div class="container">
-        <br>
-        <br>
-        <br>
-        <br>
-        <h1 class="h1">
-            <span class="color-red">Автомобілі</span>
-        </h1>
-        <div class="h2 color-blue-xs">з будь-якого континенту,<br> в наявності та під замовлення</div>
-        <picture class="img">
-            <source type="image/webp" srcset="{{ asset('img/example/img_3.webp') }}" media="(max-width: 767px)">
-            <source type="image/webp" srcset="{{ asset('img/example/img_2.webp') }}" media="(min-width: 768px)">
-            <img width="729" height="633" src="{{ asset('img/example/img_2.png') }}" alt="">
-        </picture>
-        <br>
-        <br>
-        <span class="line hidden-xs"></span>
-        <div class="h3 color-blue color-red-xs">Економія <strong>до 40%</strong> від ринкової<br> вартості</div>
-    </div>
-</div>
-<!-- ///:end/// -->
+{{-- banner --}}
+@include('partials.banner.banner')
 
 <!-- ///ЗАЛИШАЙ ЗАЯВКУ/// -->
 <form class="form-choose-car" action="#" novalidate autocomplete="off">
