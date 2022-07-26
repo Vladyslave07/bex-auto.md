@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             UserAdminSeeder::class,
             SettingTableSeeder::class,
             MenuTableSeeder::class,
+            BranchTableSeeder::class,
         ]);
     }
 }

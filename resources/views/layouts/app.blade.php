@@ -54,28 +54,8 @@
                 {{-- footer menu --}}
                 @include('partials.footer.menu')
 
-                <ul class="contacts">
-                    <li>
-                        <div class="color-red">Київ</div>
-                        Харківське шосе, 18
-                        <a href="tel:380675503454">+38 (067) 550 34 54</a>
-                    </li>
-                    <li>
-                        <div class="color-red">Харків</div>
-                        Гімназійна набережна, 18
-                        <a href="tel:380677123254">+38 (067) 712 32 54</a>
-                    </li>
-                    <li>
-                        <div class="color-red">Одеса</div>
-                        вул. Канатна, 83
-                        <a href="tel:38674404610">+38 (067) 440 46 10</a>
-                    </li>
-                    <li>
-                        <div class="color-red">Прокат</div>
-                        Отамана Головатого 147
-                        <a href="tel:380674707600">+38 (067) 47 07 600</a>
-                    </li>
-                </ul>
+                {{-- branches --}}
+                @include('partials.footer.branches')
 
                 {{-- footer bottom --}}
                 @include('partials.footer.footer-bottom')
