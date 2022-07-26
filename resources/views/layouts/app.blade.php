@@ -25,105 +25,23 @@
                     <svg width="20" height="19"><use xlink:href="#search-icon"></use></svg>
                 </button>
             </form>
-            
-            <a href="tel:08001000101" class="phone">0 800 100 01 01</a>
+
+            {{-- main phone --}}
+            @include('partials.header.phone')
 
             <div class="burger toggle-btn visible-sm">
                 <span></span>
             </div>
 
-            <a href="#" class="account">
-                <svg width="14" height="19"><use xlink:href="#account-icon"></use></svg>
-                Кабінет
-            </a>
+            {{-- cabinet link --}}
+            @include('partials.header.cabinet')
 
-            <div class="lang-switcher">
-                <span>Укр</span>
-                <a href="#">Рус</a>
-                <a href="#">Eng</a>
-            </div>
+            {{-- select site lang --}}
+            @include('partials.header.lang-button')
 
-            <nav class="main-menu">
-                <ul>
-                    <li>
-                        <a href="#">Каталог</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Авто з США</a>
-                                <a href="#">Авто з Кореї</a>
-                                <a href="#">Електрокари</a>
-                                <a href="#">Нові електрокари</a>
-                                <a href="#">Мотоцикли з США</a>
-                                <a href="#">Навантажувачі</a>
-                                <a href="#">Ділерські послуги</a>
-                            </div>
-                            <div class="menu-img">
-                                <picture>
-                                    <source type="image/webp" srcset="{{ asset('img/example/img_1.webp') }}">
-                                    <img width="290" height="202" src="{{ asset('img/example/img_1.png') }}" alt="">
-                                </picture>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="toggle-btn">Послуги</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Доставка авто з США</a>
-                                <a href="#">Митне оформлення авто з США</a>
-                                <a href="#">Підбір запчастин та ремонт автомобіля з США</a>
-                                <a href="#">Сертифікація і постановка на облік авто з США</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#">Продати авто</a>
-                    </li>
-                    <li>
-                        <a href="#" class="toggle-btn">Калькулятор</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Розрахунок доставки авто з США</a>
-                                <a href="#">Розрахунок доставки авто з Кореї</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#" class="toggle-btn">Про компанію</a>
-                        <svg class="toggle-btn" width="13" height="7"><use xlink:href="#arrow-icon"></use></svg>
-                        <div class="menu-dropdown">
-                            <div class="submenu">
-                                <a href="#">Про нас</a>
-                                <a href="#">Відгуки</a>
-                                <a href="#">Гарантії</a>
-                                <a href="#">Новини</a>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <a href="#">Авто під замовлення</a>
-                    </li>
-                    <li>
-                        <a href="#">Авто в кредит</a>
-                    </li>
-                </ul>
-                <div class="location-list visible-sm">
-                    <a href="#">Одеса</a>
-                    <a href="#">Київ</a>
-                    <a href="#">Миколаїв</a>
-                    <a href="#">Харків</a>
-                    <a href="#">Херсон</a>
-                    <a href="#">Кривий Ріг</a>
-                    <a href="#">Полтава</a>
-                    <a href="#">Черкаси</a>
-                    <a href="#">Дніпро</a>
-                    <a href="#">Вінниця</a>
-                    <a href="#">Запоріжжя</a>
-                </div>
-            </nav>
+            {{-- menu --}}
+            @include('partials.header.main-menu', ['items' => \App\Models\Menu::menuItems()])
+
         </header>
 
         <main class="main">
@@ -132,79 +50,15 @@
 
         <footer class="main-footer">
             <div class="container">
-                <div class="menu-footer">
-                    <a href="#">Про компанію</a>
-                    <a href="#">Контакти</a>
-                    <a href="#">Відгуки</a>
-                    <a href="#">Гарантії</a>
-                    <a href="#">Послуги покупки і доставки авто</a>
-                </div>
-                <div class="location-list">
-                    <a href="#">Одеса</a>
-                    <a href="#">Київ</a>
-                    <a href="#">Миколаїв</a>
-                    <a href="#">Харків</a>
-                    <a href="#">Херсон</a>
-                    <a href="#">Кривий Ріг</a>
-                    <a href="#">Полтава</a>
-                    <a href="#">Черкаси</a>
-                    <a href="#">Дніпро</a>
-                    <a href="#">Вінниця</a>
-                    <a href="#">Запоріжжя</a>
-                </div>
-                <div class="menu-footer">
-                    <a href="#">Авто з США</a>
-                    <a href="#">Авто з Кореї</a>
-                    <a href="#">Електромобвілі з Кореї</a>
-                    <a href="#">Нові електромобілі</a>
-                    <a href="#">Мотоцикли з США</a>
-                    <a href="#">Погрузчики</a>
-                    <a href="#">Ділерські послуги</a>
-                </div>
-                <ul class="contacts">
-                    <li>
-                        <div class="color-red">Київ</div>
-                        Харківське шосе, 18
-                        <a href="tel:380675503454">+38 (067) 550 34 54</a>
-                    </li>
-                    <li>
-                        <div class="color-red">Харків</div>
-                        Гімназійна набережна, 18
-                        <a href="tel:380677123254">+38 (067) 712 32 54</a>
-                    </li>
-                    <li>
-                        <div class="color-red">Одеса</div>
-                        вул. Канатна, 83
-                        <a href="tel:38674404610">+38 (067) 440 46 10</a>
-                    </li>
-                    <li>
-                        <div class="color-red">Прокат</div>
-                        Отамана Головатого 147
-                        <a href="tel:380674707600">+38 (067) 47 07 600</a>
-                    </li>
-                </ul>
-                <div class="footer-bottom">
-                    <div class="social-list">
-                        <a href="#" aria-label="telegram">
-                            <svg width="18" height="17"><use xlink:href="#telegram-icon"></use></svg>
-                        </a>
-                        <a href="#" aria-label="tiktok">
-                            <svg width="16" height="19"><use xlink:href="#tiktok-icon"></use></svg>
-                        </a>
-                        <a href="#" aria-label="viber">
-                            <svg width="16" height="18"><use xlink:href="#viber-icon"></use></svg>
-                        </a>
-                    </div>
-                    <ul class="contacts">
-                        <li class="contact-mail">
-                            <a href="mailto:welcome@bexhilltrading.net">welcome@bexhilltrading.net</a>
-                        </li>
-                        <li>
-                            <div class="color-red">Опт</div>
-                            <a href="tel:380671565359">+38 (067) 156 53 59</a>
-                        </li>
-                    </ul>
-                </div>
+
+                {{-- footer menu --}}
+                @include('partials.footer.menu')
+
+                {{-- branches --}}
+                @include('partials.footer.branches')
+
+                {{-- footer bottom --}}
+                @include('partials.footer.footer-bottom')
             </div>
         </footer>
 
