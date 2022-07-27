@@ -4,7 +4,7 @@
     </li>
     <li>
         <div class="color-red">Опт</div>
-        <a href="tel:{{App\Helpers\StringHelper::preparePhone(config('settings.main-phone'))}}">
+        <a href="tel:{{ Str::phoneNumber(config('settings.main-phone'))}}">
             {{ config('settings.opt-phone') }}
         </a>
     </li>

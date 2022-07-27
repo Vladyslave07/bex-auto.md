@@ -179,6 +179,9 @@ return [
     'empty_translations' => '(пусто)',
 
 
-    'branch' => 'Филиал',
-    'branches' => 'Филиалы',
+    'branch' => 'филиал',
+    'branches' => 'филиалы',
+
+    'result' => 'результат',
+    'results' => 'результаты'
 ];

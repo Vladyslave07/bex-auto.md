@@ -15,18 +15,8 @@
 @include('partials.banner.banner')
 
 <!-- ///ЗАЛИШАЙ ЗАЯВКУ/// -->
-<form class="form-choose-car" action="#" novalidate autocomplete="off">
-    <div class="title">Залишай заявку і ми підберемо авто під ваш бюджет та запит</div>
-    <div class="form-group">
-        <input class="form-control" placeholder="Им`я" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
-        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
-    </div>
-    <div class="form-group">
-        <input class="form-control" type="text" placeholder="+380 ( _____ )" data-type="tel" required>
-        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
-    </div>
-    <button class="btn" type="submit">Підібрати авто</button>
-</form>
+
+@livewire('forms.call-back')
 <!-- ///:end/// -->
 
 <!-- ///АВТО В НАЯВНОСТІ/// -->

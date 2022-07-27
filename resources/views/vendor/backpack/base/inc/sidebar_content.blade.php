@@ -21,6 +21,19 @@
 </li>
 
 
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-wpforms"></i> Результаты форм</a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'>
+            <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\CallBack::SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-mobile-phone'></i> Обратная связь
+            </a>
+        </li>
+    </ul>
+</li>
+
 <!-- Users, Roles, Permissions -->
 <li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-users"></i> Пользователи</a>
