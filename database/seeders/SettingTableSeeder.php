@@ -64,6 +64,13 @@ class SettingTableSeeder extends Seeder
                 'field' => json_encode(['name' => 'value', 'label' => 'Значение', 'type' => 'text']),
                 'active' => 1,
             ],
+            [
+                'key' => 'call_back_form_title',
+                'name' => 'Заголовок формы обратной связи',
+                'value' => json_encode(['uk' => 'Залишай заявку і ми підберемо авто під ваш бюджет та запит', 'ru' => 'Оставляй заявку и мы подберем авто под ваш бюджет и запрос', 'en' => 'Leave an application and we will select a car for your budget and request']),
+                'field' => json_encode(['name' => 'value', 'label' => 'Значение', 'type' => 'text']),
+                'active' => 1,
+            ],
         ]);
     }
 }
