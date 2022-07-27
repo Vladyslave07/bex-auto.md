@@ -5,8 +5,10 @@
     </a>
 </li>
 
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('car') }}'><i class='nav-icon la la-car'></i> Cars</a></li>
+
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-car"></i> Компания</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-building-o"></i> Компания</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('branch') }}'><i class='nav-icon la la-code-branch'></i> Филиалы</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('banner') }}'><i class='nav-icon la la-image'></i> Баннеры</a></li>
