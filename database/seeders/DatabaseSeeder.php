@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder
             SettingTableSeeder::class,
             MenuTableSeeder::class,
             BranchTableSeeder::class,
+            CategoryTableSeeder::class,
         ]);
     }
 }

@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CarRequest;
+use App\Models\Category;
 use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Lang;
 
 /**
  * Class CarCrudController
@@ -40,33 +42,33 @@ class CarCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::setColumns(
+        CRUD::setColumns([
             [
                 'name'  => 'id',
                 'label' => '№',
             ],
             [
                 'name'  => 'title',
-                'label' => 'Заголовок',
+                'label' => trans('backpack::fields.title'),
             ],
             [
                 'name'  => 'sort',
-                'label' => 'Сортировка',
+                'label' => trans('backpack::fields.sort'),
             ],
             [
-                'name'  => 'status',
-                'label' => 'Активность',
+                'name'  => 'active',
+                'label' => trans('backpack::fields.active'),
                 'type'  => 'check'
             ],
             [
                 'name'  => 'image',
-                'label' => 'Изображение',
+                'label' => trans('backpack::fields.image'),
                 'type' => 'image',
                 'disk' => 'public',
                 'height' => '50px',
                 'width' => '50px',
             ]
-        );
+        ]);
     }
 
     /**
@@ -79,14 +81,37 @@ class CarCrudController extends CrudController
     {
         CRUD::setValidation(CarRequest::class);
 
-        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
-        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
-        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
-        CRUD::addField(['name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products/', 'thumb_prefix' => '',]);
-        CRUD::addField(['name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'text']);
-        CRUD::addField(['name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'text']);
-        CRUD::addField(['name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products/', 'thumb_prefix' => '',]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
+
+        CRUD::addField([
+            'name' => 'category_id',
+            'label' => trans('backpack::fields.category'),
+            'type' => 'select',
+            'entity' => 'category',
+            'attribute' => 'title',
+            'model' => Category::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'tab' => 'Свойства'
+        ]);
+
+        CRUD::addField([
+            'name'        => 'status',
+            'label'       => trans('backpack::fields.status'),
+            'type'        => 'select_from_array',
+            'options'     => ['in_stock' => trans('backpack::fields.option.in_stock'), 'expect' => trans('backpack::fields.option.expect')],
+            'allows_null' => false,
+            'default'     => 'in_stock',
+            'tab' => 'Свойства'
+        ]);
     }
 
     /**

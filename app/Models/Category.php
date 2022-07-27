@@ -3,14 +3,13 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
-use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 
-class Car extends Model
+class Category extends Model
 {
-    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope;
+    use CrudTrait, HasTranslations, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -18,14 +17,11 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'cars';
+    protected $table = 'categories';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id'];
-    public static $images = ['images'];
-    protected $translatable = ['title', 'description', 'info'];
-    protected $attributes = ['sort' => 500, 'images' => ''];
-    protected $casts = ['images' => 'array'];
-
+    protected $fillable = ['title', 'active', 'slug', 'sort'];
+    protected $translatable = ['title', 'slug'];
+    protected $attributes = ['sort' => 500];
 
     /*
     |--------------------------------------------------------------------------
@@ -38,14 +34,6 @@ class Car extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function category()
-    {
-        return $this->belongsTo(Category::class);
-    }
 
     /*
     |--------------------------------------------------------------------------
