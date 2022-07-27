@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CarRequest;
+use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -17,6 +18,7 @@ class CarCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use DropzoneTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -78,10 +80,10 @@ class CarCrudController extends CrudController
         CRUD::setValidation(CarRequest::class);
 
         CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number']);
+        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
-        CRUD::addField(['name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'image', 'disk' => 'public']);
+        CRUD::addField(['name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products/', 'thumb_prefix' => '',]);
         CRUD::addField(['name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'text']);
         CRUD::addField(['name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'text']);
         CRUD::addField(['name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
