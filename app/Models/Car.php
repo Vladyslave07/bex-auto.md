@@ -7,6 +7,7 @@ use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Car extends Model
 {
@@ -18,9 +19,11 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
+    const IN_STOCK_STATUS = 'in_stock';
+
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year'];
     public static $images = ['images'];
     protected $translatable = ['title', 'description', 'info'];
     protected $attributes = ['sort' => 500, 'images' => ''];
@@ -32,6 +35,30 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public static function carsInStock()
+    {
+
+        return self::query()
+            ->orderBy('id')
+            ->with('category')
+            ->where('status', self::IN_STOCK_STATUS)
+            ->whereIn('category_id', array_column(Category::selectedCategory()->toArray(), 'id'))
+            ->active()
+            ->take(11)
+            ->get();
+
+//        return Cache::remember('cars_in_stock_category_' . implode('_', Category::selectedCategory()), 86400, function () {
+//            return self::query()
+//                ->orderBy('id')
+//                ->with('category')
+//                ->where('status', self::IN_STOCK_STATUS)
+//                ->whereIn('category_id', array_column(Category::selectedCategory(), 'id'))
+//                ->active()
+//                ->take(11)
+//                ->get();
+//        });
+    }
 
     /*
     |--------------------------------------------------------------------------
@@ -64,4 +91,9 @@ class Car extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function getPriceFormatAttribute()
+    {
+        return '$' . number_format($this->price, 0, '.', ' ');
+    }
 }

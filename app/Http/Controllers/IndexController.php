@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Car;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -12,6 +14,9 @@ class IndexController extends Controller
     {
         $banner = Banner::banner();
 
-        return view('index', compact('banner'));
+        $carsInStock = Car::carsInStock()->groupBy('category_id');
+        $categories = Category::selectedCategory();
+
+        return view('index', compact('banner', 'carsInStock', 'categories'));
     }
 }

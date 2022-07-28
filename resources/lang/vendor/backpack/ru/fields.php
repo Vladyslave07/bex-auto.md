@@ -28,6 +28,7 @@ return [
     'status' => 'Статус',
     'category' => 'Раздел',
     'show_in_slider' => 'Показать в слайдере',
+    'year' => 'Год выпуска',
 
     'option' => [
         'expect' => 'Ожидается',
