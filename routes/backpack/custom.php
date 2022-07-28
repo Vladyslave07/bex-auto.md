@@ -24,4 +24,5 @@ Route::group([
     Route::crud('form-result/call_back', 'FormResultCallBackCrudController');
     Route::crud('car', 'CarCrudController');
     Route::crud('category', 'CategoryCrudController');
+    Route::crud('popular-request', 'PopularRequestCrudController');
 }); // this should be the absolute last line of this file

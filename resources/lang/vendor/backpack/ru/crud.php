@@ -190,4 +190,7 @@ return [
 
     'category' => 'категория',
     'categories' => 'категории',
+
+    'popular_request' => 'попульрные запрос',
+    'popular_requests' => 'популярные запросы',
 ];

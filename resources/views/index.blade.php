@@ -27,25 +27,7 @@
 <hr class="hr mb-1">
 
 <!-- ///ПОПУЛЯРНІ ЗАПИТИ/// -->
-<div class="container hidden-xs">
-    <div class="main-title text-center">Популярні запити</div>
-    <div class="popular-requests">
-        <a href="#">Гібрид</a>
-        <a href="#">Кросовер / Позашляховик</a>
-        <a href="#">Мінівен</a>
-        <a href="#">Седан</a>
-        <a href="#">Універсал</a>
-        <a href="#">Електромобіль</a>
-        <a href="#">Хетчбек</a>
-        <a href="#">Пікап</a>
-        <a href="#">Кабріолет</a>
-        <a href="#">Круізер</a>
-        <a href="#">Купе</a>
-        <a href="#">Навантажувач</a>
-        <a href="#">Фургон</a>
-        <a href="#">Мотоцикл</a>
-    </div>
-</div>
+@include('partials.index.popular-requests')
 <!-- ///:end/// -->
 
 <!-- ///ПОСЛУГИ ПРИДБАННЯ ТА ДОСТАВКИ АВТО/// -->

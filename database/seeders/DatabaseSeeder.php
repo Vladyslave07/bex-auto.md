@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
             BranchTableSeeder::class,
             CategoryTableSeeder::class,
             CarTableSeeder::class,
+            PopularRequestTableSeeder::class,
         ]);
     }
 }

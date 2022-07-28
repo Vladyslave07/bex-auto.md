@@ -16,7 +16,11 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
-    Route::get('/', [\App\Http\Controllers\IndexController::class, 'index']);
+    Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
+
+    Route::get('/cars/{category}', function () {
+       return view('html.catalog');
+    })->name('category');
 });
 
 // Роуты на вёрстку
