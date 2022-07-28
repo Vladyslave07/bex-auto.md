@@ -14,8 +14,11 @@ class IndexController extends Controller
     {
         $banner = Banner::banner();
 
-        $carsInStock = Car::carsInStock()->groupBy('category_id');
+        // Categories which selected for show in slider
         $categories = Category::selectedCategory();
+
+        // Cars in Stock
+        $carsInStock = Car::carsInStock($categories)->groupBy('category_id');
 
         return view('index', compact('banner', 'carsInStock', 'categories'));
     }
