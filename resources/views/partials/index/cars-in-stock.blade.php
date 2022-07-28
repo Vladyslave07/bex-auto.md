@@ -1,5 +1,5 @@
 <div class="section-swiper container">
-    <div class="main-title text-center">Авто в наявності</div>
+    <div class="main-title text-center">@lang('car.title_in_stock')</div>
     <div class="nav-tabs">
         @foreach($categories as $category)
             @if (in_array($category->id, array_keys($carsInStock->toArray())))
@@ -36,6 +36,6 @@
         @endforeach
     </div>
     <div class="swiper-btn text-center">
-        <a href="#" class="btn">Переглянути усі авто</a>
+        <a href="#" class="btn">@lang('car.show_all')</a>
     </div>
 </div>
