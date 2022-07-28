@@ -1,42 +1,77 @@
 @extends('layouts.app')
 
-@section('title', 'Каталог')
+@section('title', 'Нові Електрокари')
 
 @push('styles')
-    <link rel="stylesheet" href="{{ mix('css/catalog.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/new-elektromobili.css') }}">
 @endpush
 
 @push('scripts')
-    <script src="{{ mix('js/catalog.js') }}" defer></script>
+    <script src="{{ mix('js/new-elektromobili.js') }}" defer></script>
 @endpush
 
 @section('content')
-<!-- ///ХЛЕБНЫЕ КРОШКИ/// -->
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Bexhill Trading Auto</a></li>
-            <li class="breadcrumb-item" aria-current="page">Каталог</li>
-        </ol>
-    </nav>
+
+<!-- ///БАННЕР/// -->
+<div class="banner bg">
+    <div class="container">
+        <!-- ///ХЛЕБНЫЕ КРОШКИ/// -->
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/">Bexhill Trading Auto</a></li>
+                <li class="breadcrumb-item"><a href="/">Послуги</a></li>
+                <li class="breadcrumb-item" aria-current="page">Нові Електрокари</li>
+            </ol>
+        </nav>
+        <!-- ///:end/// -->
+        <br>
+        <br>
+        <br>
+        <h1 class="h1">
+            <span class="color-blue">НОВІ</span><br> <span class="color-red">ЕЛЕКТРОКАРИ</span>
+        </h1>
+        <div class="h2 color-blue-xs">гарантія на всі моделі</div>
+        <span class="line"></span>
+        <div class="h3 color-blue">Економія <strong>до 40%</strong> від ринкової<br> вартості</div>
+        <picture class="img">
+            <source type="image/webp" srcset="{{ asset('img/example/img_22.webp') }}" media="(max-width: 767px)">
+            <source type="image/webp" srcset="{{ asset('img/example/img_21.webp') }}" media="(min-width: 768px)">
+            <img width="800" height="613" src="{{ asset('img/example/img_21.png') }}" alt="">
+        </picture>
+    </div>
 </div>
+<!-- ///:end/// -->
+
+<!-- ///ЗАЛИШАЙ ЗАЯВКУ/// -->
+<form class="form-choose-car" action="#" novalidate autocomplete="off">
+    <div class="title">Залишай заявку і ми підберемо авто під ваш бюджет та запит</div>
+    <div class="form-group">
+        <input class="form-control" placeholder="Им`я" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
+        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" placeholder="+380 ( _____ )" data-type="tel" required>
+        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
+    </div>
+    <button class="btn" type="submit">Підібрати авто</button>
+</form>
 <!-- ///:end/// -->
 
 <!-- ///НАЗВАНИЕ РАЗДЕЛА/// -->
 <div class="container">
-    <h1 class="main-title text-center line-left h1">Авто з США, Кореї та Канади</h1>
+    <h1 class="main-title text-center line-left h1">Нові Електрокари</h1>
 </div>
 <!-- ///:end/// -->
 
 <!-- ///КАТАЛОГ/// -->
 <div class="section-catalog container">
     <div class="tab-links row">
-        <a href="#" onclick="this.classList.toggle('active'); return false">Авто з США</a>
-        <a href="#" onclick="this.classList.toggle('active'); return false">Авто з Кореї</a>
-        <a href="#" onclick="this.classList.toggle('active'); return false">Електрокари з США</a>
-        <a href="new-elektromobili">Нові електрокари</a>
-        <a href="#" onclick="this.classList.toggle('active'); return false">Мотоцикли з США</a>
-        <a href="#" onclick="this.classList.toggle('active'); return false">Навантажувачі</a>
+        <a href="#">Авто з США</a>
+        <a href="#">Авто з Кореї</a>
+        <a href="#">Електрокари з США</a>
+        <a href="catalog" class="active">Нові електрокари</a>
+        <a href="#">Мотоцикли з США</a>
+        <a href="#">Навантажувачі</a>
     </div>
     <div class="catalog-wrap">
         <div class="catalog-settings">
@@ -372,42 +407,10 @@
 
                 <strong class="title">Пальне</strong>
                 <div class="tab-links">
-                    <label>
-                        Бензин
-                        <input class="form-checkbox" type="checkbox" onchange="this.parentElement.classList.toggle('active');">
-                    </label>
-                    <label>
-                        Газ
-                        <input class="form-checkbox" type="checkbox" onchange="this.parentElement.classList.toggle('active');">
-                    </label>
-                    <label>
+                    <label class="active">
                         Електро
-                        <input class="form-checkbox" type="checkbox" onchange="this.parentElement.classList.toggle('active');">
+                        <input class="form-checkbox" type="checkbox" onchange="this.parentElement.classList.toggle('active');" checked>
                     </label>
-                    <label>
-                        Гібрид
-                        <input class="form-checkbox" type="checkbox" onchange="this.parentElement.classList.toggle('active');">
-                    </label>
-                    <label>
-                        Дизель
-                        <input class="form-checkbox" type="checkbox" onchange="this.parentElement.classList.toggle('active');">
-                    </label>
-                </div>
-
-                <strong class="title">Коробка</strong>
-                <div class="table">
-                    <div class="form-check">
-                        <label>
-                            Автомат
-                            <input class="form-checkbox" type="checkbox">
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <label>
-                            Ручна
-                            <input class="form-checkbox" type="checkbox">
-                        </label>
-                    </div>
                 </div>
 
                 <div class="dropdown dropdown-check">
@@ -562,52 +565,40 @@
                     </div>
                 </div>
 
-                <strong class="title">Об`єм двигуна, л</strong>
+                <strong class="title">Ємність батареї</strong>
                 <div class="label">Від</div>
                 <div class="dropdown dropdown-select">
-                    <span class="dropdown-toggle form-control">1.0 л</span>
+                    <span class="dropdown-toggle form-control">10 кВтч</span>
                     <div class="dropdown-menu">
                         <ul>
                             <li class="dropdown-item option selected">
                                 <label>
-                                    1.0 л
-                                    <input class="form-hide" type="radio" name="volume1" checked>
+                                    10 кВтч
+                                    <input class="form-hide" type="radio" name="battery1" checked>
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    2.0 л
-                                    <input class="form-hide" type="radio" name="volume1">
+                                    30 кВтч
+                                    <input class="form-hide" type="radio" name="battery1">
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    3.0 л
-                                    <input class="form-hide" type="radio" name="volume1">
+                                    50 кВтч
+                                    <input class="form-hide" type="radio" name="battery1">
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    4.0 л
-                                    <input class="form-hide" type="radio" name="volume1">
+                                    70 кВтч
+                                    <input class="form-hide" type="radio" name="battery1">
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    5.0 л
-                                    <input class="form-hide" type="radio" name="volume1">
-                                </label>
-                            </li>
-                            <li class="dropdown-item option">
-                                <label>
-                                    6.0 л
-                                    <input class="form-hide" type="radio" name="volume1">
-                                </label>
-                            </li>
-                            <li class="dropdown-item option">
-                                <label>
-                                    7.0 л
-                                    <input class="form-hide" type="radio" name="volume1">
+                                    90 кВтч
+                                    <input class="form-hide" type="radio" name="battery1">
                                 </label>
                             </li>
                         </ul>
@@ -615,49 +606,115 @@
                 </div>
                 <div class="label">До</div>
                 <div class="dropdown dropdown-select">
-                    <span class="dropdown-toggle form-control">7.0 л</span>
+                    <span class="dropdown-toggle form-control">90 кВтч</span>
                     <div class="dropdown-menu">
                         <ul>
                             <li class="dropdown-item option">
                                 <label>
-                                    1.0 л
-                                    <input class="form-hide" type="radio" name="volume2">
+                                    10 кВтч
+                                    <input class="form-hide" type="radio" name="battery2">
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    2.0 л
-                                    <input class="form-hide" type="radio" name="volume2">
+                                    30 кВтч
+                                    <input class="form-hide" type="radio" name="battery2">
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    3.0 л
-                                    <input class="form-hide" type="radio" name="volume2">
+                                    50 кВтч
+                                    <input class="form-hide" type="radio" name="battery2">
                                 </label>
                             </li>
                             <li class="dropdown-item option">
                                 <label>
-                                    4.0 л
-                                    <input class="form-hide" type="radio" name="volume2">
-                                </label>
-                            </li>
-                            <li class="dropdown-item option">
-                                <label>
-                                    5.0 л
-                                    <input class="form-hide" type="radio" name="volume2">
-                                </label>
-                            </li>
-                            <li class="dropdown-item option">
-                                <label>
-                                    6.0 л
-                                    <input class="form-hide" type="radio" name="volume2">
+                                    70 кВтч
+                                    <input class="form-hide" type="radio" name="battery2">
                                 </label>
                             </li>
                             <li class="dropdown-item option selected">
                                 <label>
-                                    7.0 л
-                                    <input class="form-hide" type="radio" name="volume2" checked>
+                                    90 кВтч
+                                    <input class="form-hide" type="radio" name="battery2" checked>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <strong class="title">Запас ходу</strong>
+                <div class="label">Від</div>
+                <div class="dropdown dropdown-select">
+                    <span class="dropdown-toggle form-control">50 км</span>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li class="dropdown-item option selected">
+                                <label>
+                                    50 км
+                                    <input class="form-hide" type="radio" name="power1" checked>
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    100 км
+                                    <input class="form-hide" type="radio" name="power1">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    200 км
+                                    <input class="form-hide" type="radio" name="power1">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    300 км
+                                    <input class="form-hide" type="radio" name="power1">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    400 км
+                                    <input class="form-hide" type="radio" name="power1">
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="label">До</div>
+                <div class="dropdown dropdown-select">
+                    <span class="dropdown-toggle form-control">400 км</span>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li class="dropdown-item option">
+                                <label>
+                                    50 км
+                                    <input class="form-hide" type="radio" name="power2">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    100 км
+                                    <input class="form-hide" type="radio" name="power2">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    200 км
+                                    <input class="form-hide" type="radio" name="power2">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option">
+                                <label>
+                                    300 км
+                                    <input class="form-hide" type="radio" name="power2">
+                                </label>
+                            </li>
+                            <li class="dropdown-item option selected">
+                                <label>
+                                    400 км
+                                    <input class="form-hide" type="radio" name="power2" checked>
                                 </label>
                             </li>
                         </ul>
@@ -665,7 +722,6 @@
                 </div>
 
                 <button class="btn" type="submit">Пошук</button>
-                <a href="catalog" class="clear-filter">Зкинути усі фільтри</a>
             </form>
         </aside>
         <div class="catalog-grid">
@@ -1647,7 +1703,7 @@
 
 <!-- ///ПОПУЛЯРНІ МАРКИ АВТО/// -->
 <div class="popular-brands">
-    <div class="container hidden-xs">
+    <div class="container">
         <div class="main-title text-center">Популярні марки авто</div>
     </div>
     <div class="list">

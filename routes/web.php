@@ -26,4 +26,5 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/catalog', function () {return view('html.catalog');})->name('html.catalog');
     Route::get('/card', function () {return view('html.card');})->name('html.card');
     Route::get('/dealer-services', function () {return view('html.dealer-services');})->name('html.dealer-services');
+    Route::get('/new-elektromobili', function () {return view('html.new-elektromobili');})->name('html.new-elektromobili');
 });
