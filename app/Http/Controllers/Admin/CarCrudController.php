@@ -112,6 +112,13 @@ class CarCrudController extends CrudController
             'default'     => 'in_stock',
             'tab' => 'Свойства'
         ]);
+
+        CRUD::addField([
+            'name'        => 'year',
+            'label'       => trans('backpack::fields.year'),
+            'type'        => 'number',
+            'tab' => 'Свойства'
+        ]);
     }
 
     /**
