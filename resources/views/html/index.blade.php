@@ -2304,8 +2304,8 @@
 </div>
 <!-- ///:end/// -->
 
-<!-- ///НАДАЄМО ПОСЛУГИ ПІД КЛЮЧ/// -->
-<div class="section-services">
+<!-- ///ОФІЦІЙНИЙ ПАРТНЕР/// -->
+<div class="section-partners">
     <div class="container">
         <div class="main-title text-center noline"><span class="color-red">Bexhill</span> <span class="color-blue">Trading</span> Auto – офіційний партнер американських<br> аукціонів  Copart и IAAI</div>
         <div class="text-center">
@@ -2313,8 +2313,15 @@
                 <source type="image/webp" srcset="{{ asset('img/example/img_8.webp') }}">
                 <img width="548" height="92" src="{{ asset('img/example/img_8.png') }}" loading="lazy" alt="">
             </picture>
-            <div class="h3">Надаємо послуги під ключ:</div>
         </div>
+    </div>
+</div>
+<!-- ///:end/// -->
+
+<!-- ///НАДАЄМО ПОСЛУГИ ПІД КЛЮЧ/// -->
+<div class="section-services">
+    <div class="container">
+        <div class="h3 text-center">Надаємо послуги під ключ:</div>
         <div class="swiper services-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">

@@ -24,6 +24,10 @@
         font-size: 36px;
         line-height: 45px;
     }
+    p {
+        font-weight: 400;
+        margin: 0 0 22px;
+    }
     .line {
         background: var(--red);
         display: table;
@@ -66,6 +70,13 @@
         flex: 1;
     }
 }
+@media (min-width: 767px) {
+    .banner {
+        .img {
+            max-width: 50%;
+        }
+    }
+}
 @media (max-width: 972px) {
     .form-choose-car {
         margin-left: 20px;
@@ -98,12 +109,16 @@
             line-height: 30px;
             margin: 10px 0 13px;
         }
+        .line {
+            margin: 0 auto 22px;
+        }
         .img {
             margin: 0 -20px;
             display: block;
             position: static;
             img {
                 display: block;
+                width: 100%;
             }
         }
     }
