@@ -19,9 +19,10 @@
                 <br>
                 <br>
                 <ul>
-                    <li><a target="_blank" href="{{ route('html.index') }}">Главная</a></li>
+                    <li><a target="_blank" href="{{ route('html.index') }}">Головна</a></li>
                     <li><a target="_blank" href="{{ route('html.catalog') }}">Каталог</a></li>
-                    <li><a target="_blank" href="{{ route('html.card') }}">Карточка товара</a></li>
+                    <li><a target="_blank" href="{{ route('html.card') }}">Карточка товару</a></li>
+                    <li><a target="_blank" href="{{ route('html.dealer-services') }}">Дiлерськi послуги</a></li>
                 </ul>
                 <br>
                 <br>

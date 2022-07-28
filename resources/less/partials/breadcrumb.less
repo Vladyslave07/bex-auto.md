@@ -1,19 +1,14 @@
 .breadcrumb {
     padding: 0 0 2px;
     margin: 18px 0;
-    display: flex;
-    flex-wrap: wrap;
     .breadcrumb-item {
         font-weight: 600;
         font-size: 16px;
-        line-height: 20px;
-        white-space: nowrap;
+        line-height: 23px;
         list-style: none;
         margin-bottom: 5px;
-        display: flex;
-        align-items: center;
+        display: inline;
         & + .breadcrumb-item {
-            margin-left: 5px;
             &::before {
                 content: '/';
                 margin-right: 5px;
@@ -25,5 +20,12 @@
     .breadcrumb {
         margin-top: 40px;
         margin-bottom: 30px;
+    }
+    .banner {
+        .breadcrumb {
+            text-align: left;
+            margin-top: 0;
+            margin-bottom: 50px;
+        }
     }
 }
