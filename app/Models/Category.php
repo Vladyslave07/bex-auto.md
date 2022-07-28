@@ -19,7 +19,7 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = ['id'];
-    protected $fillable = ['title', 'active', 'slug', 'sort'];
+    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider'];
     protected $translatable = ['title', 'slug'];
     protected $attributes = ['sort' => 500];
 
@@ -28,6 +28,20 @@ class Category extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * category which selected for show in slider
+     *
+     * @return array
+     */
+    public static function selectedCategory(): array
+    {
+        $categories = self::query()->where('show_in_slider', true)->get('id')->toArray();
+        if (count($categories) > 0) {
+            return array_column($categories, 'id');
+        }
+        return [];
+    }
 
     /*
     |--------------------------------------------------------------------------

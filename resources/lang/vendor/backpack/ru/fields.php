@@ -27,6 +27,7 @@ return [
     'info' => 'Информация',
     'status' => 'Статус',
     'category' => 'Раздел',
+    'show_in_slider' => 'Показать в слайдере',
 
     'option' => [
         'expect' => 'Ожидается',
