@@ -1,4 +1,4 @@
-@if(count($carsInStock->toArray() > 0))
+@if(count($carsInStock->toArray()) > 0)
     <div class="section-swiper container">
         <div class="main-title text-center">@lang('car.title_in_stock')</div>
         @if (count($categories) > 0)
