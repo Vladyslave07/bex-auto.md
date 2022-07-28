@@ -20,6 +20,9 @@ class IndexController extends Controller
         // Cars in Stock
         $carsInStock = Car::carsInStock($categories)->groupBy('category_id');
 
-        return view('index', compact('banner', 'carsInStock', 'categories'));
+        // Expected cars
+        $expectedCars = Car::expectedCars();
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars'));
     }
 }

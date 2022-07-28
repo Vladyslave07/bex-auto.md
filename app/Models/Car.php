@@ -20,6 +20,7 @@ class Car extends Model
     */
 
     const IN_STOCK_STATUS = 'in_stock';
+    const EXPECTED_STATUS = 'expect';
 
     protected $table = 'cars';
     protected $guarded = ['id'];
@@ -36,6 +37,12 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * Returns cars which in stock
+     *
+     * @param $categories
+     * @return mixed
+     */
     public static function carsInStock($categories)
     {
         $categories = array_column($categories->toArray(), 'id');
@@ -46,6 +53,23 @@ class Car extends Model
                 ->with('category')
                 ->where('status', self::IN_STOCK_STATUS)
                 ->whereIn('category_id', $categories)
+                ->active()
+                ->take(11)
+                ->get();
+        });
+    }
+
+    /**
+     * Returns expected cars
+     *
+     * @return mixed
+     */
+    public static function expectedCars()
+    {
+        return Cache::remember('expected_cars_slider', 86400, function () {
+            return self::query()
+                ->orderBy('id')
+                ->where('status', self::EXPECTED_STATUS)
                 ->active()
                 ->take(11)
                 ->get();
