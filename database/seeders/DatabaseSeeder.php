@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             MenuTableSeeder::class,
             BranchTableSeeder::class,
             CategoryTableSeeder::class,
+            CarTableSeeder::class,
         ]);
     }
 }
