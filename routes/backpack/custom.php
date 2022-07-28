@@ -19,4 +19,9 @@ Route::group([
     Route::crud('setting', 'SettingCrudController');
     Route::crud('menu', 'MenuCrudController');
     Route::crud('branch', 'BranchCrudController');
+    Route::crud('banner', 'BannerCrudController');
+    Route::crud('form-result', 'FormResultCrudController');
+    Route::crud('form-result/call_back', 'FormResultCallBackCrudController');
+    Route::crud('car', 'CarCrudController');
+    Route::crud('category', 'CategoryCrudController');
 }); // this should be the absolute last line of this file

@@ -5,11 +5,9 @@ namespace App\Models;
 use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
 
-class Branch extends Model
+class Category extends Model
 {
     use CrudTrait, HasTranslations, DefaultScope;
 
@@ -19,32 +17,17 @@ class Branch extends Model
     |--------------------------------------------------------------------------
     */
 
-    const ACTIVE_STATUS_ID = 1;
-
-    protected $table = 'branches';
+    protected $table = 'categories';
     protected $guarded = ['id'];
-    protected $fillable = ['city', 'address', 'phone', 'sort', 'active'];
-    protected $translatable = ['city', 'address'];
-    protected $casts = ['active' => 'bool'];
-
+    protected $fillable = ['title', 'active', 'slug', 'sort'];
+    protected $translatable = ['title', 'slug'];
+    protected $attributes = ['sort' => 500];
 
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Get active branches
-     *
-     * @return mixed
-     */
-    public static function branches()
-    {
-        return Cache::remember('branches_items', 86400, function () {
-            return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone']);
-        });
-    }
 
     /*
     |--------------------------------------------------------------------------

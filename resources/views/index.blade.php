@@ -11,43 +11,12 @@
 @endpush
 
 @section('content')
-<!-- ///БАННЕР/// -->
-<div class="banner bg">
-    <div class="container">
-        <br>
-        <br>
-        <br>
-        <br>
-        <h1 class="h1">
-            <span class="color-red">Автомобілі</span>
-        </h1>
-        <div class="h2 color-blue-xs">з будь-якого континенту,<br> в наявності та під замовлення</div>
-        <picture class="img">
-            <source type="image/webp" srcset="{{ asset('img/example/img_3.webp') }}" media="(max-width: 767px)">
-            <source type="image/webp" srcset="{{ asset('img/example/img_2.webp') }}" media="(min-width: 768px)">
-            <img width="729" height="633" src="{{ asset('img/example/img_2.png') }}" alt="">
-        </picture>
-        <br>
-        <br>
-        <span class="line hidden-xs"></span>
-        <div class="h3 color-blue color-red-xs">Економія <strong>до 40%</strong> від ринкової<br> вартості</div>
-    </div>
-</div>
-<!-- ///:end/// -->
+{{-- banner --}}
+@include('partials.banner.banner')
 
 <!-- ///ЗАЛИШАЙ ЗАЯВКУ/// -->
-<form class="form-choose-car" action="#" novalidate autocomplete="off">
-    <div class="title">Залишай заявку і ми підберемо авто під ваш бюджет та запит</div>
-    <div class="form-group">
-        <input class="form-control" placeholder="Им`я" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
-        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
-    </div>
-    <div class="form-group">
-        <input class="form-control" type="text" placeholder="+380 ( _____ )" data-type="tel" required>
-        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
-    </div>
-    <button class="btn" type="submit">Підібрати авто</button>
-</form>
+
+@livewire('forms.call-back')
 <!-- ///:end/// -->
 
 <!-- ///АВТО В НАЯВНОСТІ/// -->

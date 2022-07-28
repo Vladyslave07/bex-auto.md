@@ -3,15 +3,15 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
-class Branch extends Model
+class Banner extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope;
+    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,14 +19,13 @@ class Branch extends Model
     |--------------------------------------------------------------------------
     */
 
-    const ACTIVE_STATUS_ID = 1;
-
-    protected $table = 'branches';
+    protected $table = 'banners';
     protected $guarded = ['id'];
-    protected $fillable = ['city', 'address', 'phone', 'sort', 'active'];
-    protected $translatable = ['city', 'address'];
+    protected $fillable = ['active', 'sort', 'title', 'subtitle', 'text', 'image'];
+    protected $attributes = ['sort' => 500, 'image' => ''];
+    protected $translatable = ['title', 'subtitle', 'text'];
     protected $casts = ['active' => 'bool'];
-
+    public static $images = ['image'];
 
     /*
     |--------------------------------------------------------------------------
@@ -35,14 +34,17 @@ class Branch extends Model
     */
 
     /**
-     * Get active branches
+     * Return banner
      *
      * @return mixed
      */
-    public static function branches()
+    public static function banner()
     {
-        return Cache::remember('branches_items', 86400, function () {
-            return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone']);
+        return Cache::remember('banner', 86400, function () {
+            return  self::query()
+                ->orderBy('sort')
+                ->orderBy('id', 'desc')
+                ->active()->first(['title', 'subtitle', 'text', 'image']);
         });
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SlugOrTitleTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Menu extends Model
 {
-    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait;
+    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -92,17 +93,6 @@ class Menu extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * returns only active menu item
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeActive(Builder $query): Builder
-    {
-        return $query->where('active', self::ACTIVE_STATUS_ID);
-    }
 
     /*
     |--------------------------------------------------------------------------

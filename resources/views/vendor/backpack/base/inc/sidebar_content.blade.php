@@ -5,10 +5,20 @@
     </a>
 </li>
 
+
 <li class="nav-item nav-dropdown">
-    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-car"></i> Компания</a>
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-car-side"></i> Автомобили</a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('car') }}'><i class='nav-icon la la-car'></i> Список</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-list'></i> Категории</a></li>
+    </ul>
+</li>
+
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-building-o"></i> Компания</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('branch') }}'><i class='nav-icon la la-code-branch'></i> Филиалы</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('banner') }}'><i class='nav-icon la la-image'></i> Баннеры</a></li>
     </ul>
 </li>
 
@@ -19,6 +29,19 @@
     </ul>
 </li>
 
+
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-wpforms"></i> Результаты форм</a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'>
+            <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\CallBack::SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-mobile-phone'></i> Обратная связь
+            </a>
+        </li>
+    </ul>
+</li>
 
 <!-- Users, Roles, Permissions -->
 <li class="nav-item nav-dropdown">

@@ -16,10 +16,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
-    Route::get('/', function () {
-        return view('index');
-    });
-
+    Route::get('/', [\App\Http\Controllers\IndexController::class, 'index']);
 });
 
 // Роуты на вёрстку

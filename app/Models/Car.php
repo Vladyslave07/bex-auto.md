@@ -3,15 +3,14 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
 
-class Branch extends Model
+class Car extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope;
+    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,13 +18,13 @@ class Branch extends Model
     |--------------------------------------------------------------------------
     */
 
-    const ACTIVE_STATUS_ID = 1;
-
-    protected $table = 'branches';
+    protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['city', 'address', 'phone', 'sort', 'active'];
-    protected $translatable = ['city', 'address'];
-    protected $casts = ['active' => 'bool'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id'];
+    public static $images = ['images'];
+    protected $translatable = ['title', 'description', 'info'];
+    protected $attributes = ['sort' => 500, 'images' => ''];
+    protected $casts = ['images' => 'array'];
 
 
     /*
@@ -34,23 +33,19 @@ class Branch extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * Get active branches
-     *
-     * @return mixed
-     */
-    public static function branches()
-    {
-        return Cache::remember('branches_items', 86400, function () {
-            return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone']);
-        });
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     /*
     |--------------------------------------------------------------------------
