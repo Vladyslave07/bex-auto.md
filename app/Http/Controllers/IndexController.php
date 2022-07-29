@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\PopularRequest;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -23,6 +24,9 @@ class IndexController extends Controller
         // Expected cars
         $expectedCars = Car::expectedCars();
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars'));
+        // Popular request
+        $popularRequests = PopularRequest::query()->active()->get(['slug', 'title']);
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests'));
     }
 }
