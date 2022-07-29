@@ -21,7 +21,8 @@ Route::group([
     Route::crud('branch', 'BranchCrudController');
     Route::crud('banner', 'BannerCrudController');
     Route::crud('form-result', 'FormResultCrudController');
-    Route::crud('form-result/call_back', 'FormResultCallBackCrudController');
+    Route::crud('form-result/' . \App\Http\Livewire\Forms\CallBack::SLUG_FORM, 'FormResultCallBackCrudController');
+    Route::crud('form-result/' . \App\Http\Livewire\Forms\BuyAndDeliveryAuto::SLUG_FORM, 'FormResultBuyAndDeliveryAutoCrudController');
     Route::crud('car', 'CarCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('popular-request', 'PopularRequestCrudController');

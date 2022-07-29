@@ -40,6 +40,11 @@
             >
                 <i class='nav-icon la la-mobile-phone'></i> Обратная связь
             </a>
+            <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\BuyAndDeliveryAuto::SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-money-bill'></i> Купить и доставить авто
+            </a>
         </li>
     </ul>
 </li>

@@ -26,57 +26,11 @@
 
 <hr class="hr mb-1">
 
-<!-- ///ПОПУЛЯРНІ ЗАПИТИ/// -->
+{{-- Popular requests --}}
 @include('partials.index.popular-requests')
-<!-- ///:end/// -->
 
-<!-- ///ПОСЛУГИ ПРИДБАННЯ ТА ДОСТАВКИ АВТО/// -->
-<div class="section-order-car">
-    <div class="container">
-        <div class="main-title text-center line-left">Послуги придбання та доставки авто</div>
-        <div class="row">
-            <div class="text">
-                <div class="main-title noline">Підбермо та привеземо авто<br> під ваш бюджет!</div>
-                <p>У нас ви можете замовити авто з різних країн світу:</p>
-                <p class="color-red">США, Канади, Кореї, Китаю, Грузії.</p>
-                <div class="img">
-                    <picture>
-                        <source type="image/webp" srcset="{{ asset('img/section-order-car.webp') }}">
-                        <img width="607" height="314" src="{{ asset('img/section-order-car.png') }}" loading="lazy" alt="">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="{{ asset('img/section-order-car-map.webp') }}">
-                        <img class="map" width="1232" height="631" src="{{ asset('img/section-order-car-map.png') }}" loading="lazy" alt="">
-                    </picture>
-                </div>
-            </div>
-            <form class="form" action="#" novalidate autocomplete="off">
-                <div class="form-body">
-                    <div class="header">
-                        <strong>Знайдемо авто вашої мрії!</strong>
-                        <span>Залишайте заявку та наші менеджери підберуть авто під ваш бюджет та запит</span>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Им`я" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
-                        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" type="text" placeholder="+380 ( _____ )" data-type="tel" required>
-                        <div class="invalid-feedback">Поле обов'язкове до заповнення</div>
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Бажане  авто" type="text">
-                    </div>
-                    <div class="form-group">
-                        <input class="form-control" placeholder="Страна походження авто" type="text">
-                    </div>
-                </div>
-                <button class="btn" type="submit">Замовити авто</button>
-            </form>
-        </div>
-    </div>
-</div>
-<!-- ///:end/// -->
+{{-- Buy and delivery auto block --}}
+@include('partials.index.buy-and-delivery-auto')
 
 <!-- ///ОТРИМУЙ ПЕРШИМ ВИГІДНІ ПРОПОЗИЦІЇ АВТО/// -->
 <div class="section-social">

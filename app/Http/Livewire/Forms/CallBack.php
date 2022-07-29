@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class CallBack extends Component
+class CallBack extends Component implements BaseForm
 {
     public $phone;
     public $name;
