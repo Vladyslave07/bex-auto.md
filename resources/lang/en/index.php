@@ -12,4 +12,32 @@ return [
         'title' => 'Be the first to receive favorable<br> <span class="color-red">car offers!</span>',
         'sub_title' => 'Publish cost calculations, video reviews<br> and customer reviews in our communities.',
     ],
+
+
+    'partner' => [
+        'title' => '<span class="color-red">Bexhill</span> <span class="color-blue">Trading</span> Auto – офіційний партнер американських<br> аукціонів  Copart и IAAI'
+    ],
+
+    'services' => [
+        'title' => 'We provide turnkey services:',
+        'block_1' => [
+            'title' => 'Purchase',
+            'li1' => 'The purchase of a car at an auction is carried out after the conclusion of the contract and the payment of the advance amount by the client. The advance is paid to the company\'s current account by SWIFT payment before the start of the auction.',
+            'li2' => 'After the purchase, the invoice will be paid (cost of the car in the USA + auction fee).',
+            'li3' => 'The invoice is paid the next day after the purchase of a car in dollars by SWIFT payment.',
+        ],
+        'block_2' => [
+            'title' => 'Delivery',
+            'sub_title' => 'We will buy the car you like from the USA (we will help you choose if you wish, we will tell you the nuances), we will send it from the port in America (New York, Chicago, Savannah, Miami, Los Angeles, Norfolk or Toronto). We transport by sea, insure the cargo against troubles on the road, issue customs and other documents.',
+        ],
+        'block_3' => [
+            'title' => 'Customs clearance',
+            'sub_title' => 'We will buy the car you like from the USA (we will help you choose if you wish, we will tell you the nuances), we will send it from the port in America (New York, Chicago, Savannah, Miami, Los Angeles, Norfolk or Toronto). We transport by sea, insure the cargo against troubles on the road, issue customs and other documents.',
+        ]
+    ],
+
+    'reviews' => [
+        'title' => 'They talk about <span class="bline">us</span>',
+        'sub_title' => 'Every feedback about our work is important to us',
+    ]
 ];
