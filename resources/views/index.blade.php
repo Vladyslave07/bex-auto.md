@@ -32,35 +32,8 @@
 {{-- Buy and delivery auto block --}}
 @include('partials.index.buy-and-delivery-auto')
 
-<!-- ///ОТРИМУЙ ПЕРШИМ ВИГІДНІ ПРОПОЗИЦІЇ АВТО/// -->
-<div class="section-social">
-    <div class="container">
-        <picture class="img hidden-sm">
-            <source type="image/webp" srcset="{{ asset('img/section-social.webp') }}">
-            <img width="855" height="604" src="{{ asset('img/section-social.png') }}" loading="lazy" alt="">
-        </picture>
-        <div class="text">
-            <div class="main-title noline">Отримуй першим вигідні<br> <span class="color-red">пропозиції авто!</span></div>
-            <p>Публікуємо розрахунки вартості, відеоогляди<br> та відгуки клієнтів в наших спільнотах.</p>
-            <picture class="img visible-sm">
-                <source type="image/webp" srcset="{{ asset('img/section-social-mob.webp') }}">
-                <img width="855" height="604" src="{{ asset('img/section-social-mob.png') }}" loading="lazy" alt="">
-            </picture>
-            <div class="social-list">
-                <a href="#" aria-label="telegram">
-                    <svg width="27" height="25"><use xlink:href="#telegram-icon"></use></svg>
-                </a>
-                <a href="#" aria-label="tiktok">
-                    <svg width="23" height="29"><use xlink:href="#tiktok-icon"></use></svg>
-                </a>
-                <a href="#" aria-label="viber">
-                    <svg width="24" height="28"><use xlink:href="#viber-icon"></use></svg>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ///:end/// -->
+{{-- Offers soc. --}}
+@include('partials.index.offer')
 
 <!-- ///ОФІЦІЙНИЙ ПАРТНЕР/// -->
 <div class="section-partners">
