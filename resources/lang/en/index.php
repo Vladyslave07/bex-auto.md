@@ -39,5 +39,16 @@ return [
     'reviews' => [
         'title' => 'They talk about <span class="bline">us</span>',
         'sub_title' => 'Every feedback about our work is important to us',
-    ]
+    ],
+
+    'why_we' => [
+        'title' => 'Why over <span class="color-blue"><span class="bline">5000</span> customers chose us</span>',
+        'why_1' => 'Brought cars',
+        'why_2' => 'Transport experience',
+        'why_3' => 'Years of experience in international transport',
+        'why_4' => 'Own car showrooms',
+        'why_5' => 'Stages of verification before purchase',
+        'why_6' => 'Various professionals',
+        'years' => ':num years'
+    ],
 ];

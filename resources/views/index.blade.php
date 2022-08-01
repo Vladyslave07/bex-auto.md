@@ -44,41 +44,8 @@
 {{-- Reviews --}}
 @include('partials.index.reviews')
 
-<!-- ///ЧОМУ НАС ОБРАЛИ/// -->
-<div class="section-advantages">
-    <div class="container">
-        <div class="main-title text-center noline">Чому нас обрали понад <span class="color-blue"><span class="bline">5000</span> клієнтів</span></div>
-    </div>
-    <div class="advantages-list">
-        <div class="container">
-            <div class="item">
-                <div class="title">10 000+</div>
-                <p>Привезених автомобілів</p>
-            </div>
-            <div class="item">
-                <div class="title">12 років</div>
-                <p>Досвіду транспортних перевезень</p>
-            </div>
-            <div class="item">
-                <div class="title">&lt;&nbsp;1500</div>
-                <p>років досвіду транспортних міжнародних перевезень</p>
-            </div>
-            <div class="item">
-                <div class="title">5</div>
-                <p>власних салонів авто</p>
-            </div>
-            <div class="item">
-                <div class="title">8</div>
-                <p>Етапів перевірки перед покупкою</p>
-            </div>
-            <div class="item">
-                <div class="title">&lt;&nbsp;350</div>
-                <p>різнпрофільних професіоналів</p>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- ///:end/// -->
+{{-- Why we --}}
+@include('partials.index.why-we')
 
 <!-- ///ПОПУЛЯРНІ МАРКИ АВТО/// -->
 <div class="popular-brands">
