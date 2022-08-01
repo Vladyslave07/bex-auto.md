@@ -32,4 +32,5 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/dealer-services', function () {return view('html.dealer-services');})->name('html.dealer-services');
     Route::get('/new-elektromobili', function () {return view('html.new-elektromobili');})->name('html.new-elektromobili');
     Route::get('/elektromobili', function () {return view('html.elektromobili');})->name('html.elektromobili');
+    Route::get('/delivery', function () {return view('html.delivery');})->name('html.delivery');
 });
