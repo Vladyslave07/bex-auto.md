@@ -26,6 +26,7 @@
                     <li><a target="_blank" href="{{ route('html.new-elektromobili') }}">Нові Електрокари</a></li>
                     <li><a target="_blank" href="{{ route('html.elektromobili') }}">Електрокари</a></li>
                     <li><a target="_blank" href="{{ route('html.delivery') }}">Доставка авто з США в Україну</a></li>
+                    <li><a target="_blank" href="{{ route('html.news') }}">Новини</a></li>
                 </ul>
                 <br>
                 <br>
@@ -36,10 +37,10 @@
 @endsection
 
 <style>
-    ul li {
+    .main-wrap ul li {
         margin-bottom: 20px;
     }
-    ul li a{
+    .main-wrap ul li a{
         font-size: 20px;
         font-weight: bold;
     }
