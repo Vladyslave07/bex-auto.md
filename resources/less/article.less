@@ -1,0 +1,59 @@
+@import "partials/common.less";
+@import "partials/breadcrumb.less";
+@import "partials/text-page.less";
+@import "partials/popular-brands.less";
+@import "partials/section-faq.less";
+@import "partials/section-seo.less";
+@import "partials/section-order-calculation.less";
+@import "partials/modal.less";
+.article {
+    margin-top: 90px;
+    margin-bottom: 100px;
+    .main-title {
+        max-width: 1080px;
+        margin: 0 auto 36px;
+    }
+    .text-page {
+        margin: 0 auto;
+        padding: 0;
+        max-width: 880px;
+        p,
+        ul {
+            max-width: 790px;
+        }
+        img {
+            display: block;
+            margin-bottom: 35px;
+            max-width: 100%;
+            object-fit: cover;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .article {
+        margin-top: 45px;
+        margin-bottom: 50px;
+        .main-title {
+            font-size: 23px;
+            line-height: 26px;
+            margin-bottom: 27px;
+        }
+        .text-page {
+            & > br {
+                display: none;
+            }
+            .h3,
+            h3 {
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 30px;
+                text-align: left;
+                margin-bottom: 16px;
+            }
+            img {
+                margin-bottom: 25px;
+            }
+        }
+    }
+}

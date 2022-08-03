@@ -1,0 +1,115 @@
+@import "partials/common.less";
+@import "partials/breadcrumb.less";
+@import "partials/popular-brands.less";
+@import "partials/section-faq.less";
+@import "partials/section-seo.less";
+@import "partials/section-order-calculation.less";
+@import "partials/modal.less";
+.news {
+    margin-top: 90px;
+    margin-bottom: 100px;
+    &-list {
+        margin: 0 -10px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: start;
+        .article {
+            color: #221F1F;
+            margin: 0 10px 77px;
+            width: calc(50% - 20px);
+            .date {
+                color: var(--gray);
+                font-weight: 400;
+                display: block;
+                margin-bottom: 20px;
+            }
+            img {
+                display: block;
+                margin-bottom: 27px;
+            }
+            .title {
+                font-size: 24px;
+                line-height: 24px;
+                font-weight: 600;
+                font-variant: small-caps;
+                display: table;
+                margin-bottom: 20px;
+            }
+            .description {
+                font-weight: 400;
+                margin-bottom: 15px;
+            }
+            .read-more {
+                font-size: 16px;
+                font-weight: 600;
+                line-height: 24px;
+                text-decoration: underline;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+.pagination {
+    text-align: center;
+    flex: 100%;
+    display: flex;
+    justify-content: center;
+    a {
+        cursor: pointer;
+        list-style: none;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 24px;
+        padding: 2px 0;
+        user-select: none;
+        min-width: 42px;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &.active {
+            color: var(--red);
+            cursor: auto;
+        }
+        &:first-child {
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+        &:last-child {
+            svg {
+                transform: rotate(-90deg);
+            }
+        }
+    }
+}
+@media (max-width: 767px) {
+    .news {
+        margin-top: 57px;
+        margin-bottom: 50px;
+        &-list {
+            margin: 0;
+            .article {
+                margin: 0 0 20px;
+                width: 100%;
+                img {
+                    margin-bottom: 50px;
+                    width: 100%;
+                    min-height: 400px;
+                    object-fit: cover;
+                }
+                .title {
+                    margin: 0 auto 20px;
+                    text-align: center;
+                }
+                .read-more {
+                    display: table;
+                    margin: 0 auto 20px;
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
