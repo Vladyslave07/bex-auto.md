@@ -35,4 +35,5 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/delivery', function () {return view('html.delivery');})->name('html.delivery');
     Route::get('/news', function () {return view('html.news');})->name('html.news');
     Route::get('/article', function () {return view('html.article');})->name('html.article');
+    Route::get('/contacts', function () {return view('html.contacts');})->name('html.contacts');
 });
