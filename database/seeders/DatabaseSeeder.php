@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             PopularRequestTableSeeder::class,
             BrandTableSeeder::class,
             FaqTableSeeder::class,
+            SeoTextTableSeeder::class,
         ]);
     }
 }

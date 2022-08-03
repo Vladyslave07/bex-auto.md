@@ -54,5 +54,10 @@ return [
 
     'faqs' => [
         'title' => 'Answers to questions',
-    ]
+    ],
+
+    'seo_text' => [
+        'btn_show' => 'More details',
+        'btn_close' => 'Collapse',
+    ],
 ];

@@ -19,8 +19,15 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-building-o"></i> Компания</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('branch') }}'><i class='nav-icon la la-code-branch'></i> Филиалы</a></li>
+    </ul>
+</li>
+
+<li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-align-justify"></i> Контент</a>
+    <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('banner') }}'><i class='nav-icon la la-image'></i> Баннеры</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('faq') }}'><i class='nav-icon la la-question'></i> Вопросы и ответы</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('seo-text') }}'><i class='nav-icon la la-file-text-o'></i> Сео текст</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('popular-request') }}'><i class='nav-icon la la-question-circle'></i> Популярные запросы</a></li>
     </ul>
 </li>

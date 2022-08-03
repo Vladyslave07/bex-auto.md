@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\Category;
 use App\Models\Faq;
 use App\Models\PopularRequest;
+use App\Models\SeoText;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -25,7 +26,7 @@ class IndexController extends Controller
 
         // Expected cars
         $expectedCars = Car::expectedCars();
-
+        // TODO: Проверки на наличие
         // Popular request
         $popularRequests = PopularRequest::popularRequests();
 
@@ -35,6 +36,9 @@ class IndexController extends Controller
         // Faq
         $faqs = Faq::faqs();
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs'));
+        // Seo text
+        $seoText = SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText'));
     }
 }
