@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
@@ -22,6 +23,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
        return view('html.catalog');
     })->name('category');
 });
+
+// Cache delete
+Route::get('/clear-all-cache', function ()  {
+    Artisan::call("cache:clear");
+})->name('clear-cache');
 
 // Роуты на вёрстку
 Route::group(['prefix' => 'html'], function () {
