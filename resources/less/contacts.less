@@ -1,0 +1,122 @@
+@import "partials/common.less";
+@import "partials/breadcrumb.less";
+@import "partials/section-order-calculation.less";
+@import "partials/modal.less";
+.contacts {
+    margin-top: 100px;
+    margin-bottom: 45px;
+    .main-title {
+        margin: 0 0 30px;
+    }
+    .row {
+        display: flex;
+        .col {
+            &:first-child {
+                margin-right: 9%;
+                max-width: 440px;
+            }
+        }
+    }
+    ul {
+        font-size: 16px;
+        line-height: 20px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        display: flex;
+        flex-wrap: wrap;
+        & + ul {
+            border-top: 1px solid var(--gray);
+            padding-top: 27px;
+        }
+        li {
+            margin-bottom: 24px;
+            width: 50%;
+        }
+        a {
+            display: table;
+            margin-top: 20px;
+        }
+        .mt-0 {
+            margin-top: 0;
+        }
+        .schedule {
+            margin-top: 23px;
+            span {
+                display: table;
+                margin-bottom: 10px;
+            }
+        }
+    }
+    .imgs {
+        margin: 10px -10px 0;
+        display: flex;
+        picture {
+            margin: 0 10px 20px;
+        }
+        img {
+            display: block;
+        }
+    }
+    #map {
+        height: 250px;
+    }
+}
+@media (max-width: 991px) {
+    .contacts {
+        .row {
+            flex-direction: column;
+            .col {
+                &:first-child {
+                    margin: 0;
+                    max-width: none;
+                }
+            }
+        }
+        ul {
+            & + ul {
+                padding-top: 40px;
+                margin: 10px -20px 0;
+                text-align: center;
+                li {
+                    width: 100%;
+                }
+                a {
+                    margin: 0 auto;
+                }
+            }
+            li {
+                margin-bottom: 16px;
+            }
+            .schedule {
+                margin: 9px 0 6px;
+                span {
+                    margin: 0 auto 12px;
+                }
+            }
+        }
+        .imgs {
+            margin: 10px -5px 0;
+            picture {
+                margin: 0 5px 10px;
+            }
+        }
+        #map {
+            height: 290px;
+        }
+    }
+    .section-order-calculation {
+        border-top: none;
+        padding-top: 3px;
+    }
+}
+@media (max-width: 767px) {
+    .contacts {
+        margin-top: 60px;
+        .main-title {
+            font-size: 24px;
+            text-align: center;
+            margin: 0 0 20px;
+        }
+    }
+}
