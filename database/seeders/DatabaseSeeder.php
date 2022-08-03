@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             CarTableSeeder::class,
             PopularRequestTableSeeder::class,
             BrandTableSeeder::class,
+            FaqTableSeeder::class,
         ]);
     }
 }

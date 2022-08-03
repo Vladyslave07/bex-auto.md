@@ -20,6 +20,7 @@
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('branch') }}'><i class='nav-icon la la-code-branch'></i> Филиалы</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('banner') }}'><i class='nav-icon la la-image'></i> Баннеры</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('faq') }}'><i class='nav-icon la la-question'></i> Вопросы и ответы</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('popular-request') }}'><i class='nav-icon la la-question-circle'></i> Популярные запросы</a></li>
     </ul>
 </li>

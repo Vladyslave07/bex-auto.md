@@ -51,4 +51,8 @@ return [
         'why_6' => 'Various professionals',
         'years' => ':num years'
     ],
+
+    'faqs' => [
+        'title' => 'Answers to questions',
+    ]
 ];

@@ -29,6 +29,9 @@ return [
     'category' => 'Раздел',
     'show_in_slider' => 'Показать в слайдере',
     'year' => 'Год выпуска',
+    'question' => 'Вопрос',
+    'answer' => 'Ответ',
+
 
     'option' => [
         'expect' => 'Ожидается',

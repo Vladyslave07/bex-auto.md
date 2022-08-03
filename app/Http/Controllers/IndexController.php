@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Faq;
 use App\Models\PopularRequest;
 use Illuminate\Http\Request;
 
@@ -31,6 +32,9 @@ class IndexController extends Controller
         // Brands
         $brands = Brand::brands();
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands'));
+        // Faq
+        $faqs = Faq::faqs();
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs'));
     }
 }
