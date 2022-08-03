@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\PopularRequest;
@@ -25,8 +26,11 @@ class IndexController extends Controller
         $expectedCars = Car::expectedCars();
 
         // Popular request
-        $popularRequests = PopularRequest::query()->active()->get(['slug', 'title']);
+        $popularRequests = PopularRequest::popularRequests();
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests'));
+        // Brands
+        $brands = Brand::brands();
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands'));
     }
 }

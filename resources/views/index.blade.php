@@ -47,68 +47,8 @@
 {{-- Why we --}}
 @include('partials.index.why-we')
 
-<!-- ///ПОПУЛЯРНІ МАРКИ АВТО/// -->
-<div class="popular-brands">
-    <div class="container hidden-xs">
-        <div class="main-title text-center">Популярні марки авто</div>
-    </div>
-    <div class="list">
-        <div class="container">
-            <a href="#" title="Alfa Romeo">Alfa Romeo</a>
-            <a href="#" title="Aston Martin">Aston Martin</a>
-            <a href="#" title="Audi">Audi</a>
-            <a href="#" title="Bentley">Bentley</a>
-            <a href="#" title="BMW">BMW</a>
-            <a href="#" title="Buick">Buick</a>
-            <a href="#" title="Cadillac">Cadillac</a>
-            <a href="#" title="Chevrolet">Chevrolet</a>
-            <a href="#" title="Chrysler">Chrysler</a>
-            <a href="#" title="Dodge">Dodge</a>
-            <a href="#" title="Ducati">Ducati</a>
-            <a href="#" title="Ferrari">Ferrari</a>
-            <a href="#" title="Fiat">Fiat</a>
-            <a href="#" title="Ford">Ford</a>
-            <a href="#" title="GMC">GMC</a>
-            <a href="#" title="Harley Davidson">Harley Davidson</a>
-            <a href="#" title="Honda">Honda</a>
-            <a href="#" title="Hummer">Hummer</a>
-            <a href="#" title="Hyundai">Hyundai</a>
-            <a href="#" title="Infiniti">Infiniti</a>
-            <a href="#" title="Jaguar">Jaguar</a>
-            <a href="#" title="Jeep">Jeep</a>
-            <a href="#" title="Kawasaki">Kawasaki</a>
-            <a href="#" title="KIA">KIA</a>
-            <a href="#" title="Lamborghini">Lamborghini</a>
-            <a href="#" title="Land Rover">Land Rover</a>
-            <a href="#" title="Lexus">Lexus</a>
-            <a href="#" title="Lincoln Maserati">Lincoln Maserati</a>
-            <a href="#" title="Maybach">Maybach</a>
-            <a href="#" title="Mazda">Mazda</a>
-            <a href="#" title="McLaren">McLaren</a>
-            <a href="#" title="Mercedes-Benz">Mercedes-Benz</a>
-            <a href="#" title="Mini Cooper">Mini Cooper</a>
-            <a href="#" title="Mitsubishi">Mitsubishi</a>
-            <a href="#" title="Nissan">Nissan</a>
-            <a href="#" title="Pontiac">Pontiac</a>
-            <a href="#" title="Porsche">Porsche</a>
-            <a href="#" title="RAM">RAM</a>
-            <a href="#" title="Range Rover">Range Rover</a>
-            <a href="#" title="Renault">Renault</a>
-            <a href="#" title="Rolls Royce">Rolls Royce</a>
-            <a href="#" title="Scion">Scion</a>
-            <a href="#" title="Smart">Smart</a>
-            <a href="#" title="Subaru">Subaru</a>
-            <a href="#" title="Suzuki">Suzuki</a>
-            <a href="#" title="Tesla">Tesla</a>
-            <a href="#" title="Toyota">Toyota</a>
-            <a href="#" title="Volkswagen">Volkswagen</a>
-            <a href="#" title="Volvo">Volvo</a>
-            <a href="#" title="Yamaha">Yamaha</a>
-        </div>
-    </div>
-    <span class="toggle-btn visible-xs">Детальніше</span>
-</div>
-<!-- ///:end/// -->
+{{-- Popular auto brand --}}
+@include('partials.index.popular-brand-auto')
 
 <!-- ///ВІДПОВІДІ НА ПИТАННЯ/// -->
 <div class="section-faq container">

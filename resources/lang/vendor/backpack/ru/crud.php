@@ -193,4 +193,7 @@ return [
 
     'popular_request' => 'попульрные запрос',
     'popular_requests' => 'популярные запросы',
+
+    'brand' => 'марка',
+    'brands' => 'марки',
 ];

@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
             CategoryTableSeeder::class,
             CarTableSeeder::class,
             PopularRequestTableSeeder::class,
+            BrandTableSeeder::class,
         ]);
     }
 }
