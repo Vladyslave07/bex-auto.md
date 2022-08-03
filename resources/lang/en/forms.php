@@ -9,5 +9,11 @@ return [
         'title' => 'Let\'s find the car of your dreams!',
         'sub_title' => 'Leave a request and our managers will select a car for your budget and request',
         'submit' => 'Order a car',
-    ]
+    ],
+
+    'order-calc' => [
+        'title' => 'Order a cost estimate <span class="color-blue">purchase and delivery of your car</span>',
+        'sub_title' => 'Enter your phone number and our manager will contact you',
+        'submit' => 'Order a calculation',
+    ],
 ];
