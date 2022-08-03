@@ -6,6 +6,7 @@ use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class PopularRequest extends Model
 {
@@ -27,6 +28,16 @@ class PopularRequest extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return mixed
+     */
+    public static function popularRequests()
+    {
+        return Cache::remember('index_popular_requests', 86400, function () {
+            return self::query()->orderBy('sort')->active()->get(['slug', 'title']);
+        });
+    }
 
     /*
     |--------------------------------------------------------------------------

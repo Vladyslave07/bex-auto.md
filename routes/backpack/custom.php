@@ -21,8 +21,13 @@ Route::group([
     Route::crud('branch', 'BranchCrudController');
     Route::crud('banner', 'BannerCrudController');
     Route::crud('form-result', 'FormResultCrudController');
-    Route::crud('form-result/call_back', 'FormResultCallBackCrudController');
+    Route::crud('form-result/' . \App\Http\Livewire\Forms\CallBack::SLUG_FORM, 'FormResultCallBackCrudController');
+    Route::crud('form-result/' . \App\Http\Livewire\Forms\BuyAndDeliveryAuto::SLUG_FORM, 'FormResultBuyAndDeliveryAutoCrudController');
+    Route::crud('form-result/' . \App\Http\Livewire\Forms\OrderCalculate::SLUG_FORM, 'FormResultOrderCalculationCrudController');
     Route::crud('car', 'CarCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('popular-request', 'PopularRequestCrudController');
+    Route::crud('brand', 'BrandCrudController');
+    Route::crud('faq', 'FaqCrudController');
+    Route::crud('seo-text', 'SeoTextCrudController');
 }); // this should be the absolute last line of this file

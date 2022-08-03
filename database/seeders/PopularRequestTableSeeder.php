@@ -16,7 +16,7 @@ class PopularRequestTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('menus')->insert([
+        DB::table('popular_requests')->insert([
             [
                 'active' => '1',
                 'sort' => '500',

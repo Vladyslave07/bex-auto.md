@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
-class FormResult extends Model
+class Faq extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasTranslations, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -15,9 +18,11 @@ class FormResult extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'form_results';
+    protected $table = 'faqs';
     protected $guarded = ['id'];
-     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country'];
+    protected $fillable = ['active', 'sort', 'question', 'answer'];
+    protected $translatable = ['question', 'answer'];
+    protected $attributes = ['sort' => 500];
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +35,16 @@ class FormResult extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return mixed
+     */
+    public static function faqs()
+    {
+        return Cache::remember('index_faqs', 86400, function () {
+            return self::query()->orderBy('sort')->active()->get(['question', 'answer']);
+        });
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Http\Livewire\Forms;
+
+use App\Models\FormResult;
+use App\Rules\PhoneNumber;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
+use Livewire\Component;
+
+class BuyAndDeliveryAuto extends Component implements BaseForm
+{
+
+    const SLUG_FORM = 'buy_and_delivery';
+
+    public $phone;
+    public $name;
+    public $car;
+    public $country;
+
+    public function render()
+    {
+        return view('livewire.forms.buy-and-delivery-auto');
+    }
+
+    public function submit()
+    {
+        $fields = $this->validate();
+        $fields['phone'] = Str::phoneNumber($fields['phone']);
+        $fields['slug_form'] = self::SLUG_FORM;
+        $res = FormResult::query()->create($fields);
+    }
+
+    protected function rules()
+    {
+        return [
+            'name' => ['required', 'min:3', 'max:255'],
+            'phone' => ['required', new PhoneNumber()],
+            'car' => ['max:100'],
+            'country' => ['max:100'],
+        ];
+    }
+
+    protected function messages()
+    {
+        return [
+            'name.required' => Lang::get('messages.required'),
+            'name.min' => Lang::get('messages.min', ['num' => 3]),
+            'name.max' => Lang::get('messages.max', ['num' => 255]),
+            'phone.required' => Lang::get('messages.required'),
+            'car.max' => Lang::get('messages.max', ['num' => 100]),
+            'country.max' => Lang::get('messages.max', ['num' => 100]),
+        ];
+    }
+}

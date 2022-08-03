@@ -2,12 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
-class FormResult extends Model
+class SeoText extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasTranslations, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -15,15 +18,30 @@ class FormResult extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'form_results';
+    const MAIN_PAGE_SEO_TEXT_SLUG = 'main';
+
+    protected $table = 'seo_texts';
     protected $guarded = ['id'];
-     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country'];
+    protected $fillable = ['active', 'sort', 'title', 'text', 'slug'];
+    protected $translatable = ['title', 'text'];
+    protected $attributes = ['sort' => 500];
 
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @param string $slug
+     * @return mixed
+     */
+    public static function seoTextBySlug(string $slug)
+    {
+        return Cache::remember($slug . '_seo_text', 86400, function () use ($slug) {
+            return self::query()->where('slug', $slug)->active()->first(['title', 'text']);
+        });
+    }
 
     /*
     |--------------------------------------------------------------------------

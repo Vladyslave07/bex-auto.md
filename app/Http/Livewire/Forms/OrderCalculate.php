@@ -8,12 +8,17 @@ use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
 
-class CallBack extends Component implements BaseForm
+class OrderCalculate extends Component implements BaseForm
 {
     public $phone;
     public $name;
 
-    const SLUG_FORM = 'call_back';
+    const SLUG_FORM = 'order_calculate';
+
+    public function render()
+    {
+        return view('livewire.forms.order-calculate');
+    }
 
     public function submit()
     {
@@ -24,11 +29,6 @@ class CallBack extends Component implements BaseForm
             'phone' => Str::phoneNumber($this->phone),
             'slug_form' => self::SLUG_FORM,
         ]);
-    }
-
-    public function render()
-    {
-        return view('livewire.forms.call-back');
     }
 
     protected function rules()

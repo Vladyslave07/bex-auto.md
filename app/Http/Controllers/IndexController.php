@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Banner;
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Faq;
 use App\Models\PopularRequest;
+use App\Models\SeoText;
 use Illuminate\Http\Request;
 
 class IndexController extends Controller
@@ -23,10 +26,19 @@ class IndexController extends Controller
 
         // Expected cars
         $expectedCars = Car::expectedCars();
-
+        // TODO: Проверки на наличие
         // Popular request
-        $popularRequests = PopularRequest::query()->active()->get(['slug', 'title']);
+        $popularRequests = PopularRequest::popularRequests();
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests'));
+        // Brands
+        $brands = Brand::brands();
+
+        // Faq
+        $faqs = Faq::faqs();
+
+        // Seo text
+        $seoText = SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText'));
     }
 }
