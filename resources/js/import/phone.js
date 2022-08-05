@@ -3,7 +3,7 @@ import Inputmask from "inputmask";
 export default function () {
     document.addEventListener('livewire:load', function () {
         Inputmask({
-            mask: '+380 ( 99999999 )',
+            mask: '+380 ( 999999999 )',
             showMaskOnHover: false,
             clearMaskOnLostFocus: true,
 

@@ -39,6 +39,7 @@ return [
     'reviews' => [
         'title' => 'They talk about <span class="bline">us</span>',
         'sub_title' => 'Every feedback about our work is important to us',
+        'more' => 'See all reviews',
     ],
 
     'why_we' => [
@@ -60,4 +61,9 @@ return [
         'btn_show' => 'More details',
         'btn_close' => 'Collapse',
     ],
+
+
+    'search' => [
+        'placeholder' => 'Enter the lot number or car brand'
+    ]
 ];
