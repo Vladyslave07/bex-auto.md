@@ -29,6 +29,7 @@
                     <li><a target="_blank" href="{{ route('html.news') }}">Новини</a></li>
                     <li><a target="_blank" href="{{ route('html.article') }}">Сторінка новини</a></li>
                     <li><a target="_blank" href="{{ route('html.contacts') }}">Контакти</a></li>
+                    <li><a target="_blank" href="{{ route('html.guarantee') }}">Гарантії</a></li>
                 </ul>
                 <br>
                 <br>
