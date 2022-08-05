@@ -20,7 +20,7 @@
             </a>
 
             <form class="search" action="#">
-                <input type="text" placeholder="@lang('index.search.search')" autocomplete="off">
+                <input type="text" placeholder="@lang('index.search.placeholder')" autocomplete="off">
                 <button class="search-btn" type="submit" aria-label="Search">
                     <svg width="20" height="19"><use xlink:href="#search-icon"></use></svg>
                 </button>

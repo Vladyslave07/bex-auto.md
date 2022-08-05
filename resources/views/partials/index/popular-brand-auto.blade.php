@@ -1,6 +1,6 @@
 <div class="popular-brands">
     <div class="container hidden-xs">
-        <div class="main-title text-center">Популярні марки авто</div>
+        <div class="main-title text-center">@lang('index.popular.title')</div>
     </div>
     <div class="list">
         <div class="container">
@@ -9,5 +9,5 @@
             @endforeach
         </div>
     </div>
-    <span class="toggle-btn visible-xs">Детальніше</span>
+    <span class="toggle-btn visible-xs">@lang('index.popular.more')</span>
 </div>
