@@ -91,10 +91,10 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
 
         CRUD::addField([
-            'name' => 'category_id',
-            'label' => trans('backpack::fields.category'),
-            'type' => 'select',
-            'entity' => 'category',
+            'name' => 'categories',
+            'label' => trans('backpack::fields.categories'),
+            'type' => 'relationship',
+            'entity' => 'categories',
             'attribute' => 'title',
             'model' => Category::class,
             'options' => (function ($query) {

@@ -27,6 +27,7 @@ return [
     'info' => 'Информация',
     'status' => 'Статус',
     'category' => 'Раздел',
+    'categories' => 'Разделы',
     'show_in_slider' => 'Показать в слайдере',
     'year' => 'Год выпуска',
     'question' => 'Вопрос',

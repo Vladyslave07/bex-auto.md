@@ -83,13 +83,14 @@ class Car extends Model
     */
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * categories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function category()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsToMany(Category::class, 'car_category');
     }
-
     /*
     |--------------------------------------------------------------------------
     | SCOPES
