@@ -22,7 +22,7 @@ class IndexController extends Controller
         $categories = Category::selectedCategory();
 
         // Cars in Stock
-        $carsInStock = Car::carsInStock($categories)->groupBy('category_id');
+        $carsInStock = Car::carsInStock($categories);
 
         // Expected cars
         $expectedCars = Car::expectedCars();

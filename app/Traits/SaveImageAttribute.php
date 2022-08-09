@@ -15,7 +15,7 @@ trait SaveImageAttribute
         $destination_path = Str::replace('_', '', $this->table);
 
         if ($value == null) {
-            \Storage::disk($disk)->delete($this->{$attribute_name});
+            \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
             $this->attributes[$attribute_name] = null;
         } else {
             if (Str::startsWith($value, 'data:image')) {

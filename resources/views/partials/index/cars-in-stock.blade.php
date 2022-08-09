@@ -1,10 +1,10 @@
-@if(count($carsInStock->toArray()) > 0)
+@if(count($carsInStock) > 0)
     <div class="section-swiper container">
         <div class="main-title text-center">@lang('car.title_in_stock')</div>
         @if (count($categories) > 0)
             <div class="nav-tabs">
                 @foreach($categories as $category)
-                    @if (in_array($category->id, array_keys($carsInStock->toArray())))
+                    @if (in_array($category->id, array_keys($carsInStock)))
                         <span class="nav-link @if($categories->first()->id === $category->id) active @endif"
                               data-toggle="tab"
                               data-target="#availabTab_{{ $category->id }}">{{ $category->title }}</span>
@@ -15,7 +15,7 @@
         <div class="tab-content">
             @foreach($carsInStock as $key => $cars)
                 <div id="availabTab_{{ $key }}"
-                     class="tab-pane @if(array_key_first($carsInStock->toArray()) === $key) active @endif">
+                     class="tab-pane @if(array_key_first($carsInStock) === $key) active @endif">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
                             @foreach($cars as $car)

@@ -47,15 +47,26 @@ class Car extends Model
     {
         $categories = array_column($categories->toArray(), 'id');
 
-        return Cache::remember('cars_in_stock_category_' . implode('_', $categories), 86400, function () use ($categories) {
-            return self::query()
+        return Cache::remember('cars_in_stock_category' . implode('_', $categories), 86400, function () use ($categories) {
+            $carsInStock = self::query()
                 ->orderBy('id')
-                ->with('category')
                 ->where('status', self::IN_STOCK_STATUS)
-                ->whereIn('category_id', $categories)
                 ->active()
+                ->whereHas('categories', function ($query) use ($categories){
+                    return $query->whereIn('category_id', $categories)->orderBy('category_id');
+                })
                 ->take(11)
                 ->get();
+
+            $cars = [];
+            foreach ($carsInStock as $item) {
+                foreach ($item->categories as $category) {
+                    if (in_array($category->id, $categories)) {
+                        $cars[$category->id][] = $item;
+                    }
+                }
+            }
+            return $cars;
         });
     }
 

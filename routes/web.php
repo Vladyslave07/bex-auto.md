@@ -19,7 +19,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
-    Route::get('/cars/{category}', function () {
+    Route::get(LaravelLocalization::transRoute('routes.category'), function () {
        return view('html.catalog');
     })->name('category');
 });
