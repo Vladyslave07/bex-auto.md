@@ -9,6 +9,10 @@
 
 <script>
     const deleteAllCache = () => {
-        fetch('{{ route('clear-cache') }}')
+        fetch('{{ route('clear-cache') }}');
+        new Noty({
+            type: "success",
+            text: 'Кеш успешно удален',
+        }).show();
     }
 </script>
