@@ -21,7 +21,7 @@
         <h1 class="h1">
             <span class="color-red">Автомобілі</span>
         </h1>
-        <div class="h2 color-blue-xs">з будь-якого континенту,<br> в наявності та під замовлення</div>
+        <div class="h2">з будь-якого континенту,<br> в наявності та під замовлення</div>
         <picture class="img">
             <source type="image/webp" srcset="{{ asset('img/example/img_3.webp') }}" media="(max-width: 767px)">
             <source type="image/webp" srcset="{{ asset('img/example/img_2.webp') }}" media="(min-width: 768px)">
@@ -30,7 +30,7 @@
         <br>
         <br>
         <span class="line hidden-xs"></span>
-        <div class="h3 color-blue color-red-xs">Економія <strong>до 40%</strong> від ринкової<br> вартості</div>
+        <div class="h3">Економія <strong>до 40%</strong> від ринкової<br> вартості</div>
     </div>
 </div>
 <!-- ///:end/// -->

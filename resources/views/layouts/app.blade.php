@@ -16,7 +16,7 @@
 
         <header class="main-header container">
             <a href="/" class="logo" aria-label="logo">
-                <img width="115" height="41" src="{{ asset('img/logo.svg') }}" alt="">
+                <img width="134" height="59" src="{{ asset('img/logo.svg') }}" alt="">
             </a>
 
             <form class="search" action="#">
