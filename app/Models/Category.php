@@ -7,6 +7,7 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
 class Category extends Model
 {
@@ -29,6 +30,33 @@ class Category extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @param mixed $value
+     * @param null $field
+     * @return \Illuminate\Database\Eloquent\Builder|Model|\never|object|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        return static::findByLocalizedSlug($value)->first() ?? abort(404);
+    }
+
+    /**
+     * @param $slug
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function findByLocalizedSlug($slug)
+    {
+        return static::query()->where($this->getRouteKeyName() . '->' . app()->getLocale(), $slug);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 
     /**
      * category which selected for show in slider

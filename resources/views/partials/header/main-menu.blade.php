@@ -10,7 +10,7 @@
                     <div class="menu-dropdown">
                         <div class="submenu">
                             @foreach($item->children as $child)
-                                <a href="{{ $child['url'] }}">{{ $child['name'] }}</a>
+                                <a href="{{ route('category', $child['url']) }}">{{ $child['name'] }}</a>
                             @endforeach
                         </div>
                         @if($items->first()->slug === $item->slug)

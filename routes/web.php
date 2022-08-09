@@ -19,9 +19,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
-    Route::get(LaravelLocalization::transRoute('routes.category'), function () {
-       return view('html.catalog');
-    })->name('category');
+    Route::get(
+        LaravelLocalization::transRoute('routes.category'),
+        [\App\Http\Controllers\CatalogController::class, 'category']
+    )->name('category');
 });
 
 // Cache delete
