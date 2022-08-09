@@ -1,5 +1,7 @@
 <?php
 return [
+    'title' => 'Bexhill Trading Auto',
+
     'popular_request_title' => 'Популярные запросы',
     'buy-and-delivery' => [
         'title' => 'Послуги придбання та доставки авто',

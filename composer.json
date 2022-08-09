@@ -11,6 +11,7 @@
         "backpack/permissionmanager": "^6.0",
         "backpack/settings": "^3.0",
         "cviebrock/eloquent-sluggable": "^9.0",
+        "davejamesmiller/laravel-breadcrumbs": "^5.3",
         "guzzlehttp/guzzle": "^7.2",
         "intervention/image": "^2.7",
         "laravel/framework": "^9.19",

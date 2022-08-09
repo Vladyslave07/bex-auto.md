@@ -1,5 +1,7 @@
 <?php
 return [
+    'title' => 'Bexhill Trading Auto',
+
     'popular_request_title' => 'Popular request',
     'buy-and-delivery' => [
         'title' => 'Car purchase and delivery services',
