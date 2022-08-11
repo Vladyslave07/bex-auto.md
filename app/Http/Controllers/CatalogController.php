@@ -19,12 +19,11 @@ class CatalogController extends Controller
      */
     public function category(Category $category, $page = 1)
     {
-
         $cars = Car::query()->whereHas('categories', function ($query) use ($category) {
            return $query->where('category_id', $category->id);
         })->active()->paginate(self::COUNT_CARS_ON_PAGE, ['*'], 'page', $this->pageNum($page))->withQueryString();
 
-        return view('category', compact('category', 'cars'));
+        return view('category', compact('category', 'cars', 'page'));
     }
 
     public function pageNum($page)

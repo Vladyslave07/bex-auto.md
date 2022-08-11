@@ -1,6 +1,29 @@
+
+
 @php
     $pattern = ['/\/page-(.*)?page=(.*)/', '!\?page=(.*)!'];
+    $replace = '/page-'.($paginator->currentPage() - 1);
+    if ($paginator->currentPage() - 1 === 1) {
+        $replace = '';
+    }
+    $previousPage = preg_replace($pattern, $replace, $paginator->previousPageUrl());
+    $nextPageUrl = '';
+    if ($paginator->hasMorePages()) {
+        $nextPageUrl = preg_replace($pattern, '/page-'.($paginator->currentPage() + 1), $paginator->nextPageUrl());
+    }
 @endphp
+
+@section('meta-pagination')
+@if (!$paginator->onFirstPage())
+<meta name='robots' content='noindex, follow' />
+@endif
+@if($previousPage)
+        <link rel="prev" href="{{ $previousPage }}" />
+@endif
+@if ($paginator->hasMorePages())
+        <link rel="next" href="{{ $nextPageUrl }}" />
+@endif
+@endsection
 
 @if ($paginator->hasPages())
 
@@ -13,13 +36,8 @@
                 </svg>
             </a>
         @else
-            @php
-                $replace = '/page-'.($paginator->currentPage() - 1);
-                if ($paginator->currentPage() - 1 === 1) {
-                    $replace = '';
-                }
-            @endphp
-            <a href="{{ preg_replace($pattern, $replace, $paginator->previousPageUrl()) }}" aria-label="pagination.previous">
+
+            <a href="{{ $previousPage }}" aria-label="pagination.previous">
                 <svg width="24" height="30">
                     <use xlink:href="#arrow-icon"></use>
                 </svg>
