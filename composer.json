@@ -19,6 +19,7 @@
         "laravel/tinker": "^2.7",
         "livewire/livewire": "^2.10",
         "mcamara/laravel-localization": "^1.7",
+        "michaloravec/laravel-paginateroute": "^1.0",
         "spatie/laravel-translatable": "^6.0"
     },
     "require-dev": {

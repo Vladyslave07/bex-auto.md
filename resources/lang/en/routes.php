@@ -1,4 +1,4 @@
 <?php
 return [
-  'category' => 'cars/{category}',
+  'category' => 'cars/{category}/{page?}',
 ];
