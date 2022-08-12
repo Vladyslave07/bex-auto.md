@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class CatalogController extends Controller
 {
 
-    const COUNT_CARS_ON_PAGE = 2;
+    const COUNT_CARS_ON_PAGE = 9;
 
     /**
      * Category method handle
