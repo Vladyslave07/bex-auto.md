@@ -38,7 +38,10 @@ class Category extends Model
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        return static::findByLocalizedSlug($value)->first() ?? abort(404);
+        $cacheKey = $value . '_' . app()->getLocale();
+        return Cache::remember($cacheKey, 86400, function () use ($value) {
+            return static::findByLocalizedSlug($value)->first() ?? abort(404);
+        });
     }
 
     /**

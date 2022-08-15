@@ -1,10 +1,10 @@
-@if (count($expectedCars) > 0)
+@if (count($cars) > 0)
     <div class="section-swiper container">
-        <div class="main-title text-center">@lang('car.' . \App\Models\Car::EXPECTED_STATUS)</div>
+        <div class="main-title text-center">{{ $title }}</div>
         <div class="swiper product-swiper">
             <div class="swiper-wrapper">
 
-                @foreach($expectedCars as $car)
+                @foreach($cars as $car)
 
                     @include('partials.index.car-card')
 
@@ -25,8 +25,10 @@
                 </div>
             </div>
         </div>
-        <div class="swiper-btn text-center">
-            <a href="#" class="btn">@lang('car.show_all')</a>
-        </div>
+        @if ($more)
+            <div class="swiper-btn text-center">
+                <a href="#" class="btn">@lang('car.show_all')</a>
+            </div>
+        @endif
     </div>
 @endif
