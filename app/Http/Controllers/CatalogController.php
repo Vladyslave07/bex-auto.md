@@ -33,9 +33,12 @@ class CatalogController extends Controller
         // Brands
         $brands = Brand::brands();
 
+        // Selected categories
+        $categories = Category::selectedCategory();
+
         $seoText = '';
 
-        return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText'));
+        return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText', 'categories'));
     }
 
     public function pageNum($page)

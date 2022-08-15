@@ -68,7 +68,7 @@ class Category extends Model
     public static function selectedCategory()
     {
         return Cache::remember('categories_show_in_slider', 86400, function () {
-            return self::query()->where('show_in_slider', true)->get(['id', 'title']);
+            return self::query()->where('show_in_slider', true)->get(['id', 'title', 'slug']);
         });
     }
 
