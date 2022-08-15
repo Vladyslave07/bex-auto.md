@@ -34,7 +34,7 @@ class IndexController extends Controller
         $brands = Brand::brands();
 
         // Faq
-        $faqs = Faq::faqs();
+        $faqs = Faq::defaultFaqs();
 
         // Seo text
         $seoText = SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
