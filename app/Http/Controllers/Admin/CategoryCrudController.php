@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
+use App\Models\Faq;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -75,11 +77,18 @@ class CategoryCrudController extends CrudController
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
 
-        /**
-         * Fields can be defined using the fluent syntax or array syntax:
-         * - CRUD::field('price')->type('number');
-         * - CRUD::addField(['name' => 'price', 'type' => 'number'])); 
-         */
+        CRUD::addField([
+            'name' => 'faqs',
+            'label' => trans('backpack::fields.faq'),
+            'type' => 'relationship',
+            'entity' => 'faqs',
+            'attribute' => 'question',
+            'model' => Faq::class,
+            'options' => (function ($query) {
+                return $query->orderBy('question', 'asc')->get();
+            }),
+            'hint' => trans('backpack::hint.categories.faqs'),
+        ]);
     }
 
     /**

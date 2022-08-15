@@ -78,6 +78,16 @@ class Category extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * categories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function faqs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Faq::class, 'category_faq');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

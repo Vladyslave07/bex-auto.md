@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Faq;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -36,9 +37,12 @@ class CatalogController extends Controller
         // Selected categories
         $categories = Category::selectedCategory();
 
+        // Faq
+        $faqs = Faq::categoryFaqs($category);
+
         $seoText = '';
 
-        return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText', 'categories'));
+        return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
     }
 
     public function pageNum($page)
