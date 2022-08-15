@@ -22,7 +22,13 @@
 @include('partials.index.cars-in-stock')
 
 {{-- Expected cars --}}
-@include('partials.index.cars-expected')
+@include('partials.index.cars-expected',
+    [
+        'cars' => $expectedCars,
+        'title' => \Illuminate\Support\Facades\Lang::get('car.' . \App\Models\Car::EXPECTED_STATUS),
+        'more' => true
+    ]
+)
 
 <hr class="hr mb-1">
 

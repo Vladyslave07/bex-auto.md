@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
 use Illuminate\Http\Request;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 class CatalogController extends Controller
 {
 
-    const COUNT_CARS_ON_PAGE = 2;
+    const COUNT_CARS_ON_PAGE = 9;
 
     /**
      * Category method handle
@@ -19,11 +20,22 @@ class CatalogController extends Controller
      */
     public function category(Category $category, $page = 1)
     {
+
+        // todo: Кешировать
         $cars = Car::query()->whereHas('categories', function ($query) use ($category) {
            return $query->where('category_id', $category->id);
         })->active()->paginate(self::COUNT_CARS_ON_PAGE, ['*'], 'page', $this->pageNum($page))->withQueryString();
 
-        return view('category', compact('category', 'cars', 'page'));
+
+        // todo: Понять выводить машины с текущей категории или из всех категорий
+        $popularCars = Car::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
+
+        // Brands
+        $brands = Brand::brands();
+
+        $seoText = '';
+
+        return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText'));
     }
 
     public function pageNum($page)

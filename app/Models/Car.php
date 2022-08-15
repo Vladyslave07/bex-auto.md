@@ -24,7 +24,7 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin'];
     public static $images = ['images'];
     protected $translatable = ['title', 'description', 'info'];
     protected $attributes = ['sort' => 500, 'images' => ''];
