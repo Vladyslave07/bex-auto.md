@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Faq;
+use App\Models\SeoText;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -88,6 +89,23 @@ class CategoryCrudController extends CrudController
                 return $query->orderBy('question', 'asc')->get();
             }),
             'hint' => trans('backpack::hint.categories.faqs'),
+        ]);
+
+        CRUD::addField([
+            'name' => 'seo_text_id',
+            'label' => trans('backpack::fields.seo_text'),
+            'type' => 'relationship',
+            'entity'    => 'text',
+            'model'     => SeoText::class,
+            'attribute' => 'title',
+            'options'   => (function ($query) {
+                $texts = $query->orderBy('title', 'asc')->get();
+                foreach ($texts as $text) {
+                    $text->title = str_replace(['&nbsp;', 'nbsp;'],' ',strip_tags($text->title));
+                }
+
+                return $texts;
+            }),
         ]);
     }
 

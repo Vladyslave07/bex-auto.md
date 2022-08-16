@@ -21,7 +21,7 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = ['id'];
-    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider'];
+    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id'];
     protected $translatable = ['title', 'slug'];
     protected $attributes = ['sort' => 500];
 
@@ -79,6 +79,16 @@ class Category extends Model
     */
 
     /**
+     * seo text
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function text(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(SeoText::class, 'seo_text_id');
+    }
+
+    /**
      * categories relationship
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
@@ -99,6 +109,14 @@ class Category extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getSeoTextAttribute()
+    {
+        return Cache::remember( $this->seo_text_id . '_seo_text', 86400, function () {
+            return SeoText::query()->find($this->seo_text_id, ['title', 'text']);
+        });
+
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -57,6 +57,11 @@ class SeoTextCrudController extends CrudController
                 'label' => trans('backpack::fields.active'),
                 'type'  => 'check'
             ],
+            [
+                'name'  => 'main',
+                'label' => trans('backpack::fields.main'),
+                'type'  => 'check'
+            ],
         ]);
     }
 
@@ -71,6 +76,7 @@ class SeoTextCrudController extends CrudController
         CRUD::setValidation(SeoTextRequest::class);
 
         CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
+        CRUD::addField(['name' => 'main', 'label' => trans('backpack::fields.main'), 'type' => 'checkbox']);
         CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'summernote']);

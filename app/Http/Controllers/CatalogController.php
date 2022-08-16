@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Faq;
+use App\Models\SeoText;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -40,7 +41,8 @@ class CatalogController extends Controller
         // Faq
         $faqs = Faq::categoryFaqs($category);
 
-        $seoText = '';
+        // todo: Реализовать главный сео текс по умолчанию
+        $seoText = $category->seoText ?? SeoText::mainText();
 
         return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
     }

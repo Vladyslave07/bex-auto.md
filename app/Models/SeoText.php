@@ -22,9 +22,10 @@ class SeoText extends Model
 
     protected $table = 'seo_texts';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'text', 'slug'];
+    protected $fillable = ['active', 'sort', 'title', 'text', 'slug', 'main'];
     protected $translatable = ['title', 'text'];
     protected $attributes = ['sort' => 500];
+    protected $casts = ['main' => 'boolean'];
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +41,16 @@ class SeoText extends Model
     {
         return Cache::remember($slug . '_seo_text', 86400, function () use ($slug) {
             return self::query()->where('slug', $slug)->active()->first(['title', 'text']);
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function mainText()
+    {
+        return Cache::remember( 'main_seo_text', 86400, function () {
+            return self::query()->where('main', 1)->active()->first(['title', 'text']);
         });
     }
 
