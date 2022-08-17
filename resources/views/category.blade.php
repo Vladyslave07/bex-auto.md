@@ -17,26 +17,13 @@
 
     {{-- Title --}}
     @include('partials.category.title')
-
-
-    <!-- ///КАТАЛОГ/// -->
     <div class="section-catalog container">
         {{-- Tabs --}}
         @include('partials.category.tabs')
 
-
-        <div class="catalog-wrap">
-            {{-- Sorting --}}
-            @include('partials.category.sort')
-
-            {{-- Filter --}}
-            @include('partials.category.filter')
-
-            {{-- Cars grid --}}
-            @include('partials.category.cars')
-        </div>
+    <!-- ///КАТАЛОГ/// -->
+        @livewire('category', compact('category', 'page'))
     </div>
-    <!-- ///:end/// -->
 
     {{-- Popular cars --}}
     @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => \Illuminate\Support\Facades\Lang::get('category.title'), 'more' => false])

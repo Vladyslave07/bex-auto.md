@@ -20,17 +20,11 @@ class CatalogController extends Controller
      * @param Category $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function category(Category $category, $page = 1)
+    public function category(Category $category, Request $request, $page = 1)
     {
 
-        // todo: Кешировать
-        $cars = Car::query()->whereHas('categories', function ($query) use ($category) {
-           return $query->where('category_id', $category->id);
-        })->active()->paginate(self::COUNT_CARS_ON_PAGE, ['*'], 'page', $this->pageNum($page))->withQueryString();
-
-
-        // todo: Понять выводить машины с текущей категории или из всех категорий
-        $popularCars = Car::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
+        // Popular cars
+        $popularCars = $category->cars()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
 
         // Brands
         $brands = Brand::brands();
@@ -41,14 +35,10 @@ class CatalogController extends Controller
         // Faq
         $faqs = Faq::categoryFaqs($category);
 
-        // todo: Реализовать главный сео текс по умолчанию
+        // Seo text category or main seo text
         $seoText = $category->seoText ?? SeoText::mainText();
 
-        return view('category', compact('category', 'cars', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
+        return view('category', compact('category', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
     }
 
-    public function pageNum($page)
-    {
-        return preg_replace('/[^0-9]/', '$1', $page);
-    }
 }

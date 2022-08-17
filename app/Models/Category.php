@@ -98,6 +98,16 @@ class Category extends Model
         return $this->belongsToMany(Faq::class, 'category_faq');
     }
 
+    /**
+     * categories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Car::class, 'car_category');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
