@@ -42,5 +42,6 @@ return [
     'option' => [
         'expect' => 'Ожидается',
         'in_stock' => 'В наличии',
+        'on_order' => 'Под заказ',
     ]
 ];

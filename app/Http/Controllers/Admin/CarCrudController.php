@@ -108,7 +108,7 @@ class CarCrudController extends CrudController
             'name'        => 'status',
             'label'       => trans('backpack::fields.status'),
             'type'        => 'select_from_array',
-            'options'     => ['in_stock' => trans('backpack::fields.option.in_stock'), 'expect' => trans('backpack::fields.option.expect')],
+            'options'     => ['in_stock' => trans('backpack::fields.option.in_stock'), 'expect' => trans('backpack::fields.option.expect'), 'on_order' => trans('backpack::fields.option.on_order')],
             'allows_null' => false,
             'default'     => 'in_stock',
             'tab' => 'Свойства'
