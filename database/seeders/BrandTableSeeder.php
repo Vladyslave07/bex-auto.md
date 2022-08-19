@@ -317,6 +317,12 @@ class BrandTableSeeder extends Seeder
                 'title' => '{"uk":"Yamaha","ru":"Yamaha","en":"Yamaha"}',
                 'slug' => '{"uk":"yamaha","ru":"yamaha","en":"yamaha"}',
             ],
+            [
+                'active' => '1',
+                'sort' => '500',
+                'title' => '{"uk":"Acura","ru":"Acura","en":"Acura"}',
+                'slug' => '{"uk":"acura","ru":"acura","en":"acura"}',
+            ],
         ]);
     }
 }

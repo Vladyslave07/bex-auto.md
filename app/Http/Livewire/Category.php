@@ -59,10 +59,16 @@ class Category extends Component
         ];
     }
 
+    public function filters()
+    {
+        $this->category->cars()->active()->get();
+    }
+
     public function render()
     {
         return view('livewire.category', [
             'cars' => $this->cars(),
+            'filters' => $this->filters(),
         ]);
     }
 }

@@ -202,4 +202,7 @@ return [
 
     'seo_text' => 'сео текст',
     'seo_texts' => 'сео текста',
+
+    'car_model' => 'модель',
+    'car_models' => 'модели',
 ];
