@@ -13,7 +13,7 @@
 
 <script>
     // Event for set pagination url. Url looks like this: /category/page-2
-    window.addEventListener('setPaginateUrl', event => {
+    window.addEventListener('setPageUrl', event => {
         let url = event.detail.url
         history.pushState(null, null, url);
     })

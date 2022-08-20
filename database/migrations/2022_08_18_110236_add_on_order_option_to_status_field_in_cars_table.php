@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        \DB::statement("ALTER TABLE `cars` CHANGE `status` `status` ENUM('in_stock', 'expect', 'or_order')");
+        \DB::statement("ALTER TABLE `cars` CHANGE `status` `status` ENUM('in_stock', 'expect', 'on_order')");
     }
 
     /**

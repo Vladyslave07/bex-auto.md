@@ -1,23 +1,10 @@
 <aside class="filter-side">
     <form action="#">
-        <div class="form-check">
-            <label>
-                <input class="form-radio" type="radio" name="status" checked>
-                В наявності
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-radio" type="radio" name="status">
-                Очікуємо
-            </label>
-        </div>
-        <div class="form-check">
-            <label>
-                <input class="form-radio" type="radio" name="status">
-                Під замовлення
-            </label>
-        </div>
+        @foreach($filters as $filter)
+
+            @include('filters.' . $filter['type'], compact('filter'))
+
+        @endforeach
 
         <hr class="hr">
 

@@ -6,6 +6,7 @@ use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
@@ -108,6 +109,21 @@ class Car extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Filter apply
+     *
+     * @param Builder $query
+     * @param $filterQuery
+     * @return Builder
+     */
+    public function scopeFiltered(Builder $query, $filterQuery = null): Builder
+    {
+        if (!$filterQuery) {
+            return $query;
+        }
+        return (new \App\filters\carFilter($query, $filterQuery))->apply();
+    }
 
     /*
     |--------------------------------------------------------------------------

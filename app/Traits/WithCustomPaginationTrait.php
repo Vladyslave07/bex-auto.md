@@ -40,7 +40,7 @@ trait WithCustomPaginationTrait
      */
     public function setPaginateUrl()
     {
-        $this->dispatchBrowserEvent('setPaginateUrl', ['url' => $this->makePaginateUrl()]);
+        $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makePaginateUrl()]);
     }
 
     /**
