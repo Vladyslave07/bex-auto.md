@@ -24,6 +24,10 @@ class Category extends Component
 
     protected $cars;
 
+    // Range filter params
+    public $priceFrom;
+    public $priceTo;
+
     public function cars()
     {
         $this->page = $this->pageNum($this->page);
@@ -65,13 +69,72 @@ class Category extends Component
         ];
     }
 
+    /**
+     * Setting filter params for usual params like: status:in_stock
+     *
+     * @param $slug
+     * @param $value
+     */
     public function setFilter($slug, $value)
     {
         $value = preg_replace('/_/', '-', $value);
-        $this->filterQuery = '/filter/' .  $slug . ':' . $value . '_brand:bmw';
+        $this->buildFilterQuery($slug, $value);
+        // set filter url for page
+        $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makeFilterUrl()]);
+    }
+
+    /**
+     * Method set values for range filter params
+     *
+     * @example
+     * Set priceFrom = 5 000 (default value setting in method setDefaultValuesForRangeParams())
+     * Set priceTo = 45 000 from query
+     *
+     * @param $slug
+     * @param $value
+     * @param $range
+     */
+    public function setRangeFilter($slug, $value, $range)
+    {
+        $fieldName = $slug . ucfirst($range);
+        $this->$fieldName = (int)$value;
+
+        $fieldNameFrom = $slug . 'From';
+        $fieldNameTo = $slug . 'To';
+
+        if ($this->filterQuery) {
+            $propertyValue = $this->$fieldNameFrom . '~' . $this->$fieldNameTo;
+            $this->buildFilterQuery($slug, $propertyValue);
+        } else {
+            $this->filterQuery = $slug . ':' . $this->$fieldNameFrom . '~' . $this->$fieldNameTo;
+        }
 
         // set filter url for page
         $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makeFilterUrl()]);
+    }
+
+    /**
+     * Make filter query string for filtered cars
+     *
+     * @param $propertyKey
+     * @param $propertyValue
+     */
+    public function buildFilterQuery($propertyKey, $propertyValue)
+    {
+        $properties = [];
+        if ($this->filterQuery) {
+            $params = explode('_', $this->filterQuery);
+            foreach ($params as $param) {
+                [$key, $value] = explode(':', $param);
+                $properties[$key] = $value;
+            }
+        }
+
+        $properties[$propertyKey] = $propertyValue;
+
+        // Make filter string from array
+        $res = array_map(function($k, $v) { return "$k:$v"; }, array_keys($properties), $properties);
+        $this->filterQuery = implode('_', $res);
     }
 
     /**
@@ -82,7 +145,7 @@ class Category extends Component
     public function makeFilterUrl()
     {
         $categoryUrl = route('category', ['category' => $this->category->slug], false);
-        return $categoryUrl . $this->filterQuery;
+        return $categoryUrl . CarFilter::FILTER_PREFIX . $this->filterQuery;
     }
 
     /**
@@ -93,13 +156,34 @@ class Category extends Component
      */
     public function filters()
     {
-        $filterProperties = CarFilter::getCurrentPropertiesFilter($this->category);
-        return $filterProperties;
+        return CarFilter::getCurrentPropertiesFilter($this->category);
+    }
+
+    /**
+     * Default values for range filter params.
+     * @example priceFrom = 5 000 priceTo = 50 000
+     */
+    public function setDefaultValuesForRangeParams()
+    {
+        foreach ($this->filters() as $filter) {
+            if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME) {
+                continue;
+            }
+
+            $propNameFrom = $filter['slug'] . 'From';
+            $propNameTo = $filter['slug'] . 'To';
+            $this->$propNameFrom = array_key_first($filter['values']['from']);
+            $this->$propNameTo = array_key_last($filter['values']['to']);
+        }
+    }
+
+    public function mount()
+    {
+        $this->setDefaultValuesForRangeParams();
     }
 
     public function render()
     {
-        $this->filters();
         return view('livewire.category', [
             'cars' => $this->cars(),
             'filters' => $this->filters(),

@@ -16,6 +16,10 @@ class CarFilter
     protected array $filterParams;
 
     const CAR_STATUS_PROPERTY_SLUG = 'status';
+    const FILTER_PRICE_PROPERTY_NAME = 'price';
+    const FROM_TO_PROPERTY_NAME = 'from_to_select';
+
+    const FILTER_PREFIX = '/filter/';
 
     public function __construct(Builder $query, string $queryString)
     {
@@ -48,13 +52,11 @@ class CarFilter
             [$key, $value] = explode(':', $filterPair);
 
             switch ($key) {
+                case self::FILTER_PRICE_PROPERTY_NAME:
                 case self::CAR_STATUS_PROPERTY_SLUG:
                     $filter[] = ['value' => $value, 'type' => $key];
                     break;
-//                case self::FILTER_PRICE_PROPERTY_NAME:
-//                    $filter[] = ['value' => $value, 'type' => $key];
-//                    break;
-//                case 'model':
+                //case 'model':
 //                    $filter[] = ['value' => str_replace([';', ','], '|', $value), 'type' => 'model'];
 //                    break;
 //                case 'brand':
@@ -73,7 +75,7 @@ class CarFilter
     }
 
     /**
-     * Status properties
+     * Filtered by status
      *
      * @param string $queryString
      */
@@ -81,6 +83,22 @@ class CarFilter
     {
         $value = preg_replace('/-/', '_', $value);
         $this->query->where(self::CAR_STATUS_PROPERTY_SLUG, $value);
+    }
+
+    /**
+     * Filtered by price
+     *
+     * @param string $queryString
+     */
+    public function price(string $queryString)
+    {
+        if (!str_contains($queryString, '~')) {
+            return;
+        }
+
+        [$from, $to] = explode('~', $queryString);
+
+        $this->query->whereBetween('price', [$from, $to]);
     }
 
     /**
@@ -107,6 +125,10 @@ class CarFilter
             $properties['status']['values'][$car->status] = $car->status;
 
         }
+
+        $properties[self::FILTER_PRICE_PROPERTY_NAME] = self::preparePriceFilter();
+
+
         return $properties;
             // Марка\Модель
 //            foreach (self::MODEL_BRAND_FILTER_INFO as $key => $field) {
@@ -158,6 +180,43 @@ class CarFilter
 //        $propertiesFilter['active'] = self::getActiveProperties($propertiesFilter['filters']);
 //
 //        return $propertiesFilter;
+    }
+
+    /**
+     * @return array
+     */
+    public static function preparePriceFilter(): array
+    {
+        $properties['name'] = Lang::get('category.filter.price');
+        $properties['type'] = self::FROM_TO_PROPERTY_NAME;
+        $properties['slug'] = self::FILTER_PRICE_PROPERTY_NAME;
+        $range = self::makeValueFroFromToField(range(5000, 50000, 2500), '$');
+        $properties['values'] = ['from' => $range, 'to' => $range];
+        // todo: станавливать текущие значени если пользователь перешел на страницу  фильтра
+//        $properties['current_value'] = [];
+//
+//        foreach ($params as $param) {
+//            if ($param['type'] === $propertySlug) {
+//                $value = explode('~', $param['value']);
+//                $properties['current_value'] = ['min' => $value[0], 'max' => $value[1]];
+//            }
+//        }
+        return $properties;
+    }
+
+    /**
+     * @param $range
+     * @param $prefix
+     * @return array
+     */
+    public static function makeValueFroFromToField($range, $prefix)
+    {
+        $items = array_flip($range);
+        $newRange = [];
+        foreach ($items as $key => $item) {
+            $newRange[$key] = $prefix . ' ' .  $key;
+        }
+        return $newRange;
     }
 
 
