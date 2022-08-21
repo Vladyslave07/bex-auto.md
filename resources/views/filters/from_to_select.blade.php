@@ -1,17 +1,20 @@
-{{--@php(dd($filter))--}}
 <strong class="title">{{ $filter['name'] }}</strong>
 <div class="label">Від</div>
 <div class="dropdown dropdown-select">
-    <span class="dropdown-toggle form-control">{{ $filter['values']['from'][array_key_first($filter['values']['from'])] }}</span>
+    @php
+        $fromFieldName = $filter['slug'] . 'From';
+        $fromCurrent = $filter['values']['from'][$this->$fromFieldName ?: array_key_first($filter['values']['from'])];
+    @endphp
+    <span class="dropdown-toggle form-control">{{ $fromCurrent }}</span>
     <div class="dropdown-menu">
         <ul>
             @foreach($filter['values']['from'] as $key => $from)
-                <li class="dropdown-item option @if($key === array_key_first($filter['values']['from'])) selected @endif">
+                <li class="dropdown-item option @if($key === $this->$fromFieldName)) selected @endif">
                     <label>
                         {{ $from }}
                         <input wire:click="setRangeFilter('{{ $filter['slug'] }}', '{{ $key }}', 'from')"
                                class="form-hide" type="radio" name="price1"
-                               @if($key === array_key_first($filter['values']['from'])) checked @endif>
+                               @if($key === $this->$fromFieldName) checked @endif>
                     </label>
                 </li>
             @endforeach
@@ -20,17 +23,21 @@
 </div>
 <div class="label">До</div>
 <div class="dropdown dropdown-select">
-    <span class="dropdown-toggle form-control">{{ $filter['values']['to'][array_key_last($filter['values']['to'])] }}</span>
+    @php
+        $toFieldName = $filter['slug'] . 'To';
+        $toCurrent = $filter['values']['to'][$this->$toFieldName ?: array_key_first($filter['values']['to'])];
+    @endphp
+    <span class="dropdown-toggle form-control">{{ $toCurrent }}</span>
     <div class="dropdown-menu">
         <ul>
             @foreach($filter['values']['to'] as $key => $to)
                 <li class="dropdown-item option
-                    @if($key === array_key_last($filter['values']['to'])) selected @endif">
+                    @if($key === $this->$toFieldName) selected @endif">
                     <label>
                         {{ $to }}
                         <input wire:click="setRangeFilter('{{ $filter['slug'] }}', '{{ $key }}', 'to')"
                                 class="form-hide" type="radio" name="price2"
-                               @if($key === array_key_last($filter['values']['to'])) checked @endif>
+                               @if($key === $this->$toFieldName) checked @endif>
                     </label>
                 </li>
             @endforeach

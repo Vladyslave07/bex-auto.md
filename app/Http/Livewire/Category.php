@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Traits\WithCustomPaginationTrait;
 
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\URL;
 use Livewire\Component;
 
 class Category extends Component
@@ -177,9 +178,20 @@ class Category extends Component
         }
     }
 
+    public function setFilterQueryFromUrl()
+    {
+        // todo: Устанавливать текущие параметры в фильтре из чпу
+        $currentUrl = URL::current();
+        if (str_contains($currentUrl, CarFilter::FILTER_PREFIX)) {
+            [$url, $filterQuery] = explode(CarFilter::FILTER_PREFIX, URL::current());
+            $this->filterQuery = $filterQuery;
+        }
+    }
+
     public function mount()
     {
         $this->setDefaultValuesForRangeParams();
+        $this->setFilterQueryFromUrl();
     }
 
     public function render()

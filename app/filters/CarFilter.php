@@ -7,7 +7,6 @@ namespace App\filters;
 use App\Models\Category;
 use App\Models\Car;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Lang;
 
 class CarFilter
