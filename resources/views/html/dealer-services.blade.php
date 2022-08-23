@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Дiлерскi послуги')
+@section('title', 'Дилерські послуги')
 
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/dealer.css') }}">
@@ -20,14 +20,14 @@
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="/">Bexhill Trading Auto</a></li>
                 <li class="breadcrumb-item"><a href="/">Послуги</a></li>
-                <li class="breadcrumb-item" aria-current="page">Дiлерскi послуги</li>
+                <li class="breadcrumb-item" aria-current="page">Дилерські послуги</li>
             </ol>
         </nav>
         <!-- ///:end/// -->
         <br>
         <br>
         <h1 class="h1">
-            <span class="color-red">Дiлерськi<br> послуги</span>
+            <span class="color-red">Дилерські<br> послуги</span>
         </h1>
         <div class="h2 color-blue">Партнерство оптовим покупцям</div>
         <span class="line"></span>
@@ -1738,10 +1738,6 @@
 
 <!-- ///ВИДЕО И КОНТЕНТ ОПИСАНИЯ ЛК/// -->
 <div class="section-text container">
-    <picture>
-        <source type="image/webp" srcset="{{ asset('img/example/img_20.webp') }}">
-        <img class="img-fluid" width="1342" height="592" src="{{ asset('img/example/img_20.png') }}" loading="lazy" alt="">
-    </picture>
     <div class="ratio">
         <iframe src="https://www.youtube.com/embed/O6jHA1o9xYk" loading=lazy title="youtube" allowfullscreen></iframe>
     </div>
