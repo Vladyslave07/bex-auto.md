@@ -31,9 +31,9 @@
         <h1 class="h1">
             <span class="color-red">ЕЛЕКТРОКАРИ</span>
         </h1>
-        <div class="h2 color-blue-xs">гарантія на всі моделі</div>
+        <div class="h2">гарантія на всі моделі</div>
         <span class="line"></span>
-        <div class="h3 color-blue">Економія <strong>до 40%</strong><br> від ринкової вартості</div>
+        <div class="h3">Економія <strong>до 40%</strong><br> від ринкової вартості</div>
         <picture class="img">
             <source type="image/webp" srcset="{{ asset('img/example/img_24.webp') }}" media="(max-width: 767px)">
             <source type="image/webp" srcset="{{ asset('img/example/img_23.webp') }}" media="(min-width: 768px)">
