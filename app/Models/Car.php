@@ -104,6 +104,14 @@ class Car extends Model
     {
         return $this->belongsToMany(Category::class, 'car_category');
     }
+
+    public function properties(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(\App\Models\Property::class, 'car_property')
+            ->withTimestamps()->withPivot('value', 'slug')
+            ->using(\App\Models\CarProperty::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

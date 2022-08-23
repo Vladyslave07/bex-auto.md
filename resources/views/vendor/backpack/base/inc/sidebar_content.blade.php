@@ -10,6 +10,7 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-car-side"></i> Автомобили</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('car') }}'><i class='nav-icon la la-car'></i> Список</a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('property') }}'><i class='nav-icon la la-wrench'></i>Свойства</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-list'></i> Категории</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('brand') }}'><i class='nav-icon la la-cab'></i> Марки</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('car-model') }}'><i class='nav-icon la la-car-alt'></i> Модели</a></li>

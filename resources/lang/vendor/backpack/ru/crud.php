@@ -205,4 +205,7 @@ return [
 
     'car_model' => 'модель',
     'car_models' => 'модели',
+
+    'property' => 'свойство',
+    'properties' => 'свойства',
 ];

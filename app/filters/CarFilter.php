@@ -18,6 +18,11 @@ class CarFilter
     const FILTER_PRICE_PROPERTY_NAME = 'price';
     const FROM_TO_PROPERTY_NAME = 'from_to_select';
 
+    const CAR_FIELD_FILTER_INFO = [
+        'brand' => ['relation' => 'brand'],
+        'model' => ['relation' => 'carModel']
+    ];
+
     const FILTER_PREFIX = '/filter/';
 
     public function __construct(Builder $query, string $queryString)
@@ -112,6 +117,7 @@ class CarFilter
     {
         $properties = [];
 
+        // todo: Кешировать
         $cars = $category->cars()->get();
 
         // параметры фильтра из строки запроса
@@ -119,9 +125,22 @@ class CarFilter
 
         foreach ($cars as $car) {
 //            $properties['status']['name'] = Lang::get('car.' . $car->status);
+            // Марка\Модель
+//            foreach (self::MODEL_BRAND_FILTER_INFO as $key => $field) {
+//                $relation = $field['relation'];
+//                if ($object = $product->$relation) {
+//                    $properties[$key]['name'] = Lang::get('filter.' . $key);
+//                    $properties[$key]['type'] = $field['type'] ?? 'checkbox';
+//                    $properties[$key]['slug'] = $key;
+//                    $properties[$key]['values'][$object->slug]['value'] = $object->title;
+//                    $properties[$key]['values'][$object->slug]['active'] = false;
+//                }
+//            }
+
             $properties['status']['type'] = 'status';
             $properties['status']['slug'] = 'status'; // Field name
             $properties['status']['values'][$car->status] = $car->status;
+
 
         }
 
