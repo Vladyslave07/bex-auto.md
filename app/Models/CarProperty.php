@@ -6,9 +6,9 @@ use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CarProperty extends Model
+class CarProperty extends Pivot
 {
     use HasFactory, Sluggable, SluggableScopeHelpers, HasTranslations;
 
@@ -19,10 +19,9 @@ class CarProperty extends Model
 */
 
     protected $table = 'car_property';
-    protected $guarded = ['id'];
+    protected $primaryKey = 'id';
     protected $fillable = ['value', 'slug'];
-    protected $translatable = ['value'];
-
+    protected $translatable = [];
 
     /*
     |--------------------------------------------------------------------------

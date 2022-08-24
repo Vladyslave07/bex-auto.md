@@ -83,6 +83,7 @@ class PropertyCrudController extends CrudController
             'label' => trans('backpack::fields.sort'),
             'type' => 'number',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'default' => 500,
         ]);
 
         CRUD::addField([
@@ -113,7 +114,7 @@ class PropertyCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'options',
-            'label' => 'Варианты значений',
+            'label' => trans('backpack::fields.options'),
             'type' => 'table',
             'entity_singular' => 'значение',
             'columns' => [
@@ -123,14 +124,21 @@ class PropertyCrudController extends CrudController
         ]);
         CRUD::addField([
             'name' => 'ranges',
-            'label' => 'Диапазоны',
+            'label' => trans('backpack::fields.ranges'),
             'type' => 'table',
-            'entity_singular' => 'диапазон',
+            'entity_singular' => trans('backpack::fields.ranges'),
             'columns' => [
                 'name'  => 'Наименование',
                 'from'  => 'От',
                 'to'  => 'До',
             ],
+        ]);
+
+        // Todo: Реализовать выбор из моделей (т.е. позволять пользователю устанавливать сущность из селекта а не писать вручную)
+        CRUD::addField([
+            'name' => 'relation',
+            'label' => trans('backpack::fields.relation'),
+            'type' => 'text',
         ]);
     }
 

@@ -89,6 +89,15 @@ class Car extends Model
         });
     }
 
+    /**
+     *
+     * @return mixed
+     */
+    public function getCategoryProperties()
+    {
+        return Property::query()->active()->orderBy('id')->get();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

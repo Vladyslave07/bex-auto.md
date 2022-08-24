@@ -7,7 +7,6 @@ use App\Models\Category;
 use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
-use Illuminate\Support\Facades\Lang;
 
 /**
  * Class CarCrudController
@@ -119,6 +118,39 @@ class CarCrudController extends CrudController
             'label'       => trans('backpack::fields.year'),
             'type'        => 'number',
             'tab' => 'Свойства'
+        ]);
+
+        $propertiesFields = [];
+
+        if ($this->crud->getCurrentEntry()) {
+            foreach ($this->crud->getCurrentEntry()->getCategoryProperties() as $property) {
+                $valueField = [];
+
+                switch ($property->field_type) {
+                    case 'relation':
+                        $valueField = [
+                            'type' => 'select_from_array',
+                            'options' => $property->getRelationOption($property->relation),
+                        ];
+                        break;
+                }
+
+                $propertiesFields[$property->id] = array_merge([
+                    'label' => $property->title,
+                    'name' => 'value',
+                    'wrapper' => ['class' => 'form-group col-md-6'],
+                ], $valueField);
+            }
+        }
+
+        $this->crud->addField([
+            'tab' => 'Свойства',
+            'label' => 'Свойства',
+            'type' => 'properties',
+            'name' => 'properties', //the name of the BelongsToMany relation
+            'entity' => 'properties',
+            'pivot' => true,
+            'fields' => $propertiesFields,
         ]);
     }
 
