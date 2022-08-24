@@ -133,6 +133,13 @@ class CarCrudController extends CrudController
                             'options' => $property->getRelationOption($property->relation),
                         ];
                         break;
+                    case 'select_checkbox':
+                    case 'select':
+                        $valueField = [
+                            'type' => 'select_from_array',
+                            'options' => $property->getOptions(),
+                        ];
+                        break;
                 }
 
                 $propertiesFields[$property->id] = array_merge([

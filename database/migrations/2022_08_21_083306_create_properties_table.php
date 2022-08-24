@@ -17,8 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('slug')->unique();
             $table->string('title');
-            $table->enum('field_type', ['from_to_select', 'select_checkbox', 'checkbox', 'relation']);
-            $table->enum('filter_type', ['from_to_select', 'select_checkbox', 'checkbox', 'buttons']);
+            $table->enum('field_type', ['from_to_select', 'select_checkbox', 'select', 'checkbox', 'relation']);
+            $table->enum('filter_type', ['from_to_select', 'select_checkbox', 'select', 'checkbox', 'buttons']);
             $table->string('relation')->nullable();
             $table->text('options')->nullable();
             $table->boolean('active')->default(1);

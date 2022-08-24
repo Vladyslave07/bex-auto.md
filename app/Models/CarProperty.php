@@ -13,10 +13,10 @@ class CarProperty extends Pivot
     use HasFactory, Sluggable, SluggableScopeHelpers, HasTranslations;
 
     /*
-|--------------------------------------------------------------------------
-| GLOBAL VARIABLES
-|--------------------------------------------------------------------------
-*/
+    |--------------------------------------------------------------------------
+    | GLOBAL VARIABLES
+    |--------------------------------------------------------------------------
+    */
 
     protected $table = 'car_property';
     protected $primaryKey = 'id';

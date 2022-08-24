@@ -118,8 +118,7 @@ class CarFilter
         $properties = [];
 
         // todo: Кешировать
-        $cars = $category->cars()->get();
-
+        $cars = $category->cars()->with('properties')->get();
         // параметры фильтра из строки запроса
         //$prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
 
@@ -134,6 +133,21 @@ class CarFilter
 //                    $properties[$key]['slug'] = $key;
 //                    $properties[$key]['values'][$object->slug]['value'] = $object->title;
 //                    $properties[$key]['values'][$object->slug]['active'] = false;
+//                }
+//            }
+
+//            foreach ($car->properties as $property) {
+//                $properties[$property->slug]['name'] = $property->name;
+//                $properties[$property->slug]['type'] = $property->filter_type;
+//                $properties[$property->slug]['slug'] = $property->slug;
+//                if ($property->field_type === 'select') {
+//                    foreach ($property->getOptions() as $k => $option) {
+//                        $properties[$property->slug]['values'][$k]['value'] = $option;
+//                        $properties[$property->slug]['values'][$k]['active'] = false;
+//                    }
+//                } else {
+//                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
+//                    $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
 //                }
 //            }
 
