@@ -79,7 +79,7 @@ class Property extends Model
         $options = $this->getOptions();
         if (empty($options)) {
             $relation = "App\Models\\" . $relation;
-            $items = $relation::query()->get(['title', 'slug']);
+            $items = $relation::query()->orderBy('title')->get(['title', 'slug']);
             $options = [];
             foreach ($items as $item) {
                 $options[$item->slug] = $item->title;

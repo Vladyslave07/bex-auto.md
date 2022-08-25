@@ -8,3 +8,4 @@
         </div>
     @endforeach
 @endif
+<hr class="hr">

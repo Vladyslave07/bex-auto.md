@@ -9,7 +9,7 @@
     <div class="dropdown-menu">
         <ul>
             @foreach($filter['values']['from'] as $key => $from)
-                <li class="dropdown-item option @if($key === $this->$fromFieldName)) selected @endif">
+                <li class="dropdown-item option @if($key === $this->$fromFieldName) selected @endif">
                     <label>
                         {{ $from }}
                         <input wire:click="setRangeFilter('{{ $filter['slug'] }}', '{{ $key }}', 'from')"
@@ -44,3 +44,4 @@
         </ul>
     </div>
 </div>
+<hr class="hr">

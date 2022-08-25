@@ -29,6 +29,8 @@ class Category extends Component
     public $priceFrom;
     public $priceTo;
 
+    public $disabled = true;
+
     public function cars()
     {
         $this->page = $this->pageNum($this->page);
@@ -80,6 +82,10 @@ class Category extends Component
     {
         $value = preg_replace('/_/', '-', $value);
         $this->buildFilterQuery($slug, $value);
+
+        if ($slug === 'brand') {
+            $this->disabled = false;
+        }
         // set filter url for page
         $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makeFilterUrl()]);
     }
@@ -190,8 +196,8 @@ class Category extends Component
 
     public function mount()
     {
-        $this->setDefaultValuesForRangeParams();
         $this->setFilterQueryFromUrl();
+        $this->setDefaultValuesForRangeParams();
     }
 
     public function render()

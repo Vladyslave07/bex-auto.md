@@ -5,7 +5,7 @@ namespace App\filters;
 
 
 use App\Models\Category;
-use App\Models\Car;
+use App\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Lang;
 
@@ -17,11 +17,6 @@ class CarFilter
     const CAR_STATUS_PROPERTY_SLUG = 'status';
     const FILTER_PRICE_PROPERTY_NAME = 'price';
     const FROM_TO_PROPERTY_NAME = 'from_to_select';
-
-    const CAR_FIELD_FILTER_INFO = [
-        'brand' => ['relation' => 'brand'],
-        'model' => ['relation' => 'carModel']
-    ];
 
     const FILTER_PREFIX = '/filter/';
 
@@ -60,21 +55,14 @@ class CarFilter
                 case self::CAR_STATUS_PROPERTY_SLUG:
                     $filter[] = ['value' => $value, 'type' => $key];
                     break;
-                //case 'model':
-//                    $filter[] = ['value' => str_replace([';', ','], '|', $value), 'type' => 'model'];
-//                    break;
-//                case 'brand':
-//                    $filter[] = ['value' => str_replace([';', ','], '|', $value), 'type' => 'brand'];
-//                    break;
-//                default:
-//                    if ($property = Property::findBySlug($key)) {
-//                        $filter[$property->id]['value'] = $property->id . ':' . str_replace([';', ','], '|', $value);
-//                        $filter[$property->id]['type'] = $property->filter_type;
-//                    }
+                default:
+                    if ($property = Property::findBySlug($key)) {
+                        $filter[$property->id]['value'] = $property->id . ':' . str_replace([';', ','], '|', $value);
+                        $filter[$property->id]['type'] = $property->filter_type;
+                    }
+                    break;
             }
-
         }
-
         return $filter;
     }
 
@@ -105,91 +93,75 @@ class CarFilter
         $this->query->whereBetween('price', [$from, $to]);
     }
 
+    public function select_checkbox(string $queryString)
+    {
+        $this->select($queryString);
+    }
+
+    public function select(string $queryString)
+    {
+        [$propId, $propValue] = explode(':', $queryString);
+
+        $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
+            $propValues = str_contains($propValue, '|') ? explode('|', $propValue) : [$propValue];
+            $query->where('property_id', $propId)->where('car_property.value', array_shift($propValues));
+            if (!empty($propValues)) {
+                foreach ($propValues as $propValue) {
+                    $query->orWhere('car_property.value', $propValue);
+                }
+            }
+        });
+    }
+
+
     /**
      * Возвращает параметры фильтра для текущего раздела
      *
      * @param Category $category
      * @param null $filterQuery
-     * @param null $products
      * @return array
      */
     public static function getCurrentPropertiesFilter(Category $category, $filterQuery = null)
     {
+        // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
+        $cars = $category->cars()->active()->get();
+
+        //$prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
         $properties = [];
 
-        // todo: Кешировать
-        $cars = $category->cars()->with('properties')->get();
-        // параметры фильтра из строки запроса
-        //$prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
+        // Status
+        $properties[self::CAR_STATUS_PROPERTY_SLUG] = self::statusFilterParam($cars);
 
-        foreach ($cars as $car) {
-//            $properties['status']['name'] = Lang::get('car.' . $car->status);
-            // Марка\Модель
-//            foreach (self::MODEL_BRAND_FILTER_INFO as $key => $field) {
-//                $relation = $field['relation'];
-//                if ($object = $product->$relation) {
-//                    $properties[$key]['name'] = Lang::get('filter.' . $key);
-//                    $properties[$key]['type'] = $field['type'] ?? 'checkbox';
-//                    $properties[$key]['slug'] = $key;
-//                    $properties[$key]['values'][$object->slug]['value'] = $object->title;
-//                    $properties[$key]['values'][$object->slug]['active'] = false;
-//                }
-//            }
-
-//            foreach ($car->properties as $property) {
-//                $properties[$property->slug]['name'] = $property->name;
-//                $properties[$property->slug]['type'] = $property->filter_type;
-//                $properties[$property->slug]['slug'] = $property->slug;
-//                if ($property->field_type === 'select') {
-//                    foreach ($property->getOptions() as $k => $option) {
-//                        $properties[$property->slug]['values'][$k]['value'] = $option;
-//                        $properties[$property->slug]['values'][$k]['active'] = false;
-//                    }
-//                } else {
-//                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
-//                    $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
-//                }
-//            }
-
-            $properties['status']['type'] = 'status';
-            $properties['status']['slug'] = 'status'; // Field name
-            $properties['status']['values'][$car->status] = $car->status;
-
-
-        }
-
+        // Price
         $properties[self::FILTER_PRICE_PROPERTY_NAME] = self::preparePriceFilter();
 
+        // Properties
+        foreach ($cars as $car) {
+            foreach ($car->properties as $property) {
+                if (empty($properties[$property->slug]['values'])) {
+                    $properties[$property->slug]['values'] = [];
+                }
+
+                $properties[$property->slug]['name'] = $property->title;
+                $properties[$property->slug]['type'] = $property->filter_type;
+                $properties[$property->slug]['slug'] = $property->slug;
+
+                if ($property->field_type === 'relation') {
+                    // todo: Проблема в том что slug - уникальный и по этому могут появлятся свойств в фильтре
+                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
+                    $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
+                } else {
+                    foreach ($property->getOptions() as $k => $option) {
+                        if ($property->pivot->slug == $k) {
+                            $properties[$property->slug]['values'][$k]['value'] = $option;
+                            $properties[$property->slug]['values'][$k]['active'] = false;
+                        }
+                    }
+                }
+            }
+        }
 
         return $properties;
-            // Марка\Модель
-//            foreach (self::MODEL_BRAND_FILTER_INFO as $key => $field) {
-//                $relation = $field['relation'];
-//                if ($object = $product->$relation) {
-//                    $properties[$key]['name'] = Lang::get('filter.' . $key);
-//                    $properties[$key]['type'] = $field['type'] ?? 'checkbox';
-//                    $properties[$key]['slug'] = $key;
-//                    $properties[$key]['values'][$object->slug]['value'] = $object->title;
-//                    $properties[$key]['values'][$object->slug]['active'] = false;
-//                }
-//            }
-//
-//            foreach ($product->properties as $propKey => $property) {
-//                $properties[$property->slug]['name'] = $property->name;
-//                $properties[$property->slug]['type'] = $property->filter_type;
-//                $properties[$property->slug]['slug'] = $property->slug;
-//                if ($property->field_type === 'select') {
-//                    foreach ($property->getOptions() as $k => $option) {
-//                        $properties[$property->slug]['values'][$k]['value'] = $option;
-//                        $properties[$property->slug]['values'][$k]['active'] = false;
-//                    }
-//                } else {
-//                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
-//                    $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
-//                }
-//            }
-//        }
-//
 //        // Установка активности параметров на текущей страницы фильтра
 //        foreach ($properties as $key => $property) {
 //            foreach ($property['values'] as $k => $value) {
@@ -205,13 +177,19 @@ class CarFilter
 //            }
 //        }
 
-//        $propertiesFilter['filters'] = $properties;
-//        $propertiesFilter['filters'][self::FILTER_MADE_YEAR_PROPERTY_NAME] = self::prepareYearFilter($prepParams, $products);
-//        $propertiesFilter['filters'][self::FILTER_PRICE_PROPERTY_NAME] = self::preparePriceFilter($prepParams, $products);
-//
 //        $propertiesFilter['active'] = self::getActiveProperties($propertiesFilter['filters']);
 //
 //        return $propertiesFilter;
+    }
+
+    public static function statusFilterParam($cars)
+    {
+        $status['type'] = self::CAR_STATUS_PROPERTY_SLUG;
+        $status['slug'] = self::CAR_STATUS_PROPERTY_SLUG;
+        foreach ($cars as $car) {
+            $status['values'][$car->status] = $car->status;
+        }
+        return $status;
     }
 
     /**
