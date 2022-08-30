@@ -2,7 +2,11 @@
     <form action="#">
         @foreach($filters as $filter)
 
-            @include('filters.' . $filter['type'], compact('filter'))
+            @if (key_exists('values', $filter))
+
+                @include('filters.' . $filter['type'], compact('filter'))
+
+            @endif
 
         @endforeach
 

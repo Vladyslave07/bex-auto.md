@@ -20,7 +20,7 @@ class Property extends Model
     */
 
     protected $table = 'properties';
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'field_type', 'filter_type', 'options', 'relation'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'field_type', 'filter_type', 'options', 'relation', 'step', 'prefix'];
     protected $casts = [
         'status' => 'boolean',
         'options' => 'array'

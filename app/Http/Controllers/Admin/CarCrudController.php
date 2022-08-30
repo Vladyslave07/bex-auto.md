@@ -133,8 +133,13 @@ class CarCrudController extends CrudController
                             'options' => $property->getRelationOption($property->relation),
                         ];
                         break;
-                    case 'select_checkbox':
-                    case 'select':
+                    case 'text':
+                    case 'number':
+                        $valueField = [
+                            'type' => $property->field_type,
+                        ];
+                        break;
+                    default:
                         $valueField = [
                             'type' => 'select_from_array',
                             'options' => $property->getOptions(),

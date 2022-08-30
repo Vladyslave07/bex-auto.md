@@ -113,6 +113,35 @@ class CarFilter
         });
     }
 
+    public function from_to_select(string $queryString)
+    {
+        if (!str_contains($queryString, '~')) {
+            return;
+        }
+
+        [$propId, $propValue] = explode(':', $queryString);
+
+        $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
+            [$from, $to] = explode('~', $propValue);
+            $query->where('property_id', $propId)->whereBetween('car_property.value', [$from, $to]);
+        });
+    }
+
+    public function checkbox(string $queryString)
+    {
+        [$propId, $propValue] = explode(':', $queryString);
+
+        $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
+            $propValues = str_contains($propValue, '|') ? explode('|', $propValue) : [$propValue];
+            $query->where('property_id', $propId)->where('car_property.value', array_shift($propValues));
+            if (!empty($propValues)) {
+                foreach ($propValues as $propValue) {
+                    $query->orWhere('car_property.value', $propValue);
+                }
+            }
+        });
+    }
+
 
     /**
      * Возвращает параметры фильтра для текущего раздела
@@ -130,36 +159,16 @@ class CarFilter
         $properties = [];
 
         // Status
-        $properties[self::CAR_STATUS_PROPERTY_SLUG] = self::statusFilterParam($cars);
+        $properties[self::CAR_STATUS_PROPERTY_SLUG] = self::statusProperty($cars);
 
         // Price
-        $properties[self::FILTER_PRICE_PROPERTY_NAME] = self::preparePriceFilter();
+        $properties[self::FILTER_PRICE_PROPERTY_NAME] = self::priceProperty();
 
-        // Properties
-        foreach ($cars as $car) {
-            foreach ($car->properties as $property) {
-                if (empty($properties[$property->slug]['values'])) {
-                    $properties[$property->slug]['values'] = [];
-                }
+        // Usual properties
+        $properties = array_merge($properties, self::usualProperties($cars));
 
-                $properties[$property->slug]['name'] = $property->title;
-                $properties[$property->slug]['type'] = $property->filter_type;
-                $properties[$property->slug]['slug'] = $property->slug;
-
-                if ($property->field_type === 'relation') {
-                    // todo: Проблема в том что slug - уникальный и по этому могут появлятся свойств в фильтре
-                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
-                    $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
-                } else {
-                    foreach ($property->getOptions() as $k => $option) {
-                        if ($property->pivot->slug == $k) {
-                            $properties[$property->slug]['values'][$k]['value'] = $option;
-                            $properties[$property->slug]['values'][$k]['active'] = false;
-                        }
-                    }
-                }
-            }
-        }
+        // Range properties
+        $properties = array_merge($properties, self::rangeProperties($cars));
 
         return $properties;
 //        // Установка активности параметров на текущей страницы фильтра
@@ -182,7 +191,48 @@ class CarFilter
 //        return $propertiesFilter;
     }
 
-    public static function statusFilterParam($cars)
+    /**
+     * Usual properties like: model, brand, type etc...
+     *
+     * @param $cars
+     * @return array
+     */
+    public static function usualProperties($cars): array
+    {
+        $properties = [];
+        foreach ($cars as $car) {
+            foreach ($car->properties as $property) {
+                if ($property->filter_type === self::FROM_TO_PROPERTY_NAME) {
+                    continue;
+                }
+
+                $properties[$property->slug]['name'] = $property->title;
+                $properties[$property->slug]['type'] = $property->filter_type;
+                $properties[$property->slug]['slug'] = $property->slug;
+
+                if ($property->field_type === 'relation') {
+                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
+                    $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
+                } else {
+                    foreach ($property->getOptions() as $k => $option) {
+                        if ($property->pivot->slug == $k) {
+                            $properties[$property->slug]['values'][$k]['value'] = $option;
+                            $properties[$property->slug]['values'][$k]['active'] = false;
+                        }
+                    }
+                }
+            }
+        }
+        return $properties;
+    }
+
+    /**
+     * Status filter
+     *
+     * @param $cars
+     * @return array
+     */
+    public static function statusProperty($cars): array
     {
         $status['type'] = self::CAR_STATUS_PROPERTY_SLUG;
         $status['slug'] = self::CAR_STATUS_PROPERTY_SLUG;
@@ -193,9 +243,42 @@ class CarFilter
     }
 
     /**
+     * Prepare Mileage filter property
+     *
+     * @param $cars
      * @return array
      */
-    public static function preparePriceFilter(): array
+    public static function rangeProperties($cars): array
+    {
+        $ranges = [];
+        foreach ($cars as $car) {
+            foreach ($car->properties as $property) {
+                if ($property->filter_type !== self::FROM_TO_PROPERTY_NAME) {
+                    continue;
+                }
+                $ranges[$property->slug]['name'] = $property->title;
+                $ranges[$property->slug]['type'] = $property->filter_type;
+                $ranges[$property->slug]['slug'] = $property->slug;
+                $ranges[$property->slug]['values'][] = $property->pivot->value;
+            }
+        }
+
+        $properties = Property::query()->whereIn('slug', array_column($ranges, 'slug'))->get(['slug', 'prefix', 'step']);
+
+        foreach ($ranges as $key => $range) {
+            if ($property = $properties->where('slug', $key)->first()) {
+                $range = self::makeValueFroFromToField(range(min($range['values']), max($range['values']), $property->step), $property->prefix);
+                $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
+            }
+        }
+        return $ranges;
+    }
+
+    /**
+     * @return array
+     * todo: получать значение из текущих машин
+     */
+    public static function priceProperty(): array
     {
         $properties['name'] = Lang::get('category.filter.price');
         $properties['type'] = self::FROM_TO_PROPERTY_NAME;
@@ -224,7 +307,7 @@ class CarFilter
         $items = array_flip($range);
         $newRange = [];
         foreach ($items as $key => $item) {
-            $newRange[$key] = $prefix . ' ' .  $key;
+            $newRange[$key] = $prefix . ' ' . $key;
         }
         return $newRange;
     }

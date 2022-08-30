@@ -40,6 +40,7 @@ class CarProperty extends Pivot
             'slug' => [
                 'source' => 'value',
                 'onUpdate' => true,
+                'unique' => false,
             ],
         ];
     }

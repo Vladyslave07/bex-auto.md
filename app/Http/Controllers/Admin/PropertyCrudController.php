@@ -113,6 +113,20 @@ class PropertyCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name' => 'step',
+            'label' => trans('backpack::fields.step'),
+            'type' => 'number',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
+            'name' => 'prefix',
+            'label' => trans('backpack::fields.prefix'),
+            'type' => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
             'name' => 'options',
             'label' => trans('backpack::fields.options'),
             'type' => 'table',
@@ -120,17 +134,6 @@ class PropertyCrudController extends CrudController
             'columns' => [
                 'name'  => 'Наименование',
                 'value'  => 'Значение',
-            ],
-        ]);
-        CRUD::addField([
-            'name' => 'ranges',
-            'label' => trans('backpack::fields.ranges'),
-            'type' => 'table',
-            'entity_singular' => trans('backpack::fields.ranges'),
-            'columns' => [
-                'name'  => 'Наименование',
-                'from'  => 'От',
-                'to'  => 'До',
             ],
         ]);
 

@@ -25,10 +25,6 @@ class Category extends Component
 
     protected $cars;
 
-    // Range filter params
-    public $priceFrom;
-    public $priceTo;
-
     public $disabled = true;
 
     public function cars()
@@ -86,6 +82,7 @@ class Category extends Component
         if ($slug === 'brand') {
             $this->disabled = false;
         }
+
         // set filter url for page
         $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makeFilterUrl()]);
     }
@@ -169,6 +166,8 @@ class Category extends Component
     /**
      * Default values for range filter params.
      * @example priceFrom = 5 000 priceTo = 50 000
+     *
+     * Dynamic creation class fields
      */
     public function setDefaultValuesForRangeParams()
     {
