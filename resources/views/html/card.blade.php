@@ -36,8 +36,8 @@
                     <span class="item active" data-target="Tab_1">Характеристики</span>
                     <span class="item" data-target="Tab_2">Описание</span>
                 </div>
-                <div class="card-galley">
-                    <div class="swiper galley-swiper">
+                <div class="card-gallery">
+                    <div class="swiper gallery-swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
                                 <picture>
@@ -108,7 +108,7 @@
                             <div class="swiper-button-next team-next"><svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></div>
                         </div>
                     </div>
-                    <div class="galley-thumbs">
+                    <div class="gallery-thumbs">
                         <div class="item active">
                             <picture>
                                 <source type="image/webp" srcset="{{ asset('img/example/img_17.webp') }}">
