@@ -672,7 +672,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -690,17 +690,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -735,17 +735,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 80 200 км
                             </div>
                         </div>
@@ -765,7 +765,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -783,17 +783,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Б/В
                             </div>
                         </div>
@@ -813,7 +813,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -831,17 +831,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -861,7 +861,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -879,17 +879,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -924,17 +924,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 80 200 км
                             </div>
                         </div>
@@ -954,7 +954,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -972,17 +972,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Б/В
                             </div>
                         </div>
@@ -1002,7 +1002,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1020,17 +1020,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1050,7 +1050,7 @@
             <div class="product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1068,17 +1068,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1116,7 +1116,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1134,17 +1134,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1179,17 +1179,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 80 200 км
                             </div>
                         </div>
@@ -1209,7 +1209,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1227,17 +1227,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Б/В
                             </div>
                         </div>
@@ -1257,7 +1257,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1275,17 +1275,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1305,7 +1305,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1323,17 +1323,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1368,17 +1368,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 80 200 км
                             </div>
                         </div>
@@ -1398,7 +1398,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1416,17 +1416,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Б/В
                             </div>
                         </div>
@@ -1446,7 +1446,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1464,17 +1464,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1494,7 +1494,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1512,17 +1512,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1542,7 +1542,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1560,17 +1560,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Б/В
                             </div>
                         </div>
@@ -1590,7 +1590,7 @@
             <div class="swiper-slide product-preview">
                 <div class="img">
                     <div class="icons">
-                        <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+                        <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
                     </div>
                     <div class="stickers">
                         <span>В наяності</span>
@@ -1608,17 +1608,17 @@
                     <div class="features">
                         <div class="tr">
                             <div class="item">
-                                <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                                <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
                         </div>
                         <div class="tr">
                             <div class="item">
-                                <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                                <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
                             </div>
                             <div class="item">
-                                <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                                <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                                 Новий
                             </div>
                         </div>
@@ -1773,7 +1773,7 @@
     <div class="seo-inner">
         <h2 class="main-title noline"> <span class="hidden-xs">Компания</span> <span class="color-red">Bexhill</span> <span class="color-blue">Trading</span> Auto – автомобили из США</h2>
         <p>Bexhill Trading Auto – официальный дилер IAAI, Copart, Manheim на территории Украины, занимающееся пригоном и продажей авто из США. мы являемся официальным партнером автомобильных аукционов, таких как IAAI, Copart и Manheim. Одновременно наша компания активно развивается на востоке – уже более двух лет возим авто из Кореи.</p>
-        <h3>Почему ввоз авто из США?</h3>
+        <h3>Почему ввоз <span class="color-red">авто из США?</span></h3>
         <p>Ми порівняли ринки США з Європейськими та зрозуміли, що покупка автомобіля в Америці вигідніше в кілька разів, як би парадоксально це не звучало. Це спричинено продуманою логістикою, рівнем розвитку сервісів по оцінюванню стану авто та самим процесом покупки автомобіля.</p>
         <p>Більшість громадян США беруть автомобіль в лізинг на кілька років і весь час експлуатації сама лізингова компанія займається постійним ТО автомобіля, внаслідок чого, машини з США – один з кращих виборів для автолюбителів України.</p>
         <h3>Через що така низька ціна?</h3>

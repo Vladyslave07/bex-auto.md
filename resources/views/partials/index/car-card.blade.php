@@ -1,7 +1,7 @@
 <div class="swiper-slide product-preview">
     <div class="img">
         <div class="icons">
-            <svg width="33" height="17"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#electric"></use></svg>
+            <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
         </div>
         <div class="stickers">
             <span>@lang('car.' . $car->status)</span>
@@ -18,17 +18,17 @@
         <div class="features">
             <div class="tr">
                 <div class="item">
-                    <svg width="20" height="18"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#fuel"></use></svg>
+                    <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                     Електрика
                 </div>
             </div>
             <div class="tr">
                 <div class="item">
-                    <svg width="21" height="21"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#drive"></use></svg>
+                    <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                     Передній
                 </div>
                 <div class="item">
-                    <svg width="20" height="20"><use xlink:href="http://127.0.0.1:8000/img/icons/sprite.svg#state"></use></svg>
+                    <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
                     Новий
                 </div>
             </div>

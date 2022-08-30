@@ -73,12 +73,13 @@
                         color: #fff;
                     }
                 }
+                &:first-child {
+                    .menu-dropdown {
+                        max-width: 100%;
+                    }
+                }
                 & + li {
                     position: relative;
-                    .menu-dropdown {
-                        right: auto;
-                        width: max-content;
-                    }
                 }
                 &:hover {
                     .menu-dropdown {
@@ -94,7 +95,8 @@
         .menu-dropdown {
             position: absolute;
             left: 0;
-            right: 0;
+            right: auto;
+            width: max-content;
             top: 100%;
             visibility: hidden;
             background: #fff;
@@ -103,6 +105,7 @@
             padding: 22px 40px 30px 23px;
             z-index: 10;
             display: flex;
+            gap: 50px;
             .submenu {
                 a {
                     display: table;

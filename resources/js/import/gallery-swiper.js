@@ -1,7 +1,7 @@
 import {Swiper} from './swiper';
 
 export default function() {
-    const galleyDwiper =  new Swiper('.galley-swiper', {
+    const galleryDwiper =  new Swiper('.gallery-swiper', {
         slidesPerView: 1,
         spaceBetween: 20,
         navigation: {
@@ -22,10 +22,10 @@ export default function() {
     });
 
     document.addEventListener('livewire:load', function () {
-        document.querySelectorAll('.galley-thumbs .item').forEach((btn, i) => btn.addEventListener('click', () => {
-            btn.closest('.galley-thumbs').querySelector('.active').classList.remove('active');
+        document.querySelectorAll('.gallery-thumbs .item').forEach((btn, i) => btn.addEventListener('click', () => {
+            btn.closest('.gallery-thumbs').querySelector('.active').classList.remove('active');
             btn.classList.add('active');
-            galleyDwiper.slideTo(i);
+            galleryDwiper.slideTo(i);
         }));
     });
 }
