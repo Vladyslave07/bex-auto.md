@@ -34,9 +34,9 @@
         <span class="line"></span>
         <div class="h3 color-blue">Економія <strong>до 40%</strong> від ринкової<br> вартості</div>
         <picture class="img">
-            <source type="image/webp" srcset="{{ asset('img/example/img_22.webp') }}" media="(max-width: 767px)">
-            <source type="image/webp" srcset="{{ asset('img/example/img_21.webp') }}" media="(min-width: 768px)">
-            <img width="800" height="613" src="{{ asset('img/example/img_21.png') }}" alt="">
+            <source type="image/webp" srcset="{{ asset('img/example/img_36.webp') }}" media="(max-width: 767px)">
+            <source type="image/webp" srcset="{{ asset('img/example/img_36.webp') }}" media="(min-width: 768px)">
+            <img width="800" height="613" src="{{ asset('img/example/img_36.png') }}" alt="">
         </picture>
     </div>
 </div>

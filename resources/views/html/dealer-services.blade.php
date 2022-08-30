@@ -34,9 +34,9 @@
         <p class="color-blue">Продажа автомобилей из США на авторынке Украины набирает все большие обороты<br> и при разумном подходе принесет ощутимую прибыль.</p>
         <p class="color-blue">Мы поможем вам доставить авто действительно по низким тарифам<br> - свяжитесь с нашим специалистом и убедитесь в этом сами.</p>
         <picture class="img">
-            <source type="image/webp" srcset="{{ asset('img/example/img_19.webp') }}" media="(max-width: 767px)">
-            <source type="image/webp" srcset="{{ asset('img/example/img_18.webp') }}" media="(min-width: 768px)">
-            <img width="714" height="562" src="{{ asset('img/example/img_18.png') }}" alt="">
+            <source type="image/webp" srcset="{{ asset('img/example/img_35.webp') }}" media="(max-width: 767px)">
+            <source type="image/webp" srcset="{{ asset('img/example/img_35.webp') }}" media="(min-width: 768px)">
+            <img width="714" height="562" src="{{ asset('img/example/img_35.png') }}" alt="">
         </picture>
     </div>
 </div>

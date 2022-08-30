@@ -23,9 +23,9 @@
         </h1>
         <div class="h2">з будь-якого континенту,<br> в наявності та під замовлення</div>
         <picture class="img">
-            <source type="image/webp" srcset="{{ asset('img/example/img_3.webp') }}" media="(max-width: 767px)">
-            <source type="image/webp" srcset="{{ asset('img/example/img_2.webp') }}" media="(min-width: 768px)">
-            <img width="729" height="633" src="{{ asset('img/example/img_2.png') }}" alt="">
+            <source type="image/webp" srcset="{{ asset('img/example/img_39.webp') }}" media="(max-width: 767px)">
+            <source type="image/webp" srcset="{{ asset('img/example/img_39.webp') }}" media="(min-width: 768px)">
+            <img width="729" height="633" src="{{ asset('img/example/img_39.png') }}" alt="">
         </picture>
         <br>
         <br>
