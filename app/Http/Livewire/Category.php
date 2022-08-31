@@ -176,7 +176,7 @@ class Category extends Component
      */
     public function filters()
     {
-        return CarFilter::getCurrentPropertiesFilter($this->category);
+        return CarFilter::getCurrentPropertiesFilter($this->category, $this->filterQuery);
     }
 
     /**

@@ -4,6 +4,8 @@
 namespace App\filters;
 
 
+use App\Models\Brand;
+use App\Models\CarModel;
 use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
@@ -170,6 +172,13 @@ class CarFilter
         // Range properties
         $properties = array_merge($properties, self::rangeProperties($cars));
 
+        // Set models dependents for brand
+        if ($filterQuery) {
+            $properties['model']['values'] = self::getCurrentModels($filterQuery, $properties);
+        }
+
+
+
         return $properties;
 //        // Установка активности параметров на текущей страницы фильтра
 //        foreach ($properties as $key => $property) {
@@ -295,6 +304,41 @@ class CarFilter
 //            }
 //        }
         return $properties;
+    }
+
+    /**
+     * @param string $filterQuery
+     * @param array $properties
+     * @return array
+     */
+    public static function getCurrentModels(string $filterQuery, array $properties)
+    {
+        $brand = null;
+        $filters = str_contains($filterQuery, '_') ? explode('_', $filterQuery) : [$filterQuery];
+        if (count($filters) > 0) {
+            foreach ($filters as $filterPair) {
+                [$key, $value] = explode(':', $filterPair);
+                if ($key === 'brand') {
+                    $brand = Brand::query()->where('slug->en', $value)->first(['id']);
+                }
+            }
+        }
+
+        if ($brand) {
+            $models = CarModel::query()
+                ->whereIn('slug', array_keys($properties['model']['values']))
+                ->where('brand_id', $brand->id)->get();
+
+        }
+
+        $currentCategoryModels = [];
+        foreach ($properties['model']['values'] as $key => $value) {
+            if (in_array($key, array_column($models->toArray(), 'slug'))) {
+                $currentCategoryModels[$key]['value'] = $value['value'];
+                $currentCategoryModels[$key]['active'] = $value['active'];
+            }
+        }
+        return $currentCategoryModels;
     }
 
     /**
