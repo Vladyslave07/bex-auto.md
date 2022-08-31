@@ -167,7 +167,11 @@ class Category extends Component
     public function makeFilterUrl()
     {
         $categoryUrl = route('category', ['category' => $this->category->slug], false);
-        return $categoryUrl . CarFilter::FILTER_PREFIX . $this->filterQuery;
+        $filterUrl = '';
+        if ($this->filterQuery) {
+            $filterUrl = CarFilter::FILTER_PREFIX . $this->filterQuery;
+        }
+        return $categoryUrl . $filterUrl;
     }
 
     /**
@@ -207,6 +211,12 @@ class Category extends Component
             [$url, $filterQuery] = explode(CarFilter::FILTER_PREFIX, URL::current());
             $this->filterQuery = $filterQuery;
         }
+    }
+
+    public function cleanFilters()
+    {
+        $this->filterQuery = '';
+        $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makeFilterUrl()]);
     }
 
     public function mount()

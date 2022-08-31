@@ -9,8 +9,6 @@
             @endif
 
         @endforeach
-
-        <button class="btn" type="submit">Пошук</button>
-        <a href="catalog" class="clear-filter">Зкинути усі фільтри</a>
+        <a href="#" class="clear-filter" wire:click.prevent="cleanFilters()">Зкинути усі фільтри</a>
     </form>
 </aside>
