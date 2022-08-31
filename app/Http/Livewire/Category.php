@@ -74,10 +74,10 @@ class Category extends Component
      * @param $slug
      * @param $value
      */
-    public function setFilter($slug, $value)
+    public function setFilter($slug, $value, $multiple = false)
     {
         $value = preg_replace('/_/', '-', $value);
-        $this->buildFilterQuery($slug, $value);
+        $this->buildFilterQuery($slug, $value, $multiple);
 
         if ($slug === 'brand') {
             $this->disabled = false;
@@ -90,13 +90,13 @@ class Category extends Component
     /**
      * Method set values for range filter params
      *
+     * @param $slug
+     * @param $value
+     * @param $range
      * @example
      * Set priceFrom = 5 000 (default value setting in method setDefaultValuesForRangeParams())
      * Set priceTo = 45 000 from query
      *
-     * @param $slug
-     * @param $value
-     * @param $range
      */
     public function setRangeFilter($slug, $value, $range)
     {
@@ -123,7 +123,7 @@ class Category extends Component
      * @param $propertyKey
      * @param $propertyValue
      */
-    public function buildFilterQuery($propertyKey, $propertyValue)
+    public function buildFilterQuery($propertyKey, $propertyValue, $multiple = false)
     {
         $properties = [];
         if ($this->filterQuery) {
@@ -134,10 +134,28 @@ class Category extends Component
             }
         }
 
-        $properties[$propertyKey] = $propertyValue;
+        if ($multiple && key_exists($propertyKey, $properties)) {
+            $values = explode(';', $properties[$propertyKey]);
+
+            if (!in_array($propertyValue, $values)) {
+                $values[] = $propertyValue;
+            } else {
+                $values = array_diff($values, [$propertyValue]);
+            }
+
+            if (empty($values)) {
+                unset($properties[$propertyKey]);
+            } else {
+                $properties[$propertyKey] = implode(';', $values);
+            }
+        } else {
+            $properties[$propertyKey] = $propertyValue;
+        }
 
         // Make filter string from array
-        $res = array_map(function($k, $v) { return "$k:$v"; }, array_keys($properties), $properties);
+        $res = array_map(function ($k, $v) {
+            return "$k:$v";
+        }, array_keys($properties), $properties);
         $this->filterQuery = implode('_', $res);
     }
 
@@ -154,8 +172,6 @@ class Category extends Component
 
     /**
      * Returns filter params
-     * @todo Доработать изменение параметров фильтра в зависимости от того какие товары находтся на странице
-     *
      * @return array
      */
     public function filters()

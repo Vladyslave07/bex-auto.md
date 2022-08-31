@@ -153,7 +153,7 @@ class CarFilter
     public static function getCurrentPropertiesFilter(Category $category, $filterQuery = null)
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
-        $cars = $category->cars()->active()->get();
+        $cars = $category->cars()->with('properties')->active()->get();
 
         //$prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
         $properties = [];
