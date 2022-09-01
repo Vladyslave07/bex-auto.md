@@ -27,6 +27,8 @@ class Category extends Component
 
     public $disabled = true;
 
+    const BRAND_SLUG = 'brand';
+
     public function cars()
     {
         $this->page = $this->pageNum($this->page);
@@ -79,7 +81,7 @@ class Category extends Component
         $value = preg_replace('/_/', '-', $value);
         $this->buildFilterQuery($slug, $value, $multiple);
 
-        if ($slug === 'brand') {
+        if ($slug === self::BRAND_SLUG) {
             $this->disabled = false;
         }
 
@@ -219,10 +221,24 @@ class Category extends Component
         $this->dispatchBrowserEvent('setPageUrl', ['url' => $this->makeFilterUrl()]);
     }
 
+    public function enableIfExist()
+    {
+        foreach ($this->filters() as $filter) {
+            if ($filter['slug'] === self::BRAND_SLUG) {
+                foreach ($filter['values'] as $value) {
+                    if ($value['active']) {
+                        $this->disabled = false;
+                    }
+                }
+            }
+        }
+    }
+
     public function mount()
     {
         $this->setFilterQueryFromUrl();
         $this->setDefaultValuesForRangeParams();
+        $this->enableIfExist();
     }
 
     public function render()

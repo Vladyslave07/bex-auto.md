@@ -61,6 +61,7 @@ class CarFilter
                     if ($property = Property::findBySlug($key)) {
                         $filter[$property->id]['value'] = $property->id . ':' . str_replace([';', ','], '|', $value);
                         $filter[$property->id]['type'] = $property->filter_type;
+                        $filter[$property->id]['slug'] = $property->slug;
                     }
                     break;
             }
@@ -157,7 +158,6 @@ class CarFilter
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
         $cars = $category->cars()->with('properties')->active()->get();
 
-        //$prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
         $properties = [];
 
         // Status
@@ -178,27 +178,23 @@ class CarFilter
             $properties['model']['values'] = !empty($models) ? $models : $properties['model']['values'];
         }
 
+        $prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
+        if (count($prepParams) > 0) {
+            foreach ($prepParams as $param) {
+                foreach ($properties as &$property) {
+                    if ($param['slug'] == $property['slug']) {
+                        foreach ($property['values'] as $key => $value) {
+                            if (str_contains($param['value'], $key)) {
+                                $property['values'][$key]['active'] = true;
+                            }
+                        }
+                    }
+                }
 
+            }
+        }
 
         return $properties;
-//        // Установка активности параметров на текущей страницы фильтра
-//        foreach ($properties as $key => $property) {
-//            foreach ($property['values'] as $k => $value) {
-//                foreach (self::filterQueryToArray($filterQuery) as $paramKey => $curParams) {
-//                    if ($property['slug'] === $paramKey) {
-//                        foreach ($curParams as $param) {
-//                            if (mb_strtolower($value['value']) === $param) {
-//                                $properties[$key]['values'][$k]['active'] = true;
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//        }
-
-//        $propertiesFilter['active'] = self::getActiveProperties($propertiesFilter['filters']);
-//
-//        return $propertiesFilter;
     }
 
     /**
