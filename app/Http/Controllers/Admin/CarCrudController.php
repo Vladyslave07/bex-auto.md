@@ -134,9 +134,14 @@ class CarCrudController extends CrudController
                         ];
                         break;
                     case 'text':
+                        $valueField = [
+                            'type' => $property->field_type,
+                        ];
+                        break;
                     case 'number':
                         $valueField = [
                             'type' => $property->field_type,
+                            'attributes' => ["step" => "any"],
                         ];
                         break;
                     default:

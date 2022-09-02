@@ -55,7 +55,7 @@ class CarFilter
             switch ($key) {
                 case self::FILTER_PRICE_PROPERTY_NAME:
                 case self::CAR_STATUS_PROPERTY_SLUG:
-                    $filter[] = ['value' => $value, 'type' => $key];
+                    $filter[] = ['value' => $value, 'type' => $key, 'slug' => $key];
                     break;
                 default:
                     if ($property = Property::findBySlug($key)) {
@@ -243,7 +243,8 @@ class CarFilter
         $status['type'] = self::CAR_STATUS_PROPERTY_SLUG;
         $status['slug'] = self::CAR_STATUS_PROPERTY_SLUG;
         foreach ($cars as $car) {
-            $status['values'][$car->status] = $car->status;
+            $status['values'][$car->status]['value'] = $car->status;
+            $status['values'][$car->status]['active'] = false;
         }
         return $status;
     }
@@ -344,6 +345,7 @@ class CarFilter
      */
     public static function makeValueFroFromToField($range, $prefix)
     {
+        $range = array_map('strval', $range);
         $items = array_flip($range);
         $newRange = [];
         foreach ($items as $key => $item) {

@@ -139,7 +139,7 @@ class Car extends Model
         if (!$filterQuery) {
             return $query;
         }
-        return (new \App\filters\carFilter($query, $filterQuery))->apply();
+        return (new \App\filters\CarFilter($query, $filterQuery))->apply();
     }
 
     /*
