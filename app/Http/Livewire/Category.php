@@ -36,6 +36,7 @@ class Category extends Component
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
         return $this->category
             ->cars()
+            ->with(['properties'])
             ->active()
             ->orderBy($this->by, $this->sort)
             ->filtered($filterQuery)

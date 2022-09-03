@@ -78,11 +78,33 @@ class PropertyCrudController extends CrudController
             'type' => 'checkbox',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
+
+        CRUD::addField([
+            'name' => 'show',
+            'label' => trans('backpack::fields.show'),
+            'type' => 'checkbox',
+            'default' => true,
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
+            'name' => 'show_product',
+            'label' => trans('backpack::fields.show_product'),
+            'type' => 'checkbox',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
+            'name' => 'image',
+            'label' => trans('backpack::fields.image'),
+            'type' => 'image',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
         CRUD::addField([
             'name' => 'sort',
             'label' => trans('backpack::fields.sort'),
             'type' => 'number',
-            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
             'default' => 500,
         ]);
 

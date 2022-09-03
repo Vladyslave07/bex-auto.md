@@ -17,20 +17,14 @@
         <div class="year">{{ $car->year }}</div>
         <div class="features">
             <div class="tr">
-                <div class="item">
-                    <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
-                    Електрика
-                </div>
-            </div>
-            <div class="tr">
-                <div class="item">
-                    <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
-                    Передній
-                </div>
-                <div class="item">
-                    <svg width="20" height="20"><use xlink:href="{{ asset('/img/icons/sprite.svg#state') }}"></use></svg>
-                    Новий
-                </div>
+            @foreach($car->properties as $property)
+                @if($property->show_product && ($value = $property->getValue()))
+                        <div class="item">
+                            <img width="21" height="21" src="/storage/{{ $property->image }}">
+                            {{ $value }}
+                        </div>
+                @endif
+            @endforeach
             </div>
         </div>
     </div>

@@ -208,6 +208,10 @@ class CarFilter
         $properties = [];
         foreach ($cars as $car) {
             foreach ($car->properties as $property) {
+                if (!$property->show) {
+                    continue;
+                }
+
                 if ($property->filter_type === self::FROM_TO_PROPERTY_NAME) {
                     continue;
                 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Property extends Model
 {
-    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, DefaultScope;
+    use CrudTrait, HasTranslations, Sluggable, SaveImageAttribute, SluggableScopeHelpers, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -20,13 +21,16 @@ class Property extends Model
     */
 
     protected $table = 'properties';
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'field_type', 'filter_type', 'options', 'relation', 'step', 'prefix'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'field_type', 'filter_type', 'options', 'relation', 'step', 'prefix', 'show', 'show_product', 'image'];
     protected $casts = [
-        'status' => 'boolean',
+        'active' => 'boolean',
+        'show' => 'boolean',
+        'show_product' => 'boolean',
         'options' => 'array'
     ];
     protected $translatable = ['name', 'options'];
     protected $attributes = ['sort' => 500];
+    public static $images = ['image'];
 
 
     /*
