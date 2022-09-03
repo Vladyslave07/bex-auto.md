@@ -21,7 +21,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
     Route::get(
         LaravelLocalization::transRoute('routes.category'),
-        [\App\Http\Controllers\CatalogController::class, 'category']
+        [\App\Http\Controllers\HandleRouteController::class, 'index']
     )->name('category');
 });
 

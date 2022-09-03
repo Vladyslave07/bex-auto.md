@@ -54,6 +54,15 @@ class Category extends Model
     }
 
     /**
+     * @param $slug
+     * @return \Illuminate\Database\Eloquent\Builder|Model|object|null
+     */
+    public function findBySlug($slug)
+    {
+        return static::findByLocalizedSlug($slug)->first();
+    }
+
+    /**
      * @return string
      */
     public function getRouteKeyName()
@@ -133,4 +142,8 @@ class Category extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+    public function sluggable(): array
+    {
+        // TODO: Implement sluggable() method.
+    }
 }

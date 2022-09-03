@@ -8,8 +8,9 @@ Breadcrumbs::for('index', function ($trail) {
 });
 
 // category
-Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
+Breadcrumbs::for('category', function ($trail, $category) {
     $trail->parent('index');
+    $category = (new App\Models\Category)->findBySlug($category);
     $trail->push($category->title, $category->url);
 });
 
