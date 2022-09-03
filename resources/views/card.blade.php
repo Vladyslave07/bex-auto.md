@@ -15,9 +15,9 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/">Bexhill Trading Auto</a></li>
-            <li class="breadcrumb-item"><a href="catalog">Авто из Кореи</a></li>
-            <li class="breadcrumb-item" aria-current="page">Kia Sorento 2015</li>
+            <li class="breadcrumb-item"><a href="{{ route('index') }}">Bexhill Trading Auto</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('category', ['category' => $car->category()->first()->slug]) }}">{{ $car->category()->first()->title }}</a></li>
+            <li class="breadcrumb-item" aria-current="page">{{ $car->title . ' ' . $car->year }}</li>
         </ol>
     </nav>
 </div>

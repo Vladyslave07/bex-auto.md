@@ -115,6 +115,11 @@ class Car extends Model
         return Property::query()->active()->orderBy('id')->get();
     }
 
+    public function category()
+    {
+        return $this->categories;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
