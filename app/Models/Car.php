@@ -28,11 +28,12 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link'];
     public static $images = ['images'];
     protected $translatable = ['title', 'description', 'info'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $casts = ['images' => 'array'];
+    protected $with = ['properties'];
 
 
     /*
