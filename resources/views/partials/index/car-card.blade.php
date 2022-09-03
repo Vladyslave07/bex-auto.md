@@ -1,8 +1,12 @@
 <div class="swiper-slide product-preview">
     <div class="img">
-        <div class="icons">
-            <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
-        </div>
+        @foreach($car->properties as $property)
+            @if($property->slug === \App\Models\Property::FUEL_PROPERTY_SLUG && $property->pivot->value === \App\Models\Property::FUEL_ELECTRIC_OPTION_SLUG)
+                <div class="icons">
+                    <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
+                </div>
+            @endif
+        @endforeach
         <div class="stickers">
             <span>@lang('car.' . $car->status)</span>
         </div>
@@ -36,6 +40,6 @@
                 <div>{{ $car->info }}</div>
             </div>
         </div>
-        <a href="{{ $car->slug }}" class="btn">@lang('car.more')</a>
+        <a href="{{ route('category', ['category' => $car->slug])  }}" class="btn">@lang('car.more')</a>
     </div>
 </div>

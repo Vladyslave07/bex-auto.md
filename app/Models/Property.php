@@ -32,6 +32,8 @@ class Property extends Model
     protected $attributes = ['sort' => 500];
     public static $images = ['image'];
 
+    const FUEL_PROPERTY_SLUG = 'fuel';
+    const FUEL_ELECTRIC_OPTION_SLUG = 'electro';
 
     /*
     |--------------------------------------------------------------------------
