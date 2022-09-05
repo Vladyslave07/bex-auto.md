@@ -77,7 +77,7 @@ class ServiceCrudController extends CrudController
         CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'summernote']);
+        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
 
         CRUD::addField(['name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'summernote']);
