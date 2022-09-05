@@ -12,6 +12,7 @@ class CallBack extends Component implements BaseForm
 {
     public $phone;
     public $name;
+    public $title;
 
     const SLUG_FORM = 'call_back';
 

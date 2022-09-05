@@ -120,6 +120,18 @@ class Car extends Model
         return $this->categories;
     }
 
+    /**
+     * Get popular cars
+     *
+     * @return mixed
+     */
+    public static function popularCars()
+    {
+        return Cache::remember('popular_cars', 86400, function () {
+            return self::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS

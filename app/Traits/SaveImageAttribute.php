@@ -22,6 +22,7 @@ trait SaveImageAttribute
                 $ext = 'jpg';
                 if (Str::startsWith($value, 'data:image/png;base64')) $ext = 'png';
                 if (Str::startsWith($value, 'data:image/jpeg;base64')) $ext = 'jpeg';
+                if (Str::startsWith($value, 'data:image/webp;base64')) $ext = 'webp';
 
                 $image = \Image::make($value)->encode($ext, 90);
                 $filename = md5($value . time()) . '.' . $ext;

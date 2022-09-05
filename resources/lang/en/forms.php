@@ -16,4 +16,8 @@ return [
         'sub_title' => 'Enter your phone number and our manager will contact you',
         'submit' => 'Order a calculation',
     ],
+
+    'partners' => [
+        'title' => 'Become a partner of <span class="color-blue">Bexhill Trading Auto</span>',
+    ]
 ];
