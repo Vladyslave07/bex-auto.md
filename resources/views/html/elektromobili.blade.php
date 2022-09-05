@@ -660,8 +660,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -705,8 +703,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -753,8 +749,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -801,8 +795,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -849,8 +841,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -894,8 +884,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -942,8 +930,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -990,8 +976,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1038,8 +1022,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1104,8 +1086,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1149,8 +1129,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1197,8 +1175,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1245,8 +1221,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1293,8 +1267,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1338,8 +1310,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Бензин
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1386,8 +1356,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1434,8 +1402,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1482,8 +1448,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1530,8 +1494,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
@@ -1578,8 +1540,6 @@
                                 <svg width="20" height="18"><use xlink:href="{{ asset('/img/icons/sprite.svg#fuel') }}"></use></svg>
                                 Електрика
                             </div>
-                        </div>
-                        <div class="tr">
                             <div class="item">
                                 <svg width="21" height="21"><use xlink:href="{{ asset('/img/icons/sprite.svg#drive') }}"></use></svg>
                                 Передній
