@@ -66,7 +66,7 @@
 
                 var smdeObject = new SimpleMDE(configurationObject);
 
-                smdeObject.options.minHeight = smdeObject.options.minHeight || "300px";
+                smdeObject.options.minHeight = smdeObject.options.minHeight || "70px";
                 smdeObject.codemirror.getScrollerElement().style.minHeight = smdeObject.options.minHeight;
 
                 // update the original textarea on keypress

@@ -72,6 +72,7 @@ class BenefitCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
         CRUD::addField([
             'name' => 'image',
+            'disk' => 'public',
             'label' => trans('backpack::fields.image'),
             'type' => 'image',
         ]);
