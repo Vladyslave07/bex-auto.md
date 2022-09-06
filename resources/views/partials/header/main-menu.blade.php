@@ -2,7 +2,7 @@
     <ul>
         @foreach($items as $item)
             <li>
-                <a href="/{{ $item->slug}}">{{ $item->title }}</a>
+                <a href="{{ \App\Models\Menu::localeMenuLink($item->slug) }}">{{ $item->title }}</a>
                 @if(count($item->children) > 0)
                     <svg class="toggle-btn" width="13" height="7">
                         <use xlink:href="#arrow-icon"></use>
@@ -10,7 +10,7 @@
                     <div class="menu-dropdown">
                         <div class="submenu">
                             @foreach($item->children as $child)
-                                <a href="{{ route('category', $child['url']) }}">{{ $child['name'] }}</a>
+                                <a href="{{ \App\Models\Menu::localeMenuLinks($item->slug, $child['url'])  }}">{{ $child['name'] }}</a>
                             @endforeach
                         </div>
                         @if($items->first()->slug === $item->slug)

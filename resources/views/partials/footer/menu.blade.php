@@ -1,10 +1,14 @@
 @php($footerMenu = \App\Models\Menu::footerMenu())
 
 {{-- about menu --}}
-@include('partials.footer.menu-footer-part', ['item' => $footerMenu['about']])
+@if ($footerMenu['about'])
+    @include('partials.footer.menu-footer-part', ['item' => $footerMenu['about']])
+@endif
 
 {{-- location list --}}
 @include('partials.header.location-list')
 
 {{-- catalog menu --}}
-@include('partials.footer.menu-footer-part', ['item' => $footerMenu['catalog']])
+@if ($footerMenu['catalog'])
+    @include('partials.footer.menu-footer-part', ['item' => $footerMenu['catalog']])
+@endif

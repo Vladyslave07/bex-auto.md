@@ -17,7 +17,7 @@ return [
 
 
     'partner' => [
-        'title' => '<span class="color-red">Bexhill</span> <span class="color-blue">Trading</span> Auto – офіційний партнер американських<br> аукціонів  Copart и IAAI'
+        'title' => '<span class="color-red">Bexhill</span> <span class="color-blue">Trading</span> Auto – official partner of the American<br> Copart and IAAI auctions'
     ],
 
     'services' => [

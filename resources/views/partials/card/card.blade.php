@@ -79,7 +79,7 @@
                                 <div class="dt">
                                     @if ($image = $property->image)
                                         <div class="icon">
-                                            <img src="{{ $image }}">
+                                            <img src="/storage/{{ $image }}">
                                         </div>
                                     @endif
                                     {{ $property->title }}:

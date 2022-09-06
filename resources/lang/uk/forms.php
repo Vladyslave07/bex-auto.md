@@ -17,4 +17,8 @@ return [
         'sub_title' => 'Вкажіть ваш телефон та наш менеджер зв\'яжеться з вами',
         'submit' => 'Замовити розрахунок',
     ],
+
+    'partners' => [
+        'title' => 'Стати партнером <span class="color-blue">Bexhill Trading Auto</span>',
+    ]
 ];

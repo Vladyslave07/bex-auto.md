@@ -208,4 +208,10 @@ return [
 
     'property' => 'свойство',
     'properties' => 'свойства',
+
+    'service' => 'услуга',
+    'services' => 'услуги',
+
+    'benefit' => 'преимущество',
+    'benefits' => 'преимущества',
 ];

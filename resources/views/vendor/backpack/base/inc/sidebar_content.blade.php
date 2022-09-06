@@ -76,6 +76,14 @@
 </li>
 
 <li class="nav-item nav-dropdown">
+    <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-reply"></i> Услуги</a>
+    <ul class="nav-dropdown-items">
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('service') }}'><i class='nav-icon la la-reply'></i> <span>Список</span></a></li>
+        <li class='nav-item'><a class='nav-link' href='{{ backpack_url('benefit') }}'><i class='nav-icon la la-surprise'></i> Преимущества</a></li>
+    </ul>
+</li>
+
+<li class="nav-item nav-dropdown">
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-cog"></i> Настройки</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('setting') }}'><i class='nav-icon la la-cog'></i> <span>Список настроек</span></a></li>
