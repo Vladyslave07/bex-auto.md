@@ -16,9 +16,16 @@ Breadcrumbs::for('category', function ($trail, $category) {
     $trail->push($category->title, $category->url);
 });
 
-// category
+// sevice
 Breadcrumbs::for('service', function ($trail, Service $service) {
     $trail->parent('index');
     $trail->push(str_replace(['&nbsp;'], '', strip_tags($service->title)), '');
+});
+
+// news list
+Breadcrumbs::for('news', function ($trail) {
+    $trail->parent('index');
+//    <li class="breadcrumb-item"><a href="/">Про компанiю</a></li>
+    $trail->push(Lang::get('news.breadcrumb'), '');
 });
 

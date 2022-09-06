@@ -28,6 +28,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
         LaravelLocalization::transRoute('routes.category'),
         [\App\Http\Controllers\HandleRouteController::class, 'index']
     )->name('category');
+
+    Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
+    Route::get('/news/{news}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news_detail');
 });
 
 // Cache delete

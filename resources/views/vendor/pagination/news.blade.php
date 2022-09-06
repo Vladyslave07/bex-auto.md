@@ -1,0 +1,45 @@
+@if ($paginator->hasPages())
+    <nav class="pagination">
+    </nav>
+        <nav class="pagination">
+            {{-- Previous Page Link --}}
+            @if ($paginator->onFirstPage())
+                <a aria-label="pagination.previous">
+                    <svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg>
+                </a>
+            @else
+                <a wire:click.prevent="previousPage()" aria-label="pagination.previous">
+                    <svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></a>
+            @endif
+
+            {{-- Pagination Elements --}}
+            @foreach ($elements as $element)
+                {{-- "Three Dots" Separator --}}
+                @if (is_string($element))
+                    <span aria-disabled="true">
+                        <span class="relative inline-flex items-center px-4 py-2 -ml-px text-sm font-medium text-gray-700 bg-white border border-gray-300 cursor-default leading-5">{{ $element }}</span>
+                    </span>
+                @endif
+
+                {{-- Array Of Links --}}
+                @if (is_array($element))
+                    @foreach ($element as $page => $url)
+                        @if ($page == $paginator->currentPage())
+                            <a class="active">{{ $page }}</a>
+                        @else
+                            <a wire:click.prevent="setPage({{$page}})" href="{{ $url }}">{{ $page }}</a>
+                        @endif
+                    @endforeach
+                @endif
+            @endforeach
+
+            {{-- Next Page Link --}}
+            @if ($paginator->hasMorePages())
+                <a wire:click.prevent="nextPage()" aria-label="pagination.next"><svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></a>
+            @else
+                <a aria-label="pagination.next">
+                    <svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg>
+                </a>
+            @endif
+        </nav>
+@endif

@@ -1,0 +1,34 @@
+@extends('layouts.app')
+
+@section('title', 'Новини')
+
+@push('styles')
+    <link rel="stylesheet" href="{{ mix('css/news.css') }}">
+@endpush
+
+@push('scripts')
+    <script src="{{ mix('js/news.js') }}" defer></script>
+@endpush
+
+@section('content')
+
+    {{-- Breadcrumbs --}}
+    {{ Breadcrumbs::render() }}
+
+<!-- ///НОВИНИ/// -->
+    @livewire('news-list')
+<!-- ///:end/// -->
+
+    {{-- Popular auto brand --}}
+    @include('partials.index.popular-brand-auto')
+
+    {{-- Faqs --}}
+    @include('partials.index.faq')
+
+    {{-- Seo text --}}
+    @include('partials.index.seo-text')
+
+    {{-- Order a calculation form --}}
+    @include('partials.index.order-a-calculation')
+
+@endsection
