@@ -12,6 +12,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Menu extends Model
 {
@@ -25,14 +26,14 @@ class Menu extends Model
 
     const ACTIVE_STATUS_ID = 1;
 
-    const CATALOG_MENU_SLUG = 'catalog';
+    const CATALOG_MENU_SLUG = 'avto';
     const ABOUT_MENU_SLUG = 'about';
 
     protected $table = 'menus';
     protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image'];
     protected $casts = ['items' => 'array', 'active' => 'bool'];
     public static $images = ['image'];
-    protected $translatable = ['title', 'items'];
+    protected $translatable = ['title', 'items', 'slug'];
     protected $attributes = ['sort' => 500, 'image' => ''];
 
     /*
@@ -67,17 +68,34 @@ class Menu extends Model
         });
     }
 
+    /**
+     * Return locales menu url
+     *
+     * @param $category
+     * @param $link
+     * @return string
+     */
+    public static function localeMenuLinks($category, $link)
+    {
+        $locale = app()->getLocale();
+        if (LaravelLocalization::getCurrentLocale() === LaravelLocalization::getDefaultLocale()) {
+            $locale = false;
+        }
+
+        return LaravelLocalization::localizeURL(sprintf('/%s/%s', $category, $link), $locale);
+    }
+
     public static function footerMenu()
     {
         return Cache::remember('footer_menu_items', 86400, function () {
             $collectionMenu = self::query()
                 ->active()
-                ->whereIn('slug', [self::CATALOG_MENU_SLUG, self::ABOUT_MENU_SLUG])
+                ->whereIn('slug->ru', [self::CATALOG_MENU_SLUG, self::ABOUT_MENU_SLUG])
                 ->get(['slug', 'title', 'items']);
 
             return [
-                'about' => $collectionMenu->where('slug', self::ABOUT_MENU_SLUG)->first(),
-                'catalog' => $collectionMenu->where('slug', self::CATALOG_MENU_SLUG)->first(),
+                'about' => $collectionMenu->where('slug->ru', self::ABOUT_MENU_SLUG)->first(),
+                'catalog' => $collectionMenu->where('slug->ru', self::CATALOG_MENU_SLUG)->first(),
             ];
         });
     }
