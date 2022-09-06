@@ -24,11 +24,12 @@
                 {{-- Array Of Links --}}
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
-                        @if ($page == $paginator->currentPage())
-                            <a class="active">{{ $page }}</a>
-                        @else
-                            <a wire:click.prevent="setPage({{$page}})" href="{{ $url }}">{{ $page }}</a>
-                        @endif
+                        <a
+                            @if ($page == $paginator->currentPage())
+                            class="active"
+                            @endif
+                            wire:click.prevent="setPage('{{ $page }}')"
+                        >{{ $page }}</a>
                     @endforeach
                 @endif
             @endforeach

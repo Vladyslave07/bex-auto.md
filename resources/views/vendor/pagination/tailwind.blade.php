@@ -61,7 +61,6 @@
                             @endif
                             wire:click.prevent="setPage('{{ $page }}')"
                         >{{ $page }}</a>
-
                 @endforeach
             @endif
         @endforeach

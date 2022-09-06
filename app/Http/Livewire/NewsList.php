@@ -12,8 +12,7 @@ class NewsList extends Component
 
     public function newsList()
     {
-        // todo: Кешировать
-        return News::query()->active()->orderBy('sort', 'asc')->orderBy('id', 'desc')->paginate(4);
+        return News::newsList($this->page);
     }
 
     public function paginationView()

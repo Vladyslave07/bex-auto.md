@@ -10,6 +10,7 @@ use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class News extends Model
 {
@@ -42,6 +43,19 @@ class News extends Model
                 'source' => 'slug_or_title',
             ],
         ];
+    }
+
+    /**
+     * News list
+     *
+     * @param $page
+     * @return mixed
+     */
+    public static function newsList($page)
+    {
+        return Cache::remember('news_list_' . $page, 86400, function () {
+            return self::query()->active()->orderBy('sort', 'asc')->orderBy('id', 'desc')->paginate(4);
+        });
     }
 
     /*

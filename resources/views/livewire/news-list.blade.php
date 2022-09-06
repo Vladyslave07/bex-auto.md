@@ -16,7 +16,6 @@
                 </div>
             @endforeach
         </div>
-        {{ $news->onEachSide(2)->links() }}
-
+        {{ $news->onEachSide(1)->links() }}
     </div>
 </div>
