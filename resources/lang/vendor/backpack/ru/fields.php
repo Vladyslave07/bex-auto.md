@@ -50,6 +50,10 @@ return [
     'youtube_link' => 'Id на видео из ютуба',
     'sub_title' => 'Подзаголовок',
     'sub_title_text' => 'Текст под заголовком',
+    'created_at' => 'Дата создания',
+    'updated_at' => 'Дата редактирования',
+    'preview_text' => 'Превью текст',
+    'detail_text' => 'Основной текст',
 
     'option' => [
         'expect' => 'Ожидается',
