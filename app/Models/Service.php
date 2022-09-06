@@ -20,7 +20,7 @@ class Service extends Model
 
     protected $table = 'services';
     protected $fillable = ['active', 'sort', 'image', 'sub_title', 'sub_title_text', 'title', 'slug', 'youtube_link', 'faq_id', 'seo_text_id', 'text'];
-    protected $translatable = ['title', 'text', 'slug'];
+    protected $translatable = ['title', 'text', 'slug', 'sub_title', 'sub_title_text'];
     protected $attributes = ['sort' => 500];
     protected $casts = ['active' => 'boolean'];
     protected $with = ['faqs', 'seo_text'];

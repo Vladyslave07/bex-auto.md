@@ -85,6 +85,23 @@ class Menu extends Model
         return LaravelLocalization::localizeURL(sprintf('/%s/%s', $category, $link), $locale);
     }
 
+    /**
+     * Return locales menu url
+     *
+     * @param $category
+     * @param $link
+     * @return string
+     */
+    public static function localeMenuLink($link)
+    {
+        $locale = app()->getLocale();
+        if (LaravelLocalization::getCurrentLocale() === LaravelLocalization::getDefaultLocale()) {
+            $locale = false;
+        }
+
+        return LaravelLocalization::localizeURL($link, $locale);
+    }
+
     public static function footerMenu()
     {
         return Cache::remember('footer_menu_items', 86400, function () {
