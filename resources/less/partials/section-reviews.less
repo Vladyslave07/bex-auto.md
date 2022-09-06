@@ -19,6 +19,7 @@
         padding: 27px 20px 13px;
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
     }
     .header {
         display: flex;
@@ -33,6 +34,7 @@
             font-weight: 600;
             line-height: 20px;
             margin-bottom: 14px;
+            display: table;
         }
         .review-rating {
             font-weight: 400;
@@ -40,18 +42,62 @@
         }
         .review-data {
             margin-left: 14px;
+            text-transform: capitalize;
         }
     }
     .review-text {
         font-weight: 400;
         margin-top: 18px;
         margin-bottom: auto;
+        &.open {
+            p {
+                display: block;
+            }
+            .toggle-btn {
+                font-size: 0;
+                &::after {
+                    content: attr(data-text);
+                    font-size: 14px;
+                }
+            }
+        }
         p {
             margin: 0 0 4px;
+            display: -webkit-box;
+            -webkit-line-clamp: 5;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .toggle-btn {
+            font-weight: 600;
+            text-decoration: underline;
+            display: table;
+            margin: 10px 0 0;
+            &:hover {
+                text-decoration: none;
+            }
         }
     }
     .review-logo {
         margin-top: 40px;
+        display: flex;
+        svg {
+            margin-right: 8px;
+        }
+        .label {
+            display: table;
+            white-space: nowrap;
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 1.17;
+            color: rgba(17, 17, 17, 0.5);
+        }
+        .name {
+            white-space: nowrap;
+            font-size: 14px;
+            line-height: 1.38;
+            color: rgb(25, 123, 255);
+        }
     }
     .stars {
         color: var(--orange);
