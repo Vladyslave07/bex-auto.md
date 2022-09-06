@@ -7,6 +7,8 @@ use App\Models\Benefit;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Faq;
+use App\Models\SeoText;
 use App\Models\Service;
 use Illuminate\Http\Request;
 
@@ -29,6 +31,16 @@ class ServiceController extends Controller
         $service->is_diller_page = false;
         if ($service->id === 1) {
             $service->is_diller_page = true;
+        }
+
+        // Show default seo text if current not exist
+        if (!$service->seo_text) {
+            $service->seo_text = SeoText::mainText();
+        }
+
+        // Show default faqs if current not exists
+        if (count($service->faqs) <= 0) {
+            $service->faqs = Faq::defaultFaqs();
         }
 
         return view('service', compact('service', 'categories', 'carsInStock', 'benefits', 'brands'));

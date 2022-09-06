@@ -1,5 +1,5 @@
 <div class="form">
-    <form class="form" wire:submit.prevent="submit" novalidate autocomplete="off">
+    <form wire:submit.prevent="submit" novalidate autocomplete="off">
         <div class="form-body">
             <div class="header">
                 <strong>@lang('forms.buy-and-delivery.title')</strong>
