@@ -126,7 +126,7 @@ class ServiceCrudController extends CrudController
             }),
         ]);
 
-        CRUD::addField(['name' => 'text', 'label' => trans('backpack::fields.text'), 'type' => 'summernote']);
+        CRUD::addField(['name' => 'text', 'label' => trans('backpack::fields.text'), 'type' => 'simplemde']);
     }
 
     /**

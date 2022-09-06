@@ -9,7 +9,6 @@
 
 @push('scripts')
     <script src="{{ mix('js/dealer.js') }}" defer></script>
-    <script src="{{ mix('js/delivery.js') }}" defer></script>
 @endpush
 
 
