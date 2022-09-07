@@ -37,6 +37,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 
         // News detail
         Route::get('/news/{article}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('news_detail');
+
+        // guarantee
+        Route::get('/guarantee', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.guarantee');
     });
 
 });

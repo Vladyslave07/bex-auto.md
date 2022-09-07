@@ -13,6 +13,8 @@ class CardController extends Controller
 {
     public function index(Car $car)
     {
+        // todo: seo tools
+
         // Popular cars
         $popularCars = Car::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
 

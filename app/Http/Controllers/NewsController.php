@@ -13,6 +13,8 @@ class NewsController extends Controller
 {
     public function index()
     {
+        // todo: seo tools
+
         // Brands
         $brands = Brand::brands();
 
@@ -27,6 +29,8 @@ class NewsController extends Controller
 
     public function detail(News $article)
     {
+        // todo: seo tools
+
         // Brands
         $brands = Brand::brands();
 

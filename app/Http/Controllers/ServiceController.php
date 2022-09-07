@@ -16,6 +16,8 @@ class ServiceController extends Controller
 {
     public function service(Service $service)
     {
+        // todo: seo tools
+
         // Categories which selected for show in slider
         $categories = Category::selectedCategory();
 

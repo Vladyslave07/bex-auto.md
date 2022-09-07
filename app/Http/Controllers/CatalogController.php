@@ -22,6 +22,7 @@ class CatalogController extends Controller
      */
     public function category($category, Request $request, $page = 1)
     {
+        // todo: seo tools
 
         // Popular cars
         $popularCars = $category->cars()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();

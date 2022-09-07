@@ -9,13 +9,17 @@ use App\Models\Category;
 use App\Models\Faq;
 use App\Models\PopularRequest;
 use App\Models\SeoText;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
 class IndexController extends Controller
 {
 
     public function index()
     {
+        // todo: seo tools
+
         $banner = Banner::banner();
 
         // Categories which selected for show in slider
@@ -41,4 +45,26 @@ class IndexController extends Controller
 
         return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText'));
     }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function staticPage()
+    {
+        // todo: seo tools
+
+        $routeName = \Request::route()->getName();
+
+        // Brands
+        $brands = Brand::brands();
+
+        // Faq
+        $faqs = Faq::defaultFaqs();
+
+        // default seo text
+        $seoText = SeoText::mainText();
+
+        return view($routeName, compact('brands', 'faqs', 'seoText'));
+    }
+
 }
