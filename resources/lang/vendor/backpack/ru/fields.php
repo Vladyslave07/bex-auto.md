@@ -54,6 +54,8 @@ return [
     'updated_at' => 'Дата редактирования',
     'preview_text' => 'Превью текст',
     'detail_text' => 'Основной текст',
+    'lat' => 'Широта в google maps',
+    'lng' => 'Долгота в google maps',
 
     'option' => [
         'expect' => 'Ожидается',

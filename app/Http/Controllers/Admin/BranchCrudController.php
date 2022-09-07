@@ -86,6 +86,18 @@ class BranchCrudController extends CrudController
             'label'      => trans('backpack::fields.phone'),
             'type'       => 'text',
         ]);
+
+        CRUD::addField([
+            'name'       => 'lat',
+            'label'      => trans('backpack::fields.lat'),
+            'type'       => 'text',
+        ]);
+
+        CRUD::addField([
+            'name'       => 'lng',
+            'label'      => trans('backpack::fields.lng'),
+            'type'       => 'text',
+        ]);
     }
 
     /**

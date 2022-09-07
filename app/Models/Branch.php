@@ -23,7 +23,7 @@ class Branch extends Model
 
     protected $table = 'branches';
     protected $guarded = ['id'];
-    protected $fillable = ['city', 'address', 'phone', 'sort', 'active'];
+    protected $fillable = ['city', 'address', 'phone', 'sort', 'active', 'lat', 'lng'];
     protected $translatable = ['city', 'address'];
     protected $casts = ['active' => 'bool'];
 
@@ -42,7 +42,7 @@ class Branch extends Model
     public static function branches()
     {
         return Cache::remember('branches_items', 86400, function () {
-            return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone']);
+            return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone', 'lat', 'lng']);
         });
     }
 

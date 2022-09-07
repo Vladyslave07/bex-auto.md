@@ -38,10 +38,17 @@ Breadcrumbs::for('news_detail', function ($trail, News $article) {
     $trail->push($article->title, '');
 });
 
-// news detail
+// guarantee
 Breadcrumbs::for('static.guarantee', function ($trail) {
     $trail->parent('index');
     $trail->push(Lang::get('static.about.breadcrumbs'), '');
     $trail->push(Lang::get('static.guarantee.breadcrumbs'), '');
+});
+
+// contacts
+Breadcrumbs::for('static.contacts', function ($trail) {
+    $trail->parent('index');
+    $trail->push(Lang::get('static.about.breadcrumbs'), '');
+    $trail->push(Lang::get('static.contacts.breadcrumbs'), '');
 });
 

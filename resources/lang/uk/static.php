@@ -8,5 +8,11 @@ return [
     ],
     'about' => [
         'breadcrumbs' => 'Про компанiю',
+    ],
+    'contacts' => [
+        'breadcrumbs' => 'Контакти',
+        'schedule' => 'График роботи компанії:',
+        'weekdays' => 'Пн-Пт с 09:00 до 20:00',
+        'weekends' => 'Сб-Вс с 09:00 до 18:00.',
     ]
 ];

@@ -8,5 +8,11 @@ return [
     ],
     'about' => [
         'breadcrumbs' => 'About the company',
+    ],
+    'contacts' => [
+        'breadcrumbs' => 'Contacts',
+        'schedule' => 'Company working hours:',
+        'weekdays' => 'Mon-Fri from 09:00 to 20:00',
+        'weekends' => 'Sat-Sun from 09:00 to 18:00.',
     ]
 ];
