@@ -111,8 +111,8 @@ class Menu extends Model
                 ->get(['slug', 'title', 'items']);
 
             return [
-                'about' => $collectionMenu->where('slug->ru', self::ABOUT_MENU_SLUG)->first(),
-                'catalog' => $collectionMenu->where('slug->ru', self::CATALOG_MENU_SLUG)->first(),
+                'about' => $collectionMenu->where('slug', self::ABOUT_MENU_SLUG)->first(),
+                'catalog' => $collectionMenu->where('slug', self::CATALOG_MENU_SLUG)->first(),
             ];
         });
     }

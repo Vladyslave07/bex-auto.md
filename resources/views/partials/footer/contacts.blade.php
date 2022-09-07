@@ -5,7 +5,7 @@
     <li>
         <div class="color-red">Опт</div>
         <a href="tel:{{ Str::phoneNumber(config('settings.main-phone'))}}">
-            {{ config('settings.opt-phone') }}
+            {{ config('settings.main-phone') }}
         </a>
     </li>
 </ul>
