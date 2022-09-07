@@ -41,7 +41,7 @@ Breadcrumbs::for('news_detail', function ($trail, News $article) {
 // news detail
 Breadcrumbs::for('static.guarantee', function ($trail) {
     $trail->parent('index');
-    $trail->push(Lang::get('static.about.breadcrumb'), '');
-    $trail->push(Lang::get('static.guarantee.breadcrumb'), '');
+    $trail->push(Lang::get('static.about.breadcrumbs'), '');
+    $trail->push(Lang::get('static.guarantee.breadcrumbs'), '');
 });
 
