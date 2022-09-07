@@ -46,6 +46,14 @@ class News extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      * News list
      *
      * @param $page

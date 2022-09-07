@@ -19,18 +19,26 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function()
 {
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
+    // Services
     Route::get(
         LaravelLocalization::transRoute('routes.service'),
         [\App\Http\Controllers\ServiceController::class, 'service']
     )->name('service');
 
+    // Categories
     Route::get(
         LaravelLocalization::transRoute('routes.category'),
         [\App\Http\Controllers\HandleRouteController::class, 'index']
     )->name('category');
 
-    Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
-    Route::get('/news/{news}', [\App\Http\Controllers\NewsController::class, 'index'])->name('news_detail');
+    Route::group(['prefix' => '/about'], function () {
+        // News
+        Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
+
+        // News detail
+        Route::get('/news/{article}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('news_detail');
+    });
+
 });
 
 // Cache delete

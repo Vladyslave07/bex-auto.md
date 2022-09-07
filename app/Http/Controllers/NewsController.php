@@ -24,4 +24,18 @@ class NewsController extends Controller
 
         return view('news', compact('brands', 'seoText', 'faqs'));
     }
+
+    public function detail(News $article)
+    {
+        // Brands
+        $brands = Brand::brands();
+
+        // default seo text
+        $seoText = SeoText::mainText();
+
+        // default faqs
+        $faqs = Faq::defaultFaqs();
+
+        return view('article', compact('article','brands', 'seoText', 'faqs'));
+    }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\News;
 use App\Models\Service;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Support\Facades\Lang;
@@ -27,5 +28,13 @@ Breadcrumbs::for('news', function ($trail) {
     $trail->parent('index');
 //    <li class="breadcrumb-item"><a href="/">Про компанiю</a></li>
     $trail->push(Lang::get('news.breadcrumb'), '');
+});
+
+// news detail
+Breadcrumbs::for('news_detail', function ($trail, News $article) {
+    $trail->parent('index');
+//    <li class="breadcrumb-item"><a href="/">Про компанiю</a></li>
+    $trail->push(Lang::get('news.breadcrumb'), route('news'));
+    $trail->push($article->title, '');
 });
 
