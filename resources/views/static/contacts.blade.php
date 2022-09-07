@@ -35,21 +35,17 @@
                     @endforeach
                 </ul>
                 <ul>
-                    <li>
-                        <div class="color-red">Опт</div>
-                        <a href="tel:{{ Str::phoneNumber(config('settings.main-phone'))}}">
-                            {{ config('settings.main-phone') }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="mailto:{{ config('settings.main-email') }}">{{ config('settings.main-email') }}</a>
-                    </li>
                     <li class="schedule">
                         <div class="color-red">@lang('static.contacts.schedule')</div>
                     </li>
                     <li class="schedule">
                         <span>@lang('static.contacts.weekdays')</span>
                         <span>@lang('static.contacts.weekends')</span>
+                    </li>
+                    <li>
+                    </li>
+                    <li>
+                        <a href="mailto:{{ config('settings.main-email') }}">{{ config('settings.main-email') }}</a>
                     </li>
                 </ul>
             </div>
