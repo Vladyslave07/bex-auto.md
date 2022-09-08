@@ -4,12 +4,12 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width">
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-        <meta name="Description" content="Put your description here.">
+
+        {!! SEO::generate() !!}
 
         @yield('meta-pagination')
 
         <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNUq5n3HwAEUQJBudQtMwAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon" />
-        <title>@yield('title')</title>
 
         @stack('styles')
         @livewireStyles

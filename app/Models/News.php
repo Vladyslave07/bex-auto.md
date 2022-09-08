@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
+use App\Traits\SeoSnippets;
 use App\Traits\SlugOrTitleTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 
 class News extends Model
 {
-    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope;
+    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,10 +25,10 @@ class News extends Model
 
     protected $table = 'news';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'preview_text', 'detail_text', 'image'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'preview_text', 'detail_text', 'image', 'meta_title', 'meta_description'];
     public static $images = ['image'];
     protected $attributes = ['sort' => 500];
-    protected $translatable = ['title', 'preview_text', 'detail_text'];
+    protected $translatable = ['title', 'preview_text', 'detail_text', 'meta_title', 'meta_description'];
     protected $casts = ['active' => 'bool'];
 
     /*

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
+use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Car extends Model
 {
-    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers;
+    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -28,9 +29,9 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description'];
     public static $images = ['images'];
-    protected $translatable = ['title', 'description', 'info'];
+    protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $casts = ['images' => 'array'];
     protected $with = ['properties'];

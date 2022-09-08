@@ -56,6 +56,8 @@ return [
     'detail_text' => 'Основной текст',
     'lat' => 'Широта в google maps',
     'lng' => 'Долгота в google maps',
+    'meta_title' => 'Мета title',
+    'meta_description' => 'Мета description',
 
     'option' => [
         'expect' => 'Ожидается',

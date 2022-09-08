@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
@@ -10,7 +11,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Service extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope;
+    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,8 +20,8 @@ class Service extends Model
     */
 
     protected $table = 'services';
-    protected $fillable = ['active', 'sort', 'image', 'sub_title', 'sub_title_text', 'title', 'slug', 'youtube_link', 'faq_id', 'seo_text_id', 'text'];
-    protected $translatable = ['title', 'text', 'slug', 'sub_title', 'sub_title_text'];
+    protected $fillable = ['active', 'sort', 'image', 'sub_title', 'sub_title_text', 'title', 'slug', 'youtube_link', 'faq_id', 'seo_text_id', 'text', 'meta_title', 'meta_description'];
+    protected $translatable = ['title', 'text', 'slug', 'sub_title', 'sub_title_text', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500];
     protected $casts = ['active' => 'boolean'];
     protected $with = ['faqs', 'seo_text'];

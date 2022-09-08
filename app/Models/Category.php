@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
@@ -11,7 +12,7 @@ use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
 class Category extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope;
+    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -21,8 +22,8 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = ['id'];
-    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id'];
-    protected $translatable = ['title', 'slug'];
+    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id', 'meta_title', 'meta_description'];
+    protected $translatable = ['title', 'slug', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500];
 
     /*
