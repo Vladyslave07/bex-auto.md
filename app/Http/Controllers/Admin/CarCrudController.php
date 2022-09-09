@@ -177,14 +177,15 @@ class CarCrudController extends CrudController
             'name' => 'meta_title',
             'label' => trans('backpack::fields.meta_title'),
             'type' => 'text',
-            'hint' => 'Доступные сниппеты <code>#title#</code>',
+            'hint' => 'Доступные сниппеты <code>#title#</code> <code>#price#</code> <code>#year#</code>',
         ]);
+
         CRUD::addField([
             'tab' => 'SEO',
             'name' => 'meta_description',
             'label' => trans('backpack::fields.meta_description'),
             'type' => 'text',
-            'hint' => 'Доступные сниппеты <code>#title#</code>',
+            'hint' => 'Доступные сниппеты <code>#title#</code> <code>#price#</code> <code>#year#</code>',
         ]);
 
 

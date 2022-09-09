@@ -98,7 +98,16 @@ class News extends Model
         }
 
         return $this->detail_text ? substr($this->detail_text, 0, 250) : '';
+    }
 
+    public function getSeoMetaTitleAttribute()
+    {
+        return $this->parseSnippets($this->meta_title ?: config('settings.news_meta_title'));
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->meta_description ?: config('settings.news_meta_description'));
     }
 
 }

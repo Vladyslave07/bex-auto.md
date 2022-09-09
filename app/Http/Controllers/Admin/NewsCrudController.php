@@ -74,22 +74,39 @@ class NewsCrudController extends CrudController
     {
         CRUD::setValidation(NewsRequest::class);
 
-        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
-        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
 
 
-        CRUD::addField(['name' => 'preview_text', 'label' => trans('backpack::fields.preview_text'), 'type' => 'simplemde']);
-        CRUD::addField(['name' => 'detail_text', 'label' => trans('backpack::fields.detail_text'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'preview_text', 'label' => trans('backpack::fields.preview_text'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'detail_text', 'label' => trans('backpack::fields.detail_text'), 'type' => 'simplemde']);
 
         CRUD::addField([
+            'tab' => 'Новость',
             'name' => 'image',
             'label' => trans('backpack::fields.image'),
             'disk' => 'public',
             'type' => 'image',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
+            'tab' => 'SEO',
+            'name' => 'meta_title',
+            'label' => trans('backpack::fields.meta_title'),
+            'type' => 'text',
+            'hint' => 'Доступные сниппеты <code>#title#</code>',
+        ]);
+
+        CRUD::addField([
+            'tab' => 'SEO',
+            'name' => 'meta_description',
+            'label' => trans('backpack::fields.meta_description'),
+            'type' => 'text',
+            'hint' => 'Доступные сниппеты <code>#title#</code>',
         ]);
     }
 
@@ -102,6 +119,7 @@ class NewsCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         CRUD::addField([
+            'tab' => 'Новость',
             'name' => 'created_at',
             'label' => trans('backpack::fields.created_at'),
             'type' => 'datetime',
@@ -111,6 +129,7 @@ class NewsCrudController extends CrudController
             'wrapperAttributes' => ['class' => 'form-group col-md-6', 'disabled' => true]
         ]);
         CRUD::addField([
+            'tab' => 'Новость',
             'name' => 'updated_at',
             'label' => trans('backpack::fields.updated_at'),
             'type' => 'datetime',

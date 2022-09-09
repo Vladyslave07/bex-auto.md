@@ -147,4 +147,14 @@ class Category extends Model
     {
         // TODO: Implement sluggable() method.
     }
+
+    public function getSeoMetaTitleAttribute()
+    {
+        return $this->parseSnippets($this->meta_title ?: config('settings.category_meta_title_default'));
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->meta_description ?: config('settings.category_meta_description_default'));
+    }
 }

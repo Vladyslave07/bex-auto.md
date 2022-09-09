@@ -72,13 +72,14 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setValidation(CategoryRequest::class);
 
-        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'show_in_slider', 'label' => trans('backpack::fields.show_in_slider'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
-        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
-        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'show_in_slider', 'label' => trans('backpack::fields.show_in_slider'), 'type' => 'checkbox']);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
 
         CRUD::addField([
+            'tab' => 'Категория',
             'name' => 'faqs',
             'label' => trans('backpack::fields.faq'),
             'type' => 'relationship',
@@ -92,6 +93,7 @@ class CategoryCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'tab' => 'Категория',
             'name' => 'seo_text_id',
             'label' => trans('backpack::fields.seo_text'),
             'type' => 'relationship',
@@ -106,6 +108,22 @@ class CategoryCrudController extends CrudController
 
                 return $texts;
             }),
+        ]);
+
+        CRUD::addField([
+            'tab' => 'SEO',
+            'name' => 'meta_title',
+            'label' => trans('backpack::fields.meta_title'),
+            'type' => 'text',
+            'hint' => 'Доступные сниппеты <code>#title#</code>',
+        ]);
+
+        CRUD::addField([
+            'tab' => 'SEO',
+            'name' => 'meta_description',
+            'label' => trans('backpack::fields.meta_description'),
+            'type' => 'text',
+            'hint' => 'Доступные сниппеты <code>#title#</code>',
         ]);
     }
 

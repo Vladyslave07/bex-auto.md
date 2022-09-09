@@ -72,16 +72,17 @@ class ServiceCrudController extends CrudController
     {
         CRUD::setValidation(ServiceRequest::class);
 
-        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
-        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
 
-        CRUD::addField(['name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'simplemde']);
-        CRUD::addField(['name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'simplemde']);
 
         CRUD::addField([
+            'tab' => 'Услуга',
             'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'),
             'type' => 'text',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
@@ -89,6 +90,7 @@ class ServiceCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'tab' => 'Услуга',
             'name' => 'image',
             'label' => trans('backpack::fields.image'),
             'type' => 'image',
@@ -97,6 +99,7 @@ class ServiceCrudController extends CrudController
 
 
         CRUD::addField([
+            'tab' => 'Услуга',
             'name' => 'faqs',
             'label' => trans('backpack::fields.faq'),
             'type' => 'relationship',
@@ -110,6 +113,7 @@ class ServiceCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'tab' => 'Услуга',
             'name' => 'seo_text',
             'label' => trans('backpack::fields.seo_text'),
             'type' => 'relationship',
@@ -126,7 +130,23 @@ class ServiceCrudController extends CrudController
             }),
         ]);
 
-        CRUD::addField(['name' => 'text', 'label' => trans('backpack::fields.text'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'text', 'label' => trans('backpack::fields.text'), 'type' => 'simplemde']);
+
+        CRUD::addField([
+            'tab' => 'SEO',
+            'name' => 'meta_title',
+            'label' => trans('backpack::fields.meta_title'),
+            'type' => 'text',
+            'hint' => 'Доступные сниппеты <code>#title#</code>',
+        ]);
+
+        CRUD::addField([
+            'tab' => 'SEO',
+            'name' => 'meta_description',
+            'label' => trans('backpack::fields.meta_description'),
+            'type' => 'text',
+            'hint' => 'Доступные сниппеты <code>#title#</code>',
+        ]);
     }
 
     /**

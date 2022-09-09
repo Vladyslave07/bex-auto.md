@@ -18,7 +18,8 @@ class IndexController extends Controller
 
     public function index()
     {
-        // todo: seo tools
+        SEOTools::setTitle(config('settings.index_meta_title'));
+        SEOTools::setDescription(config('settings.index_meta_description'));
 
         $banner = Banner::banner();
 
@@ -51,9 +52,10 @@ class IndexController extends Controller
      */
     public function staticPage()
     {
-        // todo: seo tools
-
         $routeName = \Request::route()->getName();
+
+        SEOTools::setTitle(config('settings.' . $routeName . '_meta_title'));
+        SEOTools::setDescription(config('settings.' . $routeName . '_meta_description'));
 
         // Brands
         $brands = Brand::brands();

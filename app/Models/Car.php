@@ -193,4 +193,15 @@ class Car extends Model
     {
         return '$' . number_format($this->price, 0, '.', ' ');
     }
+
+    public function getSeoMetaTitleAttribute()
+    {
+        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
+    }
+
 }

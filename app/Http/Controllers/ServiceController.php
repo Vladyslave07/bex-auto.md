@@ -10,13 +10,15 @@ use App\Models\Category;
 use App\Models\Faq;
 use App\Models\SeoText;
 use App\Models\Service;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function service(Service $service)
     {
-        // todo: seo tools
+        SEOTools::setTitle($service->seo_meta_title);
+        SEOTools::setDescription($service->seo_meta_description);
 
         // Categories which selected for show in slider
         $categories = Category::selectedCategory();

@@ -7,6 +7,7 @@ use App\Models\Car;
 use App\Models\Category;
 use App\Models\Faq;
 use App\Models\SeoText;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
@@ -22,7 +23,8 @@ class CatalogController extends Controller
      */
     public function category($category, Request $request, $page = 1)
     {
-        // todo: seo tools
+        SEOTools::setTitle($category->seo_meta_title);
+        SEOTools::setDescription($category->seo_meta_description);
 
         // Popular cars
         $popularCars = $category->cars()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();

@@ -116,4 +116,15 @@ class Service extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+
+    public function getSeoMetaTitleAttribute()
+    {
+        return $this->parseSnippets($this->meta_title ?: config('settings.service_meta_title_default'));
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->meta_description ?: config('settings.service_meta_description_default'));
+    }
 }

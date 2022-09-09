@@ -7,13 +7,16 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Faq;
 use App\Models\SeoText;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
     public function index(Car $car)
     {
-        // todo: seo tools
+
+        SEOTools::setTitle($car->seo_meta_title);
+        SEOTools::setDescription($car->seo_meta_description);
 
         // Popular cars
         $popularCars = Car::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
