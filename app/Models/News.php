@@ -31,6 +31,8 @@ class News extends Model
     protected $translatable = ['title', 'preview_text', 'detail_text', 'meta_title', 'meta_description'];
     protected $casts = ['active' => 'bool'];
 
+    const NEWS_LIST_CACHE_TAG = 'news_list_';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -44,6 +46,19 @@ class News extends Model
                 'source' => 'slug_or_title',
             ],
         ];
+    }
+
+    /**
+     * @param mixed $value
+     * @param null $field
+     * @return \Illuminate\Database\Eloquent\Builder|Model|\never|object|null
+     */
+    public function resolveRouteBinding($value, $field = null)
+    {
+        $cacheKey = $this->table . '_' . $value;
+        return Cache::remember($cacheKey, 86400, function () use ($value) {
+            return static::findBySlug($value) ?? abort(404);
+        });
     }
 
     /**
@@ -62,9 +77,25 @@ class News extends Model
      */
     public static function newsList($page)
     {
-        return Cache::remember('news_list_' . $page, 86400, function () {
+        return Cache::remember(self::NEWS_LIST_CACHE_TAG . $page, 86400, function () {
             return self::query()->active()->orderBy('sort', 'asc')->orderBy('id', 'desc')->paginate(4);
         });
+    }
+
+    /**
+     * Clear cache news list
+     */
+    public static function clearCacheNewsList()
+    {
+        $page = 1;
+        $newsList = Cache::has(self::NEWS_LIST_CACHE_TAG . $page);
+        while ($newsList) {
+            $page += 1;
+            $newsList = Cache::has(self::NEWS_LIST_CACHE_TAG . $page);
+            if ($newsList) {
+                Cache::forget(self::NEWS_LIST_CACHE_TAG . $page);
+            }
+        }
     }
 
     /*

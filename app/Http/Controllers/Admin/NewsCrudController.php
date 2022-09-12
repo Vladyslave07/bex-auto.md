@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NewsRequest;
+use App\Models\Delivery;
 use App\Models\Faq;
+use App\Models\News;
 use App\Models\SeoText;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class NewsCrudController
@@ -16,9 +19,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class NewsCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -139,5 +148,42 @@ class NewsCrudController extends CrudController
             'wrapperAttributes' => ['class' => 'form-group col-md-6', 'disabled' => true]
         ]);
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+
+        $response = $this->traitUpdate();
+        // do something after update
+
+        // Clear news list cache
+        News::clearCacheNewsList();
+        Cache::forget(app(News::class)->getTable() . '_' . $response->getRequest()->slug);
+
+        return $response;
+    }
+
+    public function create() {
+        $response = $this->traitCreate();
+
+        // do something after save
+        // Clear news list cache
+        News::clearCacheNewsList();
+
+        return $response;
+    }
+
+    public function destroy($id) {
+
+        $article = News::query()->where('id', $id)->first(['slug']);
+        Cache::forget(app(News::class)->getTable() . '_' . $article->slug);
+
+        $response = $this->traitDestroy($id);
+
+        // do something after save
+        // Clear news list cache
+        News::clearCacheNewsList();
+
+
+        return $response;
     }
 }

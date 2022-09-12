@@ -31,6 +31,7 @@ class Category extends Component
 
     public function cars()
     {
+        // TODO: кешировать
         $this->page = $this->pageNum($this->page);
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
