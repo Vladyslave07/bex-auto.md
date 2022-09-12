@@ -25,6 +25,7 @@ class Brand extends Model
     protected $translatable = ['title', 'slug'];
     protected $attributes = ['sort' => 500];
 
+    const INDEX_BRANDS_CACHE_KEY = 'index_brands';
 
     /*
     |--------------------------------------------------------------------------
@@ -46,7 +47,7 @@ class Brand extends Model
      */
     public static function brands()
     {
-        return Cache::remember('index_brands', 86400, function () {
+        return Cache::remember(self::INDEX_BRANDS_CACHE_KEY, 86400, function () {
             return self::query()->orderBy('sort')->orderBy('title')->active()->get(['slug', 'title']);
         });
     }
