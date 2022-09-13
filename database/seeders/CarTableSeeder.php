@@ -26,7 +26,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'category_id' => '1',
                 'year' => 2011,
             ],
             [
@@ -38,7 +37,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'category_id' => '1',
                 'year' => 2012,
 
             ],
@@ -51,7 +49,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '1',
                 'year' => 2021,
             ],
             [
@@ -63,7 +60,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '22000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '2',
                 'year' => 2013,
             ],
             [
@@ -75,7 +71,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'category_id' => '2',
                 'year' => 2013,
             ],
             [
@@ -87,7 +82,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '2',
                 'year' => 2012,
 
             ],
@@ -100,7 +94,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '22000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '2',
                 'year' => 2012,
 
             ],
@@ -113,7 +106,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'category_id' => '1',
                 'year' => 2013,
 
             ],
@@ -126,7 +118,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'category_id' => '2',
                 'year' => 2017,
 
             ],
@@ -139,7 +130,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '1',
                 'year' => 2019,
 
             ],
@@ -152,7 +142,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'category_id' => '4',
                 'year' => 2020,
             ],
             [
@@ -164,7 +153,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'category_id' => '4',
                 'year' => 2020,
 
             ],
@@ -177,7 +165,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '4',
                 'year' => 2020,
             ],
             [
@@ -189,7 +176,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'category_id' => '4',
                 'year' => 2020,
             ],
             [
@@ -201,7 +187,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'category_id' => '4',
                 'year' => 2020,
 
             ],
@@ -214,7 +199,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'category_id' => '4',
                 'year' => 2020,
             ],
         ]);
