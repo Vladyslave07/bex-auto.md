@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\MenuRequest;
+use App\Models\Faq;
+use App\Models\Menu;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class MenuCrudController
@@ -14,9 +17,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class MenuCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -108,5 +117,38 @@ class MenuCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+
+        $response = $this->traitUpdate();
+        // do something after update
+
+        Cache::forget(Menu::FOOTER_MENU_CACHE_KEY);
+        Cache::forget(Menu::MAIN_MENU_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function create() {
+        $response = $this->traitCreate();
+
+        // do something after save
+
+        Cache::forget(Menu::FOOTER_MENU_CACHE_KEY);
+        Cache::forget(Menu::MAIN_MENU_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function destroy($id) {
+        $response = $this->traitDestroy($id);
+
+        // do something after save
+
+        Cache::forget(Menu::FOOTER_MENU_CACHE_KEY);
+        Cache::forget(Menu::MAIN_MENU_CACHE_KEY);
+
+        return $response;
     }
 }

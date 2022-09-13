@@ -36,6 +36,9 @@ class Menu extends Model
     protected $translatable = ['title', 'items', 'slug'];
     protected $attributes = ['sort' => 500, 'image' => ''];
 
+    const FOOTER_MENU_CACHE_KEY = 'footer_menu_items';
+    const MAIN_MENU_CACHE_KEY = 'main_menu_items';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -63,7 +66,7 @@ class Menu extends Model
      */
     public static function menuItems()
     {
-        return Cache::remember('main_menu_items', 86400, function () {
+        return Cache::remember(self::MAIN_MENU_CACHE_KEY, 86400, function () {
             return  self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image']);
         });
     }
@@ -104,7 +107,7 @@ class Menu extends Model
 
     public static function footerMenu()
     {
-        return Cache::remember('footer_menu_items', 86400, function () {
+        return Cache::remember(self::FOOTER_MENU_CACHE_KEY, 86400, function () {
             $collectionMenu = self::query()
                 ->active()
                 ->whereIn('slug->ru', [self::CATALOG_MENU_SLUG, self::ABOUT_MENU_SLUG])
