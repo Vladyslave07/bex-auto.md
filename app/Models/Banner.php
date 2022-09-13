@@ -27,6 +27,8 @@ class Banner extends Model
     protected $casts = ['active' => 'bool'];
     public static $images = ['image'];
 
+    const BANNER_CACHE_KEY = 'banner';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -40,7 +42,7 @@ class Banner extends Model
      */
     public static function banner()
     {
-        return Cache::remember('banner', 86400, function () {
+        return Cache::remember(self::BANNER_CACHE_KEY, 86400, function () {
             return  self::query()
                 ->orderBy('sort')
                 ->orderBy('id', 'desc')
