@@ -26,6 +26,9 @@ class Category extends Model
     protected $translatable = ['title', 'slug', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500];
 
+    const CATEGORIES_IN_SLIDER_CACHE_KEY = 'categories_show_in_slider';
+    const SEO_TEXT_CACHE_KEY = 'seo_text';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -40,7 +43,7 @@ class Category extends Model
     public function resolveRouteBinding($value, $field = null)
     {
         $cacheKey = $value . '_' . app()->getLocale();
-        return Cache::remember($cacheKey, 86400, function () use ($value) {
+        return Cache::remember($this->getTable() . '_' . $cacheKey, 86400, function () use ($value) {
             return static::findByLocalizedSlug($value)->first() ?? abort(404);
         });
     }
@@ -77,7 +80,7 @@ class Category extends Model
      */
     public static function selectedCategory()
     {
-        return Cache::remember('categories_show_in_slider', 86400, function () {
+        return Cache::remember(self::CATEGORIES_IN_SLIDER_CACHE_KEY, 86400, function () {
             return self::query()->where('show_in_slider', true)->get(['id', 'title', 'slug']);
         });
     }
@@ -132,7 +135,7 @@ class Category extends Model
 
     public function getSeoTextAttribute()
     {
-        return Cache::remember( $this->seo_text_id . '_seo_text', 86400, function () {
+        return Cache::remember( $this->seo_text_id . '_' . self::SEO_TEXT_CACHE_KEY, 86400, function () {
             return SeoText::query()->find($this->seo_text_id, ['title', 'text']);
         });
 

@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
+use App\Models\Car;
 use App\Models\Category;
 use App\Models\Faq;
 use App\Models\SeoText;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+
 
 /**
  * Class CategoryCrudController
@@ -17,9 +21,13 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class CategoryCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -136,5 +144,37 @@ class CategoryCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+        $response = $this->traitUpdate();
+        // do something after update
+        $request = $response->getRequest();
+
+        Cache::forget(app(Category::class)->getTable() . '_' . $request->slug . '_' . $request->_locale);
+        Cache::forget(Category::CATEGORIES_IN_SLIDER_CACHE_KEY);
+        Cache::forget($request->seo_text_id . '_' . Category::SEO_TEXT_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function destroy($id) {
+
+        $category = Category::query()->where('id', $id)->first(['slug']);
+
+        // clear category cache with locale
+        foreach (LaravelLocalization::getSupportedLocales() as $key => $locale) {
+            $key = $key === 'uk' ? 'ua' : $key;
+            Cache::forget(app(Category::class)->getTable() . '_' . $category->slug . '_' . $key);
+        }
+
+        // clear category seo text
+        Cache::forget($category->seo_text_id . '_' . Category::SEO_TEXT_CACHE_KEY);
+
+        $response = $this->traitDestroy($id);
+
+        Cache::forget(Category::CATEGORIES_IN_SLIDER_CACHE_KEY);
+
+        return $response;
     }
 }
