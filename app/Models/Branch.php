@@ -27,6 +27,7 @@ class Branch extends Model
     protected $translatable = ['city', 'address'];
     protected $casts = ['active' => 'bool'];
 
+    const BRANCHES_ITEMS_CACHE_KEY = 'branches_items';
 
     /*
     |--------------------------------------------------------------------------
@@ -41,7 +42,7 @@ class Branch extends Model
      */
     public static function branches()
     {
-        return Cache::remember('branches_items', 86400, function () {
+        return Cache::remember(self::BRANCHES_ITEMS_CACHE_KEY, 86400, function () {
             return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone', 'lat', 'lng']);
         });
     }
