@@ -91,7 +91,7 @@ class NewsCrudController extends CrudController
 
 
         CRUD::addField(['tab' => 'Новость', 'name' => 'preview_text', 'label' => trans('backpack::fields.preview_text'), 'type' => 'simplemde']);
-        CRUD::addField(['tab' => 'Новость', 'name' => 'detail_text', 'label' => trans('backpack::fields.detail_text'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'detail_text', 'label' => trans('backpack::fields.detail_text'), 'type' => 'summernote']);
 
         CRUD::addField([
             'tab' => 'Новость',

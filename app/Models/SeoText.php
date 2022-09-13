@@ -27,6 +27,8 @@ class SeoText extends Model
     protected $attributes = ['sort' => 500];
     protected $casts = ['main' => 'boolean'];
 
+    const MAIN_SEO_TEXT_CACHE_KEY = 'main_seo_text';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -39,7 +41,7 @@ class SeoText extends Model
      */
     public static function seoTextBySlug(string $slug)
     {
-        return Cache::remember($slug . '_seo_text', 86400, function () use ($slug) {
+        return Cache::remember((new SeoText)->getTable() . '_' . $slug, 86400, function () use ($slug) {
             return self::query()->where('slug', $slug)->active()->first(['title', 'text']);
         });
     }
@@ -49,7 +51,7 @@ class SeoText extends Model
      */
     public static function mainText()
     {
-        return Cache::remember( 'main_seo_text', 86400, function () {
+        return Cache::remember( self::MAIN_SEO_TEXT_CACHE_KEY, 86400, function () {
             return self::query()->where('main', 1)->active()->first(['title', 'text']);
         });
     }

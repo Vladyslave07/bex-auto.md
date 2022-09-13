@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\SeoTextRequest;
+use App\Models\SeoText;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class SeoTextCrudController
@@ -14,9 +16,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class SeoTextCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -88,7 +96,7 @@ class SeoTextCrudController extends CrudController
         CRUD::addField([
             'name' => 'text',
             'label' => trans('backpack::fields.text'),
-            'type' => 'simplemde',
+            'type' => 'summernote',
             'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
     }
@@ -102,5 +110,38 @@ class SeoTextCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+
+        $response = $this->traitUpdate();
+        // do something after update
+
+        Cache::forget( app(SeoText::class)->getTable(). '_' . $response->getRequest()->slug);
+        Cache::forget(SeoText::MAIN_SEO_TEXT_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function create() {
+        $response = $this->traitCreate();
+
+        // do something after save
+
+        Cache::forget(SeoText::MAIN_SEO_TEXT_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function destroy($id) {
+        $text = SeoText::query()->where('id', $id)->first(['slug']);
+        Cache::forget(app(SeoText::class)->getTable() . '_' . $text->slug);
+
+        $response = $this->traitDestroy($id);
+
+        // do something after save
+        Cache::forget(SeoText::MAIN_SEO_TEXT_CACHE_KEY);
+
+        return $response;
     }
 }
