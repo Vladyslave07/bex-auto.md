@@ -23,6 +23,7 @@ class PopularRequest extends Model
     protected $fillable = ['active', 'sort', 'title', 'slug'];
     protected $translatable = ['title', 'slug'];
 
+    const POPULAR_REQUEST_CACHE_KEY = 'index_popular_requests';
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -34,7 +35,7 @@ class PopularRequest extends Model
      */
     public static function popularRequests()
     {
-        return Cache::remember('index_popular_requests', 86400, function () {
+        return Cache::remember(self::POPULAR_REQUEST_CACHE_KEY, 86400, function () {
             return self::query()->orderBy('sort')->active()->get(['slug', 'title']);
         });
     }

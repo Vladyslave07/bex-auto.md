@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\PopularRequestRequest;
+use App\Models\Menu;
+use App\Models\PopularRequest;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class PopularRequestCrudController
@@ -14,9 +17,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class PopularRequestCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -86,5 +95,35 @@ class PopularRequestCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+
+        $response = $this->traitUpdate();
+        // do something after update
+
+        Cache::forget(PopularRequest::POPULAR_REQUEST_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function create() {
+        $response = $this->traitCreate();
+
+        // do something after save
+
+        Cache::forget(PopularRequest::POPULAR_REQUEST_CACHE_KEY);
+
+        return $response;
+    }
+
+    public function destroy($id) {
+        $response = $this->traitDestroy($id);
+
+        // do something after save
+
+        Cache::forget(PopularRequest::POPULAR_REQUEST_CACHE_KEY);
+
+        return $response;
     }
 }
