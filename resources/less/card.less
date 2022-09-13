@@ -78,6 +78,9 @@
                     line-height: 1;
                     width: 36px;
                     flex: none;
+                    img {
+                        max-width: 21px;
+                    }
                 }
                 .dt {
                     color: var(--blue);
@@ -109,6 +112,12 @@
         }
         .gallery-swiper {
             position: relative;
+            padding-top: 66%;
+            .swiper-wrapper {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
             .swiper-nav {
                 pointer-events: none;
                 position: absolute;
