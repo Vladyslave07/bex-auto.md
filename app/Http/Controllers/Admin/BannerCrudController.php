@@ -131,7 +131,6 @@ class BannerCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Banner::BANNER_CACHE_KEY);
 
         return $response;
@@ -142,7 +141,6 @@ class BannerCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Banner::BANNER_CACHE_KEY);
 
         return $response;

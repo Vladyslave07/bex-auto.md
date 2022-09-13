@@ -228,7 +228,6 @@ class CarCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Car::POPULAR_CARS_CACHE_KEY);
         Cache::forget(Car::EXPECTED_CARS_CACHE_KEY);
         Cache::forget(Car::CARS_IN_STOCK_CATEGORY);
@@ -241,7 +240,6 @@ class CarCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Car::POPULAR_CARS_CACHE_KEY);
         Cache::forget(Car::EXPECTED_CARS_CACHE_KEY);
         Cache::forget(Car::CARS_IN_STOCK_CATEGORY);

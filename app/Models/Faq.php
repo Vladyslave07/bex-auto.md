@@ -25,6 +25,8 @@ class Faq extends Model
     protected $translatable = ['question', 'answer'];
     protected $attributes = ['sort' => 500];
 
+    const INDEX_FAQS_CACHE_KEY = 'index_faqs';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -51,7 +53,7 @@ class Faq extends Model
      */
     public static function defaultFaqs()
     {
-        return Cache::remember('index_faqs', 86400, function () {
+        return Cache::remember(self::INDEX_FAQS_CACHE_KEY, 86400, function () {
             return self::query()->orderBy('sort')->active()->default()->get(['question', 'answer']);
         });
     }

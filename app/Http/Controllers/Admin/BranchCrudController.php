@@ -135,7 +135,6 @@ class BranchCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Branch::BRANCHES_ITEMS_CACHE_KEY);
 
         return $response;
@@ -146,7 +145,6 @@ class BranchCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Branch::BRANCHES_ITEMS_CACHE_KEY);
 
         return $response;

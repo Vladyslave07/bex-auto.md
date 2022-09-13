@@ -113,7 +113,6 @@ class BenefitCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Benefit::ALL_BENEFITS_CACHE_KEY);
 
         return $response;
@@ -124,7 +123,6 @@ class BenefitCrudController extends CrudController
 
         // do something after save
 
-        // Clear brand list cache
         Cache::forget(Benefit::ALL_BENEFITS_CACHE_KEY);
 
         return $response;
