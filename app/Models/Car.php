@@ -37,6 +37,10 @@ class Car extends Model
     protected $with = ['properties'];
 
 
+    const POPULAR_CARS_CACHE_KEY = 'popular_cars';
+    const EXPECTED_CARS_CACHE_KEY = 'expected_cars_slider';
+    const CARS_IN_STOCK_CATEGORY = 'cars_in_stock_category';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -67,7 +71,7 @@ class Car extends Model
     {
         $categories = array_column($categories->toArray(), 'id');
 
-        return Cache::remember('cars_in_stock_category' . implode('_', $categories), 86400, function () use ($categories) {
+        return Cache::remember(self::CARS_IN_STOCK_CATEGORY . implode('_', $categories), 86400, function () use ($categories) {
             $carsInStock = self::query()
                 ->orderBy('id')
                 ->where('status', self::IN_STOCK_STATUS)
@@ -97,7 +101,7 @@ class Car extends Model
      */
     public static function expectedCars()
     {
-        return Cache::remember('expected_cars_slider', 86400, function () {
+        return Cache::remember(self::EXPECTED_CARS_CACHE_KEY, 86400, function () {
             return self::query()
                 ->orderBy('id')
                 ->where('status', self::EXPECTED_STATUS)
@@ -128,7 +132,7 @@ class Car extends Model
      */
     public static function popularCars()
     {
-        return Cache::remember('popular_cars', 86400, function () {
+        return Cache::remember(self::POPULAR_CARS_CACHE_KEY, 86400, function () {
             return self::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
         });
     }

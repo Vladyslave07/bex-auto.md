@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CarRequest;
+use App\Models\Car;
 use App\Models\Category;
 use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
 
 /**
  * Class CarCrudController
@@ -16,9 +18,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class CarCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
     use DropzoneTrait;
 
     /**
@@ -200,5 +208,44 @@ class CarCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+
+        $response = $this->traitUpdate();
+        // do something after update
+
+        // Clear news list cache
+        Cache::forget(Car::POPULAR_CARS_CACHE_KEY);
+        Cache::forget(Car::EXPECTED_CARS_CACHE_KEY);
+        Cache::forget(Car::CARS_IN_STOCK_CATEGORY);
+
+        return $response;
+    }
+
+    public function create() {
+        $response = $this->traitCreate();
+
+        // do something after save
+
+        // Clear brand list cache
+        Cache::forget(Car::POPULAR_CARS_CACHE_KEY);
+        Cache::forget(Car::EXPECTED_CARS_CACHE_KEY);
+        Cache::forget(Car::CARS_IN_STOCK_CATEGORY);
+
+        return $response;
+    }
+
+    public function destroy($id) {
+        $response = $this->traitDestroy($id);
+
+        // do something after save
+
+        // Clear brand list cache
+        Cache::forget(Car::POPULAR_CARS_CACHE_KEY);
+        Cache::forget(Car::EXPECTED_CARS_CACHE_KEY);
+        Cache::forget(Car::CARS_IN_STOCK_CATEGORY);
+
+        return $response;
     }
 }
