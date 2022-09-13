@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\ServiceRequest;
 use App\Models\Faq;
+use App\Models\News;
 use App\Models\SeoText;
+use App\Models\Service;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
+use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /**
  * Class ServiceCrudController
@@ -16,9 +20,15 @@ use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 class ServiceCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation {
+        create as traitCreate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
+    use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
+        destroy as traitDestroy;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
 
     /**
@@ -158,5 +168,41 @@ class ServiceCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update() {
+
+        $response = $this->traitUpdate();
+        // do something after update
+
+        $request = $response->getRequest();
+        Cache::forget(app(Service::class)->getTable() . '_' . $request->slug . '_' . $request->_locale);
+
+        return $response;
+    }
+
+    public function create() {
+        $response = $this->traitCreate();
+
+        // do something after save
+        // Clear news list cache
+        News::clearCacheNewsList();
+
+        return $response;
+    }
+
+    public function destroy($id) {
+
+        $category = Service::query()->where('id', $id)->first(['slug']);
+
+        // clear category cache with locale
+        foreach (LaravelLocalization::getSupportedLocales() as $key => $locale) {
+            $key = $key === 'uk' ? 'ua' : $key;
+            Cache::forget(app(Service::class)->getTable() . '_' . $category->slug . '_' . $key);
+        }
+
+        $response = $this->traitDestroy($id);
+
+        return $response;
     }
 }
