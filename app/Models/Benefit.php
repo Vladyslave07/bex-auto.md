@@ -27,6 +27,8 @@ class Benefit extends Model
     protected $translatable = ['title'];
     public static $images = ['image'];
 
+    const ALL_BENEFITS_CACHE_KEY = 'all_benefits';
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
