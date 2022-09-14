@@ -4,16 +4,18 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/catalog.css') }}">
+    <link rel="stylesheet" href="{{ mix('css/new-elektromobili.css') }}">
 @endpush
 
 @push('scripts')
     <script src="{{ mix('js/catalog.js') }}" defer></script>
+    <script src="{{ mix('js/new-elektromobili.js') }}" defer></script>
 @endpush
 
 @section('content')
 
-    {{-- Breadcrumbs --}}
-    {{ Breadcrumbs::render() }}
+    {{-- Banner --}}
+    @include('partials.category.banner')
 
     {{-- Title --}}
     @include('partials.category.title')

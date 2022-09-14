@@ -58,6 +58,8 @@ return [
     'lng' => 'Долгота в google maps',
     'meta_title' => 'Мета title',
     'meta_description' => 'Мета description',
+    'h1' => 'H1',
+    'h1' => 'H1',
 
     'option' => [
         'expect' => 'Ожидается',

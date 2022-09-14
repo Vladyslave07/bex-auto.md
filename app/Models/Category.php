@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -12,7 +13,7 @@ use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
 class Category extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets;
+    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute;
 
     /*
     |--------------------------------------------------------------------------
@@ -22,9 +23,10 @@ class Category extends Model
 
     protected $table = 'categories';
     protected $guarded = ['id'];
-    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id', 'meta_title', 'meta_description'];
-    protected $translatable = ['title', 'slug', 'meta_title', 'meta_description'];
+    protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id', 'meta_title', 'meta_description', 'image', 'sub_title', 'sub_title_text', 'h1'];
+    protected $translatable = ['title', 'slug', 'meta_title', 'meta_description', 'sub_title', 'sub_title_text', 'h1'];
     protected $attributes = ['sort' => 500];
+    public static $images = ['image'];
 
     const CATEGORIES_IN_SLIDER_CACHE_KEY = 'categories_show_in_slider';
     const SEO_TEXT_CACHE_KEY = 'seo_text';

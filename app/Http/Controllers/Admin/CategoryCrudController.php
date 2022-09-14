@@ -88,6 +88,35 @@ class CategoryCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'Категория',
+            'name' => 'h1',
+            'label' => trans('backpack::fields.h1'),
+            'type' => 'simplemde',
+            'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
+        ]);
+        CRUD::addField([
+            'tab' => 'Категория',
+            'name' => 'sub_title',
+            'label' => trans('backpack::fields.sub_title'),
+            'type' => 'simplemde',
+            'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
+        ]);
+        CRUD::addField([
+            'tab' => 'Категория',
+            'name' => 'sub_title_text',
+            'label' => trans('backpack::fields.sub_title_text'),
+            'type' => 'simplemde',
+            'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
+        ]);
+        CRUD::addField([
+            'tab' => 'Категория',
+            'name'       => 'image',
+            'label'      => trans('backpack::fields.image'),
+            'type'       => 'image',
+            'disk' => 'public',
+        ]);
+
+        CRUD::addField([
+            'tab' => 'Категория',
             'name' => 'faqs',
             'label' => trans('backpack::fields.faq'),
             'type' => 'relationship',
