@@ -130,9 +130,8 @@ class CarCrudController extends CrudController
         ]);
 
         $propertiesFields = [];
-
-        if ($this->crud->getCurrentEntry()) {
-            foreach ($this->crud->getCurrentEntry()->getCategoryProperties() as $property) {
+        if ($this->crud->getModel()) {
+            foreach ($this->crud->getModel()->getCategoryProperties() as $property) {
                 $valueField = [];
 
                 switch ($property->field_type) {

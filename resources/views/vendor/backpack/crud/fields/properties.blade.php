@@ -1,6 +1,7 @@
 {{-- PROPERTIES FIELD TYPE --}}
 @php
-    if (count($field['value']) > 0) {
+
+    if (isset($field['value']) && count($field['value']) > 0) {
         $values = [];
         foreach ($field['value'] as $value) {
             $values[] = ['properties' => $value->id, 'value' => $value->pivot->value];
