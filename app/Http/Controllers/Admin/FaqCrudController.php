@@ -82,7 +82,7 @@ class FaqCrudController extends CrudController
         CRUD::addField(['name' => 'default', 'label' => trans('backpack::fields.default'), 'type' => 'checkbox', 'hint' => trans('backpack::hint.faqs.default')]);
         CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
         CRUD::addField(['name' => 'question', 'label' => trans('backpack::fields.question'), 'type' => 'text']);
-        CRUD::addField(['name' => 'answer', 'label' => trans('backpack::fields.answer'), 'type' => 'summernote']);
+        CRUD::addField(['name' => 'answer', 'label' => trans('backpack::fields.answer'), 'type' => 'tinymce']);
 
     }
 
