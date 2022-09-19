@@ -18,7 +18,7 @@
 @include('partials.service.banner')
 
 {{-- Call back form --}}
-<livewire:forms.call-back :title="Lang::get('service.form_title')">
+<livewire:forms.call-back :title="Lang::get('service.form_title')" :btnText="Lang::get('service.form_btn')">
 
 @if ($service->is_diller_page)
 

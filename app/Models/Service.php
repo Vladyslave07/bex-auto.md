@@ -39,7 +39,7 @@ class Service extends Model
      */
     public function resolveRouteBinding($value, $field = null)
     {
-        $cacheKey = $value . '_' . app()->getLocale();
+        $cacheKey = $this->table . '_' . $value . '_' . app()->getLocale();
         return Cache::remember($cacheKey, 86400, function () use ($value) {
             return static::findByLocalizedSlug($value)->first() ?? abort(404);
         });
