@@ -9,6 +9,6 @@
             <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" type="text" placeholder="+380 ( _____ )" data-type="tel">
             @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
-        <button class="btn" type="submit">@lang('forms.order-calc.submit')</button>
+        <button class="btn" type="submit">{{ $this->btnText ?: Lang::get('forms.order-calc.submit') }}</button>
     </form>
 </div>

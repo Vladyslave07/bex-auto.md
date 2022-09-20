@@ -12,6 +12,7 @@ class OrderCalculate extends Component implements BaseForm
 {
     public $phone;
     public $name;
+    public $btnText;
 
     const SLUG_FORM = 'order_calculate';
 
