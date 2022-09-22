@@ -12,6 +12,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use phpDocumentor\Reflection\Types\Integer;
 
 class Car extends Model
 {
@@ -29,7 +30,7 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin'];
     public static $images = ['images'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500, 'images' => ''];
@@ -137,6 +138,19 @@ class Car extends Model
         });
     }
 
+    /**
+     * @param $lotId
+     * @return false|Builder|Model|object|null
+     */
+    public static function getCarByLotId($lotId)
+    {
+        if (!$lotId) {
+            return false;
+        }
+
+        return self::query()->where('lot_id', $lotId)->first();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -186,6 +200,16 @@ class Car extends Model
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    // The slug is created automatically from the "title" field if no slug exists.
+    public function getSlugOrTitleAttribute()
+    {
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->title;
+    }
 
     /*
     |--------------------------------------------------------------------------

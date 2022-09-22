@@ -59,7 +59,7 @@ return [
     'meta_title' => 'Мета title',
     'meta_description' => 'Мета description',
     'h1' => 'H1',
-    'h1' => 'H1',
+    'vin' => 'Vin код',
 
     'option' => [
         'expect' => 'Ожидается',

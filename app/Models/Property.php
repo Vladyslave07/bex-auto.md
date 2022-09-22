@@ -6,6 +6,7 @@ use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
@@ -26,7 +27,7 @@ class Property extends Model
         'active' => 'boolean',
         'show' => 'boolean',
         'show_product' => 'boolean',
-        'options' => 'array'
+//        'options' => 'array'
     ];
     protected $translatable = ['name', 'options'];
     protected $attributes = ['sort' => 500];
@@ -109,6 +110,35 @@ class Property extends Model
             return $options[$this->pivot->value] ?? '';
         }
         return $this->pivot->value;
+    }
+
+
+    /**
+     * return id property by slug
+     *
+     * @param $slug
+     * @return \Illuminate\Database\Eloquent\HigherOrderBuilderProxy|mixed
+     */
+    public static function getBySlug($slug)
+    {
+        return self::query()->where('slug', $slug)->first();
+    }
+
+    /**
+     * @param $slug
+     * @param $option
+     * @return string
+     */
+    public static function addOptionToProperty($slug, $option)
+    {
+        $property = self::query()->where('slug', $slug)->first();
+        $options = json_decode($property->options, true);
+        $optionSlug = SlugService::createSlug(Property::class, 'slug', $option, ['unique' => false]);
+        $optionSlug = $optionSlug ?: $option;
+        $options = array_merge($options, [['name' => $option, 'value' => $optionSlug]]);
+        $property->update(['options' => $options]);
+
+        return $optionSlug;
     }
 
     /*
