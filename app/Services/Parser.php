@@ -8,9 +8,11 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Property;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class Parser
 {
@@ -48,7 +50,7 @@ class Parser
     public function apply()
     {
         $countPages = $this->getCountPages();
-        for ($page = 1; $page <= $countPages; $page++) {
+        for ($page = 1; $page <= 2; $page++) {
             $lots = $this->getLots($page);
             foreach ($lots['data'] as $lot) {
                 if ($lotId = $lot['id']) {
@@ -74,11 +76,6 @@ class Parser
         $brandInfo = key_exists('brand', $info) ? $info['brand'] : [];
         $modelInfo = key_exists('model', $info) ? $info['model'] : [];
         $mileage = key_exists('mileage', $info) ? $info['mileage'] : 0;
-        $carcaseType = $this->getCarcaseType($info);
-        $fuel = $this->getFuel($info);
-
-        $brand = Brand::query()->where('title->en', $brandInfo['title'] ?? '')->first(['slug']);
-        $model = CarModel::query()->where('title->en', $modelInfo['title'] ?? '')->first(['slug']);
 
         $car = Car::create([
             'title' => $title,
@@ -91,6 +88,12 @@ class Parser
         ]);
 
         // Set properties for car
+
+        $carcaseType = $this->getPropertyValue('carcase_type', $info, $this->getPropertyCarcaseTypeOptions());
+        $fuel = $this->getPropertyValue('fuel', $info, $this->getPropertyFuelOptions());
+        $brand = Brand::query()->where('title->en', $brandInfo['title'] ?? '')->first(['slug']);
+        $model = CarModel::query()->where('title->en', $modelInfo['title'] ?? '')->first(['slug']);
+
         if ($brand) {
             $car->properties()->attach($this->getPropertyBrand()->id, ['slug' => $brand->slug, 'value' => $brand->slug]);
         }
@@ -103,8 +106,6 @@ class Parser
         if ($fuel) {
             $car->properties()->attach($this->getPropertyFuel()->id, ['slug' => $fuel, 'value' => $info['fuel']['title']]);
         }
-
-
 
     }
 
@@ -148,73 +149,76 @@ class Parser
     }
 
     /**
+     * Method return property value or create new one and return created value
      *
-     *
-     * @param $carInfo
+     * @param string $propertySlug
+     * @param array $carInfo
+     * @param $options
      * @return mixed|string|null
      */
-    public function getCarcaseType($carInfo)
+    public function getPropertyValue(string $propertySlug, array $carInfo, $options)
     {
-        $carcaseType = null;
+        $propertyOptionValue = null;
 
         // If in car info from parser not exist return null
-        if (!key_exists('carcase_type', $carInfo) || !$carInfo['carcase_type']) {
+        if (!key_exists($propertySlug, $carInfo) || !$carInfo[$propertySlug]) {
             return null;
         }
 
-        // Get current carcases types
-        $carcaseTypeOptions = $this->getPropertyCarcaseTypeOptions();
-        $optionNames = array_column($carcaseTypeOptions, 'name');
+        $propertyValue = $carInfo[$propertySlug];
+        if (is_array($carInfo[$propertySlug]) && key_exists('title', $carInfo[$propertySlug])) {
+            $propertyValue = $carInfo[$propertySlug]['title'];
+        }
 
-        // Check - If in current carcases has value from car info. Else create new option
-        if (in_array($carInfo['carcase_type'], $optionNames)) {
-            $carcaseName = $carInfo['carcase_type'];
-            foreach ($carcaseTypeOptions as $option) {
-                if ($carcaseName === $option['name']) {
-                    $carcaseType = $option['value'];
+        $optionValues = array_column($options, 'value');
+        $optionSlug = $this->makeSlug($propertyValue);
+
+        if (!$optionSlug) {
+            return null;
+        }
+
+        if (in_array($optionSlug, $optionValues)) {
+            foreach ($options as $option) {
+                if ($optionSlug === $option['value']) {
+                    $propertyOptionValue = $option['value'];
                 }
             }
         } else {
             // Create new option
-            $carcaseType = Property::addOptionToProperty('carcase_type', $carInfo['carcase_type']);
+            $propertyOptionValue = Property::addOptionToProperty($propertySlug, $propertyValue);
 
             // Set new option to current entity
-            $carcaseTypeOptions[] = ['name' => $carInfo['carcase_type'], 'value' => $carcaseType];
-            $this->setPropertyCarcaseTypeOptions($carcaseTypeOptions);
+            $options[] = ['name' => $propertyValue, 'value' => $propertyOptionValue];
+
+            $methodName = $this->makeMethodName($propertySlug);
+            if (method_exists($this, $methodName)) {
+                $this->$methodName($options);
+            }
         }
 
-        return $carcaseType;
+        return $propertyOptionValue;
     }
 
-    public function getFuel($carInfo)
+    /**
+     * Make slug from title
+     *
+     * @param $title
+     * @return string
+     */
+    public function makeSlug($title)
     {
-        $fuel = null;
+        return SlugService::createSlug(Property::class, 'slug', $title, ['unique' => false]);
+    }
 
-        // If in car info from parser not exist return null
-        if (!key_exists('fuel', $carInfo) || !$carInfo['fuel']) {
-            return null;
-        }
-
-        $fuelOptions = $this->getPropertyFuelOptions();
-        $optionNames = array_column($fuelOptions, 'name');
-        $fuelName = $carInfo['fuel']['title'];
-
-        if (in_array($fuelName, $optionNames)) {
-            foreach ($fuelOptions as $option) {
-                if ($fuelName === $option['name']) {
-                    $fuel = $option['value'];
-                }
-            }
-        } else {
-            // Create new option
-            $fuel = Property::addOptionToProperty('fuel', $fuelName);
-
-            // Set new option to current entity
-            $carcaseTypeOptions[] = ['name' => $fuelName, 'value' => $fuel];
-            $this->setPropertyCarcaseTypeOptions($carcaseTypeOptions);
-        }
-
-        return $fuel;
+    /**
+     * Returns name of method like: setPropertyFuelOptions
+     *
+     * @param $str
+     * @return string
+     */
+    public function makeMethodName($str)
+    {
+        return 'setProperty' . Str::ucfirst(Str::camel($str)) . 'Options';
     }
 
     /**

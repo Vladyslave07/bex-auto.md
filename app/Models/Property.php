@@ -132,7 +132,7 @@ class Property extends Model
     public static function addOptionToProperty($slug, $option)
     {
         $property = self::query()->where('slug', $slug)->first();
-        $options = json_decode($property->options, true);
+        $options = json_decode($property->options, true) ?: [];
         $optionSlug = SlugService::createSlug(Property::class, 'slug', $option, ['unique' => false]);
         $optionSlug = $optionSlug ?: $option;
         $options = array_merge($options, [['name' => $option, 'value' => $optionSlug]]);
