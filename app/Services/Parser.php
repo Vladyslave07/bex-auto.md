@@ -12,6 +12,7 @@ use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Parser
@@ -59,8 +60,8 @@ class Parser
 
     public function apply()
     {
-        $countPages = 52;//$this->getCountPages();
-        for ($page = 50; $page <= $countPages; $page++) {
+        $countPages = $this->getCountPages();
+        for ($page = 1; $page <= $countPages; $page++) {
             $lots = $this->getLots($page);
             foreach ($lots['data'] as $lot) {
                 if ($lotId = $lot['id']) {
@@ -103,13 +104,26 @@ class Parser
             'vin' => $vin,
         ]);
 
+        if (key_exists('images', $info) && count($info['images']) > 0) {
+            $images = [];
+            foreach ($info['images'] as $key => $image) {
+                $src = file_get_contents('http://185.149.40.229' . $image['image']);
+                $imageName = basename($image['image']);
+                $imagePath = 'products/' . $car->id .'/' . $imageName;
+                $images[] = $imagePath;
+                Storage::disk('public')->put($imagePath, $src);
+            }
+            $car->update([
+                'images' => $images,
+            ]);
+        }
+
         // Set properties for car
 
         $carcaseType = $this->getPropertyValue('carcase_type', $info, $this->getPropertyCarcaseTypeOptions());
         $fuel = $this->getPropertyValue('fuel', $info, $this->getPropertyFuelOptions());
         $driveUnit = $this->getPropertyValue('drive_unit', $info, $this->getPropertyDriveUnitOptions());
         $carTypes = $this->getPropertyValue('type', $info, $this->getPropertyTypeOptions());
-
 
         if ($brand) {
             $car->properties()->attach($this->getPropertyBrand()->id, ['slug' => $brand->slug, 'value' => $brand->slug]);
