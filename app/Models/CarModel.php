@@ -4,11 +4,15 @@ namespace App\Models;
 
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class CarModel extends Model
 {
-    use CrudTrait, HasTranslations;
+    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers;
 
     /*
     |--------------------------------------------------------------------------
@@ -28,12 +32,44 @@ class CarModel extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function sluggable(): array
     {
-        return $this->belongsTo(Brand::class);
+        return [
+            'slug' => [
+                'source' => 'slug_or_title',
+            ],
+        ];
+    }
+
+    /**
+     * @param $title
+     * @return \Illuminate\Database\Eloquent\Builder|Model|object|null
+     */
+    public static function getModelByTitle($title)
+    {
+        return self::query()->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($title)."%'")->first();
+    }
+
+    /**
+     * @param $title
+     * @param $brandId
+     * @return CarModel|false
+     */
+    public static function createModel($title, $brandId)
+    {
+        if (!$title || !$brandId) {
+            return false;
+        }
+
+        $title = Str::ucfirst(Str::lower($title));
+        $slug = SlugService::createSlug(CarModel::class, 'slug', $title, ['unique' => true]);
+
+        return self::create([
+            'active' => 1,
+            'title' => $title,
+            'slug' => $slug,
+            'brand_id' => $brandId,
+        ]);
     }
 
     /*
@@ -41,6 +77,14 @@ class CarModel extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function brand(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Brand::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

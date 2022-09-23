@@ -5,10 +5,12 @@ namespace App\Models;
 use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 
 class Brand extends Model
 {
@@ -50,6 +52,31 @@ class Brand extends Model
         return Cache::remember(self::INDEX_BRANDS_CACHE_KEY, 86400, function () {
             return self::query()->orderBy('sort')->orderBy('title')->active()->get(['slug', 'title']);
         });
+    }
+
+    /**
+     * @param $title
+     * @return \Illuminate\Database\Eloquent\Builder|Model|object|null
+     */
+    public static function getBrandByTitle($title)
+    {
+        return self::query()->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($title) . "%'")->first();
+    }
+
+    public static function createBrand($title)
+    {
+        if (!$title) {
+            return false;
+        }
+
+        $title = Str::ucfirst(Str::lower($title));
+        $slug = SlugService::createSlug(Brand::class, 'slug', $title, ['unique' => true]);
+
+        return self::create([
+            'active' => 1,
+            'title' => $title,
+            'slug' => $slug,
+        ]);
     }
 
     /*

@@ -27,6 +27,11 @@ class Parser
     public $propertyCarcaseTypeOptions;
     public $propertyFuel;
     public $propertyFuelOptions;
+    public $propertyDriveUnit;
+    public $propertyDriveUnitOptions;
+    public $propertyEngineType;
+    public $propertyType;
+    public $propertyTypeOptions;
 
     const FIRST_PAGE = 1;
 
@@ -41,16 +46,21 @@ class Parser
         $this->setPropertyModel(Property::getBySlug('model'));
         $this->setPropertyCarcaseType(Property::getBySlug('carcase_type'));
         $this->setPropertyFuel(Property::getBySlug('fuel'));
+        $this->setPropertyDriveUnit(Property::getBySlug('drive_unit'));
+        $this->setPropertyEngineType(Property::getBySlug('engine_type'));
+        $this->setPropertyType(Property::getBySlug('type'));
 
         // Set default property options
         $this->setPropertyCarcaseTypeOptions();
         $this->setPropertyFuelOptions();
+        $this->setPropertyDriveUnitOptions();
+        $this->setPropertyTypeOptions();
     }
 
     public function apply()
     {
-        $countPages = $this->getCountPages();
-        for ($page = 1; $page <= 2; $page++) {
+        $countPages = 52;//$this->getCountPages();
+        for ($page = 50; $page <= $countPages; $page++) {
             $lots = $this->getLots($page);
             foreach ($lots['data'] as $lot) {
                 if ($lotId = $lot['id']) {
@@ -76,8 +86,14 @@ class Parser
         $brandInfo = key_exists('brand', $info) ? $info['brand'] : [];
         $modelInfo = key_exists('model', $info) ? $info['model'] : [];
         $mileage = key_exists('mileage', $info) ? $info['mileage'] : 0;
+        $engineType = key_exists('engine_type', $info) ? $info['engine_type'] : '';
+
+        $brand = Brand::getBrandByTitle($brandInfo['title'] ?? '') ?: Brand::createBrand($brandInfo['title']);
+        $model = CarModel::getModelByTitle($modelInfo['title'] ?? '') ?: CarModel::createModel($modelInfo['title'], $brand->id);
 
         $car = Car::create([
+            'active' => 1,
+            'status' => Car::EXPECTED_STATUS,
             'title' => $title,
             'lot_id' => $info['id'],
             // todo: Выводить это свойство в фильтр
@@ -91,8 +107,9 @@ class Parser
 
         $carcaseType = $this->getPropertyValue('carcase_type', $info, $this->getPropertyCarcaseTypeOptions());
         $fuel = $this->getPropertyValue('fuel', $info, $this->getPropertyFuelOptions());
-        $brand = Brand::query()->where('title->en', $brandInfo['title'] ?? '')->first(['slug']);
-        $model = CarModel::query()->where('title->en', $modelInfo['title'] ?? '')->first(['slug']);
+        $driveUnit = $this->getPropertyValue('drive_unit', $info, $this->getPropertyDriveUnitOptions());
+        $carTypes = $this->getPropertyValue('type', $info, $this->getPropertyTypeOptions());
+
 
         if ($brand) {
             $car->properties()->attach($this->getPropertyBrand()->id, ['slug' => $brand->slug, 'value' => $brand->slug]);
@@ -101,10 +118,20 @@ class Parser
             $car->properties()->attach($this->getPropertyModel()->id, ['slug' => $model->slug, 'value' => $model->slug]);
         }
         if ($carcaseType) {
-            $car->properties()->attach($this->getPropertyCarcaseType()->id, ['slug' => $carcaseType, 'value' => $info['carcase_type']]);
+            $car->properties()->attach($this->getPropertyCarcaseType()->id, ['slug' => $carcaseType, 'value' => $carcaseType]);
         }
         if ($fuel) {
-            $car->properties()->attach($this->getPropertyFuel()->id, ['slug' => $fuel, 'value' => $info['fuel']['title']]);
+            $car->properties()->attach($this->getPropertyFuel()->id, ['slug' => $fuel, 'value' => $fuel]);
+        }
+        if ($driveUnit) {
+            $car->properties()->attach($this->getPropertyDriveUnit()->id, ['slug' => $driveUnit, 'value' => $driveUnit]);
+        }
+        if ($carTypes) {
+            $car->properties()->attach($this->getPropertyType()->id, ['slug' => $carTypes, 'value' => $carTypes]);
+        }
+        if (strlen($engineType) > 0) {
+            $engineType = preg_replace('/(.*)[L|l].*/', '$1', $engineType);
+            $car->properties()->attach($this->getPropertyEngineType()->id, ['slug' => $engineType, 'value' => $engineType]);
         }
 
     }
@@ -371,6 +398,95 @@ class Parser
             return $this->propertyFuelOptions = $fuels;
         }
         return $this->propertyFuelOptions = $propertyFuelOptions;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyDriveUnit()
+    {
+        return $this->propertyDriveUnit;
+    }
+
+    /**
+     * @param mixed $propertyDriveUnit
+     */
+    public function setPropertyDriveUnit($propertyDriveUnit): void
+    {
+        $this->propertyDriveUnit = $propertyDriveUnit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyDriveUnitOptions()
+    {
+        return $this->propertyDriveUnitOptions;
+    }
+
+    /**
+     * @param mixed $propertyDriveUnitOptions
+     */
+    public function setPropertyDriveUnitOptions($propertyDriveUnitOptions = [])
+    {
+        if (empty($propertyDriveUnitOptions)) {
+            $driveUnits = json_decode($this->getPropertyDriveUnit()->options, true) ?: [];
+            return $this->propertyDriveUnitOptions = $driveUnits;
+        }
+        return $this->propertyDriveUnitOptions = $propertyDriveUnitOptions;
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyEngineType()
+    {
+        return $this->propertyEngineType;
+    }
+
+    /**
+     * @param mixed $propertyEngineType
+     */
+    public function setPropertyEngineType($propertyEngineType): void
+    {
+        $this->propertyEngineType = $propertyEngineType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyType()
+    {
+        return $this->propertyType;
+    }
+
+    /**
+     * @param mixed $propertyType
+     */
+    public function setPropertyType($propertyType): void
+    {
+        $this->propertyType = $propertyType;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyTypeOptions()
+    {
+        return $this->propertyTypeOptions;
+    }
+
+    /**
+     * @param mixed $propertyTypeOptions
+     */
+    public function setPropertyTypeOptions($propertyTypeOptions = [])
+    {
+        if (empty($propertyTypeOptions)) {
+            $carTypes = json_decode($this->getPropertyType()->options, true) ?: [];
+            return $this->propertyTypeOptions = $carTypes;
+        }
+        return $this->propertyTypeOptions = $propertyTypeOptions;
     }
 
 
