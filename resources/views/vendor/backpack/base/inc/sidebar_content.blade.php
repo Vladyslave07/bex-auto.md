@@ -91,3 +91,5 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> Логи</a></li>
     </ul>
 </li>
+
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('parser') }}'><i class='nav-icon la la-th-list'></i> Парсер</a></li>

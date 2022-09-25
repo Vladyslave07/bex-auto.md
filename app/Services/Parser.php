@@ -20,6 +20,7 @@ class Parser
     public string $listUrl;
     public string $detailUrl;
     public string $token;
+    public string $categoryId;
 
     // Car properties
     public $propertyBrand;
@@ -36,11 +37,12 @@ class Parser
 
     const FIRST_PAGE = 1;
 
-    public function __construct(string $listUrl, string $detailUrl, string $token)
+    public function __construct(string $listUrl, string $detailUrl, string $token, $categoryId = null)
     {
         $this->setListUrl($listUrl);
         $this->setDetailUrl($detailUrl);
         $this->setToken($token);
+        $this->setCategoryId($categoryId);
 
         // Set car properties
         $this->setPropertyBrand(Property::getBySlug('brand'));
@@ -147,7 +149,13 @@ class Parser
             $engineType = preg_replace('/(.*)[L|l].*/', '$1', $engineType);
             $car->properties()->attach($this->getPropertyEngineType()->id, ['slug' => $engineType, 'value' => $engineType]);
         }
-
+        if (strlen($engineType) > 0) {
+            $engineType = preg_replace('/(.*)[L|l].*/', '$1', $engineType);
+            $car->properties()->attach($this->getPropertyEngineType()->id, ['slug' => $engineType, 'value' => $engineType]);
+        }
+        if ($this->getCategoryId() > 0) {
+            $car->categories()->attach($this->getCategoryId());
+        }
     }
 
     /**
@@ -501,6 +509,27 @@ class Parser
             return $this->propertyTypeOptions = $carTypes;
         }
         return $this->propertyTypeOptions = $propertyTypeOptions;
+    }
+
+    /**
+     * @return string
+     */
+    public function getCategoryId(): string
+    {
+        return $this->categoryId;
+    }
+
+    /**
+     * @param null $categoryId
+     */
+    public function setCategoryId($categoryId = null)
+    {
+        if (!$categoryId) {
+            $selectedCategory = \App\Models\Parser::query()->where('slug', 'category')->first();
+            return $this->categoryId = $selectedCategory->id;
+        }
+
+        return $this->categoryId = $categoryId;
     }
 
 

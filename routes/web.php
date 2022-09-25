@@ -58,10 +58,19 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
 });
 
-// Cache delete
-Route::get('/clear-all-cache', function () {
-    Artisan::call("cache:clear");
-})->name('clear-cache');
+// Admin actions
+Route::group(['middleware' => ['admin']], function() {
+    // Cache delete
+    Route::get('/clear-all-cache', function () {
+        Artisan::call("cache:clear");
+    })->name('clear-cache');
+
+    // Parser
+    Route::post('/save-parser-info', [\App\Http\Controllers\Admin\ParserController::class, 'save'])->name('save-parser-info');
+    Route::post('/download-lots', [\App\Http\Controllers\Admin\ParserController::class, 'download'])->name('download-lots');
+});
+
+
 
 // Роуты на вёрстку
 Route::group(['prefix' => 'html'], function () {

@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
             FaqTableSeeder::class,
             SeoTextTableSeeder::class,
             CarModelSeeder::class,
+            ParserTableSeeder::class,
         ]);
     }
 }
