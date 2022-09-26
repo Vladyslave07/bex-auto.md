@@ -102,6 +102,7 @@ class ServiceCrudController extends CrudController
         CRUD::addField([
             'tab' => 'Услуга',
             'name' => 'image',
+            'disk' => 'public',
             'label' => trans('backpack::fields.image'),
             'type' => 'image',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
