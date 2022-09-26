@@ -25,7 +25,9 @@ class CarRequest extends FormRequest
     public function rules()
     {
         return [
-            // 'name' => 'required|min:5|max:255'
+            'title' => ['required', 'min:3'],
+            'price' => ['required'],
+            'slug' => ['unique:cars'],
         ];
     }
 

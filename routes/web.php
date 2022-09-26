@@ -1,32 +1,8 @@
 <?php
 
-use App\Models\Parser;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-Route::get('/parser', function () {
-    // todo: Получать url и token из админки
-    $ListUrl = 'http://185.149.40.229/api/v1/lots/list/';
-    $detailUrl = 'http://185.149.40.229/api/v1/lots/{lot_id}/detail';
-    $token = 'SLhhLv8zfDksTQI56QLnA1cPoi4pCGwTMBt8kszyISgWR4Mu6ICWjGdp1mKDUh5vqbmyqB4JynDOk7cI';
-
-
-    $parser = new \App\Services\Parser($ListUrl, $detailUrl, $token);
-    $parser->apply();
-}
-)->name('parser');
 
 Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');

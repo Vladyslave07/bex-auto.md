@@ -35,5 +35,5 @@ Route::group([
     Route::crud('service', 'ServiceCrudController');
     Route::crud('benefit', 'BenefitCrudController');
     Route::crud('news', 'NewsCrudController');
-    Route::get('parser', 'ParserController@index');
+    Route::get('parser', 'ParserController@index')->name('parser');
 }); // this should be the absolute last line of this file

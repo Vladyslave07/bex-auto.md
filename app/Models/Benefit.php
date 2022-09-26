@@ -40,7 +40,7 @@ class Benefit extends Model
      */
     public static function allBenefits()
     {
-        return Cache::remember('all_benefits', 86400, function () {
+        return Cache::remember(self::ALL_BENEFITS_CACHE_KEY, 86400, function () {
             return self::query()->active()->orderBy('sort', 'desc')->get(['title', 'image']);
         });
     }

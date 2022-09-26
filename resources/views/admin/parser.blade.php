@@ -23,7 +23,7 @@
 
                         <div class="form-group col-sm-12">
 
-                            <label>Parent</label>
+                            <label>Категория</label>
 
                             <select name="category" class="form-control">
 
@@ -67,7 +67,7 @@
 
                         <button type="button" class="btn btn-warning" onclick="downloadLots()">
                             <span class="la la-download" role="presentation" aria-hidden="true"></span> &nbsp;
-                            <span data-value="save_and_back">Заупстить парсер</span>
+                            <span data-value="save_and_back">Запустить парсер</span>
                         </button>
 
                     </div>
