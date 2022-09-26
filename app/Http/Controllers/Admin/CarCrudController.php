@@ -96,7 +96,7 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'vin', 'label' => trans('backpack::fields.vin'), 'type' => 'text']);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '',]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'tinymce']);
-        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"]]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'), 'type' => 'text', 'hint' => trans('backpack::hint.cars.youtube_link')]);
 
