@@ -6,8 +6,8 @@
                     <time class="date" datetime="2021-09-02">{{ $article->created_at->diffForHumans() }}</time>
                     <a href="{{ route('news_detail', [$article->slug]) }}">
                         <picture>
-                            <source type="image/webp" srcset="/storage/{{ $article->image }}">
-                            <img width="666" height="400" src="/storage/{{ $article->image }}" alt="">
+                            <source type="image/webp" srcset="{{ Storage::disk('public')->url($article->image) }}">
+                            <img width="666" height="400" src="{{ Storage::disk('public')->url($article->image) }}" alt="">
                         </picture>
                     </a>
                     <a href="{{ route('news_detail', [$article->slug]) }}" class="title">{{ $article->title }}</a>

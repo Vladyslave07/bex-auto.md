@@ -3,8 +3,8 @@
         <div class="bg">
             <div class="container">
                 <div class="card-title">
-                    <h1 class="main-title">{{ $car->title . ' ' . $car->year }}</h1>
-                    <div class="price">{{ $car->price_format  }}</div>
+                    <h1 class="main-title">{{ $car->title }}</h1>
+                    <div class="price">{{ $car->price_format }}</div>
                 </div>
                 <div class="card-nav">
                     <span class="item active" data-target="Tab_1">{{ Lang::get('car.detail.characteristic')}}</span>
@@ -18,7 +18,7 @@
                                     <div class="swiper-slide">
                                         <picture>
                                             {{--                                        <source type="image/webp" srcset="{{ asset('img/example/img_16.webp') }}">--}}
-                                            <img src="/storage/{{ $image }}" alt="">
+                                            <img src="{{ Storage::disk('public')->url($image) }}" alt="">
                                         </picture>
                                     </div>
                                     @if ($key === 0 && ($link = $car->youtube_link))
@@ -46,7 +46,7 @@
                                 <div class="item @if($key === 0) active @endif">
                                     <picture>
                                         {{--                                    <source type="image/webp" srcset="{{ asset('img/example/img_17.webp') }}">--}}
-                                        <img width="206" height="187" src="/storage/{{ $image }}" alt="">
+                                        <img width="206" height="187" src="{{ Storage::disk('public')->url($image) }}" alt="">
                                     </picture>
                                     @if($key === 3)
                                         <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 3]) }}</span>
@@ -79,7 +79,7 @@
                                 <div class="dt">
                                     @if ($image = $property->image)
                                         <div class="icon">
-                                            <img src="/storage/{{ $image }}">
+                                            <img src="{{ Storage::disk('public')->url($image) }}">
                                         </div>
                                     @endif
                                     {{ $property->title }}:

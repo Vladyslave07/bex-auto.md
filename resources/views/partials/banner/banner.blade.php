@@ -11,7 +11,7 @@
             <div class="h2 color-blue-xs">{!! $banner->subtitle !!}</div>
         @endif
         <picture class="img">
-            <img width="729" height="633" src="/storage/{{ $banner->image }}" alt="">
+            <img width="729" height="633" src="{{ Storage::disk('public')->url($banner->image) }}" alt="">
         </picture>
         @if($banner->text)
             <br>

@@ -63,6 +63,14 @@ class Car extends Model
     }
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      * Returns cars which in stock
      *
      * @param $categories

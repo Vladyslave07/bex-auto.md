@@ -10,21 +10,21 @@
         <div class="stickers">
             <span>@lang('car.' . $car->status)</span>
         </div>
-        <a href="{{ $car->slug }}" aria-label="img product">
+        <a href="{{ route('car_detail', $car->slug) }}" aria-label="img product">
             <picture>
-                <img width="289" height="218" src="/storage/{{ $car->images[0] ?? ''}}" loading="lazy" alt="">
+                <img width="289" height="218" src="{{ Storage::disk('public')->url($car->images[0] ?? '') }}" loading="lazy" alt="">
             </picture>
         </a>
     </div>
     <div class="body">
-        <a href="{{ $car->slug }}" class="title">{{ $car->title }}</a>
+        <a href="{{ route('car_detail', $car->slug) }}" class="title">{{ $car->title }}</a>
         <div class="year">{{ $car->year }}</div>
         <div class="features">
             <div class="tr">
             @foreach($car->properties as $property)
                 @if($property->show_product && ($value = $property->getValue()))
                         <div class="item">
-                            <img width="21" height="21" src="/storage/{{ $property->image }}">
+                            <img width="21" height="21" src="{{ Storage::disk('public')->url($property->image) }}">
                             {{ $value }}
                         </div>
                 @endif
@@ -40,6 +40,6 @@
                 <div>{{ $car->info }}</div>
             </div>
         </div>
-        <a href="{{ route('category', ['category' => $car->slug])  }}" class="btn">@lang('car.more')</a>
+        <a href="{{ route('car_detail', $car->slug) }}" class="btn">@lang('car.more')</a>
     </div>
 </div>

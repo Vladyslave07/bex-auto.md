@@ -15,7 +15,7 @@
                         </div>
                         @if($items->first()->slug === $item->slug)
                             <div class="menu-img">
-                                    <img width="290" height="202" src="/storage/{{ $item->image }}" alt="">
+                                    <img width="290" height="202" src="{{ Storage::disk('public')->url($item->image) }}" alt="">
                             </div>
                         @endif()
                     </div>

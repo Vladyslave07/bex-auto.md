@@ -17,7 +17,7 @@
     <body>
 
         <header class="main-header container">
-            <a href="/" class="logo" aria-label="logo">
+            <a href="{{ route('index') }}" class="logo" aria-label="logo">
                 <img width="134" height="59" src="{{ asset('img/logo.png') }}" alt="">
             </a>
 

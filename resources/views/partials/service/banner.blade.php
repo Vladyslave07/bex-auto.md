@@ -15,9 +15,9 @@
             {!! $subtitleText !!}
         @endif
         <picture class="img">
-            <source type="image/webp" srcset="{{ $service->image }}" media="(max-width: 767px)">
-            <source type="image/webp" srcset="{{ $service->image }}" media="(min-width: 768px)">
-            <img width="714" height="562" src="/storage/{{ $service->image }}" alt="{{ $service->title }}">
+            <source type="image/webp" srcset="{{ Storage::disk('public')->url($service->image) }}" media="(max-width: 767px)">
+            <source type="image/webp" srcset="{{ Storage::disk('public')->url($service->image) }}" media="(min-width: 768px)">
+            <img width="714" height="562" src="{{ Storage::disk('public')->url($service->image) }}" alt="{{ $service->title }}">
         </picture>
     </div>
 </div>

@@ -13,6 +13,11 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
         [\App\Http\Controllers\ServiceController::class, 'service']
     )->name('service');
 
+    Route::get(
+        '/car-details/{car}',
+        [\App\Http\Controllers\CardController::class, 'index']
+    )->name('car_detail');
+
     // Categories
     Route::get(
         LaravelLocalization::transRoute('routes.category'),

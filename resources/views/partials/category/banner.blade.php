@@ -17,7 +17,7 @@
             <div class="h3 color-blue">{!! $category->sub_title_text !!}</div>
         @endif
         <picture class="img">
-            <img width="800" height="613" src="/storage/{{ $category->image }}" alt="{{ $category->title }}">
+            <img width="800" height="613" src="{{ Storage::disk('public')->url($category->image) }}" alt="{{ $category->title }}">
         </picture>
     </div>
 </div>
