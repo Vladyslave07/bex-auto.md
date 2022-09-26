@@ -65,7 +65,7 @@
 
                     <div class="btn-group" role="group">
 
-                        <button type="button" class="btn btn-warning" onclick="downloadLots(this)">
+                        <button type="button" class="btn btn-warning" onclick="downloadLots()">
                             <span class="la la-download" role="presentation" aria-hidden="true"></span> &nbsp;
                             <span data-value="save_and_back">Заупстить парсер</span>
                         </button>
@@ -116,15 +116,13 @@
         })
     }
 
-    function downloadLots(btn) {
+    function downloadLots() {
         new Noty({
             type: "success",
             text: 'Запущен процесс скачивания лотов',
         }).show();
 
-        let formData = new FormData(btn.closest('form'));
-
-        sendData('{{ route('download-lots') }}', JSON.stringify(Object.fromEntries(formData)))
+        fetch('{{ route('download-lots') }}')
     }
 
     document.addEventListener('DOMContentLoaded', () => {

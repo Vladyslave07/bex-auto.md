@@ -6,9 +6,11 @@ namespace App\Http\Controllers\Admin;
 
 
 use App\Http\Requests\ParserRequest;
+use App\Jobs\ParserRun;
 use App\Models\Category;
 use App\Models\Parser;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class ParserController
 {
@@ -37,11 +39,14 @@ class ParserController
         }
     }
 
-    public function download(ParserRequest $request)
+    /**
+     * Parser Run
+     *
+     * @param ParserRequest $request
+     */
+    public function download()
     {
-        $fields = $request->validated();
-
-        $parser = new \App\Services\Parser($fields['lots_url'], $fields['detail_url'], $fields['token'], $fields['category']);
-        $parser->apply();
+        ParserRun::dispatch();
+        return true;
     }
 }

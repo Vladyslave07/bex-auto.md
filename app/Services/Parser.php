@@ -525,7 +525,7 @@ class Parser
     public function setCategoryId($categoryId = null)
     {
         if (!$categoryId) {
-            $selectedCategory = \App\Models\Parser::query()->where('slug', 'category')->first();
+            $selectedCategory = \App\Models\Parser::query()->where('slug', 'category')->first()->value;
             return $this->categoryId = $selectedCategory->id;
         }
 

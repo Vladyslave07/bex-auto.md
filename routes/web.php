@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Parser;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -67,7 +68,7 @@ Route::group(['middleware' => ['admin']], function() {
 
     // Parser
     Route::post('/save-parser-info', [\App\Http\Controllers\Admin\ParserController::class, 'save'])->name('save-parser-info');
-    Route::post('/download-lots', [\App\Http\Controllers\Admin\ParserController::class, 'download'])->name('download-lots');
+    Route::get('/download-lots', [\App\Http\Controllers\Admin\ParserController::class, 'download'])->name('download-lots');
 });
 
 
