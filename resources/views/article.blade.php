@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Электрические и гибридные автомобили приравняли к опасным грузам')
-
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/article.css') }}">
 @endpush

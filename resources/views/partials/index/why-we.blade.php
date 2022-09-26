@@ -13,10 +13,6 @@
                 <p>@lang('index.why_we.why_2')</p>
             </div>
             <div class="item">
-                <div class="title">&lt;&nbsp;1500</div>
-                <p>@lang('index.why_we.why_3')</p>
-            </div>
-            <div class="item">
                 <div class="title">5</div>
                 <p>@lang('index.why_we.why_4')</p>
             </div>
@@ -25,7 +21,7 @@
                 <p>@lang('index.why_we.why_5')</p>
             </div>
             <div class="item">
-                <div class="title">&lt;&nbsp;350</div>
+                <div class="title">&gt;&nbsp;350</div>
                 <p>@lang('index.why_we.why_6')</p>
             </div>
         </div>

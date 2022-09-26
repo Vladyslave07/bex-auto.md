@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Новини')
-
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/news.css') }}">
 @endpush

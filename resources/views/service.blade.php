@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Дилерські послуги')
-
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/delivery.css') }}">
     <link rel="stylesheet" href="{{ mix('css/dealer.css') }}">

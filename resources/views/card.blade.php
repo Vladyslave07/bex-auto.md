@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Kia Sorento 2015')
-
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/card.css') }}">
 @endpush

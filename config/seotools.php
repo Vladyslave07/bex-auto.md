@@ -9,10 +9,10 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => false, // set false to total remove
+            'title'        => 'Авто из США: купить автомобиль из Америки под ключ, машины БУ и новые', // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
-            'description'  => false, // set false to total remove
-            'separator'    => ' - ',
+            'description'  => 'Купить авто из США под ключ ✔️ Помощь в подборе автомобилей из США ✔️ Оперативная доставка БУ машин из Америки ✔️ Растаможка и оформление ✔️ Доступные цены на авто из США!', // set false to total remove
+            'separator'    => '',
             'keywords'     => [],
             'canonical'    => false, // Set to null or 'full' to use Url::full(), set to 'current' to use Url::current(), set false to total remove
             'robots'       => false, // Set to 'all', 'none' or any combination of index/noindex and follow/nofollow
