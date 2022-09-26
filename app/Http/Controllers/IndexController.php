@@ -31,7 +31,7 @@ class IndexController extends Controller
 
         // Expected cars
         $expectedCars = Car::expectedCars();
-        // TODO: Проверки на наличие
+
         // Popular request
         $popularRequests = PopularRequest::popularRequests();
 

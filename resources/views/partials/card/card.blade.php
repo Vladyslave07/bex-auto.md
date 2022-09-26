@@ -102,10 +102,12 @@
             <a href="#">chevrolet corvette</a>
             <a href="#">chevrolet volt</a>
         </div>
-        <div class="card-description container">
-            <div class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</div>
-            {{ $car->description }}
-        </div>
+        @if ($car->description)
+            <div class="card-description container">
+                <div class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</div>
+                {{ $car->description }}
+            </div>
+        @endif
     </div>
     <div class="card-btn_mob">
         <a href="#" class="btn">{{ Lang::get('car.detail.buy') }}</a>

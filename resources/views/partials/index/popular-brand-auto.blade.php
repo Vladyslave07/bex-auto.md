@@ -1,3 +1,4 @@
+@if (count($brands) > 0)
 <div class="popular-brands">
     <div class="container hidden-xs">
         <div class="main-title text-center">@lang('index.popular.title')</div>
@@ -11,3 +12,4 @@
     </div>
     <span class="toggle-btn visible-xs">@lang('index.popular.more')</span>
 </div>
+@endif

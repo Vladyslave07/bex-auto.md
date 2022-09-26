@@ -3,7 +3,9 @@
         @foreach($car->properties as $property)
             @if($property->slug === \App\Models\Property::FUEL_PROPERTY_SLUG && $property->pivot->value === \App\Models\Property::FUEL_ELECTRIC_OPTION_SLUG)
                 <div class="icons">
-                    <svg width="33" height="17"><use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use></svg>
+                    <svg width="33" height="17">
+                        <use xlink:href="{{ asset('/img/icons/sprite.svg#electric') }}"></use>
+                    </svg>
                 </div>
             @endif
         @endforeach
@@ -12,33 +14,40 @@
         </div>
         <a href="{{ route('car_detail', $car->slug) }}" aria-label="img product">
             <picture>
-                <img width="289" height="218" src="{{ Storage::disk('public')->url($car->images[0] ?? '') }}" loading="lazy" alt="">
+                <img width="289" height="218" src="{{ Storage::disk('public')->url($car->images[0] ?? '') }}"
+                     loading="lazy" alt="">
             </picture>
         </a>
     </div>
     <div class="body">
         <a href="{{ route('car_detail', $car->slug) }}" class="title">{{ $car->title }}</a>
-        <div class="year">{{ $car->year }}</div>
+        @if ($car->year)
+            <div class="year">{{ $car->year }}</div>
+        @endif
         <div class="features">
             <div class="tr">
-            @foreach($car->properties as $property)
-                @if($property->show_product && ($value = $property->getValue()))
+                @foreach($car->properties as $property)
+                    @if($property->show_product && ($value = $property->getValue()))
                         <div class="item">
                             <img width="21" height="21" src="{{ Storage::disk('public')->url($property->image) }}">
                             {{ $value }}
                         </div>
-                @endif
-            @endforeach
+                    @endif
+                @endforeach
             </div>
         </div>
     </div>
     <div class="footer">
         <div class="price">
             <span class="price-new">{{ $car->priceFormat }}</span>
-            <div class="tooltip">
-                <svg width="14" height="19"><use xlink:href="#tooltip-icon"></use></svg>
-                <div>{{ $car->info }}</div>
-            </div>
+            @if ($car->info)
+                <div class="tooltip">
+                    <svg width="14" height="19">
+                        <use xlink:href="#tooltip-icon"></use>
+                    </svg>
+                    <div>{{ $car->info }}</div>
+                </div>
+            @endif
         </div>
         <a href="{{ route('car_detail', $car->slug) }}" class="btn">@lang('car.more')</a>
     </div>
