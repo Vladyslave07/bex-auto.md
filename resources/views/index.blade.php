@@ -23,7 +23,7 @@
 @include('partials.index.cars-expected',
     [
         'cars' => $expectedCars,
-        'title' => \Illuminate\Support\Facades\Lang::get('car.' . \App\Models\Car::EXPECTED_STATUS),
+        'title' => config('settings.title_expected'),
         'more' => true
     ]
 )

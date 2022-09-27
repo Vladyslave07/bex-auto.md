@@ -1,6 +1,6 @@
 @if (count($faqs) > 0)
     <div class="section-faq container">
-        <div class="main-title text-center line-left">@lang('index.faqs.title')</div>
+        <div class="main-title text-center line-left">{{ config('settings.faq_block_title') }}</div>
         @foreach($faqs as $faq)
             <div class="item">
                 <div class="title toggle-btn">

@@ -1,6 +1,6 @@
 <div class="section-order-calculation container">
     <div class="text">
-        <div class="main-title noline">@lang('forms.order-calc.title')</div>
+        <div class="main-title noline">{!! config('settings.order_calc_title') !!}</div>
         @livewire('forms.order-calculate')
     </div>
     <picture class="img">

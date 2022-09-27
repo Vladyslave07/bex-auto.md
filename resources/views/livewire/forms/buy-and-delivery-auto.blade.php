@@ -2,8 +2,8 @@
     <form wire:submit.prevent="submit" novalidate autocomplete="off">
         <div class="form-body">
             <div class="header">
-                <strong>@lang('forms.buy-and-delivery.title')</strong>
-                <span>@lang('forms.buy-and-delivery.sub_title')</span>
+                <strong>{{ config('settings.buy_and_delivery_title_form') }}</strong>
+                <span>{{ config('settings.buy_and_delivery_sub_title') }}</span>
             </div>
             <div class="form-group">
                 <input class="form-control @error('name') is-invalid @enderror" wire:model.defer="name"

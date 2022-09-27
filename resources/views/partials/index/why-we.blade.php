@@ -1,6 +1,6 @@
 <div class="section-advantages">
     <div class="container">
-        <div class="main-title text-center noline">@lang('index.why_we.title')</div>
+        <div class="main-title text-center noline">{!! config('settings.why_we_block_title') !!}</div>
     </div>
     <div class="advantages-list">
         <div class="container">

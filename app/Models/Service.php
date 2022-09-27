@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Service extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets;
+    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute;
 
     /*
     |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ class Service extends Model
     protected $attributes = ['sort' => 500];
     protected $casts = ['active' => 'boolean'];
     protected $with = ['faqs', 'seo_text'];
+    public static $images = ['image'];
 
     /*
     |--------------------------------------------------------------------------
