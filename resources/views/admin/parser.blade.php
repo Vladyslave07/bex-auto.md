@@ -11,18 +11,21 @@
                         <div class="form-group col-sm-12">
                             <label>Ссылка на список лотов</label>
                             <input type="text" name="lots_url"
+                                   data-prev-value="{{ $parserInfo->where('slug', 'lots_url')->first()->value }}"
                                    value="{{ $parserInfo->where('slug', 'lots_url')->first()->value }}"
                                    class="form-control">
                         </div>
                         <div class="form-group col-sm-12">
                             <label>Ссылка на детальную страницу лота</label>
                             <input type="text" name="detail_url"
+                                   data-prev-value="{{ $parserInfo->where('slug', 'detail_url')->first()->value }}"
                                    value="{{ $parserInfo->where('slug', 'detail_url')->first()->value }}"
                                    class="form-control">
                         </div>
                         <div class="form-group col-sm-12">
                             <label>Токен</label>
                             <input type="text" name="token"
+                                   data-prev-value="{{ $parserInfo->where('slug', 'token')->first()->value }}"
                                    value="{{ $parserInfo->where('slug', 'token')->first()->value }}"
                                    class="form-control">
                         </div>
@@ -31,7 +34,7 @@
 
                             <label>Категория</label>
 
-                            <select name="category" class="form-control">
+                            <select name="category" class="form-control" data-prev-value="{{ $parserInfo->where('slug', 'category')->first()->value }}">
 
                                 @if (!$parserInfo->where('slug', 'token')->first()->value)
                                     <option value="">-</option>
@@ -54,13 +57,13 @@
                         <div class="form-group col">
                             <label>Статус машины</label>
 
-                            <select name="status" class="form-control">
+                            <select name="status" class="form-control" data-prev-value="{{ $parserInfo->where('slug', 'status')->first()->value }}">
                                 @foreach($statuses as $status)
                                     <option
                                             value="{{ $status }}"
                                             @if($parserInfo->where('slug', 'status')->first()->value == $status) selected @endif
                                     >
-                                         @lang('backpack::fields.option.' . $status)
+                                        @lang('backpack::fields.option.' . $status)
                                     </option>
                                 @endforeach
 
@@ -70,7 +73,6 @@
                 </div>
 
 
-                <div class="d-none" id="parentLoadedAssets">[]</div>
                 <div id="saveActions" class="form-group">
                     <input type="hidden" name="_save_action" value="save_and_back">
                     <div class="btn-group" role="group">
@@ -83,7 +85,7 @@
 
                     <div class="btn-group" role="group">
 
-                        <button type="button" class="btn btn-warning" onclick="downloadLots()">
+                        <button type="button" class="btn btn-warning run-parser" onclick="downloadLots()">
                             <span class="la la-download" role="presentation" aria-hidden="true"></span> &nbsp;
                             <span data-value="save_and_back">Запустить парсер</span>
                         </button>
@@ -136,6 +138,7 @@
         })
     }
 
+    // Start download Lots
     function downloadLots() {
         new Noty({
             type: "success",
@@ -145,7 +148,28 @@
         fetch('{{ route('download-lots') }}')
     }
 
+    // If manager changing fields, not allow begin downloading lots before manager doesn't save changed fields
+    function checkFields() {
+        let form = document.querySelector('.parser-from');
+
+        let inputs = form.querySelectorAll('input');
+        let selects = form.querySelectorAll('select');
+
+        inputs.forEach(input => {
+            input.addEventListener('input', e => {
+                form.querySelector('.run-parser').disabled = e.target.value !== e.target.dataset.prevValue;
+            })
+        });
+
+        selects.forEach(select => {
+            select.addEventListener('change', e => {
+                form.querySelector('.run-parser').disabled = e.target.value !== e.target.dataset.prevValue;
+            })
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         parserInfoSave();
+        checkFields();
     })
 </script>
