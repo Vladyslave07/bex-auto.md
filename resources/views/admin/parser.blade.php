@@ -135,6 +135,7 @@
                 type: "success",
                 text: 'Данные успешно сохранены',
             }).show();
+            document.querySelector('.parser-from').querySelector('.run-parser').disabled = false;
         })
     }
 
