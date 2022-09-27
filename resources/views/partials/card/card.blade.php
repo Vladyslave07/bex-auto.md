@@ -76,15 +76,15 @@
                     <ul class="list">
                         @foreach($car->properties as $property)
                             <li>
-                                <div class="dt">
-                                    @if ($image = $property->image)
-                                        <div class="icon">
-                                            <img src="{{ Storage::disk('public')->url($image) }}">
-                                        </div>
-                                    @endif
-                                    {{ $property->title }}:
-                                </div>
                                 @if($value = $property->getValue())
+                                    <div class="dt">
+                                        @if ($image = $property->image)
+                                            <div class="icon">
+                                                <img src="{{ Storage::disk('public')->url($image) }}">
+                                            </div>
+                                        @endif
+                                        {{ $property->title }}:
+                                    </div>
                                     <div class="dd">{{ $value }}</div>
                                 @endif
                             </li>

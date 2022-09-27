@@ -10,18 +10,24 @@
                     <div class="card-body row">
                         <div class="form-group col-sm-12">
                             <label>Ссылка на список лотов</label>
-                            <input type="text" name="lots_url" value="{{ $parserInfo->where('slug', 'lots_url')->first()->value }}" class="form-control">
+                            <input type="text" name="lots_url"
+                                   value="{{ $parserInfo->where('slug', 'lots_url')->first()->value }}"
+                                   class="form-control">
                         </div>
                         <div class="form-group col-sm-12">
                             <label>Ссылка на детальную страницу лота</label>
-                            <input type="text" name="detail_url" value="{{ $parserInfo->where('slug', 'detail_url')->first()->value }}" class="form-control">
+                            <input type="text" name="detail_url"
+                                   value="{{ $parserInfo->where('slug', 'detail_url')->first()->value }}"
+                                   class="form-control">
                         </div>
                         <div class="form-group col-sm-12">
                             <label>Токен</label>
-                            <input type="text" name="token" value="{{ $parserInfo->where('slug', 'token')->first()->value }}" class="form-control">
+                            <input type="text" name="token"
+                                   value="{{ $parserInfo->where('slug', 'token')->first()->value }}"
+                                   class="form-control">
                         </div>
 
-                        <div class="form-group col-sm-12">
+                        <div class="form-group col">
 
                             <label>Категория</label>
 
@@ -45,8 +51,20 @@
 
                         </div>
 
-                        <div class="hidden">
-                            <input type="hidden" name="id" value="7" class="form-control">
+                        <div class="form-group col">
+                            <label>Статус машины</label>
+
+                            <select name="status" class="form-control">
+                                @foreach($statuses as $status)
+                                    <option
+                                            value="{{ $status }}"
+                                            @if($parserInfo->where('slug', 'status')->first()->value == $status) selected @endif
+                                    >
+                                         @lang('backpack::fields.option.' . $status)
+                                    </option>
+                                @endforeach
+
+                            </select>
                         </div>
                     </div>
                 </div>
@@ -99,7 +117,9 @@
 
     function parserInfoSave() {
         let parserForm = document.querySelector('.parser-from');
-        if (!parserForm) {return}
+        if (!parserForm) {
+            return
+        }
 
         parserForm.addEventListener('submit', e => {
             e.preventDefault();

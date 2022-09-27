@@ -21,6 +21,7 @@ class Parser
     public string $detailUrl;
     public string $token;
     public string $categoryId;
+    public $status;
 
     // Car properties
     public $propertyBrand;
@@ -37,12 +38,13 @@ class Parser
 
     const FIRST_PAGE = 1;
 
-    public function __construct(string $listUrl, string $detailUrl, string $token, $categoryId = null)
+    public function __construct(string $listUrl, string $detailUrl, string $token, $categoryId = null, $status)
     {
         $this->setListUrl($listUrl);
         $this->setDetailUrl($detailUrl);
         $this->setToken($token);
         $this->setCategoryId($categoryId);
+        $this->setStatus($status);
 
         // Set car properties
         $this->setPropertyBrand(Property::getBySlug('brand'));
@@ -96,7 +98,7 @@ class Parser
 
         $car = Car::create([
             'active' => 1,
-            'status' => Car::EXPECTED_STATUS,
+            'status' => $this->getStatus(),
             'title' => $title,
             'lot_id' => $info['id'],
             // todo: Выводить это свойство в фильтр
@@ -530,6 +532,22 @@ class Parser
         }
 
         return $this->categoryId = $categoryId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
+
+    /**
+     * @param mixed $status
+     */
+    public function setStatus($status): void
+    {
+        $this->status = $status;
     }
 
 

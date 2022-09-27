@@ -5,12 +5,13 @@ namespace App\Http\Controllers\Admin;
 
 
 
+use App\Helper\General;
 use App\Http\Requests\ParserRequest;
 use App\Jobs\ParserRun;
+use App\Models\Car;
 use App\Models\Category;
 use App\Models\Parser;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class ParserController
 {
@@ -22,7 +23,10 @@ class ParserController
         // Get parser fields
         $parserInfo = Parser::query()->get();
 
-        return view('admin.parser', compact('categories', 'parserInfo'));
+        // Status
+        $statuses = General::getEnumValues(app(Car::class)->getTable(), 'status');
+
+        return view('admin.parser', compact('categories', 'parserInfo', 'statuses'));
     }
 
     public function save(ParserRequest $request)

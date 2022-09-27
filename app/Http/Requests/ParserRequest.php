@@ -27,7 +27,8 @@ class ParserRequest extends FormRequest
             'lots_url' => ['required'],
             'detail_url' => ['required'],
             'token' => ['required'],
-            'category' => ['required']
+            'category' => ['required'],
+            'status' => ['required']
         ];
     }
 
