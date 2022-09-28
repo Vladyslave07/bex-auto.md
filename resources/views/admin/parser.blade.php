@@ -1,5 +1,12 @@
 @extends(backpack_view('blank'))
 
+
+<style>
+    .info-queue {
+        max-width: 405px;
+    }
+</style>
+
 @section('content')
     <div class="row">
         <div class="col-md-8 bold-labels">
@@ -97,6 +104,23 @@
                 </div>
 
             </form>
+
+        </div>
+
+        <div class="col-md-4 queue-info">
+            @foreach($infoQueues as $info)
+                <div class="card info-queue">
+                    <div class="card-body">
+                        <p>Id: {{ $info->id }}</p>
+                        <span>{{ Carbon\Carbon::parse($info->created_at)->diffForHumans() }}</span>
+                        @if ($info->attempts > 0)
+                            <p>Лоты загружаются</p>
+                        @else
+                            <p>В очереди на загрузку</p>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 @endsection
@@ -147,6 +171,29 @@
         }).show();
 
         fetch('{{ route('download-lots') }}')
+
+        fetch('{{ route('parser-queue-info') }}').then(response => {
+            return response.json();
+        }).then(data => {
+            let wrap = document.querySelector('.queue-info');
+
+            if (data.data.length) {
+                let result = ''
+                data.data.forEach(element => {
+                    result += makeInfoBlock(element)
+                });
+                wrap.innerHTML = result;
+            }
+        });
+    }
+
+    function makeInfoBlock(info) {
+        return `<div class="card info-queue"> <div class="card-body">
+        <p>Id: ${info.id}</p>
+        <span>${info.time}</span>
+        <p>${info.attempts > 0 ? 'Лоты загружаются' : 'В очереди на загрузку'}</p>
+        </div>
+        </div>`
     }
 
     // If manager changing fields, not allow begin downloading lots before manager doesn't save changed fields

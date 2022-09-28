@@ -11,6 +11,7 @@ use App\Jobs\ParserRun;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Parser;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 class ParserController
@@ -26,7 +27,9 @@ class ParserController
         // Status
         $statuses = General::getEnumValues(app(Car::class)->getTable(), 'status');
 
-        return view('admin.parser', compact('categories', 'parserInfo', 'statuses'));
+        $infoQueues = $this->infoQueue();
+
+        return view('admin.parser', compact('categories', 'parserInfo', 'statuses', 'infoQueues'));
     }
 
     public function save(ParserRequest $request)
@@ -52,5 +55,22 @@ class ParserController
     {
         ParserRun::dispatch();
         return true;
+    }
+
+    public function infoQueue()
+    {
+        return DB::table('jobs')->where('queue', ParserRun::NAME_QUEUE)->get();
+    }
+
+    public function infoForAjax()
+    {
+        $data = [];
+
+        foreach ($this->infoQueue() as $queue) {
+            $queue->time = Carbon::parse($queue->created_at)->diffForHumans();
+            $data[] = $queue;
+        }
+
+        return response()->json(['data' => $data]);
     }
 }

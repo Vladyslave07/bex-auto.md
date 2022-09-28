@@ -48,6 +48,7 @@ Route::group(['middleware' => ['admin']], function() {
     // Parser
     Route::post('/save-parser-info', [\App\Http\Controllers\Admin\ParserController::class, 'save'])->name('save-parser-info');
     Route::get('/download-lots', [\App\Http\Controllers\Admin\ParserController::class, 'download'])->name('download-lots');
+    Route::get('/parser-queue-info', [\App\Http\Controllers\Admin\ParserController::class, 'infoForAjax'])->name('parser-queue-info');
 });
 
 

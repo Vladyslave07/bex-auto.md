@@ -14,6 +14,8 @@ class ParserRun implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
+    const NAME_QUEUE = 'parser';
+
     /**
      * Create a new job instance.
      *
@@ -21,7 +23,7 @@ class ParserRun implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        $this->queue = self::NAME_QUEUE;
     }
 
     /**
