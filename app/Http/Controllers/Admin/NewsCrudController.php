@@ -7,6 +7,7 @@ use App\Models\Delivery;
 use App\Models\Faq;
 use App\Models\News;
 use App\Models\SeoText;
+use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
@@ -29,6 +30,7 @@ class NewsCrudController extends CrudController
         destroy as traitDestroy;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use BulkDeleteOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.

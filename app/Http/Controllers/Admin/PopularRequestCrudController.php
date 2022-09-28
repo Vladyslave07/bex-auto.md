@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\PopularRequestRequest;
 use App\Models\Menu;
 use App\Models\PopularRequest;
+use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
@@ -26,6 +27,7 @@ class PopularRequestCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
         destroy as traitDestroy;
     }
+    use BulkDeleteOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
