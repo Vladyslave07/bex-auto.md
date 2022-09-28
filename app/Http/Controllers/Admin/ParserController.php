@@ -13,6 +13,7 @@ use App\Models\Category;
 use App\Models\Parser;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 
 class ParserController
 {
@@ -72,5 +73,13 @@ class ParserController
         }
 
         return response()->json(['data' => $data]);
+    }
+
+    public function deleteQueue(Request $request)
+    {
+        if (!$request->get('id')) {
+            return false;
+        }
+        DB::table('jobs')->where('id', $request->get('id'))->delete();
     }
 }

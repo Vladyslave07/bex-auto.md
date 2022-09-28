@@ -109,7 +109,7 @@
 
         <div class="col-md-4 queue-info">
             @foreach($infoQueues as $info)
-                <div class="card info-queue">
+                <div class="card info-queue" data-id="{{ $info->id }}">
                     <div class="card-body">
                         <p>Id: {{ $info->id }}</p>
                         <span>{{ Carbon\Carbon::parse($info->created_at)->diffForHumans() }}</span>
@@ -117,6 +117,7 @@
                             <p>Лоты загружаются</p>
                         @else
                             <p>В очереди на загрузку</p>
+                            <button onclick="deleteQueue('{{ $info->id }}')" class="btn btn-error"><span class="la la-ban"></span>Отмена</button>
                         @endif
                     </div>
                 </div>
@@ -126,6 +127,16 @@
 @endsection
 
 <script>
+
+    function deleteQueue(id) {
+        let csrf = document.querySelector('meta[name="csrf-token"]').content;
+        sendData('{{ route('delete-queue') }}', JSON.stringify({id:id, _token:csrf}));
+        document.querySelector(`[data-id='${id}']`).remove();
+        new Noty({
+            type: "success",
+            text: 'Очередь успешно удалена',
+        }).show();
+    }
 
     function sendData(url, data) {
         return fetch(url, {
@@ -188,10 +199,11 @@
     }
 
     function makeInfoBlock(info) {
-        return `<div class="card info-queue"> <div class="card-body">
+        return `<div class="card info-queue" data-id="${info.id}"> <div class="card-body">
         <p>Id: ${info.id}</p>
         <span>${info.time}</span>
         <p>${info.attempts > 0 ? 'Лоты загружаются' : 'В очереди на загрузку'}</p>
+        ${info.attempts == 0 ? "<button onclick=\"deleteQueue('"+info.id+"')\" class=\"btn btn-error\"><span class=\"la la-ban\"></span>Отмена</button>" : ''}
         </div>
         </div>`
     }
