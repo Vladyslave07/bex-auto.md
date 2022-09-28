@@ -9,9 +9,8 @@ use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Property;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
-use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -67,6 +66,7 @@ class Parser
         $countPages = $this->getCountPages();
         for ($page = 1; $page <= $countPages; $page++) {
             $lots = $this->getLots($page);
+            $lots['data'] = $this->prepareData($lots['data']);
             foreach ($lots['data'] as $lot) {
                 if ($lotId = $lot['id']) {
                     $this->createCar($this->getLotInfo($lotId));
@@ -75,11 +75,28 @@ class Parser
         }
     }
 
+    /**
+     * Check if in database already has car
+     *
+     * @param $lots
+     * @return array
+     */
+    public function prepareData($lots)
+    {
+        $lotsId = array_column($lots, 'id');
+        $cars = array_column(Car::query()->whereIn('lot_id', $lotsId)->get(['id', 'lot_id'])->toArray(), 'lot_id');
+        $lotsWhichDoesNotHaveInDB = [];
+        foreach ($lots as $lot) {
+            if (in_array($lot['id'], $cars)) {
+                continue;
+            }
+            $lotsWhichDoesNotHaveInDB[] = $lot;
+        }
+        return $lotsWhichDoesNotHaveInDB;
+    }
+
     public function createCar($info)
     {
-        if (!$info['id']) {
-            return false;
-        }
         // If car exist not update it
         if (Car::getCarByLotId($info['id'])) {
             return false;
@@ -96,7 +113,7 @@ class Parser
         $brand = Brand::getBrandByTitle($brandInfo['title'] ?? '') ?: Brand::createBrand($brandInfo['title']);
         $model = CarModel::getModelByTitle($modelInfo['title'] ?? '') ?: CarModel::createModel($modelInfo['title'], $brand->id);
 
-        $car = Car::create([
+        $carInfo = [
             'active' => 1,
             'status' => $this->getStatus(),
             'title' => $title,
@@ -106,7 +123,16 @@ class Parser
             'price' => $price,
             'mileage' => $mileage,
             'vin' => $vin,
-        ]);
+        ];
+        if ((int)$price <= 0) {
+            $carInfo['info'] = json_encode([
+                'ru' => Lang::get('car.price_null_info', [], 'ru'),
+                'uk' => Lang::get('car.price_null_info', [], 'uk'),
+                'en' => Lang::get('car.price_null_info', [], 'en'),
+            ]);
+        }
+
+        $car = Car::create($carInfo);
 
         if (key_exists('images', $info) && count($info['images']) > 0) {
             $images = [];
