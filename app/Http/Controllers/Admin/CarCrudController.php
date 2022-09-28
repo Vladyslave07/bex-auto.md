@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
+use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -28,6 +29,7 @@ class CarCrudController extends CrudController
         destroy as traitDestroy;
     }
     use DropzoneTrait;
+    use BulkDeleteOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.

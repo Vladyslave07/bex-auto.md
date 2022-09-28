@@ -27,7 +27,6 @@ class CarRequest extends FormRequest
         return [
             'title' => ['required', 'min:3'],
             'price' => ['required'],
-            'slug' => ['unique:cars'],
         ];
     }
 
