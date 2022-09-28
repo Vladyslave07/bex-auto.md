@@ -7,7 +7,6 @@
 
 @push('scripts')
     <script src="{{ mix('js/catalog.js') }}" defer></script>
-    <script src="{{ mix('js/new-elektromobili.js') }}" defer></script>
 @endpush
 
 @section('content')
