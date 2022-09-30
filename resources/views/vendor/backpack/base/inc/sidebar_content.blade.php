@@ -98,3 +98,4 @@
 </li>
 
 <li class='nav-item'><a class='nav-link' href='{{ backpack_url('parser') }}'><i class='nav-icon la la-th-list'></i> Парсер</a></li>
+<li class='nav-item'><a class='nav-link' href='{{ backpack_url('redirect') }}'><i class='nav-icon la la-arrows-alt'></i> Редиректы</a></li>

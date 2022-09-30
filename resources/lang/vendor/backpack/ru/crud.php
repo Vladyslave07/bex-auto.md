@@ -217,4 +217,7 @@ return [
 
     'news' => 'Новость',
     'news_plural' => 'Новости',
+
+    'redirect' => 'редирект',
+    'redirects' => 'редиректы',
 ];
