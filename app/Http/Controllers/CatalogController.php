@@ -21,7 +21,7 @@ class CatalogController extends Controller
      * @param Category $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function category($category, Request $request, $page = 1)
+    public function category(Category $category, Request $request, $page = 1)
     {
         SEOTools::setTitle($category->seo_meta_title);
         SEOTools::setDescription($category->seo_meta_description);

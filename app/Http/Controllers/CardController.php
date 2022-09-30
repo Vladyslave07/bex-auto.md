@@ -14,12 +14,11 @@ class CardController extends Controller
 {
     public function index(Car $car)
     {
-
         SEOTools::setTitle($car->seo_meta_title);
         SEOTools::setDescription($car->seo_meta_description);
 
         // Popular cars
-        $popularCars = Car::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
+        $popularCars = Car::popularCars();
 
         // Brands
         $brands = Brand::brands();
@@ -29,6 +28,9 @@ class CardController extends Controller
         // Seo text category or main seo text
         $seoText = SeoText::mainText();
 
-        return view('card', compact('car', 'popularCars', 'brands', 'faqs', 'seoText'));
+        // Links for bloc link
+        $links = $car->getCarLinks();
+
+        return view('card', compact('car', 'popularCars', 'brands', 'faqs', 'seoText', 'links'));
     }
 }

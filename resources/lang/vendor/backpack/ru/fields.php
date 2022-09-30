@@ -60,6 +60,7 @@ return [
     'meta_description' => 'Мета description',
     'h1' => 'H1',
     'vin' => 'Vin код',
+    'links' => 'Ссылки для перелинковки',
 
     'option' => [
         'expect' => 'Ожидается',

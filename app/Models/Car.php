@@ -159,6 +159,21 @@ class Car extends Model
         return self::query()->where('lot_id', $lotId)->first();
     }
 
+    /**
+     * @return array|Builder[]|\Illuminate\Database\Eloquent\Collection|mixed
+     */
+    public function getCarLinks()
+    {
+        if (count($this->links) > 0) {
+            return $this->links;
+        }
+        if($brand = $this->properties->where('slug', 'brand')->first()) {
+            return Category::query()->where('slug', 'like','%' . $brand->getValue() . '%')->get();
+        }
+        return [];
+
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -173,6 +188,16 @@ class Car extends Model
     public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'car_category');
+    }
+
+    /**
+     * categories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function links(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'categories_cars');
     }
 
     public function properties(): \Illuminate\Database\Eloquent\Relations\BelongsToMany

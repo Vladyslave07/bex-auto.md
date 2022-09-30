@@ -99,6 +99,21 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'tinymce']);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"]]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
+
+        CRUD::addField([
+            'name' => 'links',
+            'label' => trans('backpack::fields.links'),
+            'type' => 'relationship',
+            'entity' => 'links',
+            'attribute' => 'title',
+            'model' => Category::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'tab' => 'Автомобиль',
+            'hint' => trans('backpack::hint.cars.links')
+        ]);
+
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'), 'type' => 'text', 'hint' => trans('backpack::hint.cars.youtube_link')]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '',]);
 

@@ -19,7 +19,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
     // Categories
     Route::get(
         LaravelLocalization::transRoute('routes.category'),
-        [\App\Http\Controllers\HandleRouteController::class, 'index']
+        [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 
     Route::group(['prefix' => '/about'], function () {

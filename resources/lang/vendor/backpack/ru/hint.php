@@ -15,6 +15,7 @@ return [
     ],
 
     'cars' => [
-        'youtube_link' => 'Id видео на ютуб ex: "6AnSRR5ltvk"'
+        'youtube_link' => 'Id видео на ютуб ex: "6AnSRR5ltvk"',
+        'links' => 'Ссылки выводятся под фотографиями на детальной странице машины',
     ]
 ];

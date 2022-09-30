@@ -93,15 +93,10 @@
                 </div>
             </div>
         </div>
-        <div class="hashtags container hidden-sm">
-            <a href="#">ford mustang</a>
-            <a href="#">dodge charger</a>
-            <a href="#">dodge journey</a>
-            <a href="#">dodge challenger</a><br>
-            <a href="#">ford fusion</a>
-            <a href="#">chevrolet corvette</a>
-            <a href="#">chevrolet volt</a>
-        </div>
+
+        {{-- Links --}}
+        @include('partials.card.links')
+
         @if ($car->description)
             <div class="card-description container">
                 <div class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</div>
