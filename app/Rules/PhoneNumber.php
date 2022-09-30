@@ -17,7 +17,7 @@ class PhoneNumber implements Rule
      */
     public function passes($attribute, $value)
     {
-        return preg_match("/^380[0-9]{8}$/", Str::phoneNumber($value));
+        return preg_match("/^380[0-9]{9}$/", Str::phoneNumber($value));
     }
 
     /**

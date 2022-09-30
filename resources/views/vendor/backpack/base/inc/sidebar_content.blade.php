@@ -62,6 +62,11 @@
             >
                 <i class='nav-icon la la-money-bill'></i> Купить и доставить авто
             </a>
+            <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\DiscountForm::SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-percent'></i> Получить скидку
+            </a>
         </li>
     </ul>
 </li>

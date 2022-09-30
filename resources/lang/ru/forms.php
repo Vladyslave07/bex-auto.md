@@ -19,5 +19,9 @@ return [
 
     'partners' => [
         'title' => 'Станьте партнером <span class="color-blue">Bexhill Trading Auto</span>',
+    ],
+
+    'discount' => [
+        'btn' => 'Отправить',
     ]
 ];

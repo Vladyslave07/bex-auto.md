@@ -68,18 +68,18 @@
 @push('scripts')
     <!-- TODO:Времмены код -->
     <script>
-        document.addEventListener('livewire:load', function () {
-            document.querySelectorAll('form').forEach((el) => {
-                el.addEventListener('submit', (e) => {
-                    e.target.querySelectorAll('[required]').forEach(el => {
-                        el.classList.remove('is-invalid');
-                        if (el.value == '') {
-                            el.classList.add('is-invalid');
-                        }
-                    });
-                    e.preventDefault();
-                });
-            });
-        });
+        // document.addEventListener('livewire:load', function () {
+        //     document.querySelectorAll('form').forEach((el) => {
+        //         el.addEventListener('submit', (e) => {
+        //             e.target.querySelectorAll('[required]').forEach(el => {
+        //                 el.classList.remove('is-invalid');
+        //                 if (el.value == '') {
+        //                     el.classList.add('is-invalid');
+        //                 }
+        //             });
+        //             e.preventDefault();
+        //         });
+        //     });
+        // });
     </script>
 @endpush
