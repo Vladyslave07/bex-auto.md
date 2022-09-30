@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('categories_cars', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBiInteger('car_id')->index()->nullable();
+            $table->unsignedInteger('car_id')->index()->nullable();
             $table->unsignedInteger('category_id')->index()->nullable();
         });
     }
