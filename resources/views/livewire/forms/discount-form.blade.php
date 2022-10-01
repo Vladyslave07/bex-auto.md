@@ -24,7 +24,6 @@
 
 <script>
     window.onload = () => {
-        console.log(readCookie('show-discount-modal'));
         if (readCookie('show-discount-modal') != 0) {
             setTimeout(() => {
                 openModal('#modalDiscount');
@@ -58,5 +57,4 @@
         ));
         return matches ? decodeURIComponent(matches[1]) : undefined;
     }
-
 </script>
