@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class Category extends Model
+class Category extends Model implements LocalizedUrlRoutable
 {
     use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute;
 
@@ -36,6 +36,17 @@ class Category extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Returns localized slug from model
+     *
+     * @param $locale
+     * @return mixed
+     */
+    public function getLocalizedRouteKey($locale)
+    {
+        return json_decode($this->original['slug'])->$locale;
+    }
 
     /**
      * @param mixed $value

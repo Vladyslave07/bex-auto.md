@@ -9,8 +9,9 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class Service extends Model
+class Service extends Model implements LocalizedUrlRoutable
 {
     use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute;
 
@@ -33,6 +34,17 @@ class Service extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Returns localized slug from model
+     *
+     * @param $locale
+     * @return mixed
+     */
+    public function getLocalizedRouteKey($locale)
+    {
+        return json_decode($this->original['slug'])->$locale;
+    }
 
     /**
      * @param mixed $value
