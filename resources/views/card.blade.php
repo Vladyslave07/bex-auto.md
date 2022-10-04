@@ -40,4 +40,9 @@
 {{-- Order a calculation form --}}
 @include('partials.index.order-a-calculation')
 
+
+{{-- Modal form for application for a car --}}
+<livewire:forms.application-for-car :car="$car->title"/>
+<livewire:forms.application-for-credit :car="$car->title"/>
+
 @endsection

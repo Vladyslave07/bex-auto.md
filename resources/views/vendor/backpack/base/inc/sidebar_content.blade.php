@@ -48,6 +48,16 @@
     <ul class="nav-dropdown-items">
         <li class='nav-item'>
             <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\ApplicationForCar::SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-car-alt'></i> Заявка на покупку машины
+            </a>
+            <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\ApplicationForCredit::SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-car'></i> Заявка на покупку машины в кредит
+            </a>
+            <a class='nav-link'
                href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\CallBack::SLUG_FORM]) }}'
             >
                 <i class='nav-icon la la-mobile-phone'></i> Обратная связь
