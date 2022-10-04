@@ -4,12 +4,12 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'setRouteNameForLocalize' ]], function () {
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
     // Services
     Route::get(
-        LaravelLocalization::transRoute('routes.service'),
+        \App\Services\LaravelLocalizationCustom::transRoute('routes.service'),
         [\App\Http\Controllers\ServiceController::class, 'service']
     )->name('service');
 
@@ -18,7 +18,7 @@ Route::group(['prefix' => LaravelLocalization::setLocale()], function () {
 
     // Categories
     Route::get(
-        LaravelLocalization::transRoute('routes.category'),
+        \App\Services\LaravelLocalizationCustom::transRoute('routes.category'),
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 
@@ -95,4 +95,7 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/thanks-order', function () {
         return view('html.thanks-order');
     })->name('html.thanks-order');
+    Route::get('/search', function () {
+        return view('html.search');
+    })->name('html.search');
 });

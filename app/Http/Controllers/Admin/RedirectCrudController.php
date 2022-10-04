@@ -39,13 +39,28 @@ class RedirectCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('id');
-        CRUD::column('url_from');
-        CRUD::column('url_to');
-        CRUD::column('type');
-        CRUD::column('quantity');
-        CRUD::column('updated_at');
-        CRUD::column('created_at');
+        CRUD::setColumns([
+            [
+                'name'  => 'id',
+                'label' => '№',
+            ],
+            [
+                'name'  => 'url_from',
+                'label' => trans('backpack::fields.url_from'),
+            ],
+            [
+                'name'  => 'url_to',
+                'label' => trans('backpack::fields.url_to'),
+            ],
+            [
+                'name'  => 'type',
+                'label' => trans('backpack::fields.type'),
+            ],
+            [
+                'name'  => 'quantity',
+                'label' => trans('backpack::fields.quantity'),
+            ],
+        ]);
     }
 
     /**
