@@ -96,6 +96,9 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/guarantee', function () {
         return view('html.guarantee');
     })->name('html.guarantee');
+    Route::get('/thanks-order', function () {
+        return view('html.thanks-order');
+    })->name('html.thanks-order');
     Route::get('/search', function () {
         return view('html.search');
     })->name('html.search');
