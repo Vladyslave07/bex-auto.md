@@ -51,3 +51,9 @@ Breadcrumbs::for('static.contacts', function ($trail) {
     $trail->push(Lang::get('static.contacts.breadcrumbs'), '');
 });
 
+Breadcrumbs::for('search', function ($trail) {
+    $trail->parent('index');
+
+    $trail->push(Lang::get('search.breadcrumb', ['query' => request()->get('q')]));
+});
+

@@ -65,7 +65,7 @@ return [
 
 
     'search' => [
-        'placeholder' => 'Введіть номер лота або марку авто'
+        'placeholder' => 'Введіть модель марку авто'
     ],
 
     'popular' => [

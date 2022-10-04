@@ -21,12 +21,8 @@
                 <img width="134" height="59" src="{{ asset('img/logo.png') }}" alt="">
             </a>
 
-            <form class="search" action="#">
-                <input type="text" placeholder="@lang('index.search.placeholder')" autocomplete="off">
-                <button class="search-btn" type="submit" aria-label="Search">
-                    <svg width="20" height="19"><use xlink:href="#search-icon"></use></svg>
-                </button>
-            </form>
+            {{-- search form --}}
+            @include('partials.search.search-form')
 
             {{-- main phone --}}
             @include('partials.header.phone')

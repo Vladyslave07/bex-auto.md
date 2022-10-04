@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'setRouteNameForLocalize' ]], function () {
+    // Index
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
     // Services
@@ -21,6 +22,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 's
         \App\Services\LaravelLocalizationCustom::transRoute('routes.category'),
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
+
+    // Search
+    Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
     Route::group(['prefix' => '/about'], function () {
         // News

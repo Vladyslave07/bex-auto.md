@@ -1,12 +1,12 @@
 @if ($paginator->hasPages())
-        <nav class="pagination">
+    <nav class="pagination">
             {{-- Previous Page Link --}}
             @if ($paginator->onFirstPage())
                 <a aria-label="pagination.previous">
                     <svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg>
                 </a>
             @else
-                <a wire:click.prevent="previousPage()" aria-label="pagination.previous">
+                <a href="{{ $paginator->previousPageUrl() }}" aria-label="pagination.previous">
                     <svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></a>
             @endif
 
@@ -23,10 +23,10 @@
                 @if (is_array($element))
                     @foreach ($element as $page => $url)
                         <a
-                            @if ($page == $paginator->currentPage())
-                            class="active"
-                            @endif
-                            wire:click.prevent="setPage('{{ $page }}')"
+                                @if ($page == $paginator->currentPage())
+                                class="active"
+                                @endif
+                                href="{{ $url }}"
                         >{{ $page }}</a>
                     @endforeach
                 @endif
@@ -34,11 +34,11 @@
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
-                <a wire:click.prevent="nextPage()" aria-label="pagination.next"><svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></a>
+                <a href="{{ $paginator->nextPageUrl() }}" aria-label="pagination.next"><svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></a>
             @else
                 <a aria-label="pagination.next">
                     <svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg>
                 </a>
             @endif
-        </nav>
+    </nav>
 @endif

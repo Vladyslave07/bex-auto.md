@@ -27,7 +27,7 @@ class CatalogController extends Controller
         SEOTools::setDescription($category->seo_meta_description);
 
         // Popular cars
-        $popularCars = $category->cars()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
+        $popularCars = Car::popularCars();
 
         // Brands
         $brands = Brand::brands();

@@ -66,7 +66,7 @@ return [
 
 
     'search' => [
-        'placeholder' => 'Enter the lot number or car brand'
+        'placeholder' => 'Enter model or car brand'
     ],
 
     'popular' => [

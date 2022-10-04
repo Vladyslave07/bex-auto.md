@@ -6,10 +6,10 @@
 
                     @if ($breadcrumb->url && !$loop->last)
                         <li class="breadcrumb-item"><a href="{{ $breadcrumb->url }}"
-                                                       class="link-red">{{ $breadcrumb->title }}</a></li>
+                                                       class="link-red">{!! $breadcrumb->title !!}</a></li>
                     @else
                         <li class="breadcrumb-item"
-                            aria-current="page">{{ $breadcrumb->title }}</li>
+                            aria-current="page">{!! $breadcrumb->title !!}</li>
                     @endif
 
                 @endforeach
