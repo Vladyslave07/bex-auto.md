@@ -7,6 +7,7 @@ use App\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class OrderCalculate extends Component implements BaseForm
 {
@@ -30,6 +31,7 @@ class OrderCalculate extends Component implements BaseForm
             'phone' => Str::phoneNumber($this->phone),
             'slug_form' => self::SLUG_FORM,
         ]);
+        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 
     protected function rules()

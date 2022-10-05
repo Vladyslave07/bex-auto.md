@@ -7,6 +7,7 @@ use App\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class BuyAndDeliveryAuto extends Component implements BaseForm
 {
@@ -29,6 +30,7 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
         $fields['phone'] = Str::phoneNumber($fields['phone']);
         $fields['slug_form'] = self::SLUG_FORM;
         $res = FormResult::query()->create($fields);
+        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 
     protected function rules()

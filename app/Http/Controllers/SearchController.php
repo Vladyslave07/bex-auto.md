@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Faq;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Lang;
 
 class SearchController extends Controller
 {
@@ -15,6 +17,9 @@ class SearchController extends Controller
         if (!strlen($request->get('q')) > 0) {
             return abort(404);
         }
+
+        SEOTools::setTitle(Lang::get('search.title', ['query' => $request->get('q')]));
+        SEOTools::setDescription(Lang::get('search.title', ['query' => $request->get('q')]));
 
         // Popular cars
         $popularCars = Car::popularCars();

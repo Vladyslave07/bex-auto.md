@@ -72,5 +72,13 @@ return [
     'popular' => [
         'title'  => 'Popular car brands',
         'more' => 'More details',
-    ]
+    ],
+
+    'thanks' => [
+        'title' => 'Thank you for the application!',
+        'description' => 'Thank you for the application!',
+        'text' => 'Our manager will contact you soon. <br> In the meantime, you can view the reviews of our customers',
+        'btn-back' => 'Back',
+        'btn-reviews' => 'Customer reviews',
+    ],
 ];

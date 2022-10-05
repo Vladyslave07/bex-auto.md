@@ -1,5 +1,6 @@
 <?php
 
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -25,6 +26,9 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 's
 
     // Search
     Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
+
+    // Thanks
+    Route::get('/thanks', [\App\Http\Controllers\IndexController::class, 'thanks'])->name('thanks');
 
     Route::group(['prefix' => '/about'], function () {
         // News

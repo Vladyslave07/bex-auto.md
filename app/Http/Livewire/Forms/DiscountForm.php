@@ -7,6 +7,7 @@ use App\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class DiscountForm extends Component implements BaseForm
 {
@@ -32,6 +33,7 @@ class DiscountForm extends Component implements BaseForm
             'slug_form' => self::SLUG_FORM,
         ]);
         $this->show = false;
+        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 
     protected function rules()

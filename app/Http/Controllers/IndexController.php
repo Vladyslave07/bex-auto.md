@@ -69,4 +69,15 @@ class IndexController extends Controller
         return view($routeName, compact('brands', 'faqs', 'seoText'));
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function thanks()
+    {
+        SEOTools::setTitle(Lang::get('index.thanks.title'));
+        SEOTools::setDescription(Lang::get('index.thanks.description'));
+
+        return view('thanks');
+    }
+
 }
