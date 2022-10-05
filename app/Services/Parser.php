@@ -37,7 +37,7 @@ class Parser
 
     const FIRST_PAGE = 1;
 
-    public function __construct(string $listUrl, string $detailUrl, string $token, $categoryId = null, $status)
+    public function __construct(string $listUrl, string $detailUrl, string $token, $status, $categoryId = null,)
     {
         $this->setListUrl($listUrl);
         $this->setDetailUrl($detailUrl);
