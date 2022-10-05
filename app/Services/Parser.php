@@ -34,6 +34,8 @@ class Parser
     public $propertyEngineType;
     public $propertyType;
     public $propertyTypeOptions;
+    public $propertyYear;
+    public $propertyYearOption;
 
     const FIRST_PAGE = 1;
 
@@ -53,12 +55,14 @@ class Parser
         $this->setPropertyDriveUnit(Property::getBySlug('drive_unit'));
         $this->setPropertyEngineType(Property::getBySlug('engine_type'));
         $this->setPropertyType(Property::getBySlug('type'));
+        $this->setPropertyYear(Property::getBySlug('year'));
 
         // Set default property options
         $this->setPropertyCarcaseTypeOptions();
         $this->setPropertyFuelOptions();
         $this->setPropertyDriveUnitOptions();
         $this->setPropertyTypeOptions();
+        $this->setPropertyYearOption();
     }
 
     public function apply()
@@ -109,6 +113,7 @@ class Parser
         $modelInfo = key_exists('model', $info) ? $info['model'] : [];
         $mileage = key_exists('mileage', $info) ? $info['mileage'] : 0;
         $engineType = key_exists('engine_type', $info) ? $info['engine_type'] : '';
+        $year = key_exists('year', $info) ? $info['year'] : '';
 
         $brand = Brand::getBrandByTitle($brandInfo['title'] ?? '') ?: Brand::createBrand($brandInfo['title']);
         $model = CarModel::getModelByTitle($modelInfo['title'] ?? '') ?: CarModel::createModel($modelInfo['title'], $brand->id);
@@ -118,8 +123,6 @@ class Parser
             'status' => $this->getStatus(),
             'title' => $title,
             'lot_id' => $info['id'],
-            // todo: Выводить это свойство в фильтр
-            'year' => $info['year'],
             'price' => $price,
             'mileage' => $mileage,
             'vin' => $vin,
@@ -154,6 +157,7 @@ class Parser
         $fuel = $this->getPropertyValue('fuel', $info, $this->getPropertyFuelOptions());
         $driveUnit = $this->getPropertyValue('drive_unit', $info, $this->getPropertyDriveUnitOptions());
         $carTypes = $this->getPropertyValue('type', $info, $this->getPropertyTypeOptions());
+        $carYear = $this->getPropertyValue('year', $info, $this->getPropertyYearOption());
 
         if ($brand) {
             $car->properties()->attach($this->getPropertyBrand()->id, ['slug' => $brand->slug, 'value' => $brand->slug]);
@@ -180,6 +184,9 @@ class Parser
         if (strlen($engineType) > 0) {
             $engineType = preg_replace('/(.*)[L|l].*/', '$1', $engineType);
             $car->properties()->attach($this->getPropertyEngineType()->id, ['slug' => $engineType, 'value' => $engineType]);
+        }
+        if ($carYear) {
+            $car->properties()->attach($this->getPropertyYear()->id, ['slug' => $carYear, 'value' => $carYear]);
         }
         if ($this->getCategoryId() > 0) {
             $car->categories()->attach($this->getCategoryId());
@@ -574,6 +581,42 @@ class Parser
     public function setStatus($status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyYear()
+    {
+        return $this->propertyYear;
+    }
+
+    /**
+     * @param mixed $propertyYear
+     */
+    public function setPropertyYear($propertyYear): void
+    {
+        $this->propertyYear = $propertyYear;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPropertyYearOption()
+    {
+        return $this->propertyYearOption;
+    }
+
+    /**
+     * @param mixed $propertyYearOption
+     */
+    public function setPropertyYearOption($propertyYearOption = [])
+    {
+        if (empty($propertyYearOption)) {
+            $years = json_decode($this->getPropertyYear()->options, true) ?: [];
+            return $this->propertyYearOption = $years;
+        }
+        return $this->propertyYearOption = $propertyYearOption;
     }
 
 

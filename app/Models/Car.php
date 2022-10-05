@@ -273,4 +273,17 @@ class Car extends Model
         return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
     }
 
+    /**
+     * Get property car year
+     *
+     * @return null
+     */
+    public function getYearAttribute()
+    {
+        if ($year = $this->properties->where('slug', 'year')->first()) {
+            return $year->getValue() ?: null;
+        }
+        return null;
+    }
+
 }

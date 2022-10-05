@@ -140,13 +140,6 @@ class CarCrudController extends CrudController
             'tab' => 'Свойства'
         ]);
 
-        CRUD::addField([
-            'name'        => 'year',
-            'label'       => trans('backpack::fields.year'),
-            'type'        => 'number',
-            'tab' => 'Свойства'
-        ]);
-
         $propertiesFields = [];
         if ($this->crud->getModel()) {
             foreach ($this->crud->getModel()->getCategoryProperties() as $property) {

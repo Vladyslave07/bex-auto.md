@@ -17,7 +17,6 @@ class Category extends Component
 
     public $category;
     public $orderBy = [];
-    // todo: Устанавливать строку запроса из чпу
     public $filterQuery = null;
 
     public $by = 'id';
@@ -209,7 +208,6 @@ class Category extends Component
 
     public function setFilterQueryFromUrl()
     {
-        // todo: Устанавливать текущие параметры в фильтре из чпу
         $currentUrl = URL::current();
         if (str_contains($currentUrl, CarFilter::FILTER_PREFIX)) {
             [$url, $filterQuery] = explode(CarFilter::FILTER_PREFIX, URL::current());

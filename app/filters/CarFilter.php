@@ -233,6 +233,12 @@ class CarFilter
                 }
             }
         }
+
+        // sort year properties
+        if (key_exists('year', $properties)) {
+            krsort($properties['year']['values']);
+        }
+
         return $properties;
     }
 
