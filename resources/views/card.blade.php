@@ -21,9 +21,8 @@
 </div>
 <!-- ///:end/// -->
 
-<!-- ///КАРТОЧКА ТОВАРА/// -->
+{{-- Car card --}}
 @include('partials.card.card')
-<!-- ///:end/// -->
 
 {{-- Popular cars --}}
 @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => \Illuminate\Support\Facades\Lang::get('category.title'), 'more' => false])

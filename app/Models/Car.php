@@ -250,6 +250,14 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getCategoryAttribute()
+    {
+        if (count($this->categories) > 0) {
+            return $this->categories->first()->title;
+        }
+        return '';
+    }
+
     public function getPriceFormatAttribute()
     {
         return '$' . number_format($this->price, 0, '.', ' ');

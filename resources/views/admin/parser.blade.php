@@ -181,21 +181,21 @@
             text: 'Запущен процесс скачивания лотов',
         }).show();
 
-        fetch('{{ route('download-lots') }}')
+        fetch('{{ route('download-lots') }}').then(res => {
+            fetch('{{ route('parser-queue-info') }}').then(response => {
+                return response.json();
+            }).then(data => {
+                let wrap = document.querySelector('.queue-info');
 
-        fetch('{{ route('parser-queue-info') }}').then(response => {
-            return response.json();
-        }).then(data => {
-            let wrap = document.querySelector('.queue-info');
-
-            if (data.data.length) {
-                let result = ''
-                data.data.forEach(element => {
-                    result += makeInfoBlock(element)
-                });
-                wrap.innerHTML = result;
-            }
-        });
+                if (data.data.length) {
+                    let result = ''
+                    data.data.forEach(element => {
+                        result += makeInfoBlock(element)
+                    });
+                    wrap.innerHTML = result;
+                }
+            });
+        })
     }
 
     function makeInfoBlock(info) {
