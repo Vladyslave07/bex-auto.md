@@ -40,4 +40,5 @@ Route::group([
     Route::crud('news', 'NewsCrudController');
     Route::get('parser', 'ParserController@index')->name('parser');
     Route::crud('redirect', 'RedirectCrudController');
+    Route::crud('domain', 'DomainCrudController');
 }); // this should be the absolute last line of this file

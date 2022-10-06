@@ -6,19 +6,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/parser', function() {
-    $fields = Parser::query()->get();
-
-    $parser = new \App\Services\Parser(
-        $fields->where('slug', 'lots_url')->first()->value,
-        $fields->where('slug', 'detail_url')->first()->value,
-        $fields->where('slug', 'token')->first()->value,
-        $fields->where('slug', 'status')->first()->value,
-        $fields->where('slug', 'category')->first()->value,
-    );
-    $parser->apply();
-});
-
 Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'setRouteNameForLocalize' ]], function () {
     // Index
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');

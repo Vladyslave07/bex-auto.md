@@ -220,4 +220,7 @@ return [
 
     'redirect' => 'редирект',
     'redirects' => 'редиректы',
+
+    'domain' => 'домен',
+    'domains' => 'домены',
 ];
