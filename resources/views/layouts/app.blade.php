@@ -11,6 +11,8 @@
 
         <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNUq5n3HwAEUQJBudQtMwAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon" />
 
+        @include('alternate')
+
         @stack('styles')
         @livewireStyles
     </head>

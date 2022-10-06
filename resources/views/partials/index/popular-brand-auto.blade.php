@@ -6,7 +6,7 @@
     <div class="list">
         <div class="container">
             @foreach($brands as $brand)
-                <a href="{{ route('category', $brand->slug) }}" title="{{ $brand->title }}">{{ $brand->title }} </a>
+                <a href="{{ route('category', ['category' => $brand->slug]) }}" title="{{ $brand->title }}">{{ $brand->title }} </a>
             @endforeach
         </div>
     </div>

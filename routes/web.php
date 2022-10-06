@@ -1,12 +1,31 @@
 <?php
 
-use App\Models\Parser;
-use Artesaos\SEOTools\Facades\SEOTools;
+use App\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'setRouteNameForLocalize' ]], function () {
+// Sub-domains
+$domains = Domain::all();
+$domains->each(function ($domain) {
+    Route::group([
+        'prefix' => LaravelLocalization::setLocale(),
+        'domain' => $domain->slug . env('APP_DOMAIN'),
+        'middleware' => ['setRouteNameForLocalize'],
+    ], function () {
+        commonRoute();
+    });
+});
+
+// Main domain
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['setRouteNameForLocalize'],
+], function () {
+    commonRoute();
+});
+
+function commonRoute() {
     // Index
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
@@ -44,11 +63,10 @@ Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 's
         // Contacts
         Route::get('/contacts', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.contacts');
     });
-
-});
+}
 
 // Admin actions
-Route::group(['middleware' => ['admin']], function() {
+Route::group(['middleware' => ['admin']], function () {
     // Cache delete
     Route::get('/clear-all-cache', function () {
         Artisan::call("cache:clear");
@@ -60,7 +78,6 @@ Route::group(['middleware' => ['admin']], function() {
     Route::get('/parser-queue-info', [\App\Http\Controllers\Admin\ParserController::class, 'infoForAjax'])->name('parser-queue-info');
     Route::post('/delete-queue', [\App\Http\Controllers\Admin\ParserController::class, 'deleteQueue'])->name('delete-queue');
 });
-
 
 
 // Роуты на вёрстку

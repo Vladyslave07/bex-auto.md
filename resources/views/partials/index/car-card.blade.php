@@ -12,7 +12,7 @@
         <div class="stickers">
             <span>@lang('car.' . $car->status)</span>
         </div>
-        <a href="{{ route('car_detail', $car->slug) }}" aria-label="img product">
+        <a href="{{ route('car_detail', ['car' => $car->slug]) }}" aria-label="img product">
             <picture>
                 <img width="289" height="218" src="{{ Storage::disk('public')->url($car->images[0] ?? '') }}"
                      loading="lazy" alt="">
@@ -20,7 +20,7 @@
         </a>
     </div>
     <div class="body">
-        <a href="{{ route('car_detail', $car->slug) }}" class="title">{{ $car->title }}</a>
+        <a href="{{ route('car_detail',  ['car' => $car->slug]) }}" class="title">{{ $car->title }}</a>
         @if ($car->year)
             <div class="year">{{ $car->year }}</div>
         @endif
@@ -49,6 +49,6 @@
                 </div>
             @endif
         </div>
-        <a href="{{ route('car_detail', $car->slug) }}" class="btn">@lang('car.more')</a>
+        <a href="{{ route('car_detail', ['car' => $car->slug]) }}" class="btn">@lang('car.more')</a>
     </div>
 </div>
