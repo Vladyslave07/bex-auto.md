@@ -3,4 +3,4 @@
         @include('partials.index.car-card')
     @endforeach
 </div>
-{{ $cars->onEachSide(2)->links() }}
+{{ $cars->onEachSide(1)->links() }}
