@@ -11,7 +11,7 @@ return [
 
     'detail' => [
         'more_photo' => '+:num photo',
-        'buy' => 'Купити',
+        'buy' => 'Buy',
         'buy_in_credit' => 'Buy on credit',
         'characteristic' => 'Characteristics',
         'description' => 'Description of the car',

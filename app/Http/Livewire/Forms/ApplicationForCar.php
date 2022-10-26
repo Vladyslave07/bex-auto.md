@@ -25,11 +25,13 @@ class ApplicationForCar extends Component implements BaseForm
 
     public function submit()
     {
+        $this->show = true;
         $fields = $this->validate();
         $fields['phone'] = Str::phoneNumber($fields['phone']);
         $fields['car'] = $this->car;
         $fields['slug_form'] = self::SLUG_FORM;
         $res = FormResult::query()->create($fields);
+        $this->show = false;
         return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 

@@ -58,7 +58,12 @@ class FormResultOrderCalculationCrudController extends CrudController
 
         CRUD::setValidation(FormResultRequest::class);
 
-        CRUD::field('id');
+        CRUD::addField([
+            'name' => 'id',
+            'label' => trans('backpack::fields.id'),
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled']
+        ]);
         CRUD::field('name');
         CRUD::field('phone');
 

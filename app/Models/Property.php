@@ -29,7 +29,7 @@ class Property extends Model
         'show_product' => 'boolean',
 //        'options' => 'array'
     ];
-    protected $translatable = ['name', 'options'];
+    protected $translatable = ['title', 'name', 'options'];
     protected $attributes = ['sort' => 500];
     public static $images = ['image'];
 
