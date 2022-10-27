@@ -6,7 +6,7 @@
 @endif
 
 {{-- location list --}}
-@include('partials.header.location-list')
+{{--@include('partials.header.location-list')--}}
 
 {{-- catalog menu --}}
 @if ($footerMenu['catalog'])

@@ -101,6 +101,7 @@ class PropertyCrudController extends CrudController
             'label' => trans('backpack::fields.image'),
             'type' => 'image',
             'disk' => 'public',
+            'destination_path' => 'properties', 'thumb_prefix' => '',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
