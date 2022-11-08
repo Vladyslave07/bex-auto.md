@@ -45,7 +45,10 @@ class IndexController extends Controller
         // Seo text
         $seoText = SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText'));
+        // Reviews
+        $reviews = Review::reviews();
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText', 'reviews'));
     }
 
     /**

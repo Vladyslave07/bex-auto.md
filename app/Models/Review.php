@@ -6,6 +6,7 @@ use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 
 class Review extends Model
 {
@@ -27,6 +28,19 @@ class Review extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return mixed
+     */
+    public static function reviews()
+    {
+        // todo: Кешировать и сбрасывать кеш при изменении
+//        return Cache::remember('index_reviews', 86400, function () {
+//            return self::query()->orderBy('sort')->active()->take(12)->get();
+//        });
+
+        return self::query()->orderBy('sort')->active()->take(12)->get();
+    }
 
     /*
     |--------------------------------------------------------------------------
