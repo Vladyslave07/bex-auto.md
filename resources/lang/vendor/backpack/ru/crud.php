@@ -223,4 +223,7 @@ return [
 
     'domain' => 'домен',
     'domains' => 'домены',
+
+    'review' => 'Отзыв',
+    'reviews' => 'Отзывы',
 ];
