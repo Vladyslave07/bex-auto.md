@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Str;
 
 class CarFilter
 {
@@ -221,12 +222,12 @@ class CarFilter
                 $properties[$property->slug]['slug'] = $property->slug;
 
                 if ($property->field_type === 'relation') {
-                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = $property->pivot->value;
+                    $properties[$property->slug]['values'][$property->pivot->slug]['value'] = Str::ucfirst($property->pivot->value);
                     $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
                 } else {
                     foreach ($property->getOptions() as $k => $option) {
                         if ($property->pivot->slug == $k) {
-                            $properties[$property->slug]['values'][$k]['value'] = $option;
+                            $properties[$property->slug]['values'][$k]['value'] = Str::ucfirst($option);
                             $properties[$property->slug]['values'][$k]['active'] = false;
                         }
                     }

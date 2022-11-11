@@ -85,7 +85,7 @@
                                         @endif
                                         {{ $property->title }}:
                                     </div>
-                                    <div class="dd">{{ $value }}</div>
+                                    <div class="dd">{{ Str::ucfirst($value) }}</div>
                                 @endif
                             </li>
                         @endforeach
@@ -100,7 +100,7 @@
         @if ($car->description)
             <div class="card-description container">
                 <div class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</div>
-                {{ $car->description }}
+                {!! $car->description !!}
             </div>
         @endif
     </div>
