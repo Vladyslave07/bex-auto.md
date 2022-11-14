@@ -2,8 +2,12 @@
 
 namespace App\Http\Livewire\Forms;
 
+use App\Jobs\FormResultToB24;
+use App\Jobs\OrderPartToB24Job;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
+use App\Utilities\Bitrix24\Entity\Contact;
+use App\Utilities\Bitrix24\Entity\Deal;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -22,11 +26,19 @@ class CallBack extends Component implements BaseForm
     {
         $this->validate();
 
-        FormResult::query()->create([
+        $formattedPhone = Str::phoneNumber($this->phone);
+
+        $result = FormResult::query()->create([
             'name' => $this->name,
-            'phone' => Str::phoneNumber($this->phone),
+            'phone' => $formattedPhone,
             'slug_form' => self::SLUG_FORM,
         ]);
+
+        // Send result to B24
+        if ($result->id > 0) {
+            FormResultToB24::dispatch($result->id)->onQueue('formResultToB24');
+        }
+
         return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 

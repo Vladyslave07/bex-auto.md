@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Forms;
 
+use App\Jobs\FormResultToB24;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
 use Illuminate\Support\Facades\Lang;
@@ -27,12 +28,18 @@ class DiscountForm extends Component implements BaseForm
         $this->show = true;
         $this->validate();
 
-        FormResult::query()->create([
+        $result = FormResult::query()->create([
             'name' => $this->name,
             'phone' => Str::phoneNumber($this->phone),
             'slug_form' => self::SLUG_FORM,
         ]);
         $this->show = false;
+
+        // Send result to B24
+        if ($result->id > 0) {
+            FormResultToB24::dispatch($result->id)->onQueue('formResultToB24');
+        }
+
         return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 
