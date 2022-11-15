@@ -39,7 +39,11 @@ class Review extends Model
 //            return self::query()->orderBy('sort')->active()->take(12)->get();
 //        });
 
-        return self::query()->orderBy('sort')->active()->take(12)->get();
+        // todo: Вынести установку домена глобально
+        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+        $domain = Domain::query()->where('slug', $domainSlug)->first();
+
+        return self::query()->orderBy('sort')->active()->where('domain_id', $domain->id)->take(12)->get();
     }
 
     /*
