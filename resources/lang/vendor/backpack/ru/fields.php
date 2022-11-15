@@ -71,6 +71,8 @@ return [
     'text_review' => 'Текст отзыва',
     'date_created_review' => 'Дата создания отзыва',
     'user_icon' => 'Иконка пользователя',
+    'reviews_id' => 'Id отзывов',
+    'domain' => 'Домен',
 
     'option' => [
         'expect' => 'Ожидается',

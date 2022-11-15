@@ -17,5 +17,9 @@ return [
     'cars' => [
         'youtube_link' => 'Id видео на ютуб ex: "6AnSRR5ltvk"',
         'links' => 'Ссылки выводятся под фотографиями на детальной странице машины',
+    ],
+
+    'domains' => [
+        'reviews_id' => 'Получить id можно выполнив <a href="https://serpapi.com/google-maps-api" target="_blank">get запрос</a>',
     ]
 ];

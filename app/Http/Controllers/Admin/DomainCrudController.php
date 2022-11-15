@@ -72,6 +72,7 @@ class DomainCrudController extends CrudController
 
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'reviews_id', 'label' => trans('backpack::fields.reviews_id'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.reviews_id')]);
 
     }
 

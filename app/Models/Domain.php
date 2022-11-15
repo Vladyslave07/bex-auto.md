@@ -17,13 +17,23 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['slug', 'title'];
+    protected $fillable = ['slug', 'title', 'reviews_id'];
 
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Returns domains with reviews id
+     *
+     * @return \Illuminate\Database\Eloquent\Builder[]|\Illuminate\Database\Eloquent\Collection
+     */
+    public static function domainsWithReviews()
+    {
+        return self::query()->whereNotNull('reviews_id')->get();
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -20,7 +20,7 @@ class Review extends Model
 
     protected $table = 'reviews';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'text', 'rating', 'date_created_review', 'user_name', 'user_icon'];
+    protected $fillable = ['active', 'sort', 'text', 'rating', 'date_created_review', 'user_name', 'user_icon', 'domain_id'];
     public static $images = ['user_icon'];
 
     /*
@@ -47,6 +47,11 @@ class Review extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
+    }
 
     /*
     |--------------------------------------------------------------------------

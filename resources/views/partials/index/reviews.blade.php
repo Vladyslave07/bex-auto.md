@@ -37,6 +37,5 @@
             <div class="swiper-bullets"></div>
             <div class="swiper-button-next team-next"><svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></div>
         </div>
-        <a href="#" class="link-more">@lang('index.reviews.more')</a>
     </div>
 </div>
