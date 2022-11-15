@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ReviewsController;
 use App\Models\Domain;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
@@ -63,6 +64,8 @@ function commonRoute() {
         // Contacts
         Route::get('/contacts', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.contacts');
     });
+
+    Route::get('/reviews-list', ReviewsController::class);
 }
 
 // Admin actions
