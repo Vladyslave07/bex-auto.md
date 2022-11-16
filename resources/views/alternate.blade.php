@@ -1,8 +1,8 @@
-@foreach(\App\Services\LaravelLocalizationCustom::getSupportedLocales() as $localeCode => $properties)
-    @if(\App\Services\LaravelLocalizationCustom::getCurrentLocale() == $localeCode)
+@foreach(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+    @if(\Mcamara\LaravelLocalization\Facades\LaravelLocalization::getCurrentLocale() == $localeCode)
 <link rel="alternate" hrefLang="x-default" href="{{ request()->getUri() }}" />
     @else
-<link rel="alternate" hrefLang="{{ $localeCode . '-' . strtoupper(preg_replace('/(.*)\.' . env('APP_DOMAIN') . '/', '$1', request()->getHost())) }}" href="{{ \App\Services\LaravelLocalizationCustom::getLocalizedURL($localeCode) }}" />
+<link rel="alternate" hrefLang="{{ $localeCode . '-' . strtoupper(preg_replace('/(.*)\.' . env('APP_DOMAIN') . '/', '$1', request()->getHost())) }}" href="{{ Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($localeCode) }}" />
     @endif
 @endforeach
 

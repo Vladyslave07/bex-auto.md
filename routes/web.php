@@ -6,13 +6,14 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+
+
 // Sub-domains
 $domains = Domain::all();
 $domains->each(function ($domain) {
     Route::group([
         'prefix' => LaravelLocalization::setLocale(),
         'domain' => $domain->slug . env('APP_DOMAIN'),
-        'middleware' => ['setRouteNameForLocalize'],
     ], function () {
         commonRoute();
     });
@@ -21,27 +22,34 @@ $domains->each(function ($domain) {
 // Main domain
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['setRouteNameForLocalize'],
 ], function () {
     commonRoute();
 });
 
 function commonRoute() {
+
+    Route::get('br', function() {
+        $brands = \App\Models\Brand::all();
+        foreach ($brands as $brand) {
+            $slug = json_decode($brand->slug, true);
+            $brand->update([
+                'slug' => $slug['ru']
+            ]);
+        }
+    });
+
     // Index
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
     // Services
-    Route::get(
-        \App\Services\LaravelLocalizationCustom::transRoute('routes.service'),
-        [\App\Http\Controllers\ServiceController::class, 'service']
-    )->name('service');
+    Route::get('/service/{service}', [\App\Http\Controllers\ServiceController::class, 'service'])->name('service');
 
     // Car detail
     Route::get('/car-details/{car}', [\App\Http\Controllers\CardController::class, 'index'])->name('car_detail');
 
     // Categories
     Route::get(
-        \App\Services\LaravelLocalizationCustom::transRoute('routes.category'),
+        '/avto/{category}/{page?}/{filer?}',
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 

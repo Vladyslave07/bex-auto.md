@@ -26,7 +26,6 @@ class ServiceRequest extends FormRequest
     {
         return [
              'title' => 'required',
-             'slug' => 'required',
         ];
     }
 

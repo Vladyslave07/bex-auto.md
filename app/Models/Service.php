@@ -5,15 +5,16 @@ namespace App\Models;
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
+use App\Traits\SlugOrTitleTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
+use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Mcamara\LaravelLocalization\Interfaces\LocalizedUrlRoutable;
 
-class Service extends Model implements LocalizedUrlRoutable
+class Service extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute;
+    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -23,7 +24,7 @@ class Service extends Model implements LocalizedUrlRoutable
 
     protected $table = 'services';
     protected $fillable = ['active', 'sort', 'image', 'sub_title', 'sub_title_text', 'title', 'slug', 'youtube_link', 'faq_id', 'seo_text_id', 'text', 'meta_title', 'meta_description'];
-    protected $translatable = ['title', 'text', 'slug', 'sub_title', 'sub_title_text', 'meta_title', 'meta_description'];
+    protected $translatable = ['title', 'text', 'sub_title', 'sub_title_text', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500];
     protected $casts = ['active' => 'boolean'];
     protected $with = ['faqs', 'seo_text'];
@@ -36,55 +37,26 @@ class Service extends Model implements LocalizedUrlRoutable
     */
 
     /**
-     * Returns localized slug from model
-     *
-     * @param $locale
-     * @return mixed
-     */
-    public function getLocalizedRouteKey($locale)
-    {
-        return json_decode($this->original['slug'])->$locale;
-    }
-
-    /**
-     * @param mixed $value
-     * @param null $field
-     * @return \Illuminate\Database\Eloquent\Builder|Model|\never|object|null
-     */
-    public function resolveRouteBinding($value, $field = null)
-    {
-        $cacheKey = $this->table . '_' . $value . '_' . app()->getLocale();
-        return Cache::remember($cacheKey, 86400, function () use ($value) {
-            return static::findByLocalizedSlug($value)->first() ?? abort(404);
-        });
-    }
-
-    /**
-     * @param $slug
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function findByLocalizedSlug($slug)
-    {
-        return static::query()->where($this->getRouteKeyName() . '->' . app()->getLocale(), $slug)
-            ->with($this->with);
-    }
-
-    /**
-     * @param $slug
-     * @return \Illuminate\Database\Eloquent\Builder|Model|object|null
-     */
-    public function findBySlug($slug)
-    {
-        return static::findByLocalizedSlug($slug)->first();
-    }
-
-
-    /**
      * @return string
      */
     public function getRouteKeyName()
     {
         return 'slug';
+    }
+
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'slug_or_title',
+            ],
+        ];
     }
 
     /*

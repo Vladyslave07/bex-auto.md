@@ -33,7 +33,7 @@ class Menu extends Model
     protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image'];
     protected $casts = ['items' => 'array', 'active' => 'bool'];
     public static $images = ['image'];
-    protected $translatable = ['title', 'items', 'slug'];
+    protected $translatable = ['title', 'items'];
     protected $attributes = ['sort' => 500, 'image' => ''];
 
     const FOOTER_MENU_CACHE_KEY = 'footer_menu_items';
@@ -110,7 +110,7 @@ class Menu extends Model
         return Cache::remember(self::FOOTER_MENU_CACHE_KEY, 86400, function () {
             $collectionMenu = self::query()
                 ->active()
-                ->whereIn('slug->ru', [self::CATALOG_MENU_SLUG, self::ABOUT_MENU_SLUG])
+                ->whereIn('slug', [self::CATALOG_MENU_SLUG, self::ABOUT_MENU_SLUG])
                 ->get(['slug', 'title', 'items']);
 
             return [

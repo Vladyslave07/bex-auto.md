@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SlugOrTitleTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
@@ -14,7 +15,7 @@ use Illuminate\Support\Str;
 
 class Brand extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope, Sluggable, SluggableScopeHelpers;
+    use CrudTrait, HasTranslations, DefaultScope, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -24,7 +25,7 @@ class Brand extends Model
 
     protected $table = 'brands';
     protected $fillable = ['active', 'sort', 'title', 'slug'];
-    protected $translatable = ['title', 'slug'];
+    protected $translatable = ['title'];
     protected $attributes = ['sort' => 500];
 
     const INDEX_BRANDS_CACHE_KEY = 'index_brands';
