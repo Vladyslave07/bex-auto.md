@@ -33,19 +33,19 @@ return new class extends Migration
     public function down()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->dropIndex('categories_slug_unique')->unique()->change();
+            $table->dropIndex('categories_slug_unique');
         });
 
         Schema::table('services', function (Blueprint $table) {
-            $table->string('services_slug_unique')->unique()->change();
+            $table->dropIndex('services_slug_unique')->unique()->change();
         });
 
         Schema::table('brands', function (Blueprint $table) {
-            $table->string('brands_slug_unique')->unique()->change();
+            $table->dropIndex('brands_slug_unique');
         });
 
         Schema::table('menus', function (Blueprint $table) {
-            $table->string('menus_slug_unique')->unique()->change();
+            $table->dropIndex('menus_slug_unique');
         });
     }
 };

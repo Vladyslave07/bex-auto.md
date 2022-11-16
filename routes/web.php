@@ -28,16 +28,6 @@ Route::group([
 
 function commonRoute() {
 
-    Route::get('br', function() {
-        $brands = \App\Models\Brand::all();
-        foreach ($brands as $brand) {
-            $slug = json_decode($brand->slug, true);
-            $brand->update([
-                'slug' => $slug['ru']
-            ]);
-        }
-    });
-
     // Index
     Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
