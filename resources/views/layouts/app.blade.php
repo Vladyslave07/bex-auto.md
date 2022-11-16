@@ -37,7 +37,7 @@
             @include('partials.header.cabinet')
 
             {{-- select site lang --}}
-            @include('partials.header.lang-button')
+            <x-lang-switcher></x-lang-switcher>
 
             {{-- menu --}}
             @include('partials.header.main-menu', ['items' => \App\Models\Menu::menuItems()])

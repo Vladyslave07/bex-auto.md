@@ -19,7 +19,7 @@ class ReviewsController extends Controller
     {
         // todo: Вынести установку домена глобально
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        $domain = Domain::query()->where('slug', $domainSlug)->first();
+        $domain = Domain::domainBySlug($domainSlug);
 
         return new ReviewResource(Review::query()->active()->where('domain_id', $domain->id)->paginate(100));
     }
