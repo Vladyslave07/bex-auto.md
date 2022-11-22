@@ -40,7 +40,7 @@
             @endforeach
         </div>
         <div class="swiper-btn text-center">
-            <a href="#" class="btn">@lang('car.show_all')</a>
+            <a href="{{ route('category', 'avto-iz-ssha') }}" class="btn">@lang('car.show_all')</a>
         </div>
     </div>
 @endif

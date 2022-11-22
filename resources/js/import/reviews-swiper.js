@@ -84,6 +84,9 @@ export default function() {
                 },
                 on: {
                     init: function(e) {
+                        if (reviewsArr.length < 14 ) {
+                            return;
+                        }
                         e.appendSlide(reviewsArr.slice(0, 4));
                         e.slides.forEach((el) => {
                             observer.observe(el.querySelector('.review-text p'));

@@ -28,6 +28,7 @@ class Menu extends Model
 
     const CATALOG_MENU_SLUG = 'avto';
     const ABOUT_MENU_SLUG = 'about';
+    const REVIEWS_MENU_ITEM_SLUG = 'reviews';
 
     protected $table = 'menus';
     protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image'];
@@ -67,7 +68,7 @@ class Menu extends Model
     public static function menuItems()
     {
         return Cache::remember(self::MAIN_MENU_CACHE_KEY, 86400, function () {
-            return  self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image']);
+            return self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image']);
         });
     }
 
@@ -83,6 +84,11 @@ class Menu extends Model
         $locale = app()->getLocale();
         if (LaravelLocalization::getCurrentLocale() === LaravelLocalization::getDefaultLocale()) {
             $locale = false;
+        }
+
+        // todo: delete it when reviews page is create
+        if ($link === self::REVIEWS_MENU_ITEM_SLUG) {
+            return LaravelLocalization::localizeURL('/#reviews', $locale);
         }
 
         return LaravelLocalization::localizeURL(sprintf('/%s/%s', $category, $link), $locale);
