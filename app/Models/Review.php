@@ -41,9 +41,14 @@ class Review extends Model
 
         // todo: Вынести установку домена глобально
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        $domain = Domain::domainBySlug($domainSlug);
 
-        return self::query()->orderBy('sort')->active()->where('domain_id', $domain->id)->take(12)->get();
+        $query = self::query()->orderBy('sort')->active();
+        $domain = Domain::domainBySlug($domainSlug);
+        if ($domain) {
+            $query->where('domain_id', $domain->id);
+        }
+
+        return $query->take(12)->get();
     }
 
     /*

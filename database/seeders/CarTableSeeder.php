@@ -26,7 +26,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'year' => 2011,
             ],
             [
                 'title' => '{"uk":"Jeep","ru":"Jeep","en":"Jeep"}',
@@ -37,8 +36,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'year' => 2012,
-
             ],
             [
                 'title' => '{"uk":"Nisan","ru":"NIsan","en":"NIsan"}',
@@ -49,7 +46,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2021,
             ],
             [
                 'title' => '{"uk":"Ford","ru":"Ford","en":"Ford"}',
@@ -60,7 +56,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '22000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2013,
             ],
             [
                 'title' => '{"uk":"Jeep","ru":"Jeep","en":"Jeep"}',
@@ -71,7 +66,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'year' => 2013,
             ],
             [
                 'title' => '{"uk":"Nisan","ru":"NIsan","en":"NIsan"}',
@@ -82,8 +76,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2012,
-
             ],
             [
                 'title' => '{"uk":"Ford","ru":"Ford","en":"Ford"}',
@@ -94,8 +86,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '22000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2012,
-
             ],
             [
                 'title' => '{"uk":"Geely","ru":"Geely","en":"Geely"}',
@@ -106,8 +96,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'year' => 2013,
-
             ],
             [
                 'title' => '{"uk":"Jeep","ru":"Jeep","en":"Jeep"}',
@@ -118,8 +106,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'year' => 2017,
-
             ],
             [
                 'title' => '{"uk":"Nisan","ru":"NIsan","en":"NIsan"}',
@@ -130,8 +116,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2019,
-
             ],
             [
                 'title' => '{"uk":"Geely","ru":"Geely","en":"Geely"}',
@@ -142,7 +126,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'year' => 2020,
             ],
             [
                 'title' => '{"uk":"Jeep","ru":"Jeep","en":"Jeep"}',
@@ -153,8 +136,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'year' => 2020,
-
             ],
             [
                 'title' => '{"uk":"Nisan","ru":"NIsan","en":"NIsan"}',
@@ -165,7 +146,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'expect',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2020,
             ],
             [
                 'title' => '{"uk":"Geely","ru":"Geely","en":"Geely"}',
@@ -176,7 +156,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '12400.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"Product description"}',
-                'year' => 2020,
             ],
             [
                 'title' => '{"uk":"Jeep","ru":"Jeep","en":"Jeep"}',
@@ -187,8 +166,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '14000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will"}',
-                'year' => 2020,
-
             ],
             [
                 'title' => '{"uk":"Nisan","ru":"NIsan","en":"NIsan"}',
@@ -199,7 +176,6 @@ class CarTableSeeder extends Seeder
                 'status' => 'in_stock',
                 'price' => '23000.00',
                 'description' => '{"uk":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","ru":"\u041e\u043f\u0438\u0441\u0430\u043d\u0438\u0435 \u0442\u043e\u0432\u0430\u0440\u0430","en":"The order will be delivered"}',
-                'year' => 2020,
             ],
         ]);
     }

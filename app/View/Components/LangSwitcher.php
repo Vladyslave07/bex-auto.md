@@ -41,7 +41,7 @@ class LangSwitcher extends Component
     {
         // todo: Вынести установку домена глобально
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        return Domain::domainBySlug($domainSlug);
+        return Domain::domainBySlug('uk');
     }
 
     /**
