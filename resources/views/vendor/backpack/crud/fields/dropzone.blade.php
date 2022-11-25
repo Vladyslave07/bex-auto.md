@@ -13,7 +13,7 @@
                         <img src="{{ config('filesystems.disks.'.$field['disk'].'.url') .'/'. $field['destination_path'] .'/'. $crud->entry->id .'/'. $field['thumb_prefix'] . basename ($file_path) }}" class="img-thumbnail" />
                     </div>
                     <a class="dz-remove dz-remove-existing" href="javascript:undefined;" data-path="{{ basename ($file_path) }}">
-                        {{ trans('prodixx.dropzone-field-for-backpack::dropzone.remove_file') }}
+                        Удалить файл
                     </a>
                 </div>
             @endforeach
@@ -106,7 +106,7 @@
             dictMaxFilesExceeded: "{{ trans('prodixx.dropzone-field-for-backpack::dropzone.max_files_exceeded') }}",
             dictCancelUpload: "{{ trans('prodixx.dropzone-field-for-backpack::dropzone.cancel_upload') }}",
             dictCancelUploadConfirmation: "{{ trans('prodixx.dropzone-field-for-backpack::dropzone.cancel_upload_confirmation') }}",
-            dictRemoveFile: "{{ trans('prodixx.dropzone-field-for-backpack::dropzone.remove_file') }}",
+            dictRemoveFile: "Удалить файл",
             success: function (file, response, request) {
                 if (response.success) {
                     $(file.previewElement).find('.dropzone-filename-field').val(response.filename);
