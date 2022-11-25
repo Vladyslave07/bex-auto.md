@@ -26,7 +26,7 @@ return new class extends Migration
         });
 
         Schema::table('menus', function (Blueprint $table) {
-            $table->string('slug')->unique()->change();
+            $table->string('slug')->change();
         });
     }
 
