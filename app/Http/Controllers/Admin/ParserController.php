@@ -10,6 +10,7 @@ use App\Http\Requests\ParserRequest;
 use App\Jobs\ParserRun;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Domain;
 use App\Models\Parser;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
@@ -30,7 +31,9 @@ class ParserController
 
         $infoQueues = $this->infoQueue();
 
-        return view('admin.parser', compact('categories', 'parserInfo', 'statuses', 'infoQueues'));
+        $domains = Domain::query()->get();
+
+        return view('admin.parser', compact('categories', 'parserInfo', 'statuses', 'infoQueues', 'domains'));
     }
 
     public function save(ParserRequest $request)

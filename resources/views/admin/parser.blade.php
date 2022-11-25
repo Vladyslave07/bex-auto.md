@@ -76,6 +76,22 @@
 
                             </select>
                         </div>
+
+                        <div class="form-group col-sm-12">
+                            <label>Домен на котором будет отображаться машина</label>
+
+                            <select name="domain_id" class="form-control" data-prev-value="{{ $parserInfo->where('slug', 'domain_id')->first()->value }}">
+                                @foreach($domains as $domain)
+                                    <option
+                                            value="{{ $domain->id }}"
+                                            @if($parserInfo->where('slug', 'domain_id')->first()->value == $domain->id) selected @endif
+                                    >
+                                        {{ $domain->title }}
+                                    </option>
+                                @endforeach
+
+                            </select>
+                        </div>
                     </div>
                 </div>
 

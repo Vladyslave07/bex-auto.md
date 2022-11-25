@@ -35,6 +35,7 @@ class ParserRun extends Command
             $fields->where('slug', 'detail_url')->first()->value,
             $fields->where('slug', 'token')->first()->value,
             $fields->where('slug', 'status')->first()->value,
+            $fields->where('slug', 'domain_id')->first()->value,
             $fields->where('slug', 'category')->first()->value,
         );
         $parser->apply();

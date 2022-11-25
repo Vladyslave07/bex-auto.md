@@ -142,6 +142,7 @@ class PropertyCrudController extends CrudController
             'name' => 'step',
             'label' => trans('backpack::fields.step'),
             'type' => 'number',
+            'attributes' => ["step" => "any"],
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 

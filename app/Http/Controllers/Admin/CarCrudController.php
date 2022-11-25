@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Domain;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -90,9 +91,25 @@ class CarCrudController extends CrudController
     {
         CRUD::setValidation(CarRequest::class);
 
-        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'pin', 'label' => trans('backpack::fields.pin'), 'type' => 'checkbox']);
-        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'pin', 'label' => trans('backpack::fields.pin'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+
+        CRUD::addField([
+            'name' => 'domain',
+            'label' => trans('backpack::fields.domain'),
+            'type' => 'relationship',
+            'entity' => 'domain',
+            'attribute' => 'title',
+            'model' => Domain::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'tab' => 'Автомобиль',
+            'hint' => trans('backpack::hint.domains.car'),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug')]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'vin', 'label' => trans('backpack::fields.vin'), 'type' => 'text']);

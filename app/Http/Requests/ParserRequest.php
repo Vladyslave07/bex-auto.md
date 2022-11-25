@@ -28,7 +28,8 @@ class ParserRequest extends FormRequest
             'detail_url' => ['required'],
             'token' => ['required'],
             'category' => ['required'],
-            'status' => ['required']
+            'status' => ['required'],
+            'domain_id' => ['required']
         ];
     }
 

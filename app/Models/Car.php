@@ -30,7 +30,7 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin'];
+    protected $fillable = ['domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin'];
     public static $images = ['images'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500, 'images' => ''];
@@ -180,6 +180,11 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
+    }
+
     /**
      * categories relationship
      *
@@ -226,6 +231,22 @@ class Car extends Model
             return $query;
         }
         return (new \App\filters\CarFilter($query, $filterQuery))->apply();
+    }
+
+    /**
+     * Return cars only for current domain
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeCarsForCurrentDomain(Builder $query): Builder
+    {
+        // НУЖНО УСТАНОВИТЬ ГЛОБАЛЬНО ДЛЯ ВСЕГО САЙТА
+        // todo: Вынести установку домена глобально
+        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+        $domain = Domain::domainBySlug($domainSlug);
+
+        return $query->where('domain_id', $domain->id);
     }
 
     /*

@@ -21,6 +21,7 @@ class Parser
     public string $token;
     public string $categoryId;
     public $status;
+    public $domainId;
 
     // Car properties
     public $propertyBrand;
@@ -39,13 +40,14 @@ class Parser
 
     const FIRST_PAGE = 1;
 
-    public function __construct(string $listUrl, string $detailUrl, string $token, $status, $categoryId = null,)
+    public function __construct(string $listUrl, string $detailUrl, string $token, $status, $domainId, $categoryId = null)
     {
         $this->setListUrl($listUrl);
         $this->setDetailUrl($detailUrl);
         $this->setToken($token);
         $this->setCategoryId($categoryId);
         $this->setStatus($status);
+        $this->setDomain($domainId);
 
         // Set car properties
         $this->setPropertyBrand(Property::getBySlug('brand'));
@@ -126,6 +128,7 @@ class Parser
             'price' => $price,
             'mileage' => $mileage,
             'vin' => $vin,
+            'domain_id' => $this->getDomain(),
         ];
         if ((int)$price <= 0) {
             $carInfo['info'] = json_encode([
@@ -581,6 +584,22 @@ class Parser
     public function setStatus($status): void
     {
         $this->status = $status;
+    }
+
+    /**
+     * @param mixed $domainId
+     */
+    public function setDomain($domainId): void
+    {
+        $this->domainId = $domainId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDomain()
+    {
+        return $this->domainId;
     }
 
     /**

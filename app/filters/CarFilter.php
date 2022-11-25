@@ -271,7 +271,7 @@ class CarFilter
         $ranges = [];
         foreach ($cars as $car) {
             foreach ($car->properties as $property) {
-                if ($property->filter_type !== self::FROM_TO_PROPERTY_NAME) {
+                if ($property->filter_type !== self::FROM_TO_PROPERTY_NAME || !$property->pivot->value) {
                     continue;
                 }
                 $ranges[$property->slug]['name'] = $property->title;

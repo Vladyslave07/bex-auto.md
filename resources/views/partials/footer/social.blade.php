@@ -6,6 +6,6 @@
         <svg width="16" height="19"><use xlink:href="#tiktok-icon"></use></svg>
     </a>
     <a href="{{ config('settings.viber') }}" aria-label="viber">
-        <svg width="16" height="18"><use xlink:href="#viber-icon"></use></svg>
+        <svg width="23" height="23"><use xlink:href="#insta-icon"></use></svg>
     </a>
 </div>
