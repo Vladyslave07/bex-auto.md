@@ -42,16 +42,19 @@ export default function() {
         breakpoints: {
             660: {
                 slidesPerView: 2,
+                slidesPerGroup: 2,
                 spaceBetween: 30,
                 centeredSlides: false
             },
             900: {
                 slidesPerView: 3,
+                slidesPerGroup: 3,
                 spaceBetween: 30,
                 centeredSlides: false
             },
             1200: {
                 slidesPerView: 4,
+                slidesPerGroup: 4,
                 spaceBetween: 30,
                 centeredSlides: false
             }
