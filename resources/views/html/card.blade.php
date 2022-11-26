@@ -45,7 +45,7 @@
                                     <img width="887" height="584" src="{{ asset('img/example/img_16.png') }}" alt="">
                                 </picture>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide video">
                                 <iframe data-src="https://www.youtube.com/embed/6AnSRR5ltvk"></iframe>
                             </div>
                             <div class="swiper-slide">

@@ -4,6 +4,7 @@ export default function() {
     const galleryDwiper =  new Swiper('.gallery-swiper', {
         slidesPerView: 1,
         spaceBetween: 20,
+        autoHeight: true,
         navigation: {
             nextEl: '.swiper-button-next',
             prevEl: '.swiper-button-prev',

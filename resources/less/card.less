@@ -108,18 +108,10 @@
     &-gallery {
         img {
             display: block;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            margin: auto;
         }
         .gallery-swiper {
             position: relative;
-            padding-top: 66%;
-            .swiper-wrapper {
-                position: absolute;
-                left: 0;
-                top: 0;
-            }
             .swiper-nav {
                 pointer-events: none;
                 position: absolute;
@@ -146,7 +138,13 @@
         }
         .swiper-slide {
             height: auto;
+            &.video {
+                padding-top: 66%;
+            }
             iframe {
+                position: absolute;
+                left: 0;
+                top: 0;
                 border: 0;
                 height: 100%;
                 width: 100%;
