@@ -88,6 +88,7 @@ class Car extends Model
                 ->whereHas('categories', function ($query) use ($categories){
                     return $query->whereIn('category_id', $categories)->orderBy('category_id');
                 })
+                ->carsForCurrentDomain()
                 ->take(11)
                 ->get();
 
@@ -115,6 +116,7 @@ class Car extends Model
                 ->orderBy('id')
                 ->where('status', self::EXPECTED_STATUS)
                 ->active()
+                ->carsForCurrentDomain()
                 ->take(11)
                 ->get();
         });
@@ -142,7 +144,7 @@ class Car extends Model
     public static function popularCars()
     {
         return Cache::remember(self::POPULAR_CARS_CACHE_KEY, 86400, function () {
-            return self::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->take(12)->get();
+            return self::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->carsForCurrentDomain()->take(12)->get();
         });
     }
 

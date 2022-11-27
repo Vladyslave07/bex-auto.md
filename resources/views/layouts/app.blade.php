@@ -33,9 +33,6 @@
                 <span></span>
             </div>
 
-            {{-- cabinet link --}}
-            @include('partials.header.cabinet')
-
             {{-- select site lang --}}
             <x-lang-switcher></x-lang-switcher>
 
