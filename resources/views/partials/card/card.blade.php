@@ -46,7 +46,8 @@
                                 <div class="item @if($key === 0) active @endif">
                                     <picture>
                                         {{--                                    <source type="image/webp" srcset="{{ asset('img/example/img_17.webp') }}">--}}
-                                        <img width="206" height="187" src="{{ Storage::disk('public')->url($image) }}" alt="">
+                                        <img width="206" height="187" src="{{ Storage::disk('public')->url($image) }}"
+                                             alt="">
                                     </picture>
                                     @if($key === 3)
                                         <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 3]) }}</span>
@@ -68,15 +69,17 @@
                     @endif
                 </div>
                 <div class="card-btn">
-                    <button onclick="openModal('#applicationForCar')" class="btn">{{ Lang::get('car.detail.buy') }}</button>
-                    <button onclick="openModal('#applicationForCredit')" class="btn btn-blue">{{ Lang::get('car.detail.buy_in_credit') }}</button>
+                    <button onclick="openModal('#applicationForCar')"
+                            class="btn">{{ Lang::get('car.detail.buy') }}</button>
+                    <button onclick="openModal('#applicationForCredit')"
+                            class="btn btn-blue">{{ Lang::get('car.detail.buy_in_credit') }}</button>
                 </div>
                 <div class="card-features">
                     <strong class="title">{{ Lang::get('car.detail.characteristic')}}:</strong>
                     <ul class="list">
                         @foreach($car->properties as $property)
-                            <li>
-                                @if($value = $property->getValue())
+                            @if($value = $property->getValue())
+                                <li>
                                     <div class="dt">
                                         @if ($image = $property->image)
                                             <div class="icon">
@@ -86,8 +89,8 @@
                                         {{ $property->title }}:
                                     </div>
                                     <div class="dd">{{ Str::ucfirst($value) }}</div>
-                                @endif
-                            </li>
+                                </li>
+                            @endif
                         @endforeach
                     </ul>
                 </div>

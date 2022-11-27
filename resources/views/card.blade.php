@@ -14,7 +14,9 @@
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
             <li class="breadcrumb-item"><a href="{{ route('index') }}">Bexhill Trading Auto</a></li>
-            <li class="breadcrumb-item"><a href="{{ route('category', ['category' => $car->category()->first()->slug]) }}">{{ $car->category()->first()->title }}</a></li>
+            @if ($category = $car->category()->first())
+                <li class="breadcrumb-item"><a href="{{ route('category', ['category' => $category->slug]) }}">{{ $category->title }}</a></li>
+            @endif
             <li class="breadcrumb-item" aria-current="page">{{ $car->titleWithYear }}</li>
         </ol>
     </nav>
