@@ -3,7 +3,7 @@
 
 namespace App\filters;
 
-
+use App\Helper\General;
 use App\Models\Brand;
 use App\Models\CarModel;
 use App\Models\Category;
@@ -157,6 +157,7 @@ class CarFilter
     public static function getCurrentPropertiesFilter(Category $category, $filterQuery = null)
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
+        // todo: Машины на разных доменах
         $cars = $category->cars()->with('properties')->active()->get();
 
         $properties = [];
@@ -165,7 +166,7 @@ class CarFilter
         $properties[self::CAR_STATUS_PROPERTY_SLUG] = self::statusProperty($cars);
 
         // Price
-        $properties[self::FILTER_PRICE_PROPERTY_NAME] = self::priceProperty();
+        $properties[self::FILTER_PRICE_PROPERTY_NAME] = self::priceProperty($cars);
 
         // Usual properties
         $properties = array_merge($properties, self::usualProperties($cars));
@@ -285,7 +286,9 @@ class CarFilter
 
         foreach ($ranges as $key => $range) {
             if ($property = $properties->where('slug', $key)->first()) {
-                $range = self::makeValueFroFromToField(range(min($range['values']), max($range['values']), $property->step), $property->prefix);
+                $min = 0;
+                $max = max($range['values']);
+                $range = self::makeValueFroFromToField(range($min, General::max($max), $property->step), $property->prefix);
                 $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
             }
         }
@@ -293,31 +296,28 @@ class CarFilter
     }
 
     /**
+     * @param $cars
      * @return array
      * todo: получать значение из текущих машин
      */
-    public static function priceProperty(): array
+    public static function priceProperty($cars): array
     {
         $properties['name'] = Lang::get('category.filter.price');
         $properties['type'] = self::FROM_TO_PROPERTY_NAME;
         $properties['slug'] = self::FILTER_PRICE_PROPERTY_NAME;
-        $range = self::makeValueFroFromToField(range(5000, 50000, 2500), '$');
+
+        $min = $cars->min('price') ?? 5000;
+        $max = $cars->max('price') ?? 50000;
+
+        $range = self::makeValueFroFromToField(range(General::min($min), General::max($max), 2500), '$');
         $properties['values'] = ['from' => $range, 'to' => $range];
-        // todo: станавливать текущие значени если пользователь перешел на страницу  фильтра
-//        $properties['current_value'] = [];
-//
-//        foreach ($params as $param) {
-//            if ($param['type'] === $propertySlug) {
-//                $value = explode('~', $param['value']);
-//                $properties['current_value'] = ['min' => $value[0], 'max' => $value[1]];
-//            }
-//        }
+
         return $properties;
     }
 
     /**
      * @param string $filterQuery
-     * @param array $models
+     * @param array $curModels
      * @return array
      */
     public static function getCurrentModels(string $filterQuery, array $curModels)
