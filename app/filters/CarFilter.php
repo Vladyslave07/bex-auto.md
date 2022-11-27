@@ -127,7 +127,7 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             [$from, $to] = explode('~', $propValue);
-            $query->where('property_id', $propId)->whereBetween('car_property.value', [$from, $to]);
+            $query->where('property_id', $propId)->whereBetween('car_property.value', [$from, $to + 0.1]);
         });
     }
 

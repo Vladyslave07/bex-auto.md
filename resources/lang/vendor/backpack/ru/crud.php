@@ -178,6 +178,7 @@ return [
     // returned when no translations found in select inputs
     'empty_translations' => '(пусто)',
 
+    'show_page' => 'Посмотреть страницу',
 
     'branch' => 'филиал',
     'branches' => 'филиалы',
