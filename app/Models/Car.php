@@ -12,6 +12,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
 use phpDocumentor\Reflection\Types\Integer;
 
 class Car extends Model
@@ -279,6 +280,14 @@ class Car extends Model
             return $this->categories->first()->title;
         }
         return '';
+    }
+
+    public function getTitleWithYearAttribute()
+    {
+        if (!Str::contains($this->title, $this->year)) {
+            return sprintf('%s %s', $this->title, $this->year);
+        }
+        return $this->title;
     }
 
     public function getPriceFormatAttribute()

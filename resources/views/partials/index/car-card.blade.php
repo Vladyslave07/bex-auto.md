@@ -20,7 +20,7 @@
         </a>
     </div>
     <div class="body">
-        <a href="{{ route('car_detail',  ['car' => $car->slug]) }}" class="title">{{ $car->title }}</a>
+        <a href="{{ route('car_detail',  ['car' => $car->slug]) }}" class="title">{{ $car->titleWithYear }}</a>
         @if ($car->year)
             <div class="year">{{ $car->year }}</div>
         @endif

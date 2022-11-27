@@ -73,6 +73,7 @@ return [
     'user_icon' => 'Иконка пользователя',
     'reviews_id' => 'Id отзывов',
     'domain' => 'Домен',
+    'show_link' => 'Ссылка активна',
 
     'option' => [
         'expect' => 'Ожидается',

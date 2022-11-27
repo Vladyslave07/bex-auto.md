@@ -3,7 +3,7 @@
         <div class="bg">
             <div class="container">
                 <div class="card-title">
-                    <h1 class="main-title">{{ $car->title }}</h1>
+                    <h1 class="main-title">{{ $car->titleWithYear }}</h1>
                     <div class="price">{{ $car->price_format }}</div>
                 </div>
                 <div class="card-nav">

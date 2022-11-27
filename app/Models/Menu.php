@@ -31,8 +31,8 @@ class Menu extends Model
     const REVIEWS_MENU_ITEM_SLUG = 'reviews';
 
     protected $table = 'menus';
-    protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image'];
-    protected $casts = ['items' => 'array', 'active' => 'bool'];
+    protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image', 'show_link'];
+    protected $casts = ['items' => 'array', 'active' => 'bool', 'show_link' => 'bool'];
     public static $images = ['image'];
     protected $translatable = ['title', 'items'];
     protected $attributes = ['sort' => 500, 'image' => ''];
@@ -68,7 +68,7 @@ class Menu extends Model
     public static function menuItems()
     {
         return Cache::remember(self::MAIN_MENU_CACHE_KEY, 86400, function () {
-            return self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image']);
+            return self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image', 'show_link']);
         });
     }
 

@@ -72,6 +72,13 @@ class MenuCrudController extends CrudController
         ]);
 
         CRUD::addField([
+            'name'       => 'show_link',
+            'label'      => trans('backpack::fields.show_link'),
+            'type'       => 'checkbox',
+            'default'    => '1',
+        ]);
+
+        CRUD::addField([
             'name'       => 'title',
             'label'      => trans('backpack::settings.name'),
             'type'       => 'text',
