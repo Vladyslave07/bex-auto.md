@@ -158,7 +158,7 @@ class CarFilter
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
         // todo: Машины на разных доменах
-        $cars = $category->cars()->with('properties')->active()->get();
+        $cars = $category->cars()->with('properties')->carsForCurrentDomain()->active()->get();
 
         $properties = [];
 
