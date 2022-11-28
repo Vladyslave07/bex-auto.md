@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
@@ -81,7 +82,7 @@ class Car extends Model
     {
         $categories = array_column($categories->toArray(), 'id');
 
-        return Cache::remember(self::CARS_IN_STOCK_CATEGORY . implode('_', $categories), 86400, function () use ($categories) {
+        return Cache::remember(General::cacheKey(self::CARS_IN_STOCK_CATEGORY) . implode('_', $categories), 86400, function () use ($categories) {
             $carsInStock = self::query()
                 ->orderBy('id')
                 ->where('status', self::IN_STOCK_STATUS)
@@ -112,7 +113,7 @@ class Car extends Model
      */
     public static function expectedCars()
     {
-        return Cache::remember(self::EXPECTED_CARS_CACHE_KEY, 86400, function () {
+        return Cache::remember(General::cacheKey(self::EXPECTED_CARS_CACHE_KEY), 86400, function () {
             return self::query()
                 ->orderBy('id')
                 ->where('status', self::EXPECTED_STATUS)
@@ -144,8 +145,9 @@ class Car extends Model
      */
     public static function popularCars()
     {
-        return Cache::remember(self::POPULAR_CARS_CACHE_KEY, 86400, function () {
-            return self::query()->active()->orderBy('pin', 'desc')->orderBy('sort')->carsForCurrentDomain()->take(12)->get();
+        return Cache::remember(General::cacheKey(self::POPULAR_CARS_CACHE_KEY), 86400, function () {
+            return self::query()->active()->orderBy('pin', 'desc')
+                ->orderBy('sort')->carsForCurrentDomain()->take(12)->get();
         });
     }
 

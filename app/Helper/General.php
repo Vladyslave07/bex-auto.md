@@ -75,4 +75,18 @@ class General
         return (int)ceil($number / $digit) * $digit;
     }
 
+    /**
+     * Return cache key for each domains
+     *
+     * @param $key
+     * @return string
+     */
+    public static function cacheKey($key): string
+    {
+        // todo: Вынести установку домена глобально
+        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+
+        return $domainSlug . '_' . $key;
+    }
+
 }
