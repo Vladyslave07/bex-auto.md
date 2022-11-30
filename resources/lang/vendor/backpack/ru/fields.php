@@ -74,6 +74,7 @@ return [
     'reviews_id' => 'Id отзывов',
     'domain' => 'Домен',
     'show_link' => 'Ссылка активна',
+    'phone_mask' => 'Код страны',
 
     'option' => [
         'expect' => 'Ожидается',

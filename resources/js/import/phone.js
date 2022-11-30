@@ -2,8 +2,10 @@ import Inputmask from "inputmask";
 
 export default function () {
     document.addEventListener('livewire:load', function () {
+        let mask = document.querySelector('meta[name=phone_mask]').getAttribute('content')
+
         Inputmask({
-            mask: '+380 ( 999999999 )',
+            mask: mask,
             showMaskOnHover: false,
             clearMaskOnLostFocus: true,
 

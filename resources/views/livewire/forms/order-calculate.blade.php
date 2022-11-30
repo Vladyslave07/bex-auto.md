@@ -6,7 +6,7 @@
             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <div class="form-group">
-            <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" type="text" placeholder="+380 ( _____ )" data-type="tel">
+            <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" type="text" placeholder="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}" data-type="tel">
             @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
         <button class="btn" type="submit">{{ $this->btnText ?: Lang::get('forms.order-calc.submit') }}</button>

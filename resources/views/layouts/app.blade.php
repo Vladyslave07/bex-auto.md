@@ -11,6 +11,8 @@
 
         <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNUq5n3HwAEUQJBudQtMwAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon" />
 
+        <meta name="phone_mask" content="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}">
+
         @include('alternate')
 
         @stack('styles')

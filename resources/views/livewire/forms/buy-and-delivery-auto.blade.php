@@ -14,7 +14,7 @@
             </div>
             <div class="form-group">
                 <input class="form-control @error('phone') is-invalid @enderror" wire:model.defer="phone" type="text"
-                       placeholder="+380 ( _____ )"
+                       placeholder="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}"
                        data-type="tel" required>
                 @error('phone')
                 <div class="invalid-feedback">{{ $message }}</div>@enderror
