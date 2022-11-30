@@ -21,7 +21,7 @@
             <h1 class="main-title noline color-red">@lang('static.guarantee.title')</h1>
             <div class="text-page">
                 <h2 class="main-title text-center noline color-blue">
-                    @lang('static.guarantee.sub_title')
+                    {{ config('settings.guarantee_h1') }}
                 </h2>
                 <div class="width-fix">
                     <picture>

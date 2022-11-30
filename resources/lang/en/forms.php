@@ -2,8 +2,8 @@
 return [
     'call_back_title' => 'Leave an application and we will select a car for your budget and request',
     'name' => 'Name',
-    'car' => 'Desirable car',
-    'country' => 'Country of origin of the car',
+    'car' => 'Desired car',
+    'country' => 'Auto market',
     'call_back_button' => 'Choose a car',
     'buy-and-delivery' => [
         'title' => 'Let\'s find the car of your dreams!',

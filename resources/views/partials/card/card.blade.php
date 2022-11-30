@@ -88,7 +88,7 @@
                                         @endif
                                         {{ $property->title }}:
                                     </div>
-                                    <div class="dd">{{ Str::ucfirst($value) }}</div>
+                                    <div class="dd">{{ Str::ucfirst($value) }} {{ $property->prefix }}</div>
                                 </li>
                             @endif
                         @endforeach
