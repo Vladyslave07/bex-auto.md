@@ -23,6 +23,7 @@ class Domain extends Model
 
     const DEFAULT_DOMAIN = 6;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
+    const PHONE_PLACEHOLDER_CACHE_KEY = 'placeholder';
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -68,7 +69,7 @@ class Domain extends Model
      */
     public static function phonePlaceholderForCurrDomain()
     {
-        return Cache::remember( General::cacheKey(self::PHONE_MASK_CACHE_KEY), now()->addMonth(), function () {
+        return Cache::remember( General::cacheKey(self::PHONE_PLACEHOLDER_CACHE_KEY), now()->addMonth(), function () {
             // todo: Вынести установку домена глобально
             $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
 
