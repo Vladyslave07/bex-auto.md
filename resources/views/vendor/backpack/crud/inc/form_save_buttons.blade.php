@@ -26,8 +26,9 @@
             </div>
         @endif
 
-        <a href="{{ route('car_detail', $crud->getCurrentEntry()->slug) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
-
+        @if($entry = $crud->getCurrentEntry())
+            <a href="{{ route('car_detail', $entry->slug) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
+        @endif
         @if(!$crud->hasOperationSetting('showCancelButton') || $crud->getOperationSetting('showCancelButton') == true)
             <a href="{{ $crud->hasAccess('list') ? url($crud->route) : url()->previous() }}" class="btn btn-default"><span class="la la-ban"></span> &nbsp;{{ trans('backpack::crud.cancel') }}</a>
         @endif

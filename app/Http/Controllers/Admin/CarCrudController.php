@@ -106,10 +106,13 @@ class CarCrudController extends CrudController
                 return $query->orderBy('title', 'asc')->get();
             }),
             'tab' => 'Автомобиль',
+            'default' => Domain::DEFAULT_DOMAIN,
             'hint' => trans('backpack::hint.domains.car'),
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'updated_at', 'label' => trans('backpack::fields.updated_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug')]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'vin', 'label' => trans('backpack::fields.vin'), 'type' => 'text']);

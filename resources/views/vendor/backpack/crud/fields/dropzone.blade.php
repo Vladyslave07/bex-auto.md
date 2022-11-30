@@ -10,7 +10,7 @@
         		<div class="dz-preview dz-image-preview dz-complete text-center">
                     <input type="hidden" name="{{ $field['name'] }}[]" value="{{ $file_path }}" />
                     <div class="dz-image-no-hover">
-                        <img src="{{ config('filesystems.disks.'.$field['disk'].'.url') .'/'. $field['destination_path'] .'/'. $crud->entry->id .'/'. $field['thumb_prefix'] . basename ($file_path) }}" class="img-thumbnail" />
+                        <img src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($file_path)  }}" class="img-thumbnail" />
                     </div>
                     <a class="dz-remove dz-remove-existing" href="javascript:undefined;" data-path="{{ basename ($file_path) }}">
                         Удалить файл

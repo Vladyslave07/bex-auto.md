@@ -20,6 +20,8 @@ class Domain extends Model
     protected $guarded = ['id'];
     protected $fillable = ['slug', 'title', 'reviews_id'];
 
+    const DEFAULT_DOMAIN = 6;
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS

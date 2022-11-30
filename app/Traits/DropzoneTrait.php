@@ -34,8 +34,14 @@ trait DropzoneTrait
 
         try {
             $image = Image::make($file);
-            $filename = $request->slug . '-' . Str::random(4) . '.' . File::extension($file->getClientOriginalName());
-            $file_path =  $request->destination_path . '/' . $request->entry . '/' . $filename;
+            $filename = $request->slug . '-' . Str::random(8) . '.' . File::extension($file->getClientOriginalName());
+            $file_path =  $request->destination_path;
+
+            if ($request->entry) {
+                $file_path .= '/' . $request->entry;
+            }
+
+            $file_path .= '/' . $filename;
 
             $big_image = Image::make($image)->fit($request->image_width, $request->image_height, function ($constraint) {
                 $constraint->upsize();
