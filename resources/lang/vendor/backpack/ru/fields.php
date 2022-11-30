@@ -75,6 +75,7 @@ return [
     'domain' => 'Домен',
     'show_link' => 'Ссылка активна',
     'phone_mask' => 'Код страны',
+    'placeholder' => 'placeholder',
 
     'option' => [
         'expect' => 'Ожидается',

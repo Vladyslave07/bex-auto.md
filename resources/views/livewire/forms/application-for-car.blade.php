@@ -11,7 +11,7 @@
                             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <div class="form-group">
-                            <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" type="text" placeholder="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}" data-type="tel" required>
+                            <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" type="text" placeholder="{{ \App\Models\Domain::phonePlaceholderForCurrDomain() }}" data-type="tel" required>
                             @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
                         <button class="btn" type="submit">{{ Lang::get('forms.discount.btn') }}</button>
