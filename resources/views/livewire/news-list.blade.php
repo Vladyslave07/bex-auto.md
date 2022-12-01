@@ -11,7 +11,7 @@
                         </picture>
                     </a>
                     <a href="{{ route('news_detail', [$article->slug]) }}" class="title">{{ $article->title }}</a>
-                    <div class="description">{{ $article->current_preview_text }}</div>
+                    <div class="description">{!! $article->current_preview_text !!}</div>
                     <a href="{{ route('news_detail', [$article->slug]) }}" class="read-more">
                         {{ \Illuminate\Support\Facades\Lang::get('news.read_more') }}
                     </a>
