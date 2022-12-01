@@ -5,6 +5,7 @@ return [
     \App\Models\Car::ON_ORDER_STATUS => 'Под заказ',
     'on_order_usa' => 'Под заказ из США',
     'on_order_korea' => 'Под заказ из Кореи',
+    'sold' => 'Продано',
     'more' => 'Подробнее',
     'show_all' => 'Посмотреть все авто',
     'title_in_stock' => 'Авто в наличии',

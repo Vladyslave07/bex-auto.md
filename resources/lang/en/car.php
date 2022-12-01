@@ -5,6 +5,7 @@ return [
     \App\Models\Car::ON_ORDER_STATUS => 'On order',
     'on_order_usa' => 'On order from USA',
     'on_order_korea' => 'On order from Korea',
+    'sold' => 'Sold',
     'more' => 'More',
     'show_all' => 'Show all cars',
     'title_in_stock' => 'Cars in stock',
