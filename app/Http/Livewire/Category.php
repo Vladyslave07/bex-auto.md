@@ -19,8 +19,8 @@ class Category extends Component
     public $orderBy = [];
     public $filterQuery = null;
 
-    public $by = 'id';
-    public $sort = 'desc';
+    public $by = '';
+    public $sort = '';
 
     protected $cars;
 
@@ -34,15 +34,20 @@ class Category extends Component
         $this->page = $this->pageNum($this->page);
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
-        return $this->category
+        $cars = $this->category
             ->cars()
             ->carsForCurrentDomain()
             ->with(['properties'])
             ->active()
-            ->orderBy($this->by, $this->sort)
-            ->filtered($filterQuery)
-            ->paginate(CatalogController::COUNT_CARS_ON_PAGE, ['*'], 'page', $this->page)
-            ->withQueryString();
+            ->filtered($filterQuery);
+
+        if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
+            $cars->orderBy($this->by, $this->sort);
+        } else {
+            $cars->defaultOrder();
+        }
+
+        return $cars->paginate(CatalogController::COUNT_CARS_ON_PAGE, ['*'], 'page', $this->page)->withQueryString();
     }
 
     public function sortBy($by, $sort)
@@ -56,8 +61,8 @@ class Category extends Component
         $this->orderBy = [
             [
                 'title' => Lang::get('category.sort.id_desc'),
-                'by' => 'id',
-                'sort' => 'desc'
+                'by' => '',
+                'sort' => ''
             ],
             [
                 'title' => Lang::get('category.sort.price_asc'),

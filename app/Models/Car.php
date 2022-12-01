@@ -254,6 +254,12 @@ class Car extends Model
         return $query->where('domain_id', $domain->id);
     }
 
+
+    public function scopeDefaultOrder(Builder $query): Builder
+    {
+        return $query->orderByRaw("FIELD(status, \"in_stock\", \"expect\", \"on_order\", \"on_order_usa\", \"on_order_korea\", \"sold\")");
+    }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
