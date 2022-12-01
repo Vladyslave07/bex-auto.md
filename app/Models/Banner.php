@@ -28,6 +28,8 @@ class Banner extends Model
     public static $images = ['image'];
 
     const BANNER_CACHE_KEY = 'banner';
+    const BANNER_IMAGE_CACHE_KEY = 'popup_image';
+    const IMAGE_FOR_POPUP_ID = 2;
 
     /*
     |--------------------------------------------------------------------------
@@ -44,9 +46,17 @@ class Banner extends Model
     {
         return Cache::remember(self::BANNER_CACHE_KEY, 86400, function () {
             return  self::query()
+                ->whereNot('id', self::IMAGE_FOR_POPUP_ID)
                 ->orderBy('sort')
                 ->orderBy('id', 'desc')
                 ->active()->first(['title', 'subtitle', 'text', 'image']);
+        });
+    }
+
+    public static function getImageForPopup()
+    {
+        return Cache::remember(self::BANNER_IMAGE_CACHE_KEY, 86400, function () {
+            return  self::query()->where('id', self::IMAGE_FOR_POPUP_ID)->first()->image;
         });
     }
 
