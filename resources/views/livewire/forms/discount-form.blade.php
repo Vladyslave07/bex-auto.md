@@ -4,8 +4,9 @@
             <div class="modal-content">
                 <svg class="close-modal" width="10" height="10"><use xlink:href="#close-icon"></use></svg>
                 <div class="modal-body">
-                    <p class="text-center">{{ config('settings.discount_form_title') }}</p>
-                    <form wire:submit.prevent="submit" novalidate autocomplete="off">
+                    <img width="500" height="500" src="http://placehold.jp/500x600.png" alt="" loading="lazy">
+                    <!-- <p class="text-center">{{ config('settings.discount_form_title') }}</p> -->
+                    <form wire:submit.prevent="submit" class="form-discount" novalidate autocomplete="off">
                         <div class="form-group">
                             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
                             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror

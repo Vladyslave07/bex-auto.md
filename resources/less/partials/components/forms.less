@@ -70,6 +70,41 @@ label {
 .form-hide {
     display: none;
 }
+.modal#modalDiscount {
+    img {
+        display: block;
+    }
+    .form-discount {
+        margin-top: 20px;
+        display: flex;
+        align-items: flex-start;
+        img {
+            display: block;
+        }
+        .form-group {
+            margin-right: 20px;
+            margin-bottom: 0;
+        }
+        .btn {
+            margin: 0;
+        }
+    }
+}
+@media (max-width: 600px) {
+    .modal#modalDiscount {
+        .form-discount {
+            flex-direction: column;
+            .form-group {
+                margin-right: 0;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+}
 @supports (-webkit-touch-callout: none) {
     .form-control:focus,
     textarea:focus,
