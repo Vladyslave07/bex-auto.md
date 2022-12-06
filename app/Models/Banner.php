@@ -53,10 +53,18 @@ class Banner extends Model
         });
     }
 
+    /**
+     * Returns image for popup
+     *
+     * @return mixed
+     */
     public static function getImageForPopup()
     {
         return Cache::remember(self::BANNER_IMAGE_CACHE_KEY, 86400, function () {
-            return  self::query()->where('id', self::IMAGE_FOR_POPUP_ID)->first()->image;
+            if ($banner = self::query()->where('id', self::IMAGE_FOR_POPUP_ID)->first()) {
+                return $banner->image;
+            }
+            return '';
         });
     }
 
