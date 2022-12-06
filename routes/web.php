@@ -125,4 +125,7 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/search', function () {
         return view('html.search');
     })->name('html.search');
+    Route::get('/about', function () {
+        return view('html.about');
+    })->name('html.about');
 });
