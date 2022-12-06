@@ -13,7 +13,7 @@
                                 <a href="{{ \App\Models\Menu::localeMenuLinks($item->slug, $child['url'])  }}">{{ $child['name'] }}</a>
                             @endforeach
                         </div>
-                        @if($items->first()->slug === $item->slug)
+                        @if($loop->first && $item->image)
                             <div class="menu-img">
                                     <img width="290" height="202" src="{{ Storage::disk('public')->url($item->image) }}" alt="">
                             </div>
