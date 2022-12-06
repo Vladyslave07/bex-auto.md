@@ -5,6 +5,35 @@
 
     RewriteEngine On
 
+    # Переадресация с заглавных букв на строчные
+    RewriteRule [A-Z] - [E=HASCAPS:TRUE,S=1]
+    RewriteRule ^([^A]*)A(.*)$ https://%{HTTP_HOST}/$1a$2 [R=301,L]
+    RewriteRule ^([^B]*)B(.*)$ https://%{HTTP_HOST}/$1b$2 [R=301,L]
+    RewriteRule ^([^C]*)C(.*)$ https://%{HTTP_HOST}/$1c$2 [R=301,L]
+    RewriteRule ^([^D]*)D(.*)$ https://%{HTTP_HOST}/$1d$2 [R=301,L]
+    RewriteRule ^([^E]*)E(.*)$ https://%{HTTP_HOST}/$1e$2 [R=301,L]
+    RewriteRule ^([^F]*)F(.*)$ https://%{HTTP_HOST}/$1f$2 [R=301,L]
+    RewriteRule ^([^G]*)G(.*)$ https://%{HTTP_HOST}/$1g$2 [R=301,L]
+    RewriteRule ^([^H]*)H(.*)$ https://%{HTTP_HOST}/$1h$2 [R=301,L]
+    RewriteRule ^([^I]*)I(.*)$ https://%{HTTP_HOST}/$1i$2 [R=301,L]
+    RewriteRule ^([^J]*)J(.*)$ https://%{HTTP_HOST}/$1j$2 [R=301,L]
+    RewriteRule ^([^K]*)K(.*)$ https://%{HTTP_HOST}/$1k$2 [R=301,L]
+    RewriteRule ^([^L]*)L(.*)$ https://%{HTTP_HOST}/$1l$2 [R=301,L]
+    RewriteRule ^([^M]*)M(.*)$ https://%{HTTP_HOST}/$1m$2 [R=301,L]
+    RewriteRule ^([^N]*)N(.*)$ https://%{HTTP_HOST}/$1n$2 [R=301,L]
+    RewriteRule ^([^O]*)O(.*)$ https://%{HTTP_HOST}/$1o$2 [R=301,L]
+    RewriteRule ^([^P]*)P(.*)$ https://%{HTTP_HOST}/$1p$2 [R=301,L]
+    RewriteRule ^([^Q]*)Q(.*)$ https://%{HTTP_HOST}/$1q$2 [R=301,L]
+    RewriteRule ^([^R]*)R(.*)$ https://%{HTTP_HOST}/$1r$2 [R=301,L]
+    RewriteRule ^([^S]*)S(.*)$ https://%{HTTP_HOST}/$1s$2 [R=301,L]
+    RewriteRule ^([^T]*)T(.*)$ https://%{HTTP_HOST}/$1t$2 [R=301,L]
+    RewriteRule ^([^U]*)U(.*)$ https://%{HTTP_HOST}/$1u$2 [R=301,L]
+    RewriteRule ^([^V]*)V(.*)$ https://%{HTTP_HOST}/$1v$2 [R=301,L]
+    RewriteRule ^([^W]*)W(.*)$ https://%{HTTP_HOST}/$1w$2 [R=301,L]
+    RewriteRule ^([^X]*)X(.*)$ https://%{HTTP_HOST}/$1x$2 [R=301,L]
+    RewriteRule ^([^Y]*)Y(.*)$ https://%{HTTP_HOST}/$1y$2 [R=301,L]
+    RewriteRule ^([^Z]*)Z(.*)$ https://%{HTTP_HOST}/$1z$2 [R=301,L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
