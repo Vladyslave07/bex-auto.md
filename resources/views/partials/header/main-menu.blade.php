@@ -25,5 +25,5 @@
     </ul>
 
     {{-- location list --}}
-    @include('partials.header.location-list', ['class' => 'visible-sm'])
+{{--    @include('partials.header.location-list', ['class' => 'visible-sm'])--}}
 </nav>
