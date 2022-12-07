@@ -32,6 +32,7 @@
                     <li><a target="_blank" href="{{ route('html.guarantee') }}">Гарантії</a></li>
                     <li><a target="_blank" href="{{ route('html.thanks-order') }}">Спасибо за заявку</a></li>
                     <li><a target="_blank" href="{{ route('html.search') }}">Результаты поиска</a></li>
+                    <li><a target="_blank" href="{{ route('html.about') }}">Про нас</a></li>
                 </ul>
                 <br>
                 <br>
