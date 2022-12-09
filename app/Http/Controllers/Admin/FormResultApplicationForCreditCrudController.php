@@ -61,14 +61,47 @@ class FormResultApplicationForCreditCrudController extends CrudController
         CRUD::setValidation(FormResultRequest::class);
 
         CRUD::addField([
+            'name' => 'created_at',
+            'label' => trans('backpack::fields.created_at'),
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name' => 'updated_at',
+            'label' => trans('backpack::fields.updated_at'),
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
             'name' => 'id',
             'label' => trans('backpack::fields.id'),
             'type' => 'text',
-            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled']
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
-        CRUD::field('name');
-        CRUD::field('phone');
-        CRUD::field('car');
+
+        CRUD::addField([
+            'name' => 'name',
+            'label' => trans('backpack::fields.name'),
+            'type' => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+        CRUD::addField([
+            'name' => 'phone',
+            'label' => trans('backpack::fields.phone'),
+            'type' => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+        CRUD::addField([
+            'name' => 'car',
+            'label' => trans('backpack::fields.car'),
+            'type' => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
 
     }
 

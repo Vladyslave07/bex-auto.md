@@ -79,6 +79,7 @@ class IndexController extends Controller
     {
         SEOTools::setTitle(Lang::get('index.thanks.title'));
         SEOTools::setDescription(Lang::get('index.thanks.description'));
+        SEOTools::metatags()->addMeta('robots', 'noindex, nofollow');
 
         return view('thanks');
     }
