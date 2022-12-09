@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">
     <head>
+        {{-- Сео скрипты --}}
+        @include('partials.seo_scripts.after_header_start')
+
         <meta charset="UTF-8" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width">
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
@@ -19,6 +22,8 @@
         @livewireStyles
     </head>
     <body>
+        {{-- Сео скрипты --}}
+        @include('partials.seo_scripts.after_body_start')
 
         <header class="main-header container">
             <a href="{{ route('index') }}" class="logo" aria-label="logo">
