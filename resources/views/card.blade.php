@@ -13,7 +13,7 @@
 <div class="container">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('index') }}">Bexhill Trading Auto</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('index') }}">Bex Auto</a></li>
             @if ($category = $car->category()->first())
                 <li class="breadcrumb-item"><a href="{{ route('category', ['category' => $category->slug]) }}">{{ $category->title }}</a></li>
             @endif

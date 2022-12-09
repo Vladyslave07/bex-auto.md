@@ -1,6 +1,6 @@
 <?php
 return [
-    'title' => 'Bexhill Trading Auto',
+    'title' => 'Bex Auto',
 
     'popular_request_title' => 'Популярные запросы',
     'buy-and-delivery' => [
