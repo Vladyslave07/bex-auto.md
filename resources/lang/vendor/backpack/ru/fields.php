@@ -76,6 +76,8 @@ return [
     'show_link' => 'Ссылка активна',
     'phone_mask' => 'Код страны',
     'placeholder' => 'placeholder',
+    'car' => 'Машина',
+    'country' => 'Страна',
 
     'option' => [
         'expect' => 'Ожидается',
