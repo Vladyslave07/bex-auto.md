@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Builder;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Branch extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope;
+    use CrudTrait, HasTranslations, DefaultScope, SaveImageAttribute;
 
     /*
     |--------------------------------------------------------------------------
@@ -23,9 +24,11 @@ class Branch extends Model
 
     protected $table = 'branches';
     protected $guarded = ['id'];
-    protected $fillable = ['city', 'address', 'phone', 'sort', 'active', 'lat', 'lng'];
-    protected $translatable = ['city', 'address'];
-    protected $casts = ['active' => 'bool'];
+    protected $fillable = ['city', 'address', 'phone', 'sort', 'active', 'lat', 'lng', 'domain_id', 'images', 'weekdays', 'weekends'];
+    protected $translatable = ['city', 'address', 'weekdays', 'weekends'];
+    protected $casts = ['active' => 'bool', 'images' => 'array'];
+    protected $attributes = ['images' => ''];
+    public static $images = ['images'];
 
     const BRANCHES_ITEMS_CACHE_KEY = 'branches_items';
 
@@ -52,6 +55,14 @@ class Branch extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Domain::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -28,7 +28,7 @@ class LangSwitcher extends Component
         $supportedLocales = LaravelLocalization::getSupportedLocales();
 
         foreach ($supportedLocales as $key => $locale) {
-            if ($locale['default'] === true || $key === $this->currentDomain()->slug) {
+            if ($locale['default'] === true || $key === $this->currentDomain()?->slug) {
                 $this->locales[$key] = $locale;
             }
         }

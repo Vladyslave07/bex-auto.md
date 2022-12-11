@@ -78,6 +78,8 @@ return [
     'placeholder' => 'placeholder',
     'car' => 'Машина',
     'country' => 'Страна',
+    'weekdays' => 'Рабочие часы в будни',
+    'weekends' => 'Рабочие часы в выходные',
 
     'option' => [
         'expect' => 'Ожидается',

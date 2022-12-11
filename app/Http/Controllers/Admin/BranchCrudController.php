@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Requests\BranchRequest;
 use App\Models\Branch;
 use App\Traits\BulkDeleteOperation;
+use App\Traits\DropzoneTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
@@ -27,6 +28,7 @@ class BranchCrudController extends CrudController
         destroy as traitDestroy;
     }
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use DropzoneTrait;
     use BulkDeleteOperation;
 
     /**
@@ -77,37 +79,74 @@ class BranchCrudController extends CrudController
             'label'      => trans('backpack::fields.sort'),
             'type'       => 'number',
             'default'       => '500',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
         CRUD::addField([
             'name'       => 'city',
             'label'      => trans('backpack::fields.city'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
         CRUD::addField([
             'name'       => 'address',
             'label'      => trans('backpack::fields.address'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
         CRUD::addField([
             'name'       => 'phone',
             'label'      => trans('backpack::fields.phone'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
         CRUD::addField([
             'name'       => 'lat',
             'label'      => trans('backpack::fields.lat'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
         CRUD::addField([
             'name'       => 'lng',
             'label'      => trans('backpack::fields.lng'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
+
+        CRUD::addField([
+            'name'       => 'domain',
+            'label'      => trans('backpack::fields.domain'),
+            'type'       => 'select',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name'       => 'weekdays',
+            'label'      => trans('backpack::fields.weekdays'),
+            'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name'       => 'weekends',
+            'label'      => trans('backpack::fields.weekends'),
+            'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name' => 'images',
+            'label' => trans('backpack::fields.images'),
+            'type' => 'dropzone',
+            'disk' => 'public',
+            'destination_path' => 'products',
+            'thumb_prefix' => ''
+        ]);
+
     }
 
     /**

@@ -60,7 +60,7 @@ class Domain extends Model
             // todo: Вынести установку домена глобально
             $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
 
-            return self::query()->where('slug', $domainSlug)->first()->phone_mask;
+            return self::query()->where('slug', $domainSlug)->first()?->phone_mask;
         });
     }
 
@@ -73,7 +73,19 @@ class Domain extends Model
             // todo: Вынести установку домена глобально
             $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
 
-            return self::query()->where('slug', $domainSlug)->first()->placeholder;
+            return self::query()->where('slug', $domainSlug)->first()?->placeholder;
+        });
+    }
+
+    /**
+     * List of domains
+     *
+     * @return mixed
+     */
+    public static function list()
+    {
+        return Cache::remember('domain_list', now()->addMonth(), function () {
+            return self::query()->get();
         });
     }
 
