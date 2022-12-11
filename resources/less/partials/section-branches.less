@@ -40,6 +40,11 @@
         .branches-swiper {
             margin: 0;
             display: contents;
+            &:not(.swiper-initialized) {
+                .swiper-nav {
+                    display: none;
+                }
+            }
             .swiper-wrapper {
                 display: contents;
             }
@@ -125,6 +130,9 @@
             .swiper-slide {
                 .more {
                     display: none;
+                }
+                img {
+                    display: block;
                 }
             }
         }

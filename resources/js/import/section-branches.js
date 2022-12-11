@@ -55,6 +55,6 @@ export default function() {
             init = false;
         }
     }
-    swiperBranches();
+    window.addEventListener("load", swiperBranches);
     window.addEventListener("resize", swiperBranches);
 }
