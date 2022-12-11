@@ -57,3 +57,9 @@ Breadcrumbs::for('search', function ($trail) {
     $trail->push(Lang::get('search.breadcrumb', ['query' => request()->get('q')]));
 });
 
+// about
+Breadcrumbs::for('static.about', function ($trail) {
+    $trail->parent('index');
+    $trail->push(Lang::get('static.about.breadcrumbs'), '');
+});
+

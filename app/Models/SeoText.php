@@ -19,6 +19,7 @@ class SeoText extends Model
     */
 
     const MAIN_PAGE_SEO_TEXT_SLUG = 'main';
+    const ABOUT_SEO_TEXT_SLUG = 'about_seo_text';
 
     protected $table = 'seo_texts';
     protected $guarded = ['id'];
@@ -54,6 +55,16 @@ class SeoText extends Model
         return Cache::remember( self::MAIN_SEO_TEXT_CACHE_KEY, 86400, function () {
             return self::query()->where('main', 1)->active()->first(['title', 'text']);
         });
+    }
+
+    /**
+     * About seo text
+     *
+     * @return mixed
+     */
+    public static function aboutSeoText()
+    {
+        return self::seoTextBySlug(self::ABOUT_SEO_TEXT_SLUG);
     }
 
     /*

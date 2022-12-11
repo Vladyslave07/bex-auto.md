@@ -50,6 +50,9 @@ function commonRoute() {
     Route::get('/thanks', [\App\Http\Controllers\IndexController::class, 'thanks'])->name('thanks');
 
     Route::group(['prefix' => '/about'], function () {
+
+        Route::get('/', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.about');
+
         // News
         Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
 
