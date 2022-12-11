@@ -33,7 +33,7 @@
                                 @endif
                             </ul>
                         @endforeach
-                        @if (count($branch->images) > 0)
+                        @if ($branch->images && count($branch->images) > 0)
                             <div class="swiper branches-swiper">
                                 <div class="swiper-wrapper">
                                     @foreach($branch->images as $image)

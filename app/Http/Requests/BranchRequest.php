@@ -25,7 +25,10 @@ class BranchRequest extends FormRequest
     public function rules()
     {
         return [
-            'city' => 'required|min:3|max:255'
+            'city' => 'required|min:3|max:255',
+            'domain' => 'required',
+            'phone' => 'required',
+            'address' => 'required',
         ];
     }
 
