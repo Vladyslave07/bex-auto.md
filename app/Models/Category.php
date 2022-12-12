@@ -137,7 +137,8 @@ class Category extends Model
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.category_meta_title_default'));
+        $title = $this->meta_title ?: config('settings.category_meta_title_default');
+        return $this->parseSnippets($title);
     }
 
     public function getSeoMetaDescriptionAttribute()

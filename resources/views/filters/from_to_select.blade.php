@@ -3,7 +3,8 @@
 <div class="dropdown dropdown-select">
     @php
         $fromFieldName = $filter['slug'] . 'From';
-        $fromCurrent = $filter['values']['from'][$this->$fromFieldName ?: array_key_first($filter['values']['from'])];
+            $fromFieldName = $filter['slug'] . 'From';
+            $fromCurrent = $filter['values']['from'][$this->$fromFieldName ?: array_key_first($filter['values']['from'])];
     @endphp
     <span class="dropdown-toggle form-control">{{ $fromCurrent }}</span>
     <div class="dropdown-menu">

@@ -24,6 +24,8 @@ return [
         'reviews_id' => 'Получить id можно выполнив <a href="https://serpapi.com/google-maps-api" target="_blank">get запрос</a>',
         'car' => 'Домен на котором будет отображаться машина',
         'phone_mask' => 'Маска номера телефона для домена (на всех формах сайта)',
-        'placeholder' => 'placeholder'
+        'placeholder' => 'placeholder',
+        'lat' => 'Широта страны (точка на google карте)',
+        'lng' => 'Долгота страны (точка на google карте)',
     ]
 ];

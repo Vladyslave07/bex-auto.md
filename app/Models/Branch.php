@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -45,8 +46,12 @@ class Branch extends Model
      */
     public static function branches()
     {
-        return Cache::remember(self::BRANCHES_ITEMS_CACHE_KEY, 86400, function () {
-            return  self::query()->orderBy('sort')->active()->get(['city', 'address', 'phone', 'lat', 'lng']);
+        return Cache::remember(General::cacheKey(self::BRANCHES_ITEMS_CACHE_KEY), 86400, function () {
+            return  self::query()
+                ->branchesForCurrentDomain()
+                ->orderBy('sort')
+                ->active()
+                ->get(['city', 'address', 'phone', 'lat', 'lng']);
         });
     }
 
@@ -69,6 +74,17 @@ class Branch extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Оnly for current domain
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeBranchesForCurrentDomain(Builder $query): Builder
+    {
+        return $query->where('domain_id', Domain::currentDomain()->id);
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -16,5 +16,9 @@
     window.addEventListener('setPageUrl', event => {
         let url = event.detail.url
         history.pushState(null, null, url);
+
+        setTimeout(() => {
+            document.querySelector('.catalog-wrap').scrollIntoView();
+        }, 500)
     })
 </script>

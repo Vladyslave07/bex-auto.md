@@ -110,7 +110,7 @@ class Category extends Component
     public function setRangeFilter($slug, $value, $range)
     {
         $fieldName = $slug . ucfirst($range);
-        $this->$fieldName = (int)$value;
+        $this->$fieldName = $value;
 
         $fieldNameFrom = $slug . 'From';
         $fieldNameTo = $slug . 'To';

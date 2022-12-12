@@ -5,6 +5,7 @@ namespace App\filters;
 
 use App\Helper\General;
 use App\Models\Brand;
+use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Category;
 use App\Models\Property;
@@ -127,7 +128,8 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             [$from, $to] = explode('~', $propValue);
-            $query->where('property_id', $propId)->whereBetween('car_property.value', [$from, $to + 0.1]);
+            $to = (int)$to + + 0.1;
+            $query->where('property_id', $propId)->whereBetween('car_property.value', [(float)$from, (float)$to]);
         });
     }
 
@@ -157,7 +159,6 @@ class CarFilter
     public static function getCurrentPropertiesFilter(Category $category, $filterQuery = null)
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
-        // todo: Машины на разных доменах
         $cars = $category->cars()->with('properties')->carsForCurrentDomain()->active()->get();
 
         $properties = [];
@@ -278,7 +279,7 @@ class CarFilter
                 $ranges[$property->slug]['name'] = $property->title;
                 $ranges[$property->slug]['type'] = $property->filter_type;
                 $ranges[$property->slug]['slug'] = $property->slug;
-                $ranges[$property->slug]['values'][] = $property->pivot->value;
+                $ranges[$property->slug]['values'][] = $property->pivot->value ;
             }
         }
 
@@ -286,10 +287,20 @@ class CarFilter
 
         foreach ($ranges as $key => $range) {
             if ($property = $properties->where('slug', $key)->first()) {
-                $min = 0;
+                $min = min($range['values']);
                 $max = max($range['values']);
-                $range = self::makeValueFroFromToField(range($min, General::max($max), $property->step), $property->prefix);
-                $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
+
+                // for filters by mileage
+                if ($key === Property::FUEL_MILEAGE_OPTION_SLUG) {
+                    $min = 0;
+                }
+
+                if ($min !== $max) {
+                    $range = self::makeValueFroFromToField(range($min, General::max($max), $property->step), $property->prefix);
+                    $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
+                } else {
+                    unset($ranges[$key]);
+                }
             }
         }
         return $ranges;
@@ -328,7 +339,7 @@ class CarFilter
             foreach ($filters as $filterPair) {
                 [$key, $value] = explode(':', $filterPair);
                 if ($key === 'brand') {
-                    $brand = Brand::query()->where('slug->en', $value)->first(['id']);
+                    $brand = Brand::query()->where('slug', $value)->first(['id']);
                 }
             }
         }

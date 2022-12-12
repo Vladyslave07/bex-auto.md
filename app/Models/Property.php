@@ -35,6 +35,7 @@ class Property extends Model
 
     const FUEL_PROPERTY_SLUG = 'fuel';
     const FUEL_ELECTRIC_OPTION_SLUG = 'electro';
+    const FUEL_MILEAGE_OPTION_SLUG = 'mileage';
 
     /*
     |--------------------------------------------------------------------------

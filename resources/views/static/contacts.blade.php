@@ -75,8 +75,8 @@
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 47.845335, lng: 30.6470585},
-                zoom: 5,
+                center: {lat: {{ \App\Models\Domain::currentDomain()?->lat }}, lng: {{ \App\Models\Domain::currentDomain()?->lng }}},
+                zoom: 4,
                 disableDefaultUI: true
             });
             @foreach($branches as $key => $branch)

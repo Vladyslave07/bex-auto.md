@@ -19,7 +19,7 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder'];
+    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng'];
 
     const DEFAULT_DOMAIN = 6;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
@@ -29,6 +29,13 @@ class Domain extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public static function currentDomain()
+    {
+        // todo: Вынести установку домена глобально
+        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+        return self::domainBySlug($domainSlug);
+    }
 
     /**
      * Returns domains with reviews id

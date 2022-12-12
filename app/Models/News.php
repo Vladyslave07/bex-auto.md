@@ -122,15 +122,6 @@ class News extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getCurrentPreviewTextAttribute()
-    {
-        if ($text = $this->preview_text) {
-            return $text;
-        }
-
-        return $this->detail_text ? substr($this->detail_text, 0, 250) : '';
-    }
-
     public function getSeoMetaTitleAttribute()
     {
         return $this->parseSnippets($this->meta_title ?: config('settings.news_meta_title'));

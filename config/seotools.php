@@ -9,7 +9,7 @@ return [
          * The default configurations to be used by the meta generator.
          */
         'defaults'       => [
-            'title'        => 'Авто из США: купить автомобиль из Америки под ключ, машины БУ и новые', // set false to total remove
+            'title'        => false, // set false to total remove
             'titleBefore'  => false, // Put defaults.title before page title, like 'It's Over 9000! - Dashboard'
             'description'  => 'Купить авто из США под ключ ✔️ Помощь в подборе автомобилей из США ✔️ Оперативная доставка БУ машин из Америки ✔️ Растаможка и оформление ✔️ Доступные цены на авто из США!', // set false to total remove
             'separator'    => '',

@@ -60,6 +60,7 @@ class Car extends Model
         return [
             'slug' => [
                 'source' => 'slug_or_title',
+                'unique' => true,
             ],
         ];
     }
