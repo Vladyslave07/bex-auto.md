@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'branch' => 'Біздің филиалдар',
     'price' => 'Competitive prices',
     'cabinet' => 'Personal cabinet for ordering and tracking cars',
     'guarantee' => 'Guarantees for company services',

@@ -1,6 +1,6 @@
 <div>
     <div class="section-branches container">
-        <div class="main-title text-center">Наші філії</div>
+        <div class="main-title text-center">{{ __('about.branch') }}</div>
         <div class="nav-tabs">
             @foreach($branches as $domainId => $branch)
                 <span class="nav-link @if($loop->first) active @endif" data-toggle="tab"
@@ -22,7 +22,7 @@
                                 </li>
                                 @if (strlen($branch->weekdays) > 0 || strlen($branch->weekends) > 0)
                                     <li>
-                                        <div class="color-red">Графік роботы:</div>
+                                        <div class="color-red">@lang('static.contacts.schedule')</div>
                                         @if(strlen($branch->weekdays) > 0)
                                             <p>{{ $branch->weekdays }}</p>
                                         @endif
