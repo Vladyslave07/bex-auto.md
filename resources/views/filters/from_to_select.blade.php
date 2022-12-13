@@ -1,5 +1,5 @@
 <strong class="title">{{ $filter['name'] }}</strong>
-<div class="label">Від</div>
+<div class="label">{{ __('category.filter.form') }}</div>
 <div class="dropdown dropdown-select">
     @php
         $fromFieldName = $filter['slug'] . 'From';
@@ -22,7 +22,7 @@
         </ul>
     </div>
 </div>
-<div class="label">До</div>
+<div class="label">{{ __('category.filter.to') }}</div>
 <div class="dropdown dropdown-select">
     @php
         $toFieldName = $filter['slug'] . 'To';

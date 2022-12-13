@@ -8,7 +8,9 @@ return [
     ],
 
     'filter' => [
-        'price' => 'Price in dol.'
+        'price' => 'Price in dol.',
+        'form' => 'Form',
+        'to' => 'To'
     ],
 
     'form' => [
