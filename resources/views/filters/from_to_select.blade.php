@@ -32,7 +32,7 @@
     <div class="dropdown-menu">
         <ul>
             @foreach($filter['values']['to'] as $key => $to)
-                <li class="dropdown-item option
+                <li class="dropdown-item option @if($this->$fromFieldName > $key) disabled @endif
                     @if($key === $this->$toFieldName) selected @endif">
                     <label>
                         {{ $to }}

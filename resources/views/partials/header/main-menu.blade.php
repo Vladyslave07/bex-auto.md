@@ -10,7 +10,9 @@
                     <div class="menu-dropdown">
                         <div class="submenu">
                             @foreach($item->children as $child)
+                                @if ($child)
                                 <a href="{{ \App\Models\Menu::localeMenuLinks($item->slug, key_exists('url', $child) ? $child['url'] : '')  }}">{{ $child['name'] }}</a>
+                                @endif
                             @endforeach
                         </div>
                         @if($loop->first && $item->image)

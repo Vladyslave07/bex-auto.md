@@ -158,7 +158,11 @@ class Category extends Component
                 $properties[$propertyKey] = implode(';', $values);
             }
         } else {
-            $properties[$propertyKey] = $propertyValue;
+            if (key_exists($propertyKey, $properties) && $properties[$propertyKey] === $propertyValue) {
+                unset($properties[$propertyKey]);
+            } else {
+                $properties[$propertyKey] = $propertyValue;
+            }
         }
 
         // Make filter string from array

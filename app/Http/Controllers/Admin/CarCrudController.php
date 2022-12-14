@@ -34,7 +34,7 @@ class CarCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -46,7 +46,7 @@ class CarCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -54,24 +54,24 @@ class CarCrudController extends CrudController
     {
         CRUD::setColumns([
             [
-                'name'  => 'id',
+                'name' => 'id',
                 'label' => '№',
             ],
             [
-                'name'  => 'title',
+                'name' => 'title',
                 'label' => trans('backpack::fields.title'),
             ],
             [
-                'name'  => 'sort',
+                'name' => 'sort',
                 'label' => trans('backpack::fields.sort'),
             ],
             [
-                'name'  => 'active',
+                'name' => 'active',
                 'label' => trans('backpack::fields.active'),
-                'type'  => 'check'
+                'type' => 'check'
             ],
             [
-                'name'  => 'image',
+                'name' => 'image',
                 'label' => trans('backpack::fields.image'),
                 'type' => 'image',
                 'disk' => 'public',
@@ -83,7 +83,7 @@ class CarCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -151,10 +151,10 @@ class CarCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name'        => 'status',
-            'label'       => trans('backpack::fields.status'),
-            'type'        => 'select_from_array',
-            'options'     => [
+            'name' => 'status',
+            'label' => trans('backpack::fields.status'),
+            'type' => 'select_from_array',
+            'options' => [
                 'in_stock' => trans('backpack::fields.option.in_stock'),
                 'expect' => trans('backpack::fields.option.expect'),
                 'on_order' => trans('backpack::fields.option.on_order'),
@@ -163,7 +163,7 @@ class CarCrudController extends CrudController
                 'sold' => trans('backpack::fields.option.sold'),
             ],
             'allows_null' => false,
-            'default'     => 'in_stock',
+            'default' => 'in_stock',
             'tab' => 'Свойства'
         ]);
 
@@ -238,7 +238,7 @@ class CarCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
@@ -247,8 +247,8 @@ class CarCrudController extends CrudController
         $this->setupCreateOperation();
     }
 
-    public function update() {
-
+    public function update()
+    {
         $response = $this->traitUpdate();
         // do something after update
 
@@ -260,7 +260,8 @@ class CarCrudController extends CrudController
         return $response;
     }
 
-    public function create() {
+    public function create()
+    {
         $response = $this->traitCreate();
 
         // do something after save
@@ -272,7 +273,8 @@ class CarCrudController extends CrudController
         return $response;
     }
 
-    public function destroy($id) {
+    public function destroy($id)
+    {
         $response = $this->traitDestroy($id);
 
         // do something after save

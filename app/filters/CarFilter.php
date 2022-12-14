@@ -109,7 +109,7 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             $propValues = str_contains($propValue, '|') ? explode('|', $propValue) : [$propValue];
-            $query->where('property_id', $propId)->where('car_property.value', array_shift($propValues));
+            $query->where('property_id', $propId)->where('car_property.slug', array_shift($propValues));
             if (!empty($propValues)) {
                 foreach ($propValues as $propValue) {
                     $query->orWhere('car_property.value', $propValue);

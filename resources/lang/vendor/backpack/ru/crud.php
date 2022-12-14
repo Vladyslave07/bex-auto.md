@@ -192,7 +192,7 @@ return [
     'category' => 'категория',
     'categories' => 'категории',
 
-    'popular_request' => 'попульрные запрос',
+    'popular_request' => 'популярный запрос',
     'popular_requests' => 'популярные запросы',
 
     'brand' => 'марка',
