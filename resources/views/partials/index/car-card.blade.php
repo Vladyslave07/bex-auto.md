@@ -14,7 +14,7 @@
         </div>
         <a href="{{ route('car_detail', ['car' => $car->slug]) }}" aria-label="img product">
             <picture>
-                <img width="289" height="218" src="{{ Storage::disk('public')->url($car->images[0] ?? '') }}"
+                <img width="289" height="218" src="{{ Storage::disk('public')->url($car->preview_image ?? '') }}"
                      loading="lazy" alt="">
             </picture>
         </a>
