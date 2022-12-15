@@ -170,13 +170,15 @@ class Car extends Model
      */
     public function getCarLinks()
     {
-        if (count($this->links) > 0) {
-            return $this->links;
-        }
-        if($brand = $this->properties->where('slug', 'brand')->first()) {
-            return Category::query()->where('slug', 'like','%' . $brand->getValue() . '%')->get();
-        }
-        return [];
+        return Cache::remember(General::cacheKey($this->slug . '_links'), 86400, function () {
+            if (count($this->categories) > 0) {
+                return $this->categories;
+            }
+            if($brand = $this->properties->where('slug', 'brand')->first()) {
+                return Category::query()->where('slug', 'like','%' . $brand->getValue() . '%')->get();
+            }
+            return [];
+        });
 
     }
 
