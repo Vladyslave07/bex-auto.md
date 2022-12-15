@@ -39,31 +39,24 @@
         }
         .branches-swiper {
             margin: 0;
-            display: contents;
+            flex: 1;
             &:not(.swiper-initialized) {
                 .swiper-nav {
                     display: none;
                 }
             }
             .swiper-wrapper {
-                display: contents;
+                flex-wrap: wrap;
+                gap: 20px;
             }
             .swiper-slide {
                 height: auto;
                 width: auto;
+                flex: 0 0 calc(50% - 10px);
                 &.open {
                     .more {
                         display: none;
                     }
-                }
-                &:nth-child(odd) {
-                    flex: 0 0 58%;
-                }
-                &:nth-child(even) {
-                    flex: 1;
-                }
-                &:first-child {
-                    flex: 0 0 33%;
                 }
                 &:nth-child(4):not(.open) ~ * {
                     display: none;
