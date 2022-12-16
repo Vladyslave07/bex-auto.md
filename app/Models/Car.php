@@ -271,7 +271,9 @@ class Car extends Model
 
     public function getPreviewPictureAttribute()
     {
-        return strlen($this->preview_image) > 0 ? $this->preview_image : $this->images[0];
+        $previewImage = ($this->images && count($this->images) > 0) ? $this->images[0] : '';
+
+        return strlen($this->preview_image) > 0 ? $this->preview_image : $previewImage;
     }
 
     // The slug is created automatically from the "title" field if no slug exists.
