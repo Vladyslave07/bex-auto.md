@@ -69,10 +69,7 @@
                     @endif
                 </div>
                 <div class="card-btn">
-                    <button onclick="openModal('#applicationForCar')"
-                            class="btn">{{ Lang::get('car.detail.buy') }}</button>
-                    <button onclick="openModal('#applicationForCredit')"
-                            class="btn btn-blue">{{ Lang::get('car.detail.buy_in_credit') }}</button>
+                    @include('partials.card.card-btn')
                 </div>
                 <div class="card-features">
                     <strong class="title">{{ Lang::get('car.detail.characteristic')}}:</strong>
@@ -108,7 +105,6 @@
         @endif
     </div>
     <div class="card-btn_mob">
-        <a href="#" class="btn">{{ Lang::get('car.detail.buy') }}</a>
-        <a href="#" class="btn btn-blue">{{ Lang::get('car.detail.buy_in_credit') }}</a>
+        @include('partials.card.card-btn')
     </div>
 </div>

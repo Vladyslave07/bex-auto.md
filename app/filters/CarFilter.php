@@ -178,7 +178,7 @@ class CarFilter
         // Set models dependents for brand
         if ($filterQuery && $properties['model']['values']) {
             $models = self::getCurrentModels($filterQuery, $properties['model']['values']);
-            $properties['model']['values'] = !empty($models) ? $models : $properties['model']['values'];
+            $properties['model']['values'] = $models;
         }
 
         $prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];

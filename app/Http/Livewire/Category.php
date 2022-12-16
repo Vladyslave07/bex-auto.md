@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\filters\CarFilter;
 use App\Http\Controllers\CatalogController;
 use App\Models\Car;
+use App\Models\Property;
 use App\Traits\WithCustomPaginationTrait;
 
 use Illuminate\Support\Facades\Lang;
@@ -140,6 +141,12 @@ class Category extends Component
             foreach ($params as $param) {
                 [$key, $value] = explode(':', $param);
                 $properties[$key] = $value;
+            }
+        }
+
+        if ($propertyKey === self::BRAND_SLUG) {
+            if (key_exists('model', $properties)) {
+                unset($properties['model']);
             }
         }
 
