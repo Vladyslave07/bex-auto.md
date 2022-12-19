@@ -64,9 +64,8 @@
     .features {
         margin-top: auto;
         .tr {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr auto;
         }
         .item {
             font-weight: 600;
@@ -75,15 +74,6 @@
             margin-bottom: 11px;
             display: flex;
             align-items: center;
-            &:first-child {
-                width: 100%;
-            }
-            &:not(:last-child) {
-                flex: 0 0 100%;
-            }
-            &:nth-last-child(2) {
-                flex: 0 0 50%;
-            }
             img,
             svg {
                 margin-right: 13px;

@@ -15,14 +15,14 @@
                         <div class="swiper gallery-swiper">
                             <div class="swiper-wrapper">
                                 @foreach($car->images as $key => $image)
-                                    <div class="swiper-slide">
+                                    <a data-fancybox="gallery" href="{{ Storage::disk('public')->url($image) }}" class="swiper-slide">
                                         <picture>
                                             {{--                                        <source type="image/webp" srcset="{{ asset('img/example/img_16.webp') }}">--}}
                                             <img src="{{ Storage::disk('public')->url($image) }}" alt="">
                                         </picture>
-                                    </div>
+                                    </a>
                                     @if ($key === 0 && ($link = $car->youtube_link))
-                                        <div class="swiper-slide">
+                                        <div data-fancybox="gallery" data-type="iframe" class="swiper-slide">
                                             <iframe data-src="https://www.youtube.com/embed/{{ $link }}"></iframe>
                                         </div>
                                     @endif
