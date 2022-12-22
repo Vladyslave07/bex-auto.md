@@ -16,6 +16,7 @@ class SearchController extends Controller
     {
         SEOTools::setTitle(Lang::get('search.title', ['query' => $request->get('q')]));
         SEOTools::setDescription(Lang::get('search.title', ['query' => $request->get('q')]));
+        SEOTools::metatags()->addMeta('robots', 'noindex, nofollow');
 
         // Popular cars
         $popularCars = Car::popularCars();

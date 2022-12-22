@@ -8,6 +8,7 @@ use App\Models\Car;
 use App\Models\Property;
 use App\Traits\WithCustomPaginationTrait;
 
+use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
@@ -251,11 +252,21 @@ class Category extends Component
         }
     }
 
+    public function setNoindex()
+    {
+        if (strlen($this->filterQuery)) {
+            SEOTools::metatags()->addMeta('robots', 'noindex, nofollow');
+        }
+    }
+
     public function mount()
     {
         $this->setFilterQueryFromUrl();
         $this->setDefaultValuesForRangeParams();
         $this->enableIfExist();
+
+        // Set noindex for filter, sort pages
+        $this->setNoindex();
     }
 
     public function render()
