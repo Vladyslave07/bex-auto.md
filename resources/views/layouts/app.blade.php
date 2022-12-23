@@ -27,7 +27,8 @@
 
         <header class="main-header container">
             <a href="{{ route('index') }}" class="logo" aria-label="logo">
-                <img width="134" height="59" src="{{ asset('img/logo.png') }}" alt="">
+                @php $path = app()->getLocale() === 'uk' ? 'img/bex-logo-ua.svg' : 'img/bex-logo-ru.svg' @endphp
+                <img width="134" height="59" src="{{ asset($path) }}" alt="">
             </a>
 
             {{-- search form --}}
