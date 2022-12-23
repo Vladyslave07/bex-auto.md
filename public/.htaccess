@@ -4,6 +4,8 @@
     </IfModule>
 
     RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # Переадресация с заглавных букв на строчные
 #    RewriteRule [A-Z] - [E=HASCAPS:TRUE,S=1]

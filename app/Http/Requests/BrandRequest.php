@@ -26,7 +26,7 @@ class BrandRequest extends FormRequest
     {
         return [
              'title' => 'required|min:3|max:255',
-             'slug' => 'required|min:3|max:255',
+             'slug' => "required|min:3|max:255|unique:brands",
         ];
     }
 
@@ -50,7 +50,7 @@ class BrandRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'slug.unique' => 'Марка с данным символьным кодом уже существует'
         ];
     }
 }
