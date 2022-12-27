@@ -9,7 +9,7 @@ return [
         'en'          => ['name' => 'English',                'script' => 'Latn', 'native' => 'Eng', 'regional' => 'en_GB', 'default' => true],
         'ru'          => ['name' => 'Russian',                'script' => 'Cyrl', 'native' => 'Рус', 'regional' => 'ru_RU', 'default' => true],
         'uk'          => ['name' => 'Ukrainian',              'script' => 'Cyrl', 'native' => 'Укр', 'regional' => 'uk_UA', 'default' => false],
-        'kz'          => ['name' => 'Kazakh',                 'script' => 'Cyrl', 'native' => 'қаз', 'regional' => 'kk_KZ', 'default' => false],
+        'kz'          => ['name' => 'Kazakh',                 'script' => 'Cyrl', 'native' => 'Каз', 'regional' => 'kk_KZ', 'default' => false],
         //'ace'         => ['name' => 'Achinese',               'script' => 'Latn', 'native' => 'Aceh', 'regional' => ''],
         //'af'          => ['name' => 'Afrikaans',              'script' => 'Latn', 'native' => 'Afrikaans', 'regional' => 'af_ZA'],
         //'agq'         => ['name' => 'Aghem',                  'script' => 'Latn', 'native' => 'Aghem', 'regional' => ''],
