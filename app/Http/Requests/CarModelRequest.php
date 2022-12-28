@@ -25,8 +25,8 @@ class CarModelRequest extends FormRequest
     public function rules()
     {
         return [
-             'name' => 'required',
-             'slug' => 'required|unique:car_models'
+             'title' => 'required',
+             'slug' => 'required'
         ];
     }
 

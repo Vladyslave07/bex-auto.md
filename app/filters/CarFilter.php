@@ -351,8 +351,9 @@ class CarFilter
                 ->where('brand_id', $brand->id)->get();
 
             foreach ($curModels as $key => $value) {
-                if (in_array($key, array_column($models->toArray(), 'slug'))) {
-                    $currentCategoryModels[$key]['value'] = $value['value'];
+                $title = $models->where('slug', $key)->first()?->title;
+                if (strlen($title) > 0) {
+                    $currentCategoryModels[$key]['value'] = $title;
                     $currentCategoryModels[$key]['active'] = $value['active'];
                 }
             }
