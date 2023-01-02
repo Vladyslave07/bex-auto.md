@@ -8,7 +8,7 @@
                     {{ $value['value'] }}
                     <input class="form-checkbox"
                            wire:click="setFilter('{{ $filter['slug'] }}', '{{ $key }}', 'true')"
-                           type="checkbox">
+                           type="checkbox" @if($value['active']) checked @endif>
                 </label>
             </div>
         @endforeach

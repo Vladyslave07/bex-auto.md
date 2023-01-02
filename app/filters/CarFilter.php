@@ -181,7 +181,9 @@ class CarFilter
             $properties['model']['values'] = $models;
         }
 
-        asort($properties['brand']['values']);
+        if (!empty($properties['brand']['values'])) {
+            asort($properties['brand']['values']);
+        }
 
         $prepParams = $filterQuery ? self::prepareFilterParams($filterQuery) : [];
         if (count($prepParams) > 0) {
