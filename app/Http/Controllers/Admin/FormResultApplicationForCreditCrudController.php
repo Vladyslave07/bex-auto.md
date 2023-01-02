@@ -47,6 +47,7 @@ class FormResultApplicationForCreditCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('phone');
         CRUD::column('car');
+        CRUD::column('created_at');
     }
 
     /**

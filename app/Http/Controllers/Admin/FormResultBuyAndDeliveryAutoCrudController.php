@@ -47,6 +47,7 @@ class FormResultBuyAndDeliveryAutoCrudController extends CrudController
         CRUD::column('phone');
         CRUD::column('car');
         CRUD::column('country');
+        CRUD::column('created_at');
     }
 
     /**

@@ -4,6 +4,7 @@
 namespace App\Utilities\Bitrix24\Traits;
 
 
+use Illuminate\Support\Facades\Storage;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 
@@ -16,7 +17,7 @@ trait B24Trait
     public static function getLoggerInstance(string $logFileName = 'b24-api-default.log'): Logger
     {
         $log = new Logger('name');
-        $log->pushHandler(new StreamHandler('storage/logs/' . $logFileName, Logger::DEBUG));
+        $log->pushHandler(new StreamHandler(storage_path('logs/' . $logFileName), Logger::DEBUG));
         return $log;
     }
 

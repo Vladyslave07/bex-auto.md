@@ -44,6 +44,8 @@ class Car extends Model
     const EXPECTED_CARS_CACHE_KEY = 'expected_cars_slider';
     const CARS_IN_STOCK_CATEGORY = 'cars_in_stock_category';
 
+    const KZ_DOMAIN_ID = 5;
+
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -254,7 +256,12 @@ class Car extends Model
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
         $domain = Domain::domainBySlug($domainSlug);
 
-        return $query->where('domain_id', $domain->id);
+        $id = self::KZ_DOMAIN_ID;
+        if ($domain) {
+            $id = $domain->id;
+        }
+
+        return $query->where('domain_id', $id);
     }
 
 
