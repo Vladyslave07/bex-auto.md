@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use App\Traits\SlugOrTitleTrait;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 
 class News extends Model
 {
-    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
+    use MakesWebp, CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------

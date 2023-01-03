@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Helper\General;
 use App\Traits\DefaultScope;
+use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -18,7 +19,7 @@ use phpDocumentor\Reflection\Types\Integer;
 
 class Car extends Model
 {
-    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
+    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ class Car extends Model
     protected $table = 'cars';
     protected $guarded = ['id'];
     protected $fillable = ['domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
-    public static $images = ['images'];
+    public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $casts = ['images' => 'array'];

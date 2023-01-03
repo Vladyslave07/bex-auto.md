@@ -16,10 +16,7 @@
                             <div class="swiper-wrapper">
                                 @foreach($car->images as $key => $image)
                                     <a data-fancybox="gallery" href="{{ Storage::disk('public')->url($image) }}" class="swiper-slide">
-                                        <picture>
-                                            {{--                                        <source type="image/webp" srcset="{{ asset('img/example/img_16.webp') }}">--}}
-                                            <img src="{{ Storage::disk('public')->url($image) }}" alt="">
-                                        </picture>
+                                        {!! \App\Helper\ImageHelper::getPicture($image) !!}
                                     </a>
                                     @if ($key === 0 && ($link = $car->youtube_link))
                                         <div data-fancybox="gallery" data-type="iframe" class="swiper-slide">
@@ -44,13 +41,9 @@
                         <div class="gallery-thumbs">
                             @foreach($car->images as $key =>  $image)
                                 <div class="item @if($key === 0) active @endif">
-                                    <picture>
-                                        {{--                                    <source type="image/webp" srcset="{{ asset('img/example/img_17.webp') }}">--}}
-                                        <img width="206" height="187" src="{{ Storage::disk('public')->url($image) }}"
-                                             alt="">
-                                    </picture>
+                                        {!! \App\Helper\ImageHelper::getPicture($image) !!}
                                     @if($key === 3)
-                                        <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 3]) }}</span>
+                                        <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 4]) }}</span>
                                     @endif
                                 </div>
                                 @if ($key === 0 && ($link = $car->youtube_link))

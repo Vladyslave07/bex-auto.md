@@ -13,10 +13,9 @@
             <span>@lang('car.' . $car->status)</span>
         </div>
         <a href="{{ route('car_detail', ['car' => $car->slug]) }}" aria-label="img product">
-            <picture>
-                <img width="289" height="218" src="{{ Storage::disk('public')->url($car->previewPicture ?? '') }}"
-                     loading="lazy" alt="">
-            </picture>
+            @if (strlen($car->previewPicture) > 0)
+                {!! \App\Helper\ImageHelper::getPicture($car->previewPicture) !!}
+            @endif
         </a>
     </div>
     <div class="body">

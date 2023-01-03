@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use App\Traits\SlugOrTitleTrait;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Category extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
+    use MakesWebp, CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ class Category extends Model
     protected $translatable = ['title', 'meta_title', 'meta_description', 'sub_title', 'sub_title_text', 'h1'];
     protected $attributes = ['sort' => 500];
     public static $images = ['image'];
+    public static $imageSize = ['width' => 826, 'height' => 614];
 
     const CATEGORIES_IN_SLIDER_CACHE_KEY = 'categories_show_in_slider';
     const SEO_TEXT_CACHE_KEY = 'seo_text';

@@ -7,6 +7,37 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 
+Route::get('/image', function() {
+
+    $cars = \App\Models\Car::query()->get();
+    foreach ($cars as $car) {
+        $car->update(['active' => $car->active]);
+    }
+
+    $categories = \App\Models\Category::query()->get();
+    foreach ($categories as $category) {
+        $category->update(['active' => $category->active]);
+    }
+
+    $categories = \App\Models\Service::query()->get();
+    foreach ($categories as $category) {
+        $category->update(['active' => $category->active]);
+    }
+
+    $categories = \App\Models\News::query()->get();
+    foreach ($categories as $category) {
+        $category->update(['active' => $category->active]);
+    }
+
+    $categories = \App\Models\Banner::query()->get();
+    foreach ($categories as $category) {
+        $category->update(['active' => $category->active]);
+    }
+
+//    $j = \Illuminate\Support\Facades\DB::table('jobs')->get();
+//    $fj = \Illuminate\Support\Facades\DB::table('failed_jobs')->get();
+//    dd($j, $fj);
+});
 
 // Sub-domains
 $domains = Domain::all();

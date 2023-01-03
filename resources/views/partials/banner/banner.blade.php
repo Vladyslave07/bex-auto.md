@@ -10,9 +10,9 @@
         @if($banner->subtitle)
             <div class="h2 color-blue-xs">{!! $banner->subtitle !!}</div>
         @endif
-        <picture class="img">
-            <img width="729" height="633" src="{{ Storage::disk('public')->url($banner->image) }}" alt="">
-        </picture>
+        @if (strlen($banner->image) > 0)
+            {!! \App\Helper\ImageHelper::getPicture($banner->image, null, 'img') !!}
+        @endif
         @if($banner->text)
             <br>
             <br>

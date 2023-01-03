@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -11,7 +12,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Banner extends Model
 {
-    use CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope;
+    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------

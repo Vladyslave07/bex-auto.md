@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DefaultScope;
+use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use App\Traits\SlugOrTitleTrait;
@@ -14,7 +15,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Service extends Model
 {
-    use CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
+    use MakesWebp, CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
     /*
     |--------------------------------------------------------------------------
@@ -29,6 +30,7 @@ class Service extends Model
     protected $casts = ['active' => 'boolean'];
     protected $with = ['faqs', 'seo_text'];
     public static $images = ['image'];
+    public static $imageSize = ['width' => 826, 'height' => 614];
 
     /*
     |--------------------------------------------------------------------------

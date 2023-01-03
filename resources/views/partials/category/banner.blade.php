@@ -17,9 +17,7 @@
             <div class="h3 color-blue">{!! $category->sub_title_text !!}</div>
         @endif
         @if (strlen($category->image) > 0)
-            <picture class="img">
-                <img width="800" height="613" src="{{ Storage::disk('public')->url($category->image) }}" alt="{{ $category->title }}">
-            </picture>
+            {!! \App\Helper\ImageHelper::getPicture($category->image, $category->title, 'img') !!}
         @endif
     </div>
 </div>

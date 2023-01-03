@@ -24,7 +24,15 @@ trait SaveImageAttribute
                 if (Str::startsWith($value, 'data:image/jpeg;base64')) $ext = 'jpeg';
                 if (Str::startsWith($value, 'data:image/webp;base64')) $ext = 'webp';
 
-                $image = \Image::make($value)->encode($ext, 90);
+                $image = \Image::make($value);
+
+                if (isset($this::$imageSize) && is_array($this::$imageSize)) {
+                    $image = $image->fit($this::$imageSize['width'], $this::$imageSize['height'], function ($constraint) {
+                        $constraint->upsize();
+                    });
+                }
+
+                $image = $image->encode($ext, 90);
                 $filename = md5($value . time()) . '.' . $ext;
                 \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
                 \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
