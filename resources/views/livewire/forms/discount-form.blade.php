@@ -21,41 +21,43 @@
             </div>
         </div>
     </div>
+
+    <script>
+        window.onload = () => {
+            if (readCookie('show-discount-modal') != 0) {
+                setTimeout(() => {
+                    openModal('#modalDiscount');
+                }, 3000);
+            }
+
+            let closeBtn = document.querySelector('#modalDiscount .close-modal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', e => {
+                    writeCookie('show-discount-modal', 0, 7)
+                })
+            }
+
+            let discountForm = document.querySelector('#modalDiscount form')
+            if (discountForm) {
+                discountForm.addEventListener('submit', e => {
+                    writeCookie('show-discount-modal', 0, 7)
+                })
+            }
+        }
+
+        function writeCookie(name, val, expires) {
+            let date = new Date;
+            date.setDate(date.getDate() + expires);
+            document.cookie = name+"="+val+"; path=/; expires=" + date.toUTCString();
+        }
+
+        function readCookie(name) {
+            let matches = document.cookie.match(new RegExp(
+                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+            ));
+            return matches ? decodeURIComponent(matches[1]) : undefined;
+        }
+    </script>
 </div>
 
-<script>
-    window.onload = () => {
-        if (readCookie('show-discount-modal') != 0) {
-            setTimeout(() => {
-                openModal('#modalDiscount');
-            }, 3000);
-        }
 
-        let closeBtn = document.querySelector('#modalDiscount .close-modal');
-        if (closeBtn) {
-            closeBtn.addEventListener('click', e => {
-                writeCookie('show-discount-modal', 0, 7)
-            })
-        }
-
-        let discountForm = document.querySelector('#modalDiscount form')
-        if (discountForm) {
-            discountForm.addEventListener('submit', e => {
-                writeCookie('show-discount-modal', 0, 7)
-            })
-        }
-    }
-
-    function writeCookie(name, val, expires) {
-        let date = new Date;
-        date.setDate(date.getDate() + expires);
-        document.cookie = name+"="+val+"; path=/; expires=" + date.toUTCString();
-    }
-
-    function readCookie(name) {
-        let matches = document.cookie.match(new RegExp(
-            "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-        ));
-        return matches ? decodeURIComponent(matches[1]) : undefined;
-    }
-</script>
