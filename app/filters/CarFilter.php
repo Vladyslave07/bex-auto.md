@@ -283,7 +283,7 @@ class CarFilter
                 $ranges[$property->slug]['name'] = $property->title;
                 $ranges[$property->slug]['type'] = $property->filter_type;
                 $ranges[$property->slug]['slug'] = $property->slug;
-                $ranges[$property->slug]['values'][] = $property->pivot->value ;
+                $ranges[$property->slug]['values'][] = $property->pivot->value;
             }
         }
 
@@ -299,7 +299,7 @@ class CarFilter
                     $min = 0;
                 }
 
-                if ($min !== $max) {
+                if ($min !== $max && $property->step < $max) {
                     $range = self::makeValueFroFromToField(range($min, General::max($max), $property->step), $property->prefix);
                     $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
                 } else {
