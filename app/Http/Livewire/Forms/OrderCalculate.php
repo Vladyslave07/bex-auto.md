@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Forms;
 use App\Jobs\FormResultToB24;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
+use App\Traits\UtmMarkTrait;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -12,6 +13,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class OrderCalculate extends Component implements BaseForm
 {
+    use UtmMarkTrait;
+
     public $phone;
     public $name;
     public $btnText;
@@ -26,12 +29,13 @@ class OrderCalculate extends Component implements BaseForm
     public function submit()
     {
         $this->validate();
-
-        $result = FormResult::query()->create([
+        $fields = [
             'name' => $this->name,
             'phone' => Str::phoneNumber($this->phone),
             'slug_form' => self::SLUG_FORM,
-        ]);
+        ];
+        $fields = $this->addUtmMarks($fields);
+        $result = FormResult::query()->create($fields);
 
         // Send result to B24
         if ($result->id > 0) {

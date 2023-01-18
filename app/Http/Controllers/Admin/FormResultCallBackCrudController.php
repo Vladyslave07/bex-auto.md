@@ -94,6 +94,28 @@ class FormResultCallBackCrudController extends CrudController
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
+        CRUD::addField([
+            'name' => 'utm_source',
+            'label' => 'utm_source',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+        CRUD::addField([
+            'name' => 'utm_medium',
+            'label' => 'utm_medium',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+        CRUD::addField([
+            'name' => 'utm_campaign',
+            'label' => 'utm_campaign',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+
     }
 
     /**

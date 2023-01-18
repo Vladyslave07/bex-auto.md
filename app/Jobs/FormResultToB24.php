@@ -46,12 +46,31 @@ class FormResultToB24 implements ShouldQueue
             'CONTACT_ID' => $contactId,
         ];
 
+        // Add Utm tags
+        if ($utmSource = $this->formResult->utm_source) {
+            $data = array_merge($data, $this->utmData());
+        }
+
         $preparedData['fields'] = $b24Deal->prepareData($data);
 
         // Creating deal in b24
         $deal = $b24Deal->create($preparedData);
 
         Log::debug($deal);
+    }
+
+    /**
+     * @return array
+     */
+    public function utmData()
+    {
+        $data = [];
+
+        if ($source = $this->formResult->utm_source) {$data['UTM_SOURCE'] = $source;}
+        if ($medium = $this->formResult->utm_medium) {$data['UTM_MEDIUM'] = $medium;}
+        if ($campaign = $this->formResult->utm_campaign) {$data['UTM_CAMPAIGN'] = $campaign;}
+
+        return $data;
     }
 
 }

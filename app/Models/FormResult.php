@@ -26,7 +26,7 @@ class FormResult extends Model
 
     protected $table = 'form_results';
     protected $guarded = ['id'];
-     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country'];
+     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country', 'utm_source', 'utm_medium', 'utm_campaign'];
 
     /*
     |--------------------------------------------------------------------------

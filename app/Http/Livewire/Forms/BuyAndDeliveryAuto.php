@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Forms;
 use App\Jobs\FormResultToB24;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
+use App\Traits\UtmMarkTrait;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -12,6 +13,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class BuyAndDeliveryAuto extends Component implements BaseForm
 {
+    use UtmMarkTrait;
 
     const SLUG_FORM = 'buy_and_delivery';
 
@@ -30,6 +32,7 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
         $fields = $this->validate();
         $fields['phone'] = Str::phoneNumber($fields['phone']);
         $fields['slug_form'] = self::SLUG_FORM;
+        $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
 
         // Send result to B24

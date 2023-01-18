@@ -5,6 +5,7 @@ namespace App\Http\Livewire\Forms;
 use App\Jobs\FormResultToB24;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
+use App\Traits\UtmMarkTrait;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -12,6 +13,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class ApplicationForCar extends Component implements BaseForm
 {
+    use UtmMarkTrait;
+
     public $show;
     public $name;
     public $phone;
@@ -31,6 +34,7 @@ class ApplicationForCar extends Component implements BaseForm
         $fields['phone'] = Str::phoneNumber($fields['phone']);
         $fields['car'] = $this->car;
         $fields['slug_form'] = self::SLUG_FORM;
+        $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
         $this->show = false;
 

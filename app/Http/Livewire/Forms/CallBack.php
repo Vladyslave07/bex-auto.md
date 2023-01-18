@@ -6,8 +6,7 @@ use App\Jobs\FormResultToB24;
 use App\Jobs\OrderPartToB24Job;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
-use App\Utilities\Bitrix24\Entity\Contact;
-use App\Utilities\Bitrix24\Entity\Deal;
+use App\Traits\UtmMarkTrait;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -15,6 +14,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class CallBack extends Component implements BaseForm
 {
+    use UtmMarkTrait;
+
     public $phone;
     public $name;
     public $title;
@@ -28,11 +29,15 @@ class CallBack extends Component implements BaseForm
 
         $formattedPhone = Str::phoneNumber($this->phone);
 
-        $result = FormResult::query()->create([
+        $data = [
             'name' => $this->name,
             'phone' => $formattedPhone,
             'slug_form' => self::SLUG_FORM,
-        ]);
+        ];
+
+        $data = $this->addUtmMarks($data);
+
+        $result = FormResult::query()->create($data);
 
         // Send result to B24
         if ($result->id > 0) {
