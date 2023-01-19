@@ -20,9 +20,6 @@
     </div>
     <div class="body">
         <a href="{{ route('car_detail',  ['car' => $car->slug]) }}" class="title">{{ $car->titleWithYear }}</a>
-        @if ($car->year)
-            <div class="year">{{ $car->year }}</div>
-        @endif
         <div class="features">
             <div class="tr">
                 @foreach($car->properties as $property)

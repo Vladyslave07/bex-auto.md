@@ -18,12 +18,22 @@ class DiscountForm extends Component implements BaseForm
     public $phone;
     public $name;
     public $show;
+    public $readyToLoad = false;
 
     const SLUG_FORM = 'discount';
 
+    public function init()
+    {
+        $this->readyToLoad = true;
+    }
+
     public function render()
     {
-        return view('livewire.forms.discount-form');
+        return view('livewire.forms.discount-form', [
+            'src' => $this->readyToLoad
+                ? \App\Models\Banner::getImageForPopup()
+                : '',
+        ]);
     }
 
     public function submit()
