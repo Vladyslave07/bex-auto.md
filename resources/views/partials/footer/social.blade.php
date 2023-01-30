@@ -8,4 +8,7 @@
     <a href="{{ config('settings.viber') }}" aria-label="viber">
         <svg width="23" height="23"><use xlink:href="#insta-icon"></use></svg>
     </a>
+    <a href="{{ config('settings.viber') }}" aria-label="viber">
+        <svg width="23" height="23"><use xlink:href="#youtube"></use></svg>
+    </a>
 </div>
