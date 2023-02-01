@@ -51,6 +51,10 @@ class FormResultToB24 implements ShouldQueue
             $data = array_merge($data, $this->utmData());
         }
 
+        if ($car = $this->formResult->car) {
+            $data['COMMENTS'] = $car;
+        }
+
         $preparedData['fields'] = $b24Deal->prepareData($data);
 
         // Creating deal in b24

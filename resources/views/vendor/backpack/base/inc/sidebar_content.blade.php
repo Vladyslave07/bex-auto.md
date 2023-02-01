@@ -61,7 +61,7 @@
             <a class='nav-link'
                href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\CallBack::SLUG_FORM]) }}'
             >
-                <i class='nav-icon la la-mobile-phone'></i> Обратная связь
+                <i class='nav-icon la la-mobile-phone'></i> {{ \App\Models\FormResult::FORM_NAMES['call_back'] }}
             </a>
             <a class='nav-link'
                href='{{ backpack_url('form-result', [\App\Http\Livewire\Forms\OrderCalculate::SLUG_FORM]) }}'

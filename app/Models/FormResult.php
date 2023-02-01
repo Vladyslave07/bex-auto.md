@@ -12,7 +12,7 @@ class FormResult extends Model
     const FORM_NAMES = [
         'order_calculate' => 'Расчет стоимости',
         'buy_and_delivery' => 'Услуги приобретения и доставки авто',
-        'call_back' => 'Обратной связи',
+        'call_back' => 'Заявки на подбор авто',
         'discount' => 'Получить скидку',
         'application_for_credit' => 'Заявка на покупку авто в Кредит',
         'buy_car_from' => 'Заявка на покупку авто',
