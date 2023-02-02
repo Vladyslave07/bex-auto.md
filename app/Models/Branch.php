@@ -51,7 +51,7 @@ class Branch extends Model
                 ->branchesForCurrentDomain()
                 ->orderBy('sort')
                 ->active()
-                ->get(['city', 'address', 'phone', 'lat', 'lng']);
+                ->get(['city', 'address', 'phone', 'lat', 'lng', 'images']);
         });
     }
 

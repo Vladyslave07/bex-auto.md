@@ -50,16 +50,20 @@
                 </ul>
             </div>
             <div class="col">
-                <div class="imgs">
-                    <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_32.webp') }}">
-                        <img width="320" height="187" src="{{ asset('img/example/img_32.png.png') }}" alt="">
-                    </picture>
-                    <picture>
-                        <source type="image/webp" srcset="{{ asset('img/example/img_31.webp') }}">
-                        <img width="320" height="187" src="{{ asset('img/example/img_31.png.png') }}" alt="">
-                    </picture>
-                </div>
+            @if ($branch = $branches->first())
+                @if($branch->images && count($branch->images) > 0)
+                        <div class="imgs">
+                            @foreach($branch->images as $image)
+                                @if($loop->iteration <= 2)
+                                    <picture>
+                                        {{--                                <source type="image/webp" srcset="{{ asset('img/example/img_32.webp') }}">--}}
+                                        <img width="320" height="187" src="{{ \Illuminate\Support\Facades\Storage::disk('public')->url($image) }}" alt="">
+                                    </picture>
+                                @endif
+                            @endforeach
+                        </div>
+                @endif
+            @endif
                 <div id="map"></div>
             </div>
         </div>
