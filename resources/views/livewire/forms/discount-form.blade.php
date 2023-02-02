@@ -24,28 +24,31 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
-            window.addEventListener('scroll', function(e) {
-                if (readCookie('show-discount-modal') != 0) {
-                    setTimeout(() => {
-                        openModal('#modalDiscount');
-                    }, 5000);
-                }
-
-                let closeBtn = document.querySelector('#modalDiscount .close-modal');
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', e => {
-                        writeCookie('show-discount-modal', 0, 7)
-                    })
-                }
-
-                let discountForm = document.querySelector('#modalDiscount form')
-                if (discountForm) {
-                    discountForm.addEventListener('submit', e => {
-                        writeCookie('show-discount-modal', 0, 7)
-                    })
-                }
-            });
+            window.addEventListener('scroll', showDiscountForm);
         });
+
+        function showDiscountForm () {
+            if (readCookie('show-discount-modal') != 0) {
+                setTimeout(() => {
+                    openModal('#modalDiscount');
+                    window.removeEventListener('scroll', showDiscountForm);
+                }, 5000);
+            }
+
+            let closeBtn = document.querySelector('#modalDiscount .close-modal');
+            if (closeBtn) {
+                closeBtn.addEventListener('click', e => {
+                    writeCookie('show-discount-modal', 0, 7)
+                })
+            }
+
+            let discountForm = document.querySelector('#modalDiscount form')
+            if (discountForm) {
+                discountForm.addEventListener('submit', e => {
+                    writeCookie('show-discount-modal', 0, 7)
+                })
+            }
+        }
 
         function writeCookie(name, val, expires) {
             let date = new Date;
