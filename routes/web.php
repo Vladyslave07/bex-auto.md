@@ -27,7 +27,7 @@ Route::group([
 function commonRoute() {
 
     // Index
-    Route::get('/', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
+    Route::get('/{city?}', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 
     // Services
     Route::get('/service/{service}', [\App\Http\Controllers\ServiceController::class, 'service'])->name('service');

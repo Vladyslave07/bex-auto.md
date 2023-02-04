@@ -6,6 +6,7 @@ use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\City;
 use App\Models\Faq;
 use App\Models\PopularRequest;
 use App\Models\Review;
@@ -16,10 +17,10 @@ use Illuminate\Support\Facades\Lang;
 class IndexController extends Controller
 {
 
-    public function index()
+    public function index(City $city = null)
     {
-        SEOTools::setTitle(config('settings.index_meta_title'));
-        SEOTools::setDescription(config('settings.index_meta_description'));
+        SEOTools::setTitle($city?->seoMetaTitle ?? config('settings.index_meta_title'));
+        SEOTools::setDescription($city?->seoMetaDescription ?? config('settings.index_meta_description'));
 
         $banner = Banner::banner();
 
@@ -42,7 +43,7 @@ class IndexController extends Controller
         $faqs = Faq::defaultFaqs();
 
         // Seo text
-        $seoText = SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
+        $seoText = $city?->text ?? SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
 
         // Reviews
         $reviews = Review::reviews();

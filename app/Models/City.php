@@ -26,6 +26,7 @@ class City extends Model
     protected $fillable = ['active', 'sort', 'title', 'slug', 'title_m', 'meta_title', 'meta_description', 'seo_text_id'];
     protected $translatable = ['title', 'title_m', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500];
+    protected $with = ['text'];
 
     /*
     |--------------------------------------------------------------------------
@@ -88,4 +89,14 @@ class City extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function getSeoMetaTitleAttribute()
+    {
+        return $this->parseSnippets($this->meta_title ?: config('settings.city_meta_title_default'));
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->meta_description ?: config('settings.city_meta_description_default'));
+    }
 }
