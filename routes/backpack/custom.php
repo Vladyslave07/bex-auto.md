@@ -42,4 +42,5 @@ Route::group([
     Route::crud('redirect', 'RedirectCrudController');
     Route::crud('domain', 'DomainCrudController');
     Route::crud('review', 'ReviewCrudController');
+    Route::crud('city', 'CityCrudController');
 }); // this should be the absolute last line of this file
