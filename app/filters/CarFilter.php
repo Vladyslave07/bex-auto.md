@@ -300,7 +300,7 @@ class CarFilter
                 }
 
                 if ($min !== $max && $property->step < $max) {
-                    $range = self::makeValueFroFromToField(range($min, General::max($max), $property->step), $property->prefix);
+                    $range = self::makeValueFroFromToField(range($min, General::max($max), (int)$property->step), $property->prefix);
                     $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
                 } else {
                     unset($ranges[$key]);
