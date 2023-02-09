@@ -26,9 +26,6 @@ Route::group([
 
 function commonRoute() {
 
-    // Index
-    Route::get('/{city?}', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
-
     // Services
     Route::get('/service/{service}', [\App\Http\Controllers\ServiceController::class, 'service'])->name('service');
 
@@ -65,6 +62,9 @@ function commonRoute() {
     });
 
     Route::get('/reviews-list', ReviewsController::class);
+
+    // Index
+    Route::get('/{city?}', [\App\Http\Controllers\IndexController::class, 'index'])->name('index');
 }
 
 // Admin actions
