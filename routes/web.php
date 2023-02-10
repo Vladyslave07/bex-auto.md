@@ -70,15 +70,15 @@ function commonRoute() {
 // Admin actions
 Route::group(['middleware' => ['admin']], function () {
     // Cache delete
-    Route::get('/clear-all-cache', function () {
+    Route::get('/cache/clear', function () {
         Artisan::call("cache:clear");
     })->name('clear-cache');
 
     // Parser
-    Route::post('/save-parser-info', [\App\Http\Controllers\Admin\ParserController::class, 'save'])->name('save-parser-info');
-    Route::get('/download-lots', [\App\Http\Controllers\Admin\ParserController::class, 'download'])->name('download-lots');
-    Route::get('/parser-queue-info', [\App\Http\Controllers\Admin\ParserController::class, 'infoForAjax'])->name('parser-queue-info');
-    Route::post('/delete-queue', [\App\Http\Controllers\Admin\ParserController::class, 'deleteQueue'])->name('delete-queue');
+    Route::post('parser/save', [\App\Http\Controllers\Admin\ParserController::class, 'save'])->name('save-parser-info');
+    Route::get('parser/download', [\App\Http\Controllers\Admin\ParserController::class, 'download'])->name('download-lots');
+    Route::get('parser/queue-info', [\App\Http\Controllers\Admin\ParserController::class, 'infoForAjax'])->name('parser-queue-info');
+    Route::post('parser/delete', [\App\Http\Controllers\Admin\ParserController::class, 'deleteQueue'])->name('delete-queue');
 });
 
 
