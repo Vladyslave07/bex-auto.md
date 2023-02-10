@@ -33,7 +33,7 @@ class CategoryCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -45,7 +45,7 @@ class CategoryCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -74,7 +74,7 @@ class CategoryCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -93,21 +93,21 @@ class CategoryCrudController extends CrudController
             'name' => 'h1',
             'label' => trans('backpack::fields.h1'),
             'type' => 'simplemde',
-            'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
+            'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([
             'tab' => 'Категория',
             'name' => 'sub_title',
             'label' => trans('backpack::fields.sub_title'),
             'type' => 'simplemde',
-            'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
+            'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([
             'tab' => 'Категория',
             'name' => 'sub_title_text',
             'label' => trans('backpack::fields.sub_title_text'),
             'type' => 'simplemde',
-            'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
+            'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([
             'tab' => 'Категория',
@@ -168,7 +168,7 @@ class CategoryCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

@@ -147,4 +147,33 @@ class Category extends Model
     {
         return $this->parseSnippets($this->meta_description ?: config('settings.category_meta_description_default'));
     }
+
+    public function getDomainH1Attribute()
+    {
+        if (strlen($this->h1) <= 0) {
+            return '';
+        }
+        return $this->parseSnippets($this->h1);
+    }
+
+    public function getDomainSubTitleAttribute()
+    {
+        if (strlen($this->sub_title) <= 0) {
+            return '';
+        }
+        return $this->parseSnippets($this->sub_title);
+    }
+
+    public function getDomainSubTitleTextAttribute()
+    {
+        if (strlen($this->sub_title_text) <= 0) {
+            return '';
+        }
+        return $this->parseSnippets($this->sub_title_text);
+    }
+
+    public function getCountryAttribute()
+    {
+        return Domain::currentDomain()?->country;
+    }
 }

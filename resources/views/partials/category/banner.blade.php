@@ -7,14 +7,14 @@
         <br>
         <br>
         <h1 class="h1">
-            {!! $category->h1 !!}
+            {!! $category->domain_h1 !!}
         </h1>
         @if ($category->sub_title)
-            <div class="h2 color-blue-xs">{!! $category->sub_title !!}</div>
+            <div class="h2 color-blue-xs">{!! $category->domain_sub_title !!}</div>
         @endif
         <span class="line"></span>
         @if ($category->sub_title_text)
-            <div class="h3 color-blue">{!! $category->sub_title_text !!}</div>
+            <div class="h3 color-blue">{!! $category->domain_sub_title_text !!}</div>
         @endif
         @if (strlen($category->image) > 0)
             {!! \App\Helper\ImageHelper::getPicture($category->image, $category->title, 'img') !!}

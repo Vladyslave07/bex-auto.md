@@ -4,12 +4,13 @@ namespace App\Models;
 
 use App\Helper\General;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 
 class Domain extends Model
 {
-    use CrudTrait;
+    use CrudTrait, HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -19,7 +20,8 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone'];
+    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country'];
+    protected $translatable = ['country'];
 
     const DEFAULT_DOMAIN = 6;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
