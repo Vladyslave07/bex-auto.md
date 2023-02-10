@@ -21,7 +21,7 @@ class DomainCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,7 +33,7 @@ class DomainCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -58,7 +58,7 @@ class DomainCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -75,6 +75,7 @@ class DomainCrudController extends CrudController
         CRUD::addField(['name' => 'reviews_id', 'label' => trans('backpack::fields.reviews_id'), 'type' => 'text', 'hint' => trans('backpack::hint.domains.reviews_id')]);
         CRUD::addField(['name' => 'phone_mask', 'label' => trans('backpack::fields.phone_mask'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.phone_mask')]);
         CRUD::addField(['name' => 'placeholder', 'label' => trans('backpack::fields.placeholder'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.placeholder')]);
+        CRUD::addField(['name' => 'phone', 'label' => trans('backpack::fields.phone'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'lat', 'label' => trans('backpack::fields.lat'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.lat')]);
         CRUD::addField(['name' => 'lng', 'label' => trans('backpack::fields.lng'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.lng')]);
 
@@ -82,7 +83,7 @@ class DomainCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

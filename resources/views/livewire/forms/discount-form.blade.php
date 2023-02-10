@@ -24,15 +24,17 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", (event) => {
+            window.showForm = false;
             window.addEventListener('scroll', showDiscountForm);
         });
 
         function showDiscountForm () {
-            if (readCookie('show-discount-modal') != 0) {
+            if (readCookie('show-discount-modal') != 0 && !window.showForm) {
                 setTimeout(() => {
                     openModal('#modalDiscount');
                     window.removeEventListener('scroll', showDiscountForm);
                 }, 5000);
+                window.showForm = true;
             }
 
             let closeBtn = document.querySelector('#modalDiscount .close-modal');

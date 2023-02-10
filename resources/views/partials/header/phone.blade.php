@@ -1,1 +1,1 @@
-<a href="tel:{{ Str::phoneNumber(config('settings.main-phone')) }}" class="phone">{{ config('settings.main-phone') }}</a>
+<a href="tel:{{ Str::phoneNumber(\App\Models\Domain::phoneForCurrDomain()) }}" class="phone">{{ \App\Models\Domain::phoneForCurrDomain() }}</a>

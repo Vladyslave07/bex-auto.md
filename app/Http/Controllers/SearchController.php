@@ -29,11 +29,8 @@ class SearchController extends Controller
 
         $cars = [];
         if ($q = $request->get('q')) {
-            $cars = Car::query()
-                ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
-                ->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
+            $cars = Car::carsSearch($q);
         }
-
 
         return view('search', compact('popularCars', 'brands', 'faqs', 'cars'));
     }

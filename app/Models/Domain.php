@@ -19,11 +19,12 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng'];
+    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone'];
 
     const DEFAULT_DOMAIN = 6;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
     const PHONE_PLACEHOLDER_CACHE_KEY = 'placeholder';
+    const PHONE_CACHE_KEY = 'phone';
     /*
     |--------------------------------------------------------------------------
     | FUNCTIONS
@@ -81,6 +82,19 @@ class Domain extends Model
             $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
 
             return self::query()->where('slug', $domainSlug)->first()?->placeholder;
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function phoneForCurrDomain()
+    {
+        return Cache::remember( General::cacheKey(self::PHONE_CACHE_KEY), now()->addMonth(), function () {
+            // todo: Вынести установку домена глобально
+            $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+
+            return self::query()->where('slug', $domainSlug)->first()?->phone;
         });
     }
 

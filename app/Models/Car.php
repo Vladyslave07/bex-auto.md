@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helper\General;
+use App\Http\Controllers\CatalogController;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
@@ -108,6 +109,20 @@ class Car extends Model
             }
             return $cars;
         });
+    }
+
+    /**
+     * Returns cars for search page
+     *
+     * @param string $q
+     * @return mixed
+     */
+    public static function carsSearch(string $q = '')
+    {
+        return self::query()
+            ->CarsForCurrentDomain()
+            ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
+            ->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
     }
 
     /**
