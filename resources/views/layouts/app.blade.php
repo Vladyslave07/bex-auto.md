@@ -13,6 +13,7 @@
         @yield('meta-pagination')
         <link rel="canonical" href="{{ url()->current() }}" />
         <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNUq5n3HwAEUQJBudQtMwAAAABJRU5ErkJggg==" rel="icon" type="image/x-icon" />
+        <link rel="shortcut icon" href="{{ asset('img/favicon.svg') }}">
 
         <meta name="phone_mask" content="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}">
 
