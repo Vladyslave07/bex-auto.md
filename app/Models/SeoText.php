@@ -20,6 +20,7 @@ class SeoText extends Model
 
     const MAIN_PAGE_SEO_TEXT_SLUG = 'main';
     const ABOUT_SEO_TEXT_SLUG = 'about_seo_text';
+    const PRIVACY_SEO_TEXT_SLUG = 'privacy';
 
     protected $table = 'seo_texts';
     protected $guarded = ['id'];

@@ -14,5 +14,8 @@ return [
         'schedule' => 'Company working hours:',
         'weekdays' => 'Mon-Fri from 10:00 to 19:00',
         'weekends' => 'Sat-Sun weekend',
-    ]
+    ],
+    'privacy' => [
+        'breadcrumbs' => 'Privacy Policy',
+    ],
 ];

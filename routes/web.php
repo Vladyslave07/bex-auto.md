@@ -6,6 +6,11 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+Route::get('/test', function() {
+    $cars = \App\Models\Car::query()->get();
+    dd($cars->first()->properties->where('slug', 'brand')->first());
+});
+
 // Sub-domains
 $domains = Domain::all();
 $domains->each(function ($domain) {
@@ -60,6 +65,8 @@ function commonRoute() {
         // Contacts
         Route::get('/contacts', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.contacts');
     });
+
+    Route::get('/privacy-policy', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.privacy');
 
     Route::get('/reviews-list', ReviewsController::class);
 

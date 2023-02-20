@@ -14,5 +14,8 @@ return [
         'schedule' => 'График роботи компанії:',
         'weekdays' => 'Пн-Пт с 10:00 до 19:00',
         'weekends' => 'Сб-Вс вихідний.',
-    ]
+    ],
+    'privacy' => [
+        'breadcrumbs' => 'Privacy Policy',
+    ],
 ];

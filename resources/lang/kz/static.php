@@ -15,5 +15,8 @@ return [
         'weekdays' => 'Дүйсенбі-жұма 10:00-ден 19:00-ге дейін',
         'weekends' => 'Сенбі-жексенбі Демалыс күні',
     ],
+    'privacy' => [
+        'breadcrumbs' => 'Privacy Policy',
+    ],
 
 ];

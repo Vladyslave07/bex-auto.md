@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Контакти')
-
 @push('styles')
     <link rel="stylesheet" href="{{ mix('css/contacts.css') }}">
 @endpush

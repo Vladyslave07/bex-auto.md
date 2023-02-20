@@ -51,6 +51,12 @@ Breadcrumbs::for('static.contacts', function ($trail) {
     $trail->push(Lang::get('static.contacts.breadcrumbs'), '');
 });
 
+// privacy
+Breadcrumbs::for('static.privacy', function ($trail) {
+    $trail->parent('index');
+    $trail->push(Lang::get('static.privacy.breadcrumbs'), '');
+});
+
 Breadcrumbs::for('search', function ($trail) {
     $trail->parent('index');
 
