@@ -52,6 +52,15 @@ class CarModel extends Model
 
     /**
      * @param $title
+     * @return \Illuminate\Database\Eloquent\Builder|Model|object|null
+     */
+    public static function getBySlug($slug)
+    {
+        return self::query()->where('slug', $slug)->first();
+    }
+
+    /**
+     * @param $title
      * @param $brandId
      * @return CarModel|false
      */

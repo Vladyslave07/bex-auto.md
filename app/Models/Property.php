@@ -90,7 +90,7 @@ class Property extends Model
             $items = $relation::query()->orderBy('title')->get(['title', 'slug']);
             $options = [];
             foreach ($items as $item) {
-                $options[$item->title] = $item->title;
+                $options[$item->slug] = $item->title;
             }
         }
         return $options;

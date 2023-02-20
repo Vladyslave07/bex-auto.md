@@ -76,4 +76,15 @@ class CarProperty extends Pivot
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setSlugAttribute($value)
+    {
+        $model = CarModel::getBySlug($value);
+        $brand = Brand::getBySlug($value);
+        if (strlen($value) > 0 && ($model || $brand)) {
+            $entity = $brand ?? $model;
+            $this->attributes['value'] = $entity->title;
+        }
+        $this->attributes['slug'] = $value;
+    }
 }
