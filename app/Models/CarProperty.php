@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CarProperty extends Pivot
 {
-    use HasFactory, Sluggable, SluggableScopeHelpers, HasTranslations;
+    use HasFactory, Sluggable, SluggableScopeHelpers;
 
     /*
     |--------------------------------------------------------------------------
@@ -20,8 +20,7 @@ class CarProperty extends Pivot
 
     protected $table = 'car_property';
     protected $primaryKey = 'id';
-    protected $fillable = ['value', 'slug'];
-    protected $translatable = [];
+    protected $fillable = ['car_id', 'property_id', 'value', 'slug'];
 
     /*
     |--------------------------------------------------------------------------

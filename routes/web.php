@@ -7,8 +7,23 @@ use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('/test', function() {
-    $res = App\Models\CarModel::getBySlug('');
-    dd($res);
+    // Чтобы сработало нужно закомментить трейты в моделе CarProperty
+    $cars = \App\Models\Car::query()->get();
+    foreach ($cars as $car) {
+        $carProperty = \App\Models\CarProperty::query()
+            ->where('car_id', $car->id)->where('property_id', 2)->first();
+        $model = \App\Models\CarModel::query()->where('title->ru', $carProperty->value)->first();
+        if ($model) {
+            dump($model->slug, $carProperty->id);
+            $carProperty->slug = $model->slug;
+//            dump($res);
+            $res = $carProperty->save();
+            dump($res);
+        }
+//        dump($carProperty);
+    }
+//    $res = App\Models\CarModel::getBySlug('');
+//    dd($res);
 });
 
 // Sub-domains

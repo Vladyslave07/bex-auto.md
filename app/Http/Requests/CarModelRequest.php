@@ -26,7 +26,6 @@ class CarModelRequest extends FormRequest
     {
         return [
              'title' => 'required',
-             'slug' => 'required'
         ];
     }
 
