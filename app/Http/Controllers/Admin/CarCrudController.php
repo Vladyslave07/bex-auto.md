@@ -177,23 +177,27 @@ class CarCrudController extends CrudController
                     case 'relation':
                         $valueField = [
                             'type' => 'select_from_array',
+                            'name' => 'slug',
                             'options' => $property->getRelationOption($property->relation),
                         ];
                         break;
                     case 'text':
                         $valueField = [
                             'type' => $property->field_type,
+                            'name' => 'value',
                         ];
                         break;
                     case 'number':
                         $valueField = [
                             'type' => $property->field_type,
+                            'name' => 'value',
                             'attributes' => ["step" => "any"],
                         ];
                         break;
                     default:
                         $valueField = [
                             'type' => 'select_from_array',
+                            'name' => 'value',
                             'options' => $property->getOptions(),
                         ];
                         break;
@@ -201,7 +205,6 @@ class CarCrudController extends CrudController
 
                 $propertiesFields[$property->id] = array_merge([
                     'label' => $property->title,
-                    'name' => 'value',
                     'wrapper' => ['class' => 'form-group col-md-6'],
                 ], $valueField);
             }

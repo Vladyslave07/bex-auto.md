@@ -1,10 +1,9 @@
 {{-- PROPERTIES FIELD TYPE --}}
 @php
-
     if (isset($field['value']) && count($field['value']) > 0) {
         $values = [];
         foreach ($field['value'] as $value) {
-            $values[] = ['properties' => $value->id, 'value' => $value->pivot->value];
+            $values[] = ['properties' => $value->id, 'value' => $value->field_type === 'relation' ? $value->pivot->slug : $value->pivot->value];
         }
         $field['value'] = json_encode($values);
     }
@@ -13,7 +12,7 @@
     $field['value'] = old($field['name']) ? old($field['name']) : (isset($field['value']) ? $field['value'] : (isset($field['default']) ? $field['default'] : '' ));
     // make sure the value is a JSON string (not array, if it's cast in the model)
     $field['value'] = is_array($field['value']) ? json_encode($field['value']) : $field['value'];
-@endphp
+    @endphp
 
 @include('crud::fields.inc.wrapper_start')
 
@@ -39,6 +38,7 @@
                 <input type="hidden" value="{{ $id }}" name="properties">
                 @php
 
+                    $subfield['name'] = 'value';
                     $subfield = $crud->makeSureFieldHasNecessaryAttributes($subfield);
 
                     $fieldViewNamespace = $subfield['view_namespace'] ?? 'crud::fields';

@@ -112,7 +112,7 @@ class CarFilter
             $query->where('property_id', $propId)->where('car_property.slug', array_shift($propValues));
             if (!empty($propValues)) {
                 foreach ($propValues as $propValue) {
-                    $query->orWhere('car_property.value', $propValue);
+                    $query->orWhere('car_property.slug', $propValue);
                 }
             }
         });
