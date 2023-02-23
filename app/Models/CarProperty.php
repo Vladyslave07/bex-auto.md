@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CarProperty extends Pivot
 {
-    use HasFactory, Sluggable, SluggableScopeHelpers, HasTranslations;
+    use HasFactory, Sluggable, SluggableScopeHelpers;
 
     /*
     |--------------------------------------------------------------------------
@@ -20,8 +20,7 @@ class CarProperty extends Pivot
 
     protected $table = 'car_property';
     protected $primaryKey = 'id';
-    protected $fillable = ['value', 'slug'];
-    protected $translatable = [];
+    protected $fillable = ['car_id', 'property_id', 'value', 'slug'];
 
     /*
     |--------------------------------------------------------------------------
@@ -76,4 +75,15 @@ class CarProperty extends Pivot
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setSlugAttribute($value)
+    {
+        $model = CarModel::getBySlug($value);
+        $brand = Brand::getBySlug($value);
+        if (strlen($value) > 0 && ($model || $brand)) {
+            $entity = $brand ?? $model;
+            $this->attributes['value'] = $entity->title;
+        }
+        $this->attributes['slug'] = $value;
+    }
 }
