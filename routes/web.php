@@ -6,11 +6,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-Route::get('/test', function() {
-    $cars = \App\Models\Car::query()->get();
-    dd($cars->first()->properties->where('slug', 'brand')->first());
-});
-
 // Sub-domains
 $domains = Domain::all();
 $domains->each(function ($domain) {
