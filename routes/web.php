@@ -131,4 +131,7 @@ Route::group(['prefix' => 'html'], function () {
     Route::get('/about', function () {
         return view('html.about');
     })->name('html.about');
+    Route::get('/new-card', function () {
+        return view('html.new-card');
+    })->name('html.new-card');
 });

@@ -22,6 +22,7 @@
                     <li><a target="_blank" href="{{ route('html.index') }}">Головна</a></li>
                     <li><a target="_blank" href="{{ route('html.catalog') }}">Каталог</a></li>
                     <li><a target="_blank" href="{{ route('html.card') }}">Карточка товару</a></li>
+                    <li><a target="_blank" href="{{ route('html.new-card') }}">Розгорнута Карточка товару</a></li>
                     <li><a target="_blank" href="{{ route('html.dealer-services') }}">Дiлерськi послуги</a></li>
                     <li><a target="_blank" href="{{ route('html.new-elektromobili') }}">Нові Електрокари</a></li>
                     <li><a target="_blank" href="{{ route('html.elektromobili') }}">Електрокари</a></li>
