@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\SlugOrTitleTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\SlugService;
@@ -12,7 +13,7 @@ use Illuminate\Support\Str;
 
 class CarModel extends Model
 {
-    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers;
+    use CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
     /*
     |--------------------------------------------------------------------------
