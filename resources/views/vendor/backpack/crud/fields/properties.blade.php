@@ -37,8 +37,6 @@
             <div class="container-properties-element col-md-12">
                 <input type="hidden" value="{{ $id }}" name="properties">
                 @php
-
-                    $subfield['name'] = 'value';
                     $subfield = $crud->makeSureFieldHasNecessaryAttributes($subfield);
 
                     $fieldViewNamespace = $subfield['view_namespace'] ?? 'crud::fields';
@@ -125,8 +123,11 @@
                     if (Object.hasOwnProperty.call(values, key)) {
                         const value = values[key];
                         let $propertiesField = $('[data-properties-input-name=' + field_name + '][value=' + key + ']');
+
                         if ($propertiesField) {
-                            let $valueField = $propertiesField.parent().find('[data-properties-input-name=value]');
+                            let inputName = $propertiesField.parent().find('[bp-field-name]').attr('bp-field-name');
+
+                            let $valueField = $propertiesField.parent().find(`[data-properties-input-name=${inputName}]`);
                             if ($valueField) {
                                 if (Array.isArray(value)) {
                                     $valueField.val(JSON.stringify(value.map((v) => { return {value: v}; })));

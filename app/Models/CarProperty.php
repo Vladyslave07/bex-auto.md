@@ -37,7 +37,7 @@ class CarProperty extends Pivot
     {
         return [
             'slug' => [
-                'source' => 'value',
+                'source' => 'value_or_slug',
                 'onUpdate' => true,
                 'unique' => false,
             ],
@@ -69,6 +69,15 @@ class CarProperty extends Pivot
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
+
+    public function getValueOrSlugAttribute()
+    {
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->value;
+    }
 
     /*
     |--------------------------------------------------------------------------
