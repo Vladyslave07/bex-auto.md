@@ -24,10 +24,11 @@ Route::group([
     commonRoute();
 });
 
-function commonRoute() {
+function commonRoute()
+{
 
     // Services
-    Route::get('/service/{service}', [\App\Http\Controllers\ServiceController::class, 'service'])->name('service');
+    Route::get('/uslugi/{service}', [\App\Http\Controllers\ServiceController::class, 'service'])->name('service');
 
     // Car detail
     Route::get('/car-details/{car}', [\App\Http\Controllers\CardController::class, 'index'])->name('car_detail');
