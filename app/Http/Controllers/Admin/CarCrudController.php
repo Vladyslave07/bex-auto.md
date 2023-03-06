@@ -120,20 +120,6 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"]]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info')]);
 
-//        CRUD::addField([
-//            'name' => 'links',
-//            'label' => trans('backpack::fields.links'),
-//            'type' => 'relationship',
-//            'entity' => 'links',
-//            'attribute' => 'title',
-//            'model' => Category::class,
-//            'options' => (function ($query) {
-//                return $query->orderBy('title', 'asc')->get();
-//            }),
-//            'tab' => 'Автомобиль',
-//            'hint' => trans('backpack::hint.cars.links')
-//        ]);
-
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'), 'type' => 'text', 'hint' => trans('backpack::hint.cars.youtube_link')]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'preview_image', 'label' => trans('backpack::fields.preview_image'), 'type' => 'image', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '', 'hint' => trans('backpack::hint.cars.preview_image')]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '',]);
@@ -237,7 +223,8 @@ class CarCrudController extends CrudController
             'hint' => 'Доступные сниппеты <code>#title#</code> <code>#price#</code> <code>#year#</code>',
         ]);
 
-
+        // Fields for full card template
+        $this->addFullTemplate();
     }
 
     /**
@@ -288,5 +275,11 @@ class CarCrudController extends CrudController
         Cache::forget(Car::CARS_IN_STOCK_CATEGORY);
 
         return $response;
+    }
+
+
+    public function addFullTemplate()
+    {
+        CRUD::addField(['tab' => 'Поля для посадочной страницы', 'name' => 'full_template', 'label' => trans('backpack::fields.full_template'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
     }
 }

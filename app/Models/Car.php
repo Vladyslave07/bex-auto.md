@@ -28,13 +28,16 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
+    const DEFAULT_TEMPLATE_NAME = 'card';
+    const FULL_TEMPLATE_NAME = 'full-card';
+
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
+    protected $fillable = ['full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500, 'images' => ''];
@@ -53,6 +56,11 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function cardTemplate()
+    {
+        return $this->full_template ? self::FULL_TEMPLATE_NAME : self::DEFAULT_TEMPLATE_NAME;
+    }
 
     /**
      * Return the sluggable configuration array for this model.
