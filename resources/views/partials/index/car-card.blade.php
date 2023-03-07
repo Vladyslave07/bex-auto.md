@@ -9,9 +9,11 @@
                 </div>
             @endif
         @endforeach
-        <div class="stickers">
-            <span>@lang('car.' . $car->status)</span>
-        </div>
+        @if ($car->status)
+            <div class="stickers">
+                <span>@lang('car.' . $car->status)</span>
+            </div>
+        @endif
         <a href="{{ route('car_detail', ['car' => $car->slug]) }}" aria-label="img product">
             @if (strlen($car->previewPicture) > 0)
                 {!! \App\Helper\ImageHelper::getPicture($car->previewPicture) !!}
