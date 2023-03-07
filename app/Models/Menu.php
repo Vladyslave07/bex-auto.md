@@ -29,6 +29,7 @@ class Menu extends Model
     const CATALOG_MENU_SLUG = 'avto';
     const ABOUT_MENU_SLUG = 'about';
     const REVIEWS_MENU_ITEM_SLUG = 'reviews';
+    const ABOUT_MENU_ITEM_SLUG = 'about';
 
     protected $table = 'menus';
     protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image', 'show_link'];
@@ -89,6 +90,10 @@ class Menu extends Model
         // todo: delete it when reviews page is create
         if ($link === self::REVIEWS_MENU_ITEM_SLUG) {
             return LaravelLocalization::localizeURL('/#reviews', $locale);
+        }
+
+        if ($category === self::ABOUT_MENU_ITEM_SLUG) {
+            return LaravelLocalization::localizeURL($link, $locale);
         }
 
         return LaravelLocalization::localizeURL(sprintf('/%s/%s', $category, $link), $locale);

@@ -324,7 +324,11 @@ class CarFilter
         $min = $cars->min('price') ?? 5000;
         $max = $cars->max('price') ?? 50000;
 
-        $range = self::makeValueFroFromToField(range(General::min($min), General::max($max), 2500), '$');
+        $step = 2500;
+        if ($max < $step) {
+            $step = 100;
+        }
+        $range = self::makeValueFroFromToField(range(General::min($min), General::max($max), $step), '$');
         $properties['values'] = ['from' => $range, 'to' => $range];
 
         return $properties;

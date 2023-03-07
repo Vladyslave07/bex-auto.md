@@ -45,22 +45,20 @@ function commonRoute()
     // Thanks
     Route::get('/thanks', [\App\Http\Controllers\IndexController::class, 'thanks'])->name('thanks');
 
-    Route::group(['prefix' => '/about'], function () {
+    // About us
+    Route::get('/about', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.about');
 
-        Route::get('/', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.about');
+    // News
+    Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
 
-        // News
-        Route::get('/news', [\App\Http\Controllers\NewsController::class, 'index'])->name('news');
+    // News detail
+    Route::get('/news/{article}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('news_detail');
 
-        // News detail
-        Route::get('/news/{article}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('news_detail');
+    // Guarantee
+    Route::get('/guarantee', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.guarantee');
 
-        // Guarantee
-        Route::get('/guarantee', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.guarantee');
-
-        // Contacts
-        Route::get('/contacts', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.contacts');
-    });
+    // Contacts
+    Route::get('/contacts', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.contacts');
 
     Route::get('/privacy-policy', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.privacy');
 
