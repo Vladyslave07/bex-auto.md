@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Domain;
 use App\Models\Faq;
 use App\Models\SeoText;
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -14,6 +15,10 @@ class CardController extends Controller
 {
     public function index(Car $car)
     {
+        if (!$car->forCurrentDomain()) {
+            abort(404);
+        }
+
         SEOTools::setTitle($car->seo_meta_title);
         SEOTools::setDescription($car->seo_meta_description);
 

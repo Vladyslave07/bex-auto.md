@@ -200,6 +200,16 @@ class Car extends Model
 
     }
 
+    /**
+     * Check car for current domain
+     *
+     * @return bool
+     */
+    public function forCurrentDomain()
+    {
+        return $this->domain_id === Domain::currentDomain()->id;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
