@@ -42,7 +42,7 @@
                             @foreach($car->images as $key =>  $image)
                                 <div class="item @if($key === 0) active @endif">
                                         {!! \App\Helper\ImageHelper::getPicture($image) !!}
-                                    @if($key === 3)
+                                    @if($key === 3 && count($car->images) > 4)
                                         <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 4]) }}</span>
                                     @endif
                                 </div>
