@@ -19,6 +19,7 @@ class CardController extends Controller
             abort(404);
         }
 
+        dd($car->benefits);
         SEOTools::setTitle($car->seo_meta_title);
         SEOTools::setDescription($car->seo_meta_description);
 

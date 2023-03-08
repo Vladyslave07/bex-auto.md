@@ -15,6 +15,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use phpDocumentor\Reflection\Types\Integer;
 
@@ -37,11 +38,11 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
+    protected $fillable = ['equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500, 'images' => ''];
-    protected $casts = ['images' => 'array'];
+    protected $casts = ['images' => 'array', 'benefits' => 'array', 'equipment' => 'array'];
     protected $with = ['properties'];
 
 
@@ -353,6 +354,37 @@ class Car extends Model
                 \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
                 $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
             } else $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
+        }
+    }
+
+    public function setBenefitsAttribute($values)
+    {
+        $destination_path = Str::replace('_', '', $this->table);
+        if ($values && count($values) > 0) {
+            $newValues = [];
+            foreach ($values as $value) {
+
+                if (key_exists('image', $value) && strlen($value['image']) > 0 && !Storage::disk('public')->exists($value['image'])) {
+                    $image = $value['image'];
+                    $ext = 'jpg';
+                    if (Str::startsWith($image, 'data:image/png;base64')) $ext = 'png';
+                    if (Str::startsWith($image, 'data:image/jpeg;base64')) $ext = 'jpeg';
+                    if (Str::startsWith($image, 'data:image/webp;base64')) $ext = 'webp';
+
+                    $image = \Image::make($image)->fit(550, 400, function ($constraint) {
+                        $constraint->upsize();
+                    })->encode($ext, 90);
+
+                    $filename = md5($image . time()) . '.' . $ext;
+                    Storage::disk('public')->put($destination_path . '/' . $filename, $image->stream());
+                    $newValues[] = [
+                        'text' => $value['text'],
+                        'image' => $destination_path . '/' . $filename,
+                    ];
+                }
+            }
+
+            $this->attributes['benefits'] = json_encode($newValues);
         }
     }
 

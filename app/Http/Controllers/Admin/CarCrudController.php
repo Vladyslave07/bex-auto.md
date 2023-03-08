@@ -281,5 +281,31 @@ class CarCrudController extends CrudController
     public function addFullTemplate()
     {
         CRUD::addField(['tab' => 'Поля для посадочной страницы', 'name' => 'full_template', 'label' => trans('backpack::fields.full_template'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Поля для посадочной страницы',
+            'name'  => 'benefits',
+            'label' => 'Testimonials',
+            'type'  => 'repeatable',
+            'subfields' => [ // also works as: "fields"
+                [
+                    'name'    => 'text',
+                    'type'    => 'ckeditor',
+                    'label'   => 'Текст',
+                ],
+                [
+                    'name'    => 'image',
+                    'label' => trans('backpack::fields.image'),
+                    'type' => 'image',
+                    'disk' => 'public',
+//                    'height' => '50px',
+//                    'width' => '50px',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+            ],
+
+            // optional
+            'new_item_label'  => 'Add Group', // customize the text of the button
+            'init_rows' => 1, // number of empty rows to be initialized, by default 1
+            'max_rows' => 3, // maximum rows allowed, when reached the "new item" button will be hidden
+        ]);
     }
 }
