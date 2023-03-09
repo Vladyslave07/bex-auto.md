@@ -149,6 +149,9 @@ class CategoryCrudController extends CrudController
             }),
         ]);
 
+        // todo: сделать так чтобы при получении поля meta_title был текст из конкретного домена
+        dd($this->crud);
+
         CRUD::addField([
             'tab' => 'SEO',
             'name' => 'meta_title',

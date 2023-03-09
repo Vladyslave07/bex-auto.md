@@ -122,25 +122,13 @@ class Category extends Model
     |--------------------------------------------------------------------------
     */
 
+
     public function getSeoTextAttribute()
     {
         return Cache::remember( $this->seo_text_id . '_' . self::SEO_TEXT_CACHE_KEY, 86400, function () {
             return SeoText::query()->find($this->seo_text_id, ['title', 'text']);
         });
 
-    }
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-
-
-    public function getSeoMetaTitleAttribute()
-    {
-        $title = $this->meta_title ?: config('settings.category_meta_title_default');
-        return $this->parseSnippets($title);
     }
 
     public function getSeoMetaDescriptionAttribute()
@@ -175,5 +163,29 @@ class Category extends Model
     public function getCountryAttribute()
     {
         return Domain::currentDomain()?->country;
+    }
+
+    public function getSeoMetaTitleAttribute()
+    {
+        $title = $this->meta_title ?: config('settings.category_meta_title_default');
+        return $this->parseSnippets($title);
+    }
+
+    public function getDomainMetaTitleAttribute()
+    {
+        return $this->meta_title;
+//        $title = $this->meta_title ?: config('settings.category_meta_title_default');
+//        return $this->parseSnippets($title);
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
+
+    public function setMetaTitleAttribute($value)
+    {
+        $this->attributes['meta_title'] = json_encode([Domain::currentDomain()->slug => $value]);
     }
 }
