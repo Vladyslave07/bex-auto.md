@@ -87,7 +87,7 @@ class Category extends Model
      */
     public function text(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(SeoText::class, 'seo_text_id');
+        return $this->belongsTo(SeoText::class, 'domain_seo_text_id');
     }
 
     /**
@@ -122,20 +122,6 @@ class Category extends Model
     |--------------------------------------------------------------------------
     */
 
-
-    public function getSeoTextAttribute()
-    {
-        return Cache::remember( $this->seo_text_id . '_' . self::SEO_TEXT_CACHE_KEY, 86400, function () {
-            return SeoText::query()->find($this->seo_text_id, ['title', 'text']);
-        });
-
-    }
-
-    public function getSeoMetaDescriptionAttribute()
-    {
-        return $this->parseSnippets($this->meta_description ?: config('settings.category_meta_description_default'));
-    }
-
     public function getDomainH1Attribute()
     {
         if (strlen($this->h1) <= 0) {
@@ -167,15 +153,46 @@ class Category extends Model
 
     public function getSeoMetaTitleAttribute()
     {
-        $title = $this->meta_title ?: config('settings.category_meta_title_default');
+        $title = $this->domain_meta_title ?: config('settings.category_meta_title_default');
         return $this->parseSnippets($title);
     }
 
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->domain_meta_description ?: config('settings.category_meta_description_default'));
+    }
+
+    public function getSeoTextAttribute()
+    {
+        return Cache::remember( $this->domain_seo_text_id . '_' . self::SEO_TEXT_CACHE_KEY, 86400, function () {
+            return SeoText::query()->find($this->domain_seo_text_id, ['title', 'text']);
+        });
+    }
+
+
     public function getDomainMetaTitleAttribute()
     {
-        return $this->meta_title;
-//        $title = $this->meta_title ?: config('settings.category_meta_title_default');
-//        return $this->parseSnippets($title);
+        $key = Domain::currentDomain()->slug;
+        $titleArray = json_decode($this->meta_title, true) ?? [];
+        return key_exists($key, $titleArray) ? $titleArray[$key] : '';
+    }
+
+    public function getDomainMetaDescriptionAttribute()
+    {
+        $key = Domain::currentDomain()->slug;
+        $descriptionArray = json_decode($this->meta_description, true) ?? [];
+        return key_exists($key, $descriptionArray) ? $descriptionArray[$key] : '';
+    }
+
+    public function getDomainSeoTextIdAttribute()
+    {
+        $key = Domain::currentDomain()->slug;
+        $seoTextIdArray = json_decode($this->seo_text_id, true) ?? [];
+
+        if (is_array($seoTextIdArray)) {
+            return key_exists($key, $seoTextIdArray) ? $seoTextIdArray[$key] : '';
+        }
+        return $this->seo_text_id;
     }
 
     /*
@@ -186,6 +203,34 @@ class Category extends Model
 
     public function setMetaTitleAttribute($value)
     {
-        $this->attributes['meta_title'] = json_encode([Domain::currentDomain()->slug => $value]);
+        if (strlen($this->meta_title) > 0) {
+            $titleArray = json_decode($this->meta_title, true);
+            $titleArray[Domain::currentDomain()->slug] = $value;
+            $this->attributes['meta_title'] = json_encode($titleArray);
+        } else {
+            $this->attributes['meta_title'] = json_encode([Domain::currentDomain()->slug => $value]);
+        }
+    }
+
+    public function setMetaDescriptionAttribute($value)
+    {
+        if (strlen($this->meta_description) > 0) {
+            $descriptionArray = json_decode($this->meta_description, true);
+            $descriptionArray[Domain::currentDomain()->slug] = $value;
+            $this->attributes['meta_description'] = json_encode($descriptionArray);
+        } else {
+            $this->attributes['meta_description'] = json_encode([Domain::currentDomain()->slug => $value]);
+        }
+    }
+
+    public function setSeoTextIdAttribute($value)
+    {
+        if (strlen($this->seo_text_id) > 0) {
+            $seoTextArray = json_decode($this->seo_text_id, true);
+            $seoTextArray[Domain::currentDomain()->slug] = $value;
+            $this->attributes['seo_text_id'] = json_encode($seoTextArray);
+        } else {
+            $this->attributes['seo_text_id'] = json_encode([Domain::currentDomain()->slug => $value]);
+        }
     }
 }

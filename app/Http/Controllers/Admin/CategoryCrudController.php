@@ -65,6 +65,10 @@ class CategoryCrudController extends CrudController
                 'label' => trans('backpack::fields.sort'),
             ],
             [
+                'name'  => 'seo_text_id',
+                'label' => 'Сео текст',
+            ],
+            [
                 'name'  => 'active',
                 'label' => trans('backpack::fields.active'),
                 'type'  => 'check'
@@ -133,7 +137,7 @@ class CategoryCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'Категория',
-            'name' => 'seo_text_id',
+            'name' => 'domain_seo_text_id',
             'label' => trans('backpack::fields.seo_text'),
             'type' => 'relationship',
             'entity'    => 'text',
@@ -149,12 +153,9 @@ class CategoryCrudController extends CrudController
             }),
         ]);
 
-        // todo: сделать так чтобы при получении поля meta_title был текст из конкретного домена
-        dd($this->crud);
-
         CRUD::addField([
             'tab' => 'SEO',
-            'name' => 'meta_title',
+            'name' => 'domain_meta_title',
             'label' => trans('backpack::fields.meta_title'),
             'type' => 'text',
             'hint' => 'Доступные сниппеты <code>#title#</code>',
@@ -162,7 +163,7 @@ class CategoryCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'SEO',
-            'name' => 'meta_description',
+            'name' => 'domain_meta_description',
             'label' => trans('backpack::fields.meta_description'),
             'type' => 'text',
             'hint' => 'Доступные сниппеты <code>#title#</code>',
@@ -181,6 +182,24 @@ class CategoryCrudController extends CrudController
     }
 
     public function update() {
+        $title = $this->crud->getRequest()->request->get('domain_meta_title');
+        if (strlen($title) > 0){
+            $this->crud->addField(['type' => 'hidden', 'name' => 'meta_title']);
+            $this->crud->getRequest()->request->add(['meta_title'=> $title]);
+        }
+
+        $description = $this->crud->getRequest()->request->get('domain_meta_description');
+        if (strlen($description) > 0){
+            $this->crud->addField(['type' => 'hidden', 'name' => 'meta_description']);
+            $this->crud->getRequest()->request->add(['meta_description'=> $description]);
+        }
+
+        $seoText = $this->crud->getRequest()->request->get('domain_seo_text_id');
+        if (strlen($seoText) > 0){
+            $this->crud->addField(['type' => 'hidden', 'name' => 'seo_text_id']);
+            $this->crud->getRequest()->request->add(['seo_text_id'=> $seoText]);
+        }
+
         $response = $this->traitUpdate();
         // do something after update
         $request = $response->getRequest();
