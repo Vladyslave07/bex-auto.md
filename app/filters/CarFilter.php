@@ -191,6 +191,15 @@ class CarFilter
                 foreach ($properties as &$property) {
                     if ($param['slug'] == $property['slug']) {
                         foreach ($property['values'] as $key => $value) {
+
+                            // only for status filter
+                            if ($param['slug'] == self::CAR_STATUS_PROPERTY_SLUG) {
+                                if (Str::contains(Str::slug($param['value'], '_'), $key)) {
+                                    $property['values'][$key]['active'] = true;
+                                }
+                                continue;
+                            }
+
                             if (str_contains($param['value'], $key)) {
                                 $property['values'][$key]['active'] = true;
                             }

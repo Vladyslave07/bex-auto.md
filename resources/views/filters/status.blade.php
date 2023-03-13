@@ -4,7 +4,7 @@
             <div class="form-check">
                 <label>
                     <input class="form-radio" wire:click="setFilter('{{ $filter['slug'] }}', '{{ $value['value'] }}')"
-                           type="radio" name="status">
+                           type="radio" name="status" <?= $value['active'] ? 'checked' : '' ?>>
                     {{ \Illuminate\Support\Facades\Lang::get('car.' . $value['value']) }}
                 </label>
             </div>
