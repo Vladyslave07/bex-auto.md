@@ -29,41 +29,27 @@
         });
 
         function showDiscountForm () {
-            if (readCookie('show-discount-modal') != 0 && !window.showForm) {
+            if (!getSessionStorageItem('show-discount-modal') && !window.showForm) {
                 setTimeout(() => {
                     openModal('#modalDiscount');
                     window.removeEventListener('scroll', showDiscountForm);
-                }, 5000);
-                window.showForm = true;
-            }
-
-            let closeBtn = document.querySelector('#modalDiscount .close-modal');
-            if (closeBtn) {
-                closeBtn.addEventListener('click', e => {
-                    writeCookie('show-discount-modal', 0, 7)
-                })
-            }
-
-            let discountForm = document.querySelector('#modalDiscount form')
-            if (discountForm) {
-                discountForm.addEventListener('submit', e => {
-                    writeCookie('show-discount-modal', 0, 7)
-                })
+                }, 30000);
+                window.showForm = false;
+                setSessionStorageItem('show-discount-modal', true);
             }
         }
 
-        function writeCookie(name, val, expires) {
-            let date = new Date;
-            date.setDate(date.getDate() + expires);
-            document.cookie = name+"="+val+"; path=/; expires=" + date.toUTCString();
+        // Функция для записи данных в session storage
+        function setSessionStorageItem(key, value) {
+            sessionStorage.setItem(key, JSON.stringify(value));
         }
 
-        function readCookie(name) {
-            let matches = document.cookie.match(new RegExp(
-                "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
-            ));
-            return matches ? decodeURIComponent(matches[1]) : undefined;
+        // Функция для чтения данных из session storage
+        function getSessionStorageItem(key) {
+            const value = sessionStorage.getItem(key);
+            return value ? JSON.parse(value) : null;
         }
+
     </script>
 </div>
 
