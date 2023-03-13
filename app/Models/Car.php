@@ -40,9 +40,9 @@ class Car extends Model
     protected $guarded = ['id'];
     protected $fillable = ['equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
     public static $images = ['images', 'preview_image'];
-    protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
+    protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
-    protected $casts = ['images' => 'array', 'benefits' => 'array', 'equipment' => 'array'];
+    protected $casts = ['images' => 'array', 'benefits' => 'array'];
     protected $with = ['properties'];
 
 
@@ -363,8 +363,7 @@ class Car extends Model
         if ($values && count($values) > 0) {
             $newValues = [];
             foreach ($values as $value) {
-
-                if (key_exists('image', $value) && strlen($value['image']) > 0 && !Storage::disk('public')->exists($value['image'])) {
+                if (key_exists('image', $value) && Str::startsWith($value['image'], 'data:image')) {
                     $image = $value['image'];
                     $ext = 'jpg';
                     if (Str::startsWith($image, 'data:image/png;base64')) $ext = 'png';
@@ -381,6 +380,11 @@ class Car extends Model
                         'text' => $value['text'],
                         'image' => $destination_path . '/' . $filename,
                     ];
+                } else {
+                    $newValues[] = [
+                        'text' => $value['text'],
+                        'image' => Str::replace(env('APP_URL') . '/storage', '', $value['image']),
+                    ];
                 }
             }
 
@@ -393,6 +397,14 @@ class Car extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function getPreparedBenefitsAttribute()
+    {
+        if ($this->benefits) {
+            return json_decode($this->benefits);
+        }
+        return null;
+    }
 
     public function getCategoryAttribute()
     {
