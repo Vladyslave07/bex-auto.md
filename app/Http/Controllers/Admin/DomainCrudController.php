@@ -79,6 +79,7 @@ class DomainCrudController extends CrudController
         CRUD::addField(['name' => 'phone', 'label' => trans('backpack::fields.phone'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'lat', 'label' => trans('backpack::fields.lat'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.lat')]);
         CRUD::addField(['name' => 'lng', 'label' => trans('backpack::fields.lng'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.lng')]);
+        CRUD::addField(['name' => 'gtm', 'label' => trans('backpack::fields.gtm'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.gtm')]);
 
     }
 
