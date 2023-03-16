@@ -11,6 +11,9 @@
         flex: 1;
         input {
             padding: 10px 40px 10px 20px;
+            &:not(:placeholder-shown) ~ .search-btn {
+                pointer-events: all;
+            }
         }
         .search-btn {
             background: transparent;
@@ -21,6 +24,7 @@
             top: 0;
             padding: 0 16px 0 0;
             height: 40px;
+            pointer-events: none;
         }
     }
     .phone {
@@ -39,6 +43,7 @@
     .lang-switcher {
         font-weight: 600;
         span {
+            cursor: pointer;
             color: var(--red);
         }
         * {
@@ -118,6 +123,20 @@
         }
     }
 }
+@media (max-width: 1350px) {
+    .main-header {
+        .main-menu {
+            ul {
+                li + li {
+                    .menu-dropdown {
+                        right: 0;
+                        left: auto;
+                    }
+                }
+            }
+        }
+    }
+}
 @media (max-width: 991px) {
     .main-header {
         padding-bottom: 19px;
@@ -150,6 +169,8 @@
                 display: block;
             }
             .burger {
+                position: relative;
+                z-index: 100;
                 span {
                      background: none;
                      transform: rotate(90deg);
@@ -212,7 +233,7 @@
             display: none;
             background: #fff;
             margin: 0;
-            padding: 50px 20px 40px;
+            padding: 50px 20px 0;
             position: absolute;
             top: 104px;
             right: 20px;
@@ -249,6 +270,13 @@
                         margin-left: auto;
                         width: 20px;
                         height: 11px;
+                    }
+                    a {
+                        &.toggle-btn {
+                            margin: -23px 0;
+                            padding: 23px 0;
+                            flex: 1;
+                        }
                     }
                 }
             }
