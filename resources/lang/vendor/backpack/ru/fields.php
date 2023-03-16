@@ -82,6 +82,7 @@ return [
     'weekends' => 'Рабочие часы в выходные',
     'preview_image' => 'Превью картинка',
     'title_m' => 'Заголовок в местном падеже',
+    'gtm' => 'Код Google Tag Manager',
 
     'option' => [
         'expect' => 'Ожидается',
