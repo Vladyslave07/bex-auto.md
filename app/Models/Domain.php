@@ -24,6 +24,7 @@ class Domain extends Model
     protected $translatable = ['country'];
 
     const DEFAULT_DOMAIN = 6;
+    const KAZACHSTAN_DOMAIN = 5;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
     const PHONE_PLACEHOLDER_CACHE_KEY = 'placeholder';
     const PHONE_CACHE_KEY = 'phone';
