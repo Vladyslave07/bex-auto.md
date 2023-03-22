@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Domain;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
+use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
@@ -31,6 +32,7 @@ class CarCrudController extends CrudController
     }
     use DropzoneTrait;
     use BulkDeleteOperation;
+    use FormFilterTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -52,6 +54,9 @@ class CarCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+
+        $this->addDomainFilter();
+
         CRUD::setColumns([
             [
                 'name' => 'id',
