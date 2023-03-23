@@ -24,7 +24,7 @@ class Alternate extends Component
         $supportedLocales = \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getSupportedLocales();
 
         // Delete uk lang for kz domain
-        if (Domain::currentDomain()->slug == 'kz') {
+        if (Domain::currentDomain()?->slug == 'kz') {
             unset($supportedLocales['uk']);
         }
 
