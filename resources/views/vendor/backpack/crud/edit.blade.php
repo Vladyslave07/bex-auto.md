@@ -64,6 +64,11 @@
               {{-- This makes sure that all field assets are loaded. --}}
             <div class="d-none" id="parentLoadedAssets">{{ json_encode(Assets::loaded()) }}</div>
             @include('crud::inc.form_save_buttons')
+
+              @if(($entry = $crud->getCurrentEntry()) && $crud->getCurrentEntry()->getTable() === 'cars')
+                  <a href="{{ route('car_detail', $entry->slug) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
+              @endif
+
 		  </form>
 	</div>
 </div>
