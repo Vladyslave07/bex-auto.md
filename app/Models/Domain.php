@@ -63,7 +63,8 @@ class Domain extends Model
     public static function domainBySlug(string $slug)
     {
         return Cache::remember( $slug . '_domain', now()->addMonth(), function () use ($slug) {
-            return self::query()->where('slug', $slug)->first();
+            return self::query()->where('slug', $slug)->first() ??
+                self::query()->where('id', self::DEFAULT_DOMAIN)->first();
         });
     }
 
