@@ -37,22 +37,27 @@ class FormResultToB24 implements ShouldQueue
      */
     public function handle()
     {
-        $contactId = Contact::createIfNotExist($this->formResult->phone, $this->formResult->name);
+        $lead = new \App\Utilities\Bitrix24\Entity\Lead(getenv('B24_WEBHOOK_LEAD_CREATE'));
 
-        $b24Deal = new Deal(getenv('B24_WEBHOOK_DEAL_CREATE'));
         $domain = env('KZ_APP_URL');
         if ($this->formResult?->domain_id == Domain::DEFAULT_DOMAIN) {
             $domain = env('UK_APP_URL');
         }
 
+        $title = sprintf("Заявка ID: %s с формы - %s сайт: %s", $this->formResult->id, FormResult::FORM_NAMES[$this->formResult->slug_form], $domain);
+
         $data = [
-            'TITLE' => sprintf("Заявка ID: %s с формы - %s сайт: %s", $this->formResult->id, FormResult::FORM_NAMES[$this->formResult->slug_form], $domain),
-            'UF_CRM_5E1DC411CF666' => Str::phoneNumber($this->formResult->phone),
-            'CONTACT_ID' => $contactId,
+            'TITLE' => $title,
+            "NAME"=> $this->formResult->name,
+            "STATUS_ID"=> "NEW",
         ];
 
+        if ($car = $this->formResult->car) {
+            $data['COMMENTS'] = $car;
+        }
+
         // Add Utm tags
-        if ($utmSource = $this->formResult->utm_source) {
+        if ($this->formResult->utm_source) {
             $data = array_merge($data, $this->utmData());
         }
 
@@ -60,10 +65,13 @@ class FormResultToB24 implements ShouldQueue
             $data['COMMENTS'] = $car;
         }
 
-        $preparedData['fields'] = $b24Deal->prepareData($data);
+        $data['PHONE'] = [['VALUE' => Str::phoneNumber($this->formResult->phone), 'VALUE_TYPE' => 'MOBILE']];
+
+        $preparedData['fields'] = $data;
+
 
         // Creating deal in b24
-        $deal = $b24Deal->create($preparedData);
+        $lead->create($preparedData);
     }
 
     /**
