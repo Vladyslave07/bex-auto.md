@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Models\Domain;
 use App\Models\FormResult;
 use App\Utilities\Bitrix24\Entity\Contact;
 use App\Utilities\Bitrix24\Entity\Deal;
@@ -39,9 +40,13 @@ class FormResultToB24 implements ShouldQueue
         $contactId = Contact::createIfNotExist($this->formResult->phone, $this->formResult->name);
 
         $b24Deal = new Deal(getenv('B24_WEBHOOK_DEAL_CREATE'));
+        $domain = env('KZ_APP_URL');
+        if ($this->formResult?->domain_id == Domain::DEFAULT_DOMAIN) {
+            $domain = env('UK_APP_URL');
+        }
 
         $data = [
-            'TITLE' => sprintf("Заявка ID: %s с формы - %s сайт: %s", $this->formResult->id, FormResult::FORM_NAMES[$this->formResult->slug_form], request()->getHost()),
+            'TITLE' => sprintf("Заявка ID: %s с формы - %s сайт: %s", $this->formResult->id, FormResult::FORM_NAMES[$this->formResult->slug_form], $domain),
             'UF_CRM_5E1DC411CF666' => Str::phoneNumber($this->formResult->phone),
             'CONTACT_ID' => $contactId,
         ];
@@ -59,8 +64,6 @@ class FormResultToB24 implements ShouldQueue
 
         // Creating deal in b24
         $deal = $b24Deal->create($preparedData);
-
-        Log::debug($deal);
     }
 
     /**

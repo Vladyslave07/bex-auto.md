@@ -9,8 +9,12 @@ class DomainService
 {
     public static function storagePath(): string
     {
+        if (app()->runningInConsole()) {
+            return env('UK_APP_URL').'/storage';
+        }
+
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        $domainSlug = Str::upper($domainSlug);
+        $domainSlug = mb_strtoupper($domainSlug);
         return  env($domainSlug . '_APP_URL').'/storage';
     }
 }

@@ -29,7 +29,7 @@ class Alternate extends Component
         }
 
         // Delete kz lang for uk domain
-        if (Domain::currentDomain()->slug == 'uk') {
+        if (Domain::currentDomain()?->slug == 'uk') {
             unset($supportedLocales['kz']);
         }
 
