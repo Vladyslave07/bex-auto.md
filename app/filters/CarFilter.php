@@ -176,7 +176,7 @@ class CarFilter
         $properties = array_merge($properties, self::rangeProperties($cars));
 
         // Set models dependents for brand
-        if ($filterQuery && $properties['model']['values']) {
+        if ($filterQuery && (key_exists('model', $properties) && $properties['model']['values'])) {
             $models = self::getCurrentModels($filterQuery, $properties['model']['values']);
             $properties['model']['values'] = $models;
         }
@@ -237,6 +237,9 @@ class CarFilter
                 $properties[$property->slug]['slug'] = $property->slug;
 
                 if ($property->field_type === 'relation') {
+                    if (!$property->pivot->value || !$property->pivot->slug) {
+                        continue;
+                    }
                     $properties[$property->slug]['values'][$property->pivot->slug]['value'] = Str::ucfirst($property->pivot->value);
                     $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
                 } else {
@@ -337,8 +340,14 @@ class CarFilter
         if ($max < $step) {
             $step = 100;
         }
-        $range = self::makeValueFroFromToField(range(General::min($min), General::max($max), $step), '$');
-        $properties['values'] = ['from' => $range, 'to' => $range];
+        $generalMax = General::max($max);
+
+        if ($generalMax <= 0) {
+            $properties['values'] = [];
+        } else {
+            $range = self::makeValueFroFromToField(range(General::min($min), $generalMax, $step), '$');
+            $properties['values'] = ['from' => $range, 'to' => $range];
+        }
 
         return $properties;
     }
