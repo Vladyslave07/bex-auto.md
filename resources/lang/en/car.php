@@ -16,6 +16,7 @@ return [
         'buy_in_credit' => 'Buy on credit',
         'characteristic' => 'Characteristics',
         'description' => 'Description of the car',
+        'sold' => 'Sold',
     ],
 
     'price_null_info' => 'Bidding is ongoing and the price of the final lot will be different',

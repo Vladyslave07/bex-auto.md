@@ -15,7 +15,7 @@
         <div class="tab-content">
             @foreach($carsInStock as $key => $cars)
                 <div id="availabTab_{{ $key }}"
-                     class="tab-pane @if(array_key_first($carsInStock) === $key) active @endif">
+                     class="tab-pane @if($categories->first()->id === $key) active @endif">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
                             @foreach($cars as $car)

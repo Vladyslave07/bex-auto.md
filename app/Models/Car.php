@@ -31,6 +31,7 @@ class Car extends Model
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
+    const SOLD_STATUS = 'sold';
 
     protected $table = 'cars';
     protected $guarded = ['id'];
