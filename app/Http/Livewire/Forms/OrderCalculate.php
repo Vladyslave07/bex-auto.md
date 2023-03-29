@@ -47,6 +47,7 @@ class OrderCalculate extends Component implements BaseForm
 
     protected function rules()
     {
+        $this->phone = Str::phoneNumber($this->phone);
         return [
             'name' => ['required', 'min:3'],
             'phone' => ['required', 'min:10', new PhoneNumber()],
