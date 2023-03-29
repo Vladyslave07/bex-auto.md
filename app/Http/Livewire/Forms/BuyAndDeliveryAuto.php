@@ -45,9 +45,10 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
 
     protected function rules()
     {
+        $this->phone = Str::phoneNumber($this->phone);
         return [
             'name' => ['required', 'min:3', 'max:255'],
-            'phone' => ['required', new PhoneNumber()],
+            'phone' => ['required', 'min:10', new PhoneNumber()],
             'car' => ['max:100'],
             'country' => ['max:100'],
         ];
@@ -60,6 +61,7 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
             'name.min' => Lang::get('messages.min', ['num' => 3]),
             'name.max' => Lang::get('messages.max', ['num' => 255]),
             'phone.required' => Lang::get('messages.required'),
+            'phone.min' => Lang::get('messages.min', ['num' => 10]),
             'car.max' => Lang::get('messages.max', ['num' => 100]),
             'country.max' => Lang::get('messages.max', ['num' => 100]),
         ];

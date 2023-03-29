@@ -50,9 +50,10 @@ class DiscountForm extends Component implements BaseForm
 
     protected function rules()
     {
+        $this->phone = Str::phoneNumber($this->phone);
         return [
             'name' => ['required', 'min:3'],
-            'phone' => ['required', new PhoneNumber()],
+            'phone' => ['required', 'min:10', new PhoneNumber()],
         ];
     }
 
@@ -62,6 +63,7 @@ class DiscountForm extends Component implements BaseForm
             'name.required' => Lang::get('messages.required'),
             'name.min' => Lang::get('messages.min', ['num' => 3]),
             'phone.required' => Lang::get('messages.required'),
+            'phone.min' => Lang::get('messages.min', ['num' => 10]),
         ];
     }
 }
