@@ -84,6 +84,7 @@ return [
     'title_m' => 'Заголовок в местном падеже',
     'gtm' => 'Код Google Tag Manager',
     'menu_domains' => 'На каких доменах выводить меню',
+    'show_credit_btn' => 'Доступна для покупки в кредит',
 
     'option' => [
         'expect' => 'Ожидается',
