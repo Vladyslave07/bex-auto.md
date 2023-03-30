@@ -254,7 +254,7 @@ class CarFilter
         }
 
         // sort year properties
-        if (key_exists('year', $properties) && count($properties['year']['values']) > 0) {
+        if (key_exists('year', $properties) && key_exists('values', $properties['year']) && count($properties['year']['values']) > 0) {
             krsort($properties['year']['values']);
         }
 
