@@ -131,7 +131,7 @@ class MenuCrudController extends CrudController
             'columns' => [
                 'name'  => trans('backpack::fields.title'),
                 'url'  => trans('backpack::fields.link'),
-                'domain'  => trans('backpack::fields.domain') . ' (id домена через запятую)',
+                'domain'  => trans('backpack::fields.domain') . ' (id домена через двоеточие)',
             ],
             'min' => 0,
         ]);
