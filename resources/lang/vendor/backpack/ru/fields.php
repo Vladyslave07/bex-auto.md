@@ -83,6 +83,7 @@ return [
     'preview_image' => 'Превью картинка',
     'title_m' => 'Заголовок в местном падеже',
     'gtm' => 'Код Google Tag Manager',
+    'menu_domains' => 'На каких доменах выводить меню',
 
     'option' => [
         'expect' => 'Ожидается',

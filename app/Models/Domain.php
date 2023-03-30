@@ -125,6 +125,16 @@ class Domain extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * menu relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function menus(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'domain_menu');
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\MenuRequest;
+use App\Models\Domain;
 use App\Models\Faq;
 use App\Models\Menu;
 use App\Traits\BulkDeleteOperation;
@@ -32,7 +33,7 @@ class MenuCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -44,7 +45,7 @@ class MenuCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -57,7 +58,7 @@ class MenuCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -69,6 +70,7 @@ class MenuCrudController extends CrudController
             'name'       => 'active',
             'label'      => trans('backpack::fields.active'),
             'type'       => 'checkbox',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
         CRUD::addField([
@@ -76,18 +78,21 @@ class MenuCrudController extends CrudController
             'label'      => trans('backpack::fields.show_link'),
             'type'       => 'checkbox',
             'default'    => '1',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
         CRUD::addField([
             'name'       => 'title',
             'label'      => trans('backpack::settings.name'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
         CRUD::addField([
             'name'       => 'slug',
             'label'      => trans('backpack::fields.symbol_code'),
             'type'       => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
         CRUD::addField([
@@ -95,6 +100,7 @@ class MenuCrudController extends CrudController
             'label'      => trans('backpack::fields.sort'),
             'type'       => 'number',
             'default'    => '500',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
         CRUD::addField([
@@ -102,6 +108,19 @@ class MenuCrudController extends CrudController
             'label'      => trans('backpack::fields.image'),
             'type'       => 'image',
             'disk' => 'public',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
+            'name' => 'domains',
+            'label' => trans('backpack::fields.menu_domains'),
+            'type' => 'relationship',
+            'entity' => 'domains',
+            'attribute' => 'title',
+            'model' => Domain::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
         ]);
 
         CRUD::addField([
@@ -112,6 +131,7 @@ class MenuCrudController extends CrudController
             'columns' => [
                 'name'  => trans('backpack::fields.title'),
                 'url'  => trans('backpack::fields.link'),
+                'domain'  => trans('backpack::fields.domain') . ' (id домена через запятую)',
             ],
             'min' => 0,
         ]);
@@ -119,7 +139,7 @@ class MenuCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
