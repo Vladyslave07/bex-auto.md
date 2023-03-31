@@ -56,6 +56,7 @@ class CarCrudController extends CrudController
     {
 
         $this->addDomainFilter();
+        $this->addCategoriesFilter();
 
         CRUD::setColumns([
             [
@@ -63,25 +64,24 @@ class CarCrudController extends CrudController
                 'label' => '№',
             ],
             [
-                'name' => 'title',
-                'label' => trans('backpack::fields.title'),
-            ],
-            [
-                'name' => 'sort',
-                'label' => trans('backpack::fields.sort'),
-            ],
-            [
                 'name' => 'active',
                 'label' => trans('backpack::fields.active'),
                 'type' => 'check'
             ],
             [
-                'name' => 'image',
-                'label' => trans('backpack::fields.image'),
+                'name' => 'title',
+                'label' => trans('backpack::fields.title'),
+            ],
+            [
+                'name' => 'preview_image',
+                'label' => trans('backpack::fields.preview_image'),
                 'type' => 'image',
-                'disk' => 'public',
-                'height' => '50px',
-                'width' => '50px',
+                'prefix' => 'storage/',
+            ],
+            [
+                'name' => 'categories',
+                'label' => trans('backpack::fields.categories'),
+                'type' => 'relationship',
             ]
         ]);
     }

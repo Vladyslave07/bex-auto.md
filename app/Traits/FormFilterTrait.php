@@ -2,11 +2,12 @@
 
 namespace App\Traits;
 
+use App\Models\Category;
 use App\Models\Domain;
 
 trait FormFilterTrait
 {
-    function addDomainFilter()
+    public function addDomainFilter()
     {
         $this->crud->addFilter([
             'type'  => 'dropdown',
@@ -25,6 +26,27 @@ trait FormFilterTrait
             return $domainsPrepare;
         }, function ($value) {
             $this->crud->addClause('where', 'domain_id', $value);
+        });
+    }
+
+    public function addCategoriesFilter()
+    {
+        $this->crud->addFilter([
+            'type'  => 'select2',
+            'name'  => 'categories',
+            'label' => 'Категория'
+        ], function () {
+
+            $categories = Category::query()->get(['id', 'title']);
+            $categoriesPrepare = [];
+            foreach ($categories as $category) {
+                $categoriesPrepare[$category->id] = $category->title;
+            }
+            return $categoriesPrepare;
+        }, function ($value) {
+            $this->crud->query = $this->crud->query->whereHas('categories', function ($query) use ($value) {
+                $query->where('category_id', $value);
+            });
         });
     }
 }

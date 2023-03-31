@@ -128,7 +128,7 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             [$from, $to] = explode('~', $propValue);
-            $to = (int)$to + + 0.1;
+            $to = (int)$to + 0.1;
             $query->where('property_id', $propId)->whereBetween('car_property.value', [(float)$from, (float)$to]);
         });
     }
@@ -342,7 +342,7 @@ class CarFilter
         }
         $generalMax = General::max($max);
 
-        if ($generalMax <= 0) {
+        if ($generalMax <= 0 || $generalMax <= $step) {
             $properties['values'] = [];
         } else {
             $range = self::makeValueFroFromToField(range(General::min($min), $generalMax, $step), '$');
