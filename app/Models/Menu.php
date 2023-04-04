@@ -203,4 +203,35 @@ class Menu extends Model
     |--------------------------------------------------------------------------
     */
 
+//    public function setItemsAttribute($values, $locale)
+//    {
+//        $items = $this->getOriginal('items');
+//        $currentItems = [];
+//        if (key_exists($locale, $items)) {
+//            $currentItems = $items[$locale];
+//        }
+//
+//
+////        $this->setTranslations('items', $arr);
+////        if (count($values) > count($currentItems)) {
+////
+////        }
+////
+////        dd($items, $values);
+//
+//
+////        dd($locale, $values, $this->items, $this);
+////        // 1. Получить тек. локале
+////        // 2. Получить новое значение для поля
+////        // 3. Продублировать новое значение во все locale
+////        $currentItems = $this->getOriginal('items');
+////
+//////        if (key_exists($curLocale, $currentItems)) {
+//////
+//////        }
+////
+////        $this->attributes['items'] = $value;
+////        $this->attributes['items'] = '{"ru":[{"name":"tes","url":"tes"},{"name":"tes","url":"tes"},{"name":"tes","url":"tes"},{"name":"test4","url":"test4"},{"name":"test5","url":"test5"},{"name":"test6","url":"test6"}],"uk":[{"name":"tes","url":"test1"},{"name":"test2","url":"test2"},{"name":"test3","url":"test3"},{"name":"test4","url":"test4"},{"name":"test5","url":"test5"}]}';
+////        dd($value, $this->getOriginal('items'), $this);
+//    }
 }
