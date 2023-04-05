@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Faq;
 use App\Models\News;
 use App\Models\SeoText;
+use App\View\Components\NewsCallBack;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {
@@ -42,6 +41,8 @@ class NewsController extends Controller
 
         // default faqs
         $faqs = Faq::defaultFaqs();
+
+        $article->detail_text = $article->detail_text . (new \App\View\Components\NewsCallBack)->render();
 
         return view('article', compact('article','brands', 'seoText', 'faqs'));
     }

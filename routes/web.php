@@ -54,6 +54,8 @@ function commonRoute()
     // News detail
     Route::get('/news/{article}', [\App\Http\Controllers\NewsController::class, 'detail'])->name('news_detail');
 
+    Route::post('/news/callback', [\App\View\Components\NewsCallBack::class, 'submit'])->name('news-callback');
+
     // Guarantee
     Route::get('/guarantee', [\App\Http\Controllers\IndexController::class, 'staticPage'])->name('static.guarantee');
 

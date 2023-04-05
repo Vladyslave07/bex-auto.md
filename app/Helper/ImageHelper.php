@@ -4,7 +4,9 @@
 namespace App\Helper;
 
 
+use App\Models\Domain;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class ImageHelper
 {
@@ -33,6 +35,8 @@ class ImageHelper
 
     public static function getImageData($filename): array
     {
+        $filename = Str::contains($filename, env('UK_APP_URL')) ? Str::replace(env('UK_APP_URL') . '/storage', '', $filename) : $filename;
+
         if (Storage::exists($filename)) {
             $data = ['src' => Storage::url($filename)];
 

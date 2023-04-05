@@ -70,7 +70,7 @@ class Menu extends Model
     public static function menuItems()
     {
         return Cache::remember(General::cacheKey(self::MAIN_MENU_CACHE_KEY), 86400, function () {
-            return self::query()->orderBy('sort')->whereHas('domains', function($q) {
+            return self::query()->orderBy('sort')->whereHas('domains', function ($q) {
                 $q->where('domain_menu.domain_id', Domain::currentDomain()->id);
             })->active()->get(['slug', 'title', 'items', 'image', 'show_link']);
         });
@@ -150,6 +150,51 @@ class Menu extends Model
         return $this->belongsToMany(Domain::class, 'domain_menu');
     }
 
+    protected static function boot()
+    {
+        parent::boot();
+
+        // попробовать before saved
+        static::saved(function($menu) {
+            $items = $menu->getOriginal('items');
+            $request = request()->toArray();
+            $itemsForCurrentLocale = $items[$request['_locale']];
+
+            unset($items[$request['_locale']]);
+
+            $locales = LaravelLocalization::getSupportedLocales();
+
+            unset($locales[$request['_locale']]);
+
+            $newValue = null;
+
+            foreach ($locales as $key => $locale) {
+                if (!key_exists($key, $items)) {
+                    continue;
+                }
+                $oldValues = array_column($items[$key], 'url');
+
+                foreach ($itemsForCurrentLocale as $item) {
+                    if (!in_array($item['url'], $oldValues)) {
+                        $newValue = [
+                            'name' => $item['name'],
+                            'url' => $item['url'],
+                        ];
+                        $localesItems = $items[$key];
+                        $localesItems[] = $newValue;
+
+                        $menu->update([
+                            'items' => $localesItems,
+                            '_locale' => $key
+                        ]);
+                    }
+                }
+
+            }
+
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -203,35 +248,4 @@ class Menu extends Model
     |--------------------------------------------------------------------------
     */
 
-//    public function setItemsAttribute($values, $locale)
-//    {
-//        $items = $this->getOriginal('items');
-//        $currentItems = [];
-//        if (key_exists($locale, $items)) {
-//            $currentItems = $items[$locale];
-//        }
-//
-//
-////        $this->setTranslations('items', $arr);
-////        if (count($values) > count($currentItems)) {
-////
-////        }
-////
-////        dd($items, $values);
-//
-//
-////        dd($locale, $values, $this->items, $this);
-////        // 1. Получить тек. локале
-////        // 2. Получить новое значение для поля
-////        // 3. Продублировать новое значение во все locale
-////        $currentItems = $this->getOriginal('items');
-////
-//////        if (key_exists($curLocale, $currentItems)) {
-//////
-//////        }
-////
-////        $this->attributes['items'] = $value;
-////        $this->attributes['items'] = '{"ru":[{"name":"tes","url":"tes"},{"name":"tes","url":"tes"},{"name":"tes","url":"tes"},{"name":"test4","url":"test4"},{"name":"test5","url":"test5"},{"name":"test6","url":"test6"}],"uk":[{"name":"tes","url":"test1"},{"name":"test2","url":"test2"},{"name":"test3","url":"test3"},{"name":"test4","url":"test4"},{"name":"test5","url":"test5"}]}';
-////        dd($value, $this->getOriginal('items'), $this);
-//    }
 }
