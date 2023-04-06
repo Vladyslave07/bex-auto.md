@@ -155,41 +155,24 @@ class Menu extends Model
         parent::boot();
 
         // попробовать before saved
-        static::saved(function($menu) {
+        static::saving(function($menu) {
             $items = $menu->getOriginal('items');
             $request = request()->toArray();
-            $itemsForCurrentLocale = $items[$request['_locale']];
-
-            unset($items[$request['_locale']]);
-
-            $locales = LaravelLocalization::getSupportedLocales();
-
-            unset($locales[$request['_locale']]);
-
-            $newValue = null;
-
-            foreach ($locales as $key => $locale) {
-                if (!key_exists($key, $items)) {
+            foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                if (key_exists('_locale', $request) && $localeCode == $request['_locale']) {
                     continue;
                 }
-                $oldValues = array_column($items[$key], 'url');
-
-                foreach ($itemsForCurrentLocale as $item) {
-                    if (!in_array($item['url'], $oldValues)) {
-                        $newValue = [
-                            'name' => $item['name'],
-                            'url' => $item['url'],
-                        ];
-                        $localesItems = $items[$key];
-                        $localesItems[] = $newValue;
-
-                        $menu->update([
-                            'items' => $localesItems,
-                            '_locale' => $key
-                        ]);
-                    }
+                $itemsForLocale = $items && key_exists($localeCode, $items) ? $items[$localeCode] : [];
+                $currentItems = strlen($menu->items) > 0 ? json_decode($menu->items, true) : [];
+                $newItem = false;
+                if ($itemsForLocale && count($itemsForLocale) > 0) {
+                    $newItem = array_udiff($currentItems, $itemsForLocale, function($a, $b) {
+                        return strcmp((string)$a['url'], (string)$b['url']);
+                    });
                 }
-
+                if ($newItem) {
+                    $menu->setTranslation('items', $localeCode, array_merge($itemsForLocale, $newItem));
+                }
             }
 
         });
