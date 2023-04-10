@@ -24,6 +24,7 @@ Route::group([
     commonRoute();
 });
 
+
 function commonRoute()
 {
 

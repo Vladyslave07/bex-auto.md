@@ -1,14 +1,6 @@
 @php($footerMenu = \App\Models\Menu::footerMenu())
 
-{{-- about menu --}}
-@if ($footerMenu['about'])
-    @include('partials.footer.menu-footer-part', ['item' => $footerMenu['about']])
-@endif
+@foreach(\App\Models\FooterMenu::footerMenu()->groupBy('column') as $items)
+    @include('partials.footer.menu-footer-part', ['items' => $items])
+@endforeach
 
-{{-- location list --}}
-{{--@include('partials.header.location-list')--}}
-
-{{-- catalog menu --}}
-@if ($footerMenu['catalog'])
-    @include('partials.footer.menu-footer-part', ['item' => $footerMenu['catalog']])
-@endif

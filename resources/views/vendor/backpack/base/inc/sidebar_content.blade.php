@@ -41,6 +41,7 @@
     <a class="nav-link nav-dropdown-toggle" href="#"><i class="nav-icon la la-list"></i> Меню</a>
     <ul class="nav-dropdown-items">
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('menu') }}'><i class='nav-icon la la-list'></i> Простое меню</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('footer_menus') }}"><i class="nav-icon la la-list"></i>Меню в футере</a></li>
     </ul>
 </li>
 

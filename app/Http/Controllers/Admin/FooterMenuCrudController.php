@@ -45,6 +45,7 @@ class FooterMenuCrudController extends CrudController
         CRUD::column('active');
         CRUD::column('title');
         CRUD::column('sort');
+        CRUD::column('column');
     }
 
     /**
@@ -76,7 +77,7 @@ class FooterMenuCrudController extends CrudController
             'name'       => 'slug',
             'label'      => trans('backpack::fields.link'),
             'type'       => 'text',
-            'hint'       => 'Без домена и языковой версии e: /avto/avto-iz-korei',
+            'hint'       => 'Без домена и языковой версии ex: /avto/avto-iz-korei',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
