@@ -13,8 +13,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Category extends Model
+class Category extends Model implements Sitemapable
 {
     use MakesWebp, CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
@@ -40,6 +42,12 @@ class Category extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    {
+        $url = app('domain')->getDomainUrl() . route('category', ['category' => $this], false);
+        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+    }
 
     /**
      * @return string

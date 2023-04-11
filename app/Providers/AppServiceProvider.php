@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Domain;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
@@ -27,5 +28,12 @@ class AppServiceProvider extends ServiceProvider
         Str::macro('phoneNumber', function ($string) {
             return preg_replace('/[^0-9]/', '', $string);
         });
+
+        if (!app()->runningInConsole()) {
+            $domain = Domain::currentDomain();
+        } else {
+            $domain = Domain::defaultDomain();
+        }
+        app('domain')->setDomain($domain);
     }
 }

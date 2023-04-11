@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ReviewsController;
 use App\Models\Domain;
+use App\Services\Sitemap\SitemapGeneral;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -27,6 +28,11 @@ Route::group([
 
 function commonRoute()
 {
+
+    Route::get('sitemap.xml', function (){
+        $xml = file_get_contents(public_path(SitemapGeneral::getSavePath('sitemap', app()->getLocale())));
+        return response($xml, 200)->header('Content-Type', 'application/xml');
+    });
 
     // Services
     Route::get('/uslugi/{service}', [\App\Http\Controllers\ServiceController::class, 'service'])->name('service');

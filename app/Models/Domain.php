@@ -24,6 +24,7 @@ class Domain extends Model
     protected $translatable = ['country'];
 
     const DEFAULT_DOMAIN = 6;
+    const DEFAULT_SLUG_DOMAIN = 'uk';
     const KAZACHSTAN_DOMAIN = 5;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
     const PHONE_PLACEHOLDER_CACHE_KEY = 'placeholder';
@@ -39,6 +40,11 @@ class Domain extends Model
         // todo: Вынести установку домена глобально
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
         return self::domainBySlug($domainSlug);
+    }
+
+    public static function defaultDomain()
+    {
+        return self::domainBySlug(self::DEFAULT_SLUG_DOMAIN);
     }
 
     public static function googleTagManager()

@@ -13,8 +13,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
-class News extends Model
+class News extends Model implements Sitemapable
 {
     use MakesWebp, CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 
@@ -39,6 +41,13 @@ class News extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    {
+        $url = app('domain')->getDomainUrl() . route('news_detail', ['article' => $this], false);
+        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+    }
+
 
     public function sluggable(): array
     {

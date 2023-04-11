@@ -16,9 +16,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Car extends Model
+class Car extends Model implements Sitemapable
 {
     use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
@@ -54,6 +56,12 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    {
+        $url = app('domain')->getDomainUrl() . route('car_detail', ['car' => $this], false);
+        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+    }
 
     /**
      * Return the sluggable configuration array for this model.
@@ -278,17 +286,7 @@ class Car extends Model
      */
     public function scopeCarsForCurrentDomain(Builder $query): Builder
     {
-        // НУЖНО УСТАНОВИТЬ ГЛОБАЛЬНО ДЛЯ ВСЕГО САЙТА
-        // todo: Вынести установку домена глобально
-        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        $domain = Domain::domainBySlug($domainSlug);
-
-        $id = self::KZ_DOMAIN_ID;
-        if ($domain) {
-            $id = $domain->id;
-        }
-
-        return $query->where('domain_id', $id);
+        return $query->where('domain_id', app('domain')->getDomain()->id);
     }
 
 
