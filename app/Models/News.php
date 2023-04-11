@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Sitemap\Contracts\Sitemapable;
 
-class News extends Model implements Sitemapable
+class News extends Model
 {
     use MakesWebp, CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 
@@ -119,7 +119,7 @@ class News extends Model implements Sitemapable
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+#call_back#
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
@@ -135,6 +135,14 @@ class News extends Model implements Sitemapable
     public function getSeoMetaTitleAttribute()
     {
         return $this->parseSnippets($this->meta_title ?: config('settings.news_meta_title'));
+    }
+
+    public function getDetailTextSnippetAttribute()
+    {
+        if (preg_match('/\#call_back\#/', $this->detail_text)) {
+            return preg_replace('/\#call_back\#/', (new \App\View\Components\NewsCallBack)->render(), $this->detail_text);
+        }
+        return $this->detail_text;
     }
 
     public function getSeoMetaDescriptionAttribute()

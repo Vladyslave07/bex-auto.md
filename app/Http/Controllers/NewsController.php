@@ -42,8 +42,6 @@ class NewsController extends Controller
         // default faqs
         $faqs = Faq::defaultFaqs();
 
-        $article->detail_text = $article->detail_text . (new \App\View\Components\NewsCallBack)->render();
-
         return view('article', compact('article','brands', 'seoText', 'faqs'));
     }
 }
