@@ -95,8 +95,8 @@ return [
         'expect' => 'Ожидается',
         'in_stock' => 'В наличии',
         'on_order' => 'Под заказ',
-        'on_order_usa' => 'Под заказ из США',
-        'on_order_korea' => 'Под заказ из Кореи',
+        'on_order_usa' => 'Copart',
+        'on_order_korea' => 'Encar',
         'sold' => 'Продано',
     ],
 
