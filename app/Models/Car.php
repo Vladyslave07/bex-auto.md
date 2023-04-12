@@ -379,6 +379,11 @@ class Car extends Model implements Sitemapable
         return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
     }
 
+    public function getCountryAttribute()
+    {
+        return Domain::currentDomain()?->country;
+    }
+
     public function getSeoMetaDescriptionAttribute()
     {
         return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
