@@ -20,7 +20,7 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['gtm', 'slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country'];
+    protected $fillable = ['telegram', 'tiktok', 'instagram', 'youtube', 'gtm', 'slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country'];
     protected $translatable = ['country'];
 
     const DEFAULT_DOMAIN = 6;

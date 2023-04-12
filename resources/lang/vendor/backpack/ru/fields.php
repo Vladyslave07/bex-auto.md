@@ -86,6 +86,10 @@ return [
     'menu_domains' => 'На каких доменах выводить меню',
     'show_credit_btn' => 'Доступна для покупки в кредит',
     'column' => 'Колонка для вывода',
+    'telegram' => 'Ссылка на Telegram',
+    'tiktok' => 'Ссылка на Tik-Tok',
+    'instagram' => 'Ссылка на instagram',
+    'youtube' => 'Ссылка на YouTube',
 
     'option' => [
         'expect' => 'Ожидается',
