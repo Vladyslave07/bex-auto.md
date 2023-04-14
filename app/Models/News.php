@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Sitemap\Contracts\Sitemapable;
 
-class News extends Model
+class News extends Model implements Sitemapable
 {
     use MakesWebp, CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 

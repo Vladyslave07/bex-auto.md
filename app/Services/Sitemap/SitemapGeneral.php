@@ -5,11 +5,8 @@ namespace App\Services\Sitemap;
 
 
 use App\Models\Car;
-use App\Models\CarBrand;
 use App\Models\Category;
-use App\Models\FilterSeo;
 use App\Models\News;
-use App\Models\Product;
 use App\Models\Service;
 use Mcamara\LaravelLocalization\LaravelLocalization;
 use Spatie\Sitemap\Sitemap;
@@ -38,12 +35,12 @@ class SitemapGeneral
             ->add($this->getFileName('categories', $this->locale))
             ->add($this->getFileName('cars', $this->locale))
             ->add($this->getFileName('service', $this->locale))
-            ->add($this->getFileName('filters', $this->locale))
+            ->add($this->getFileName('news', $this->locale))
             ->writeToFile(public_path($this->getSavePath('sitemap', $this->locale)));
 
         // Разделы
         SitemapCustom::create()
-            ->add(Url::create(app('domain')->getDomainUrl() . '/' . $locale)
+            ->add(Url::create(app('domain')->getDomainUrl() . '/' . $this->locale)
                 ->setChangeFrequency(Url::CHANGE_FREQUENCY_ALWAYS))
             ->writeToFile(public_path($this->getSavePath('index', $this->locale)));
 
