@@ -25,6 +25,7 @@ class Domain extends Model
 
     const DEFAULT_DOMAIN = 6;
     const DEFAULT_SLUG_DOMAIN = 'uk';
+    const KAZACHSTAN_SLUG_DOMAIN = 'kz';
     const KAZACHSTAN_DOMAIN = 5;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
     const PHONE_PLACEHOLDER_CACHE_KEY = 'placeholder';

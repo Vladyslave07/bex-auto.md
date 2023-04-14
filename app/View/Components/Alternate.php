@@ -24,13 +24,17 @@ class Alternate extends Component
         $supportedLocales = \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getSupportedLocales();
 
         // Delete uk lang for kz domain
-        if (Domain::currentDomain()?->slug == 'kz') {
-            unset($supportedLocales['uk']);
+        if (Domain::currentDomain()?->slug == Domain::KAZACHSTAN_SLUG_DOMAIN) {
+            unset($supportedLocales[Domain::DEFAULT_SLUG_DOMAIN]);
         }
 
         // Delete kz lang for uk domain
-        if (Domain::currentDomain()?->slug == 'uk') {
-            unset($supportedLocales['kz']);
+        if (Domain::currentDomain()?->slug == Domain::DEFAULT_SLUG_DOMAIN) {
+            unset($supportedLocales[Domain::KAZACHSTAN_SLUG_DOMAIN]);
+        }
+
+        foreach ($supportedLocales as $key => $locale) {
+            $supportedLocales[$key]['lang'] = Domain::currentDomain()?->slug == Domain::DEFAULT_SLUG_DOMAIN ? 'UA' : 'KZ';
         }
 
        return $supportedLocales;
