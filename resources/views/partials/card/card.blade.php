@@ -15,7 +15,8 @@
                         <div class="swiper gallery-swiper">
                             <div class="swiper-wrapper">
                                 @foreach($car->images as $key => $image)
-                                    <a data-fancybox="gallery" href="{{ Storage::disk('public')->url($image) }}" class="swiper-slide">
+                                    <a data-fancybox="gallery" href="{{ Storage::disk('public')->url($image) }}"
+                                       class="swiper-slide">
                                         {!! \App\Helper\ImageHelper::getPicture($image) !!}
                                     </a>
                                     @if ($key === 0 && ($link = $car->youtube_link))
@@ -41,9 +42,10 @@
                         <div class="gallery-thumbs">
                             @foreach($car->images as $key =>  $image)
                                 <div class="item @if($key === 0) active @endif">
-                                        {!! \App\Helper\ImageHelper::getPicture($image) !!}
+                                    {!! \App\Helper\ImageHelper::getPicture($image) !!}
                                     @if($key === 3 && count($car->images) > 4)
-                                        <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 4]) }}</span>
+                                        <span
+                                            class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 4]) }}</span>
                                     @endif
                                 </div>
                                 @if ($key === 0 && ($link = $car->youtube_link))
@@ -87,6 +89,14 @@
                                 </li>
                             @endif
                         @endforeach
+                        @if($car->vin)
+                            <li>
+                                <div class="dt">
+                                    Vin code:
+                                </div>
+                                <div class="dd">{{ $car->vin }}</div>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>
