@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Domain;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
+use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
@@ -31,6 +32,8 @@ class CarCrudController extends CrudController
     }
     use DropzoneTrait;
     use BulkDeleteOperation;
+    use FormFilterTrait;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -52,18 +55,14 @@ class CarCrudController extends CrudController
      */
     protected function setupListOperation()
     {
+
+        $this->addDomainFilter();
+        $this->addCategoriesFilter();
+
         CRUD::setColumns([
             [
                 'name' => 'id',
                 'label' => '№',
-            ],
-            [
-                'name' => 'title',
-                'label' => trans('backpack::fields.title'),
-            ],
-            [
-                'name' => 'sort',
-                'label' => trans('backpack::fields.sort'),
             ],
             [
                 'name' => 'active',
@@ -71,12 +70,19 @@ class CarCrudController extends CrudController
                 'type' => 'check'
             ],
             [
-                'name' => 'image',
-                'label' => trans('backpack::fields.image'),
+                'name' => 'title',
+                'label' => trans('backpack::fields.title'),
+            ],
+            [
+                'name' => 'preview_image',
+                'label' => trans('backpack::fields.preview_image'),
                 'type' => 'image',
-                'disk' => 'public',
-                'height' => '50px',
-                'width' => '50px',
+                'prefix' => 'storage/',
+            ],
+            [
+                'name' => 'categories',
+                'label' => trans('backpack::fields.categories'),
+                'type' => 'relationship',
             ]
         ]);
     }
@@ -93,6 +99,7 @@ class CarCrudController extends CrudController
 
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'pin', 'label' => trans('backpack::fields.pin'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'show_credit_btn', 'label' => trans('backpack::fields.show_credit_btn'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField([

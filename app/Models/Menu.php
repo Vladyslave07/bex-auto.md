@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SlugOrTitleTrait;
@@ -32,7 +33,7 @@ class Menu extends Model
     const ABOUT_MENU_ITEM_SLUG = 'about';
 
     protected $table = 'menus';
-    protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image', 'show_link'];
+    protected $fillable = ['slug', 'title', 'sort', 'items', 'active', 'image', 'show_link', 'domain_id'];
     protected $casts = ['items' => 'array', 'active' => 'bool', 'show_link' => 'bool'];
     public static $images = ['image'];
     protected $translatable = ['title', 'items'];
@@ -68,8 +69,10 @@ class Menu extends Model
      */
     public static function menuItems()
     {
-        return Cache::remember(self::MAIN_MENU_CACHE_KEY, 86400, function () {
-            return self::query()->orderBy('sort')->active()->get(['slug', 'title', 'items', 'image', 'show_link']);
+        return Cache::remember(General::cacheKey(self::MAIN_MENU_CACHE_KEY), 86400, function () {
+            return self::query()->orderBy('sort')->whereHas('domains', function ($q) {
+                $q->where('domain_menu.domain_id', Domain::currentDomain()->id);
+            })->active()->get(['slug', 'title', 'items', 'image', 'show_link']);
         });
     }
 
@@ -137,6 +140,44 @@ class Menu extends Model
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * domains relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function domains(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Domain::class, 'domain_menu');
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        // попробовать before saved
+        static::saving(function($menu) {
+            $items = $menu->getOriginal('items');
+            $request = request()->toArray();
+            foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties) {
+                if (key_exists('_locale', $request) && $localeCode == $request['_locale']) {
+                    continue;
+                }
+                $itemsForLocale = $items && key_exists($localeCode, $items) ? $items[$localeCode] : [];
+                $currentItems = strlen($menu->items) > 0 ? json_decode($menu->items, true) : [];
+                $newItem = false;
+                if ($itemsForLocale && count($itemsForLocale) > 0) {
+                    $newItem = array_udiff($currentItems, $itemsForLocale, function($a, $b) {
+                        return strcmp((string)$a['url'], (string)$b['url']);
+                    });
+                }
+                if ($newItem) {
+                    $menu->setTranslation('items', $localeCode, array_merge($itemsForLocale, $newItem));
+                }
+            }
+
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -156,7 +197,32 @@ class Menu extends Model
      */
     public function getChildrenAttribute()
     {
-        return json_decode($this->items, true) ?? [];
+        $currentDomain = Domain::currentDomain();
+        $items = json_decode($this->items, true) ?? [];
+        if (count($items) <= 0) {
+            return [];
+        }
+
+        $itemsForCurrentDomain = [];
+        foreach ($items as $item) {
+            // если для подпункта меню не установлен домен, то выводить его везде
+            if (!key_exists('domain', $item)) {
+                $itemsForCurrentDomain[] = $item;
+                continue;
+            }
+
+            if (str_contains($item['domain'], ';')) {
+                $domains = explode(';', $item['domain']);
+                if (in_array($currentDomain->id, $domains)) {
+                    $itemsForCurrentDomain[] = $item;
+                }
+            } elseif (trim($item['domain']) == $currentDomain->id) {
+                $itemsForCurrentDomain[] = $item;
+            }
+        }
+
+
+        return $itemsForCurrentDomain;
     }
 
     /*

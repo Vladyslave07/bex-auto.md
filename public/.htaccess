@@ -5,7 +5,15 @@
 
     RewriteEngine On
     RewriteCond %{HTTPS} off
-#    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # for uk domain
+    RewriteCond %{HTTP_HOST} ^bex-auto.com$
+    RewriteRule ^robots\.txt$ /uploads/robots.txt [L]
+
+    # for kz domain
+    RewriteCond %{HTTP_HOST} ^kz.bex-auto.com$
+    RewriteRule ^robots\.txt$ /uploads/kz_robots.txt [L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

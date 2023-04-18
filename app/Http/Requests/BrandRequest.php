@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class BrandRequest extends FormRequest
 {
@@ -25,8 +26,8 @@ class BrandRequest extends FormRequest
     public function rules()
     {
         return [
-             'title' => 'required|max:255',
-             'slug' => "required|max:255|unique:brands",
+            'title' => 'required|max:255',
+            'slug' => Rule::unique('brands')->ignore($this->route('id')),
         ];
     }
 

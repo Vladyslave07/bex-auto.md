@@ -16,7 +16,7 @@
 
         <meta name="phone_mask" content="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}">
 
-        @include('alternate')
+        <x-alternate></x-alternate>
 
         @stack('styles')
         @livewireStyles

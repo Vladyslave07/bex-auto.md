@@ -84,13 +84,29 @@ return [
     'title_m' => 'Заголовок в местном падеже',
     'full_template' => 'Посадочная страница',
     'equipment' => 'Комплектация',
+    'gtm' => 'Код Google Tag Manager',
+    'menu_domains' => 'На каких доменах выводить меню',
+    'show_credit_btn' => 'Доступна для покупки в кредит',
+    'column' => 'Колонка для вывода',
+    'telegram' => 'Ссылка на Telegram',
+    'tiktok' => 'Ссылка на Tik-Tok',
+    'instagram' => 'Ссылка на instagram',
+    'youtube' => 'Ссылка на YouTube',
 
     'option' => [
         'expect' => 'Ожидается',
         'in_stock' => 'В наличии',
         'on_order' => 'Под заказ',
-        'on_order_usa' => 'Под заказ из США',
-        'on_order_korea' => 'Под заказ из Кореи',
+        'on_order_usa' => 'Copart',
+        'on_order_korea' => 'Encar',
         'sold' => 'Продано',
+    ],
+
+    'footer_menu_option' => [
+        '1' => 'Первая',
+        '2' => 'Вторая',
+        '3' => 'Третья',
+        '4' => 'Четвертая',
+        '5' => 'Пятая',
     ]
 ];

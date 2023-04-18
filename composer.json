@@ -24,6 +24,7 @@
         "mcamara/laravel-localization": "^1.7",
         "mesilov/bitrix24-php-sdk": "2.x-dev",
         "michaloravec/laravel-paginateroute": "^1.0",
+        "spatie/laravel-sitemap": "*",
         "spatie/laravel-translatable": "^6.0"
     },
     "require-dev": {

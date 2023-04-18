@@ -18,7 +18,7 @@
         <div class="container">
             <h1 class="main-title noline color-red">@lang('static.guarantee.title')</h1>
             <div class="text-page">
-                <h2 class="main-title text-center noline color-blue">
+                <h2 class="main-title text-center noline">
                     {{ config('settings.guarantee_h1') }}
                 </h2>
                 <div class="width-fix">

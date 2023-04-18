@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Livewire\Forms\DiscountForm;
 use App\Http\Requests\FormResultRequest;
+use App\Models\Domain;
+use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -18,10 +20,11 @@ class FormResultDiscountCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use FormFilterTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -33,13 +36,15 @@ class FormResultDiscountCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
     protected function setupListOperation()
     {
         CRUD::addClause('where', 'slug_form', DiscountForm::SLUG_FORM);
+
+        $this->addDomainFilter();
 
         CRUD::column('id');
         CRUD::column('name');
@@ -49,7 +54,7 @@ class FormResultDiscountCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -80,6 +85,21 @@ class FormResultDiscountCrudController extends CrudController
             'type' => 'text',
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled']
         ]);
+
+        CRUD::addField([
+            'name' => 'domain',
+            'label' => trans('backpack::fields.domain'),
+            'type' => 'relationship',
+            'entity' => 'domain',
+            'attribute' => 'title',
+            'model' => Domain::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
         CRUD::addField([
             'name' => 'id',
             'label' => trans('backpack::fields.id'),
@@ -99,11 +119,32 @@ class FormResultDiscountCrudController extends CrudController
             'type' => 'text',
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
+        CRUD::addField([
+            'name' => 'utm_source',
+            'label' => 'utm_source',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+        CRUD::addField([
+            'name' => 'utm_medium',
+            'label' => 'utm_medium',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+        CRUD::addField([
+            'name' => 'utm_campaign',
+            'label' => 'utm_campaign',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

@@ -1,4 +1,4 @@
-@if(count($filter['values']) > 0)
+@if(key_exists('values', $filter) && count($filter['values']) > 0)
     <div class="dropdown dropdown-check @if($filter['slug'] === 'model' && $this->disabled) disabled @endif">
         @if (in_array(true, array_column($filter['values'], 'active')))
             @foreach($filter['values'] as $value)

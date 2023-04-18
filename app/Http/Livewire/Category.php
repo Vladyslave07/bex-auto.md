@@ -46,7 +46,7 @@ class Category extends Component
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);
         } else {
-            $cars->defaultOrder();
+            $cars->defaultOrder()->orderBy('created_at', 'asc');
         }
 
         return $cars->paginate(CatalogController::COUNT_CARS_ON_PAGE, ['*'], 'page', $this->page)->withQueryString();

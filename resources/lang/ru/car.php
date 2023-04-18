@@ -3,8 +3,8 @@ return [
     \App\Models\Car::IN_STOCK_STATUS => 'В наличии',
     \App\Models\Car::EXPECTED_STATUS => 'Ожидается',
     \App\Models\Car::ON_ORDER_STATUS => 'Под заказ',
-    'on_order_usa' => 'Под заказ из США',
-    'on_order_korea' => 'Под заказ из Кореи',
+    'on_order_usa' => 'Copart',
+    'on_order_korea' => 'Encar',
     'sold' => 'Продано',
     'more' => 'Подробнее',
     'show_all' => 'Посмотреть все авто',
@@ -16,6 +16,7 @@ return [
         'buy_in_credit' => 'Купить в кредит',
         'characteristic' => 'Характеристики',
         'description' => 'Описание авто',
+        'sold' => 'Продано',
     ],
 
     'price_null_info' => 'Идут торги и цена конечного лота будет отличаться',

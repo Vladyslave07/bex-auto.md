@@ -17,7 +17,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
 class Car extends Model
 {
@@ -28,21 +30,20 @@ class Car extends Model
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-
     const DEFAULT_TEMPLATE_NAME = 'card';
     const FULL_TEMPLATE_NAME = 'full-card';
-
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
+    const SOLD_STATUS = 'sold';
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
+    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
-    protected $casts = ['images' => 'array', 'benefits' => 'array'];
+    protected $casts = ['images' => 'array'];
     protected $with = ['properties'];
 
 
@@ -57,11 +58,6 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
-
-    public function cardTemplate()
-    {
-        return $this->full_template ? self::FULL_TEMPLATE_NAME : self::DEFAULT_TEMPLATE_NAME;
-    }
 
     /**
      * Return the sluggable configuration array for this model.
@@ -430,6 +426,11 @@ class Car extends Model
     public function getSeoMetaTitleAttribute()
     {
         return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
+    }
+
+    public function getCountryAttribute()
+    {
+        return Domain::currentDomain()?->country;
     }
 
     public function getSeoMetaDescriptionAttribute()

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Livewire\Forms\ApplicationForCar;
 use App\Http\Livewire\Forms\DiscountForm;
 use App\Http\Requests\FormResultRequest;
+use App\Models\Domain;
+use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -19,10 +21,11 @@ class FormResultApplicationForCarCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
+    use FormFilterTrait;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -34,7 +37,7 @@ class FormResultApplicationForCarCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -42,16 +45,19 @@ class FormResultApplicationForCarCrudController extends CrudController
     {
         CRUD::addClause('where', 'slug_form', ApplicationForCar::SLUG_FORM);
 
+        $this->addDomainFilter();
+
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('phone');
+        CRUD::column('domain_id');
         CRUD::column('car');
         CRUD::column('created_at');
     }
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -80,6 +86,20 @@ class FormResultApplicationForCarCrudController extends CrudController
             'name' => 'id',
             'label' => trans('backpack::fields.id'),
             'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name' => 'domain',
+            'label' => trans('backpack::fields.domain'),
+            'type' => 'relationship',
+            'entity' => 'domain',
+            'attribute' => 'title',
+            'model' => Domain::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
@@ -129,7 +149,7 @@ class FormResultApplicationForCarCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

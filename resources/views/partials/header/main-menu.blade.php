@@ -2,7 +2,7 @@
     <ul>
         @foreach($items as $item)
             <li>
-                <a @if ($item->show_link) href="{{ \App\Models\Menu::localeMenuLink($item->slug) }}" @endif>{{ $item->title }}</a>
+                <a @if ($item->show_link) href="{{ \App\Models\Menu::localeMenuLink($item->slug) }}" @else class="toggle-btn" @endif>{{ $item->title }}</a>
                 @if(count($item->children) > 0)
                     <svg class="toggle-btn" width="13" height="7">
                         <use xlink:href="#arrow-icon"></use>

@@ -14,7 +14,12 @@
                 @include('partials.card.gallery')
 
                 <div class="card-btn">
-                    @include('partials.card.card-btn')
+                    @if ($car->status != \App\Models\Car::SOLD_STATUS)
+                        @include('partials.card.card-btn')
+                    @else
+                        <button onclick="openModal('#applicationForCar')"
+                                class="btn btn-blue">{{ Lang::get('car.detail.sold') }}</button>
+                    @endif
                 </div>
                 <div class="card-features">
                     <strong class="title">{{ Lang::get('car.detail.characteristic')}}:</strong>
@@ -34,6 +39,14 @@
                                 </li>
                             @endif
                         @endforeach
+                        @if($car->vin)
+                            <li>
+                                <div class="dt">
+                                    Vin code:
+                                </div>
+                                <div class="dd">{{ $car->vin }}</div>
+                            </li>
+                        @endif
                     </ul>
                 </div>
             </div>

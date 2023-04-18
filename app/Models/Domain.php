@@ -20,10 +20,13 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country'];
+    protected $fillable = ['telegram', 'tiktok', 'instagram', 'youtube', 'gtm', 'slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country'];
     protected $translatable = ['country'];
 
     const DEFAULT_DOMAIN = 6;
+    const DEFAULT_SLUG_DOMAIN = 'uk';
+    const KAZACHSTAN_SLUG_DOMAIN = 'kz';
+    const KAZACHSTAN_DOMAIN = 5;
     const PHONE_MASK_CACHE_KEY = 'phone_mask';
     const PHONE_PLACEHOLDER_CACHE_KEY = 'placeholder';
     const PHONE_CACHE_KEY = 'phone';
@@ -38,6 +41,16 @@ class Domain extends Model
         // todo: Вынести установку домена глобально
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
         return self::domainBySlug($domainSlug);
+    }
+
+    public static function defaultDomain()
+    {
+        return self::domainBySlug(self::DEFAULT_SLUG_DOMAIN);
+    }
+
+    public static function googleTagManager()
+    {
+        return self::currentDomain()?->gtm ?? '';
     }
 
     /**
@@ -57,7 +70,8 @@ class Domain extends Model
     public static function domainBySlug(string $slug)
     {
         return Cache::remember( $slug . '_domain', now()->addMonth(), function () use ($slug) {
-            return self::query()->where('slug', $slug)->first();
+            return self::query()->where('slug', $slug)->first() ??
+                self::query()->where('id', self::DEFAULT_DOMAIN)->first();
         });
     }
 
@@ -117,6 +131,16 @@ class Domain extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * menu relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function menus(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Category::class, 'domain_menu');
+    }
 
     /*
     |--------------------------------------------------------------------------

@@ -13,8 +13,10 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
-class News extends Model
+class News extends Model implements Sitemapable
 {
     use MakesWebp, CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 
@@ -39,6 +41,13 @@ class News extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    {
+        $url = app('domain')->getDomainUrl() . route('news_detail', ['article' => $this], false);
+        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+    }
+
 
     public function sluggable(): array
     {
@@ -110,7 +119,7 @@ class News extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
+#call_back#
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
@@ -126,6 +135,14 @@ class News extends Model
     public function getSeoMetaTitleAttribute()
     {
         return $this->parseSnippets($this->meta_title ?: config('settings.news_meta_title'));
+    }
+
+    public function getDetailTextSnippetAttribute()
+    {
+        if (preg_match('/\#call_back\#/', $this->detail_text)) {
+            return preg_replace('/\#call_back\#/', (new \App\View\Components\NewsCallBack)->render(), $this->detail_text);
+        }
+        return $this->detail_text;
     }
 
     public function getSeoMetaDescriptionAttribute()

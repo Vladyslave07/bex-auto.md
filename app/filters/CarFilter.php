@@ -128,8 +128,10 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             [$from, $to] = explode('~', $propValue);
-            $to = (int)$to + + 0.1;
-            $query->where('property_id', $propId)->whereBetween('car_property.value', [(float)$from, (float)$to]);
+            $to = (int)$to;
+            $from = (int)$from;
+
+            $query->where('property_id', $propId)->whereBetween('car_property.value', [$from, $to]);
         });
     }
 
@@ -176,7 +178,7 @@ class CarFilter
         $properties = array_merge($properties, self::rangeProperties($cars));
 
         // Set models dependents for brand
-        if ($filterQuery && $properties['model']['values']) {
+        if ($filterQuery && (key_exists('model', $properties) && $properties['model']['values'])) {
             $models = self::getCurrentModels($filterQuery, $properties['model']['values']);
             $properties['model']['values'] = $models;
         }
@@ -191,6 +193,15 @@ class CarFilter
                 foreach ($properties as &$property) {
                     if ($param['slug'] == $property['slug']) {
                         foreach ($property['values'] as $key => $value) {
+
+                            // only for status filter
+                            if ($param['slug'] == self::CAR_STATUS_PROPERTY_SLUG) {
+                                if (Str::contains(Str::slug($param['value'], '_'), $key)) {
+                                    $property['values'][$key]['active'] = true;
+                                }
+                                continue;
+                            }
+
                             if (str_contains($param['value'], $key)) {
                                 $property['values'][$key]['active'] = true;
                             }
@@ -228,6 +239,9 @@ class CarFilter
                 $properties[$property->slug]['slug'] = $property->slug;
 
                 if ($property->field_type === 'relation') {
+                    if (!$property->pivot->value || !$property->pivot->slug) {
+                        continue;
+                    }
                     $properties[$property->slug]['values'][$property->pivot->slug]['value'] = Str::ucfirst($property->pivot->value);
                     $properties[$property->slug]['values'][$property->pivot->slug]['active'] = false;
                 } else {
@@ -242,7 +256,7 @@ class CarFilter
         }
 
         // sort year properties
-        if (key_exists('year', $properties) && count($properties['year']['values']) > 0) {
+        if (key_exists('year', $properties) && key_exists('values', $properties['year']) && count($properties['year']['values']) > 0) {
             krsort($properties['year']['values']);
         }
 
@@ -283,7 +297,9 @@ class CarFilter
                 $ranges[$property->slug]['name'] = $property->title;
                 $ranges[$property->slug]['type'] = $property->filter_type;
                 $ranges[$property->slug]['slug'] = $property->slug;
-                $ranges[$property->slug]['values'][] = $property->pivot->value;
+                if ($property->step <= (float)$property->pivot->value) {
+                    $ranges[$property->slug]['values'][] = $property->pivot->value;
+                }
             }
         }
 
@@ -294,13 +310,21 @@ class CarFilter
                 $min = min($range['values']);
                 $max = max($range['values']);
 
+                // for filters by power reserve
+                if ($key === Property::PROPERTY_POWER_RESERVE) {
+                    $max = max($range['values']);
+                    $min = $min > 100 ? floor($min / 100) * 100 : 0;
+                    $max = $max > 100 ? ceil($max / 10) * 10 : 0;
+                }
+
                 // for filters by mileage
                 if ($key === Property::FUEL_MILEAGE_OPTION_SLUG) {
                     $min = 0;
                 }
 
-                if ($min !== $max && $property->step < $max) {
-                    $range = self::makeValueFroFromToField(range($min, General::max($max), (int)$property->step), $property->prefix);
+                $difference = $max - $min;
+                if ($min !== $max && $max > $property->step && $difference > (int)$property->step) {
+                    $range = self::makeValueFroFromToField(range((int)$min, (int)$max, (int)$property->step), $property->prefix);
                     $ranges[$key]['values'] = ['from' => $range, 'to' => $range];
                 } else {
                     unset($ranges[$key]);
@@ -324,12 +348,21 @@ class CarFilter
         $min = $cars->min('price') ?? 5000;
         $max = $cars->max('price') ?? 50000;
 
+        $min = $min > 1000 ? floor($min / 1000) * 1000 : 0;
+
         $step = 2500;
         if ($max < $step) {
             $step = 100;
         }
-        $range = self::makeValueFroFromToField(range(General::min($min), General::max($max), $step), '$');
-        $properties['values'] = ['from' => $range, 'to' => $range];
+
+        $diff = $max - $min;
+        if ($max <= 0 || $max <= $step || $diff <= $step) {
+            $properties['values'] = [];
+        } else {
+            $range = self::makeValueFroFromToField(range($min, $max, $step), '$');
+            $range[$max] = '$' . $max;
+            $properties['values'] = ['from' => $range, 'to' => $range];
+        }
 
         return $properties;
     }

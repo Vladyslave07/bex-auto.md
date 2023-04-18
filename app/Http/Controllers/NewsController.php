@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Faq;
 use App\Models\News;
 use App\Models\SeoText;
+use App\View\Components\NewsCallBack;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Http\Request;
 
 class NewsController extends Controller
 {

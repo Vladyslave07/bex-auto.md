@@ -26,7 +26,7 @@ class FormResult extends Model
 
     protected $table = 'form_results';
     protected $guarded = ['id'];
-     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country', 'utm_source', 'utm_medium', 'utm_campaign'];
+     protected $fillable = ['domain_id', 'slug_form', 'name', 'phone', 'car', 'country', 'utm_source', 'utm_medium', 'utm_campaign'];
 
     /*
     |--------------------------------------------------------------------------
@@ -34,11 +34,25 @@ class FormResult extends Model
     |--------------------------------------------------------------------------
     */
 
+    public static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($item) {
+            $item->domain_id = Domain::currentDomain()?->id ?? Domain::DEFAULT_DOMAIN;
+        });
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
+    }
 
     /*
     |--------------------------------------------------------------------------
