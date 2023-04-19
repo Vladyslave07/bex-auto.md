@@ -59,6 +59,11 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function cardTemplate()
+    {
+        return $this->full_template ? self::FULL_TEMPLATE_NAME : self::DEFAULT_TEMPLATE_NAME;
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *
@@ -220,6 +225,16 @@ class Car extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * categories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function equipments(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'car_equipment');
+    }
 
     public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {

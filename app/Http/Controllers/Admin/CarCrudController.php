@@ -6,6 +6,7 @@ use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Domain;
+use App\Models\Equipment;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
 use App\Traits\FormFilterTrait;
@@ -294,6 +295,20 @@ class CarCrudController extends CrudController
             'type' => 'checkbox',
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
+
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
+            'name' => 'equipments',
+            'label' => trans('backpack::fields.equipments'),
+            'type' => 'relationship',
+            'entity' => 'equipments',
+            'attribute' => 'title',
+            'model' => Equipment::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+        ]);
+
         CRUD::addField([
             'tab' => 'Поля для посадочной страницы',
             'name' => 'benefits',

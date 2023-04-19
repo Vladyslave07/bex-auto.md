@@ -92,6 +92,9 @@ return [
     'tiktok' => 'Ссылка на Tik-Tok',
     'instagram' => 'Ссылка на instagram',
     'youtube' => 'Ссылка на YouTube',
+    'color' => 'Цвет',
+    'characteristic' => 'Характеристика',
+    'equipments' => 'Комплектации',
 
     'option' => [
         'expect' => 'Ожидается',
