@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('slug')->unique();
 
             $table->text('title');
-            $table->text('color')->nullable();
             $table->string('price');
             $table->text('images')->nullable();
             $table->longText('characteristic')->nullable();

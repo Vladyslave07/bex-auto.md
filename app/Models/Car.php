@@ -39,11 +39,11 @@ class Car extends Model
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
+    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
-    protected $casts = ['images' => 'array'];
+    protected $casts = ['images' => 'array', 'color' => 'array'];
     protected $with = ['properties'];
 
 
@@ -340,6 +340,69 @@ class Car extends Model
     }
 
 
+    public function getPreparedBenefitsAttribute()
+    {
+        if ($this->benefits) {
+            return json_decode($this->benefits);
+        }
+        return null;
+    }
+
+    public function getCategoryAttribute()
+    {
+        if (count($this->categories) > 0) {
+            return $this->categories->first()->title;
+        }
+        return '';
+    }
+
+    public function getTitleWithYearAttribute()
+    {
+        if (!Str::contains($this->title, $this->year)) {
+            return sprintf('%s %s', $this->title, $this->year);
+        }
+        return $this->title;
+    }
+
+    public function getPriceFormatAttribute()
+    {
+        return '$' . number_format($this->price, 0, '.', ' ');
+    }
+
+    public function getSeoMetaTitleAttribute()
+    {
+        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
+    }
+
+    public function getCountryAttribute()
+    {
+        return Domain::currentDomain()?->country;
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
+    }
+
+    /**
+     * Get property car year
+     *
+     * @return null
+     */
+    public function getYearAttribute()
+    {
+        if ($year = $this->properties->where('slug', 'year')->first()) {
+            return $year->getValue() ?: null;
+        }
+        return null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
+
     public function setPreviewImageAttribute($value)
     {
         $attribute_name = "preview_image";
@@ -403,67 +466,15 @@ class Car extends Model
         }
     }
 
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-
-    public function getPreparedBenefitsAttribute()
+    public function setColorAttribute($values)
     {
-        if ($this->benefits) {
-            return json_decode($this->benefits);
+        foreach ($values as $key => $value) {
+            if (!$value) {
+                unset($values[$key]);
+            }
         }
-        return null;
-    }
 
-    public function getCategoryAttribute()
-    {
-        if (count($this->categories) > 0) {
-            return $this->categories->first()->title;
-        }
-        return '';
-    }
-
-    public function getTitleWithYearAttribute()
-    {
-        if (!Str::contains($this->title, $this->year)) {
-            return sprintf('%s %s', $this->title, $this->year);
-        }
-        return $this->title;
-    }
-
-    public function getPriceFormatAttribute()
-    {
-        return '$' . number_format($this->price, 0, '.', ' ');
-    }
-
-    public function getSeoMetaTitleAttribute()
-    {
-        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
-    }
-
-    public function getCountryAttribute()
-    {
-        return Domain::currentDomain()?->country;
-    }
-
-    public function getSeoMetaDescriptionAttribute()
-    {
-        return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
-    }
-
-    /**
-     * Get property car year
-     *
-     * @return null
-     */
-    public function getYearAttribute()
-    {
-        if ($year = $this->properties->where('slug', 'year')->first()) {
-            return $year->getValue() ?: null;
-        }
-        return null;
+        return $this->attributes['color'] = json_encode($values);
     }
 
 }

@@ -23,7 +23,7 @@ class Equipment extends Model
     protected $table = 'equipments';
     protected $fillable = ['active', 'slug', 'title', 'price', 'color', 'images', 'characteristic'];
     protected $translatable = ['title', 'characteristic'];
-    protected $casts = ['images' => 'array', 'characteristic' => 'json'];
+    protected $casts = ['images' => 'array', 'characteristic' => 'json', 'color' => 'array'];
 
 
     /*

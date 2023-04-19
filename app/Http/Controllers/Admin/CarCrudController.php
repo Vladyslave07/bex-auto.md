@@ -311,6 +311,14 @@ class CarCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'Поля для посадочной страницы',
+            'name' => 'color',
+            'multiple' => true,
+            'label' => trans('backpack::fields.color'),
+            'type' => 'color_picker_multi'
+        ]);
+
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
             'name' => 'benefits',
             'label' => 'Testimonials',
             'type' => 'repeatable',

@@ -84,12 +84,6 @@ class City extends Model
     |--------------------------------------------------------------------------
     */
 
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
-
     public function getSeoMetaTitleAttribute()
     {
         return $this->parseSnippets($this->meta_title ?: config('settings.city_meta_title_default'));
@@ -99,4 +93,10 @@ class City extends Model
     {
         return $this->parseSnippets($this->meta_description ?: config('settings.city_meta_description_default'));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
 }
