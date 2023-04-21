@@ -82,9 +82,9 @@ class EquipmentCrudController extends CrudController
                     'default'   => 'Характеристики',
                 ],
                 [
-                    'name'  => 'quote',
+                    'name'  => 'text',
                     'type'  => 'ckeditor',
-                    'label' => 'Quote',
+                    'label' => 'Текст',
                 ],
             ],
             'max_rows' => 1,

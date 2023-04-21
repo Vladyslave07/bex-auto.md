@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\Pivot;
+use Illuminate\Support\Str;
 
 class CarProperty extends Pivot
 {
@@ -84,6 +84,17 @@ class CarProperty extends Pivot
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setValueAttribute($value)
+    {
+        $newSlug = Str::slug($value);
+        $slug = $this->slug;
+        if ($this->slug !== $newSlug) {
+            $slug = $newSlug;
+        }
+        $this->attributes['value'] = $value;
+        $this->attributes['slug'] = $slug;
+    }
 
     public function setSlugAttribute($value)
     {

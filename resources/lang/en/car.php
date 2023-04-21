@@ -19,6 +19,10 @@ return [
         'sold' => 'Sold',
     ],
 
+    'btn' => [
+        \App\Models\Car::ON_ORDER_STATUS => 'Order'
+    ],
+
     'price_null_info' => 'Bidding is ongoing and the price of the final lot will be different',
 
 ];

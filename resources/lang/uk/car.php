@@ -19,6 +19,10 @@ return [
         'sold' => 'Продано',
     ],
 
+    'btn' => [
+        \App\Models\Car::ON_ORDER_STATUS => 'Заказати'
+    ],
+
     'price_null_info' => 'Ідуть торги і ціна кінцевого лоту відрізнятиметься',
 
 ];

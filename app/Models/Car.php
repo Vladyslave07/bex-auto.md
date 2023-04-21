@@ -44,7 +44,7 @@ class Car extends Model
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $casts = ['images' => 'array', 'color' => 'array'];
-    protected $with = ['properties'];
+    protected $with = ['properties', 'equipments'];
 
 
     const POPULAR_CARS_CACHE_KEY = 'popular_cars';

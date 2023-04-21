@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Equipment extends Model
 {
-    use CrudTrait, HasTranslations, SaveImageAttribute, Sluggable, SluggableScopeHelpers;
+    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, Sluggable, SluggableScopeHelpers;
 
     /*
     |--------------------------------------------------------------------------
@@ -67,6 +68,19 @@ class Equipment extends Model
         }
 
         return $this->title;
+    }
+
+    public function getPreparedCharacteristicAttribute()
+    {
+        if ($this->characteristic) {
+            return json_decode($this->characteristic)[0];
+        }
+        return null;
+    }
+
+    public function getPriceFormatAttribute()
+    {
+        return '$' . number_format($this->price, 0, '.', ' ');
     }
 
     /*
