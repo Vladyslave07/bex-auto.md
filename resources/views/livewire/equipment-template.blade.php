@@ -23,71 +23,90 @@
                 {{--                </div>--}}
                 {{--                <a href="#" class="btn btn-blue">В кредит</a>--}}
                 {{--            </div>--}}
-                <div class="card-options">
-                    <div class="item">
-                        <div class="title">Комплектация</div>
-                        <div class="tab-content">
-                            <div id="equipments_1" class="tab-pane active">
-                                <div class="ul">
-                                    <label class="li">
-                                        <input type="radio" name="battery" checked>
-                                        <svg width="32" height="25"><use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use></svg>
-                                        <span>93 kWh</span>
-                                    </label>
-                                    <label class="li">
-                                        <input type="radio" name="battery">
-                                        <svg width="32" height="25"><use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use></svg>
-                                        <span>144 kWh</span>
-                                    </label>
+                @if ($car->equipments)
+                    <div class="card-options">
+                        <div class="item">
+                            <div class="title">Комплектация</div>
+                            <div class="tab-content">
+                                @foreach($car->equipments as $key => $equipment)
+                                    @if ($equipment->volumes)
+                                        <div id="equipments_{{ $key }}"
+                                             class="tab-pane @if($this->equipment->id == $equipment->id) active @endif">
+                                            <div class="ul">
+                                                @foreach($equipment->volumes as $volume)
+                                                    <label class="li">
+                                                        <input wire:click.prevent="setPrice('{{$volume['price']}}', '{{$volume['value']}}')"
+                                                               type="radio" name="battery"
+                                                               @if($this->volume == $volume['value']) checked @endif>
+                                                        <svg width="32" height="25">
+                                                            <use
+                                                                xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
+                                                        </svg>
+                                                        <span>{{ sprintf('%s %s', $volume['value'], $volume['unit']) }} </span>
+                                                    </label>
+                                                @endforeach
+                                            </div>
+                                        </div>
+                                    @endif
+                                @endforeach
+                                <div id="equipments_2" class="tab-pane">
+                                    <div class="ul">
+                                        <label class="li">
+                                            <input type="radio" name="battery2" checked>
+                                            <svg width="32" height="25">
+                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
+                                            </svg>
+                                            <span>100 kWh</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="equipments_3" class="tab-pane">
+                                    <div class="ul">
+                                        <label class="li">
+                                            <input type="radio" name="battery3" checked>
+                                            <svg width="32" height="25">
+                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
+                                            </svg>
+                                            <span>50 kWh</span>
+                                        </label>
+                                        <label class="li">
+                                            <input type="radio" name="battery3">
+                                            <svg width="32" height="25">
+                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
+                                            </svg>
+                                            <span>100 kWh</span>
+                                        </label>
+                                        <label class="li">
+                                            <input type="radio" name="battery3">
+                                            <svg width="32" height="25">
+                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
+                                            </svg>
+                                            <span>114 kWh</span>
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                            <div id="equipments_2" class="tab-pane">
-                                <div class="ul">
-                                    <label class="li">
-                                        <input type="radio" name="battery2" checked>
-                                        <svg width="32" height="25"><use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use></svg>
-                                        <span>100 kWh</span>
+                            <div class="nav-tabs">
+                                @foreach($car->equipments as $key => $equipment)
+                                    <label data-toggle="tab" data-target="#equipments_{{ $key }}"
+                                           class="@if($this->equipment->id == $equipment->id) active @endif">
+                                        <input wire:click.prevent="setEquipment('{{ $equipment->id }}')" type="radio"
+                                               name="engine" @if($this->equipment->id == $equipment->id) checked @endif>
+                                        <span>{{ $equipment->title }}</span>
                                     </label>
-                                </div>
-                            </div>
-                            <div id="equipments_3" class="tab-pane">
-                                <div class="ul">
-                                    <label class="li">
-                                        <input type="radio" name="battery3" checked>
-                                        <svg width="32" height="25"><use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use></svg>
-                                        <span>50 kWh</span>
-                                    </label>
-                                    <label class="li">
-                                        <input type="radio" name="battery3">
-                                        <svg width="32" height="25"><use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use></svg>
-                                        <span>100 kWh</span>
-                                    </label>
-                                    <label class="li">
-                                        <input type="radio" name="battery3">
-                                        <svg width="32" height="25"><use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use></svg>
-                                        <span>114 kWh</span>
-                                    </label>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
-                        <div class="nav-tabs">
-                            @foreach($car->equipments as $equipment)
-                                <label class="@if($this->equipment->id == $equipment->id) active @endif">
-                                    <input wire:click.prevent="setEquipment('{{ $equipment->id }}')" type="radio" name="engine" @if($this->equipment->id == $equipment->id) checked @endif>
-                                    <span>{{ $equipment->title }}</span>
-                                </label>
-                            @endforeach
-                        </div>
+
+                        {{-- Colors --}}
+                        @include('partials.full_card.colors')
+
                     </div>
-
-                    {{-- Colors --}}
-                    @include('partials.full_card.colors')
-
-                </div>
+                @endif
                 @if ($characteristic = $this->equipment->prepared_characteristic)
                     <div class="card-features">
                         <div class="main-title">{{ $characteristic->title }}</div>
-                            {!! $characteristic->text !!}
+                        {!! $characteristic->text !!}
                     </div>
                 @endif
             </div>

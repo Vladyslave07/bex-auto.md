@@ -95,6 +95,8 @@ return [
     'color' => 'Цвет',
     'characteristic' => 'Характеристика',
     'equipments' => 'Комплектации',
+    'volumes' => 'Объём двигателя \ Ёмкость аккумулятора',
+    'volumes_value' => 'Значение',
 
     'option' => [
         'expect' => 'Ожидается',

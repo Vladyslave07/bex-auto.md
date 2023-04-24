@@ -73,7 +73,36 @@ class EquipmentCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'target'  => 'title', 'type' => 'slug', 'hint' => trans('backpack::hint.categories.slug'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"]]);
-        CRUD::addField(['name' => 'characteristic', 'label' => trans('backpack::fields.characteristic'), 'type' => 'repeatable',
+        CRUD::addField([
+            'name' => 'volumes',
+            'label' => trans('backpack::fields.volumes'),
+            'type' => 'repeatable',
+            'subfields' => [
+                [
+                    'name'    => 'value',
+                    'type'    => 'number',
+                    'label'   => trans('backpack::fields.volumes_value'),
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+                [
+                    'name'  => 'unit',
+                    'type'  => 'text',
+                    'label' => trans('backpack::fields.prefix'),
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+                [
+                    'name'  => 'price',
+                    'type'  => 'number',
+                    'label' => trans('backpack::fields.price'),
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+            ],
+            'max_rows' => 8,
+        ]);
+        CRUD::addField([
+            'name' => 'characteristic',
+            'label' => trans('backpack::fields.characteristic'),
+            'type' => 'repeatable',
             'subfields' => [
                 [
                     'name'    => 'title',
