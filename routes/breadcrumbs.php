@@ -4,6 +4,7 @@ use App\Models\News;
 use App\Models\Service;
 use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use Illuminate\Support\Facades\Lang;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // Main page
 Breadcrumbs::for('index', function ($trail) {
@@ -14,6 +15,15 @@ Breadcrumbs::for('index', function ($trail) {
 Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
     $trail->parent('index');
     $trail->push($category->title, $category->url);
+});
+
+// card
+Breadcrumbs::for('car_detail', function ($trail, \App\Models\Car $car) {
+    $trail->parent('index');
+    if ($category = $car->category()->first()) {
+        $trail->push($category->title, route('category', $category->slug));
+    }
+    $trail->push($car->title, '');
 });
 
 // sevice

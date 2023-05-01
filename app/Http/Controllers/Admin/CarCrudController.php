@@ -6,6 +6,7 @@ use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Domain;
+use App\Models\Equipment;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
 use App\Traits\FormFilterTrait;
@@ -230,7 +231,8 @@ class CarCrudController extends CrudController
             'hint' => 'Доступные сниппеты <code>#title#</code> <code>#price#</code> <code>#year#</code>',
         ]);
 
-
+        // Fields for full card template
+        $this->addFullTemplate();
     }
 
     /**
@@ -281,5 +283,70 @@ class CarCrudController extends CrudController
         Cache::forget(Car::CARS_IN_STOCK_CATEGORY);
 
         return $response;
+    }
+
+
+    public function addFullTemplate()
+    {
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
+            'name' => 'full_template',
+            'label' => trans('backpack::fields.full_template'),
+            'type' => 'checkbox',
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
+            'name' => 'equipments',
+            'label' => trans('backpack::fields.equipments'),
+            'type' => 'relationship',
+            'entity' => 'equipments',
+            'attribute' => 'title',
+            'model' => Equipment::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+        ]);
+
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
+            'name' => 'color',
+            'multiple' => true,
+            'label' => trans('backpack::fields.color'),
+            'type' => 'color_picker_multi'
+        ]);
+
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
+            'name' => 'benefits',
+            'label' => trans('backpack::fields.text_image_block'),
+            'type' => 'repeatable',
+            'subfields' => [ // also works as: "fields"
+                [
+                    'name' => 'text',
+                    'type' => 'ckeditor',
+                    'label' => trans('backpack::fields.text'),
+                ],
+                [
+                    'name' => 'image',
+                    'label' => trans('backpack::fields.image'),
+                    'type' => 'image',
+                    'disk' => 'public',
+                    'wrapper' => ['class' => 'form-group col-md-4'],
+                ],
+            ],
+
+            'new_item_label' => 'Добавить элемент', // customize the text of the button
+            'init_rows' => 1, // number of empty rows to be initialized, by default 1
+            'max_rows' => 3, // maximum rows allowed, when reached the "new item" button will be hidden
+        ]);
+
+        CRUD::addField([
+            'tab' => 'Поля для посадочной страницы',
+            'name' => 'equipment',
+            'label' => trans('backpack::fields.equipment'),
+            'type' => 'ckeditor',
+        ]);
     }
 }

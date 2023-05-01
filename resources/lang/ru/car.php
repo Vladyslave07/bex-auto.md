@@ -9,7 +9,7 @@ return [
     'more' => 'Подробнее',
     'show_all' => 'Посмотреть все авто',
     'title_in_stock' => 'Авто в наличии',
-
+    'equipment' => 'Комплектация',
     'detail' => [
         'more_photo' => '+:num фото',
         'buy' => 'Купить',
@@ -17,6 +17,10 @@ return [
         'characteristic' => 'Характеристики',
         'description' => 'Описание авто',
         'sold' => 'Продано',
+    ],
+
+    'btn' => [
+        \App\Models\Car::ON_ORDER_STATUS => 'Заказать'
     ],
 
     'price_null_info' => 'Идут торги и цена конечного лота будет отличаться',

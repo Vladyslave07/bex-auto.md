@@ -82,6 +82,8 @@ return [
     'weekends' => 'Рабочие часы в выходные',
     'preview_image' => 'Превью картинка',
     'title_m' => 'Заголовок в местном падеже',
+    'full_template' => 'Посадочная страница',
+    'equipment' => 'Комплектация',
     'gtm' => 'Код Google Tag Manager',
     'menu_domains' => 'На каких доменах выводить меню',
     'show_credit_btn' => 'Доступна для покупки в кредит',
@@ -90,6 +92,13 @@ return [
     'tiktok' => 'Ссылка на Tik-Tok',
     'instagram' => 'Ссылка на instagram',
     'youtube' => 'Ссылка на YouTube',
+    'color' => 'Цвет',
+    'characteristic' => 'Характеристика',
+    'equipments' => 'Комплектации',
+    'volumes' => 'Объём двигателя \ Ёмкость аккумулятора',
+    'volumes_value' => 'Значение',
+    'text_image_block' => 'Текстовые блоки с картинкой',
+
 
     'option' => [
         'expect' => 'Ожидается',

@@ -15,12 +15,13 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
 use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Car extends Model implements Sitemapable
+class Car extends Model
 {
     use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
@@ -29,7 +30,8 @@ class Car extends Model implements Sitemapable
     | GLOBAL VARIABLES
     |--------------------------------------------------------------------------
     */
-
+    const DEFAULT_TEMPLATE_NAME = 'card';
+    const FULL_TEMPLATE_NAME = 'full-card';
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
@@ -37,12 +39,12 @@ class Car extends Model implements Sitemapable
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_credit_btn', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image'];
+    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
     public static $images = ['images', 'preview_image'];
-    protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description'];
+    protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
-    protected $casts = ['show_credit_btn' => 'bool', 'images' => 'array'];
-    protected $with = ['properties'];
+    protected $casts = ['images' => 'array', 'color' => 'array'];
+    protected $with = ['properties', 'equipments'];
 
 
     const POPULAR_CARS_CACHE_KEY = 'popular_cars';
@@ -57,10 +59,9 @@ class Car extends Model implements Sitemapable
     |--------------------------------------------------------------------------
     */
 
-    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    public function cardTemplate()
     {
-        $url = app('domain')->getDomainUrl() . route('car_detail', ['car' => $this], false);
-        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+        return $this->full_template ? self::FULL_TEMPLATE_NAME : self::DEFAULT_TEMPLATE_NAME;
     }
 
     /**
@@ -226,6 +227,16 @@ class Car extends Model implements Sitemapable
     |--------------------------------------------------------------------------
     */
 
+    /**
+     * categories relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function equipments(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Equipment::class, 'car_equipment');
+    }
+
     public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
@@ -287,7 +298,17 @@ class Car extends Model implements Sitemapable
      */
     public function scopeCarsForCurrentDomain(Builder $query): Builder
     {
-        return $query->where('domain_id', app('domain')->getDomain()->id);
+        // НУЖНО УСТАНОВИТЬ ГЛОБАЛЬНО ДЛЯ ВСЕГО САЙТА
+        // todo: Вынести установку домена глобально
+        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+        $domain = Domain::domainBySlug($domainSlug);
+
+        $id = self::KZ_DOMAIN_ID;
+        if ($domain) {
+            $id = $domain->id;
+        }
+
+        return $query->where('domain_id', $id);
     }
 
 
@@ -320,39 +341,13 @@ class Car extends Model implements Sitemapable
     }
 
 
-    public function setPreviewImageAttribute($value)
+    public function getPreparedBenefitsAttribute()
     {
-        $attribute_name = "preview_image";
-        $disk = "public";
-        $destination_path = Str::replace('_', '', $this->table);
-
-        if ($value == null) {
-            \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
-            $this->attributes[$attribute_name] = null;
-        } else {
-            if (Str::startsWith($value, 'data:image')) {
-                $ext = 'jpg';
-                if (Str::startsWith($value, 'data:image/png;base64')) $ext = 'png';
-                if (Str::startsWith($value, 'data:image/jpeg;base64')) $ext = 'jpeg';
-                if (Str::startsWith($value, 'data:image/webp;base64')) $ext = 'webp';
-
-                $image = \Image::make($value)->fit(289, 220, function ($constraint) {
-                    $constraint->upsize();
-                })->encode($ext, 90);
-
-                $filename = md5($value . time()) . '.' . $ext;
-                \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
-                \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
-                $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
-            } else $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
+        if ($this->benefits) {
+            return json_decode($this->benefits);
         }
+        return null;
     }
-
-    /*
-    |--------------------------------------------------------------------------
-    | MUTATORS
-    |--------------------------------------------------------------------------
-    */
 
     public function getCategoryAttribute()
     {
@@ -401,6 +396,86 @@ class Car extends Model implements Sitemapable
             return $year->getValue() ?: null;
         }
         return null;
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | MUTATORS
+    |--------------------------------------------------------------------------
+    */
+
+    public function setPreviewImageAttribute($value)
+    {
+        $attribute_name = "preview_image";
+        $disk = "public";
+        $destination_path = Str::replace('_', '', $this->table);
+
+        if ($value == null) {
+            \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
+            $this->attributes[$attribute_name] = null;
+        } else {
+            if (Str::startsWith($value, 'data:image')) {
+                $ext = 'jpg';
+                if (Str::startsWith($value, 'data:image/png;base64')) $ext = 'png';
+                if (Str::startsWith($value, 'data:image/jpeg;base64')) $ext = 'jpeg';
+                if (Str::startsWith($value, 'data:image/webp;base64')) $ext = 'webp';
+
+                $image = \Image::make($value)->fit(289, 220, function ($constraint) {
+                    $constraint->upsize();
+                })->encode($ext, 90);
+
+                $filename = md5($value . time()) . '.' . $ext;
+                \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
+                \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
+                $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
+            } else $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
+        }
+    }
+
+    public function setBenefitsAttribute($values)
+    {
+        $destination_path = Str::replace('_', '', $this->table);
+        if ($values && count($values) > 0) {
+            $newValues = [];
+            foreach ($values as $value) {
+                if (key_exists('image', $value) && Str::startsWith($value['image'], 'data:image')) {
+                    $image = $value['image'];
+                    $ext = 'jpg';
+                    if (Str::startsWith($image, 'data:image/png;base64')) $ext = 'png';
+                    if (Str::startsWith($image, 'data:image/jpeg;base64')) $ext = 'jpeg';
+                    if (Str::startsWith($image, 'data:image/webp;base64')) $ext = 'webp';
+
+                    $image = \Image::make($image)->fit(550, 400, function ($constraint) {
+                        $constraint->upsize();
+                    })->encode($ext, 90);
+
+                    $filename = md5($image . time()) . '.' . $ext;
+                    Storage::disk('public')->put($destination_path . '/' . $filename, $image->stream());
+                    $newValues[] = [
+                        'text' => $value['text'],
+                        'image' => $destination_path . '/' . $filename,
+                    ];
+                } else {
+                    $newValues[] = [
+                        'text' => $value['text'],
+                        'image' => Str::replace(env('APP_URL') . '/storage', '', $value['image']),
+                    ];
+                }
+            }
+
+            $this->attributes['benefits'] = json_encode($newValues);
+        }
+    }
+
+    public function setColorAttribute($values)
+    {
+        foreach ($values as $key => $value) {
+            if (!$value) {
+                unset($values[$key]);
+            }
+        }
+
+        return $this->attributes['color'] = json_encode($values);
     }
 
 }

@@ -9,7 +9,7 @@ return [
     'more' => 'More',
     'show_all' => 'Show all cars',
     'title_in_stock' => 'Cars in stock',
-
+    'equipment' => 'Equipment',
     'detail' => [
         'more_photo' => '+:num photo',
         'buy' => 'Buy',
@@ -17,6 +17,10 @@ return [
         'characteristic' => 'Characteristics',
         'description' => 'Description of the car',
         'sold' => 'Sold',
+    ],
+
+    'btn' => [
+        \App\Models\Car::ON_ORDER_STATUS => 'Order'
     ],
 
     'price_null_info' => 'Bidding is ongoing and the price of the final lot will be different',
