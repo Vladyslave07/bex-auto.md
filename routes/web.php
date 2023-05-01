@@ -21,7 +21,7 @@ $domains->each(function ($domain) {
 Route::get('brand-tie-to-domain', function (){
     $brands = \App\Models\Brand::all();
     foreach ($brands as $brand) {
-        foreach ([6,7] as $id) {
+        foreach ([5,6] as $id) {
             $brand->domains()->attach($id);
         }
     }
