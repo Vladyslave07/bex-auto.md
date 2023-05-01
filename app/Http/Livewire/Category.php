@@ -28,6 +28,8 @@ class Category extends Component
 
     public $disabled = true;
 
+    public $filters = null;
+
     const BRAND_SLUG = 'brand';
 
     public function cars()
@@ -212,7 +214,7 @@ class Category extends Component
      */
     public function setDefaultValuesForRangeParams()
     {
-        foreach ($this->filters() as $filter) {
+        foreach ($this->getFilters() as $filter) {
             if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME) {
                 continue;
             }
@@ -241,7 +243,7 @@ class Category extends Component
 
     public function enableIfExist()
     {
-        foreach ($this->filters() as $filter) {
+        foreach ($this->getFilters() as $filter) {
             if ($filter['slug'] === self::BRAND_SLUG) {
                 foreach ($filter['values'] as $value) {
                     if ($value['active']) {
@@ -269,11 +271,19 @@ class Category extends Component
         $this->setNoindex();
     }
 
+    public function getFilters()
+    {
+        if (!$this->filters) {
+            $this->filters = $this->filters();
+        }
+        return $this->filters;
+    }
+
     public function render()
     {
         return view('livewire.category', [
             'cars' => $this->cars(),
-            'filters' => $this->filters(),
+            'filters' => $this->getFilters(),
         ]);
     }
 }

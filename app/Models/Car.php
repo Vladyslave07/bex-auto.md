@@ -99,6 +99,7 @@ class Car extends Model
 
         return Cache::remember(General::cacheKey(self::CARS_IN_STOCK_CATEGORY) . implode('_', $categories), 86400, function () use ($categories) {
             $carsInStock = self::query()
+                ->with(['categories'])
                 ->orderBy('id')
                 ->where('status', self::IN_STOCK_STATUS)
                 ->active()
