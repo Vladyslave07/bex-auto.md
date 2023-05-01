@@ -16,7 +16,7 @@
                         <div class="price">{{ $this->equipment ? $this->equipment->price_format : $car->price_format }}</div>
                         <p>@lang('car.' . $car->status)</p>
                     </div>
-                    <a href="#" class="btn">{{ __('car.btn.' . $car->status) }}</a>
+                    <button onclick="openModal('#applicationForCar')" class="btn">{{ __('car.btn.' . $car->status) }}</button>
                 </div>
                 {{--            <div class="card-btn">--}}
                 {{--                <div>--}}
