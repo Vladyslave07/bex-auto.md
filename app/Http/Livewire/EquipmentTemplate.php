@@ -38,8 +38,6 @@ class EquipmentTemplate extends Component
         if (!$this->equipment) {return;}
         if ($images = $this->equipment->images) {
             $this->car->images = $images;
-        } else {
-            dump($this->car);
         }
     }
 

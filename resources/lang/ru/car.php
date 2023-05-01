@@ -9,7 +9,7 @@ return [
     'more' => 'Подробнее',
     'show_all' => 'Посмотреть все авто',
     'title_in_stock' => 'Авто в наличии',
-
+    'equipment' => 'Комплектация',
     'detail' => [
         'more_photo' => '+:num фото',
         'buy' => 'Купить',

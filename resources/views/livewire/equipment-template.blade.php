@@ -28,7 +28,7 @@
                 @if ($car->equipments)
                     <div class="card-options">
                         <div class="item">
-                            <div class="title">Комплектация</div>
+                            <div class="title">{{ __('car.equipment') }}</div>
                             <div class="tab-content">
                                 @foreach($car->equipments as $key => $equipment)
                                     @if ($equipment->volumes)
@@ -37,7 +37,7 @@
                                             <div class="ul">
                                                 @foreach($equipment->volumes as $volume)
                                                     <label class="li">
-                                                        <input wire:click.prevent="setPrice('{{$volume['price']}}', '{{$volume['value']}}')"
+                                                        <input wire:click.prevent="setPrice('{{ $volume['price'] }}', '{{ $volume['value'] }}')"
                                                                type="radio" name="battery"
                                                                @if($this->volume == $volume['value']) checked @endif>
                                                         <svg width="32" height="25">
