@@ -161,6 +161,7 @@ class CarFilter
     public static function getCurrentPropertiesFilter(Category $category, $filterQuery = null)
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
+        // Нужно получать именно свойства а не товары возможно использовать car_property
         $cars = $category->cars()->with('properties')->carsForCurrentDomain()->active()->get();
 
         $properties = [];

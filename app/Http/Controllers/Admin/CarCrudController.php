@@ -320,7 +320,7 @@ class CarCrudController extends CrudController
         CRUD::addField([
             'tab' => 'Поля для посадочной страницы',
             'name' => 'benefits',
-            'label' => 'Testimonials',
+            'label' => trans('backpack::fields.text_image_block'),
             'type' => 'repeatable',
             'subfields' => [ // also works as: "fields"
                 [

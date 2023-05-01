@@ -14,26 +14,56 @@ class EquipmentTemplate extends Component
     public function setEquipment($equipmentId)
     {
         $this->equipment = $this->car->equipments->where('id', $equipmentId)->first();
-        if ($this->equipment) {
+        if ($this->equipment && $this->equipment->images) {
             $this->car->images = $this->equipment->images;
+        } else {
+            $this->car->images = $this->car->getOriginal('images');
+        }
+
+        if ($this->equipment->volumes && count($this->equipment->volumes) > 0) {
+            $this->volume = $this->equipment->volumes[0]['value'];
+            $this->equipment->price = $this->equipment->volumes[0]['price'];
         }
     }
 
     public function setPrice($price, $value)
     {
+        $this->setCurrentEquipmentImages();
         $this->equipment->price = $price;
         $this->volume = $value;
     }
 
-    public function mount()
+    public function setCurrentEquipmentImages()
+    {
+        if (!$this->equipment) {return;}
+        if ($images = $this->equipment->images) {
+            $this->car->images = $images;
+        } else {
+            dump($this->car);
+        }
+    }
+
+    public function setDefaultVolume()
+    {
+        if (!$this->equipment) {return;}
+        if ($volumes = $this->equipment->volumes) {
+            $this->volume = $volumes[0]['value'];
+            $this->equipment->price = $volumes[0]['price'];
+        }
+    }
+
+    public function setDefaultEquipment()
     {
         $equipment = $this->car->equipments->first();
-        if ($equipment) {
-            $this->equipment = $equipment;
-            if ($equipment->volumes) {
-                $this->volume = $equipment->volumes[0]['value'];
-            }
-        }
+        if (!$equipment) {return;}
+        $this->equipment = $equipment;
+    }
+
+    public function mount()
+    {
+        $this->setDefaultEquipment();
+        $this->setDefaultVolume();
+        $this->setCurrentEquipmentImages();
     }
 
     public function render()

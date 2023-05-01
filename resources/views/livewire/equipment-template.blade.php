@@ -7,11 +7,13 @@
 
                 <div class="card-title">
                     <h1 class="main-title">{{ $car->titleWithYear }}</h1>
-                    <h2 class="sub-title">{{ $this->equipment->title }}</h2>
+                    @if ($this->equipment)
+                        <h2 class="sub-title">{{ $this->equipment->title }}</h2>
+                    @endif
                 </div>
                 <div class="card-btn">
                     <div>
-                        <div class="price">{{ $equipment->price_format }}</div>
+                        <div class="price">{{ $this->equipment ? $this->equipment->price_format : $car->price_format }}</div>
                         <p>@lang('car.' . $car->status)</p>
                     </div>
                     <a href="#" class="btn">{{ __('car.btn.' . $car->status) }}</a>
@@ -103,7 +105,7 @@
 
                     </div>
                 @endif
-                @if ($characteristic = $this->equipment->prepared_characteristic)
+                @if ($this->equipment && ($characteristic = $this->equipment->prepared_characteristic))
                     <div class="card-features">
                         <div class="main-title">{{ $characteristic->title }}</div>
                         {!! $characteristic->text !!}
