@@ -89,7 +89,7 @@ class BrandCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
         CRUD::addField([
             'name' => 'domains',
-            'label' => trans('backpack::fields.menu_domains'),
+            'label' => trans('backpack::fields.brand_domain'),
             'type' => 'relationship',
             'entity' => 'domains',
             'attribute' => 'title',
