@@ -297,6 +297,7 @@ class CarFilter
                 $ranges[$property->slug]['name'] = $property->title;
                 $ranges[$property->slug]['type'] = $property->filter_type;
                 $ranges[$property->slug]['slug'] = $property->slug;
+                $ranges[$property->slug]['values'] = [];
                 if ($property->step <= (float)$property->pivot->value) {
                     $ranges[$property->slug]['values'][] = $property->pivot->value;
                 }
@@ -306,7 +307,7 @@ class CarFilter
         $properties = Property::query()->whereIn('slug', array_column($ranges, 'slug'))->get(['slug', 'prefix', 'step']);
 
         foreach ($ranges as $key => $range) {
-            if ($property = $properties->where('slug', $key)->first()) {
+            if ($property = $properties->where('slug', $key)->first() && key_exists('values', $range)) {
                 $min = min($range['values']);
                 $max = max($range['values']);
 

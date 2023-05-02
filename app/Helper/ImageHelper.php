@@ -36,6 +36,13 @@ class ImageHelper
     public static function getImageData($filename): array
     {
         $filename = Str::contains($filename, env('UK_APP_URL')) ? Str::replace(env('UK_APP_URL') . '/storage', '', $filename) : $filename;
+        $filename = Str::contains($filename, '/storage') ? Str::replace('/storage', '', $filename) : $filename;
+
+        $fileNameWebp = $filename . '.webp';
+
+        if (!Storage::exists($filename) && Storage::exists($fileNameWebp)) {
+            $filename = $fileNameWebp;
+        }
 
         if (Storage::exists($filename)) {
             $data = ['src' => Storage::url($filename)];

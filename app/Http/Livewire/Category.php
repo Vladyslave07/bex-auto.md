@@ -215,7 +215,7 @@ class Category extends Component
     public function setDefaultValuesForRangeParams()
     {
         foreach ($this->getFilters() as $filter) {
-            if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME) {
+            if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME || !key_exists('values', $filter)) {
                 continue;
             }
 
