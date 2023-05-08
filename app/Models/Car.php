@@ -357,6 +357,19 @@ class Car extends Model
         return '';
     }
 
+    public function getColorsAttribute()
+    {
+        $colors = [];
+        if (!$this->equipments || $this->equipments->count() <= 0) {
+            return $colors;
+        }
+
+        foreach ($this->equipments as $equipment) {
+            $colors[$equipment->id] = $equipment->color;
+        }
+        return $colors;
+    }
+
     public function getTitleWithYearAttribute()
     {
         if (!Str::contains($this->title, $this->year)) {

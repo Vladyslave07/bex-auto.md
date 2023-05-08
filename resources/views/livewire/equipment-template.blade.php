@@ -51,42 +51,6 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                <div id="equipments_2" class="tab-pane">
-                                    <div class="ul">
-                                        <label class="li">
-                                            <input type="radio" name="battery2" checked>
-                                            <svg width="32" height="25">
-                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
-                                            </svg>
-                                            <span>100 kWh</span>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div id="equipments_3" class="tab-pane">
-                                    <div class="ul">
-                                        <label class="li">
-                                            <input type="radio" name="battery3" checked>
-                                            <svg width="32" height="25">
-                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
-                                            </svg>
-                                            <span>50 kWh</span>
-                                        </label>
-                                        <label class="li">
-                                            <input type="radio" name="battery3">
-                                            <svg width="32" height="25">
-                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
-                                            </svg>
-                                            <span>100 kWh</span>
-                                        </label>
-                                        <label class="li">
-                                            <input type="radio" name="battery3">
-                                            <svg width="32" height="25">
-                                                <use xlink:href="{{ asset('img/icons/sprite.svg#battery') }}"></use>
-                                            </svg>
-                                            <span>114 kWh</span>
-                                        </label>
-                                    </div>
-                                </div>
                             </div>
                             <div class="nav-tabs">
                                 @foreach($car->equipments as $key => $equipment)
