@@ -20,7 +20,7 @@
                                         {!! \App\Helper\ImageHelper::getPicture($image) !!}
                                     </a>
                                     @if ($key === 0 && ($link = $car->youtube_link))
-                                        <div data-fancybox="gallery" data-type="iframe" class="swiper-slide">
+                                        <div data-fancybox="gallery" data-type="iframe" class="swiper-slide video">
                                             <iframe data-src="https://www.youtube.com/embed/{{ $link }}"></iframe>
                                         </div>
                                     @endif
