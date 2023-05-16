@@ -2,18 +2,17 @@
 
 namespace App\Models;
 
-use App\Traits\DefaultScope;
-use App\Traits\SeoSnippets;
-use App\Traits\SlugOrTitleTrait;
+use App\Traits\MakesWebp;
+use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
 
-class City extends Model
+class Equipment extends Model
 {
-    use CrudTrait, Sluggable, SluggableScopeHelpers, HasTranslations, DefaultScope, SlugOrTitleTrait, SeoSnippets;
+    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, Sluggable, SluggableScopeHelpers;
 
     /*
     |--------------------------------------------------------------------------
@@ -21,12 +20,12 @@ class City extends Model
     |--------------------------------------------------------------------------
     */
 
-    protected $table = 'cities';
-    protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'title_m', 'meta_title', 'meta_description', 'seo_text_id'];
-    protected $translatable = ['title', 'title_m', 'meta_title', 'meta_description'];
-    protected $attributes = ['sort' => 500];
-    protected $with = ['text'];
+    public static $images = ['images'];
+    protected $table = 'equipments';
+    protected $fillable = ['active', 'slug', 'title', 'price', 'color', 'images', 'characteristic', 'volumes'];
+    protected $translatable = ['title', 'characteristic'];
+    protected $casts = ['images' => 'array', 'characteristic' => 'json', 'volumes' => 'array', 'color' => 'array'];
+
 
     /*
     |--------------------------------------------------------------------------
@@ -34,24 +33,12 @@ class City extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
-    /**
-     * Return the sluggable configuration array for this model.
-     *
-     * @return array
-     */
     public function sluggable(): array
     {
         return [
             'slug' => [
                 'source' => 'slug_or_title',
+                'unique' => true,
             ],
         ];
     }
@@ -61,16 +48,6 @@ class City extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * seo text
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function text(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(SeoText::class, 'seo_text_id');
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -84,14 +61,26 @@ class City extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function getSeoMetaTitleAttribute()
+    public function getSlugOrTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.city_meta_title_default'));
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->title;
     }
 
-    public function getSeoMetaDescriptionAttribute()
+    public function getPreparedCharacteristicAttribute()
     {
-        return $this->parseSnippets($this->meta_description ?: config('settings.city_meta_description_default'));
+        if ($this->characteristic) {
+            return json_decode($this->characteristic)[0];
+        }
+        return null;
+    }
+
+    public function getPriceFormatAttribute()
+    {
+        return '$' . number_format($this->price, 0, '.', ' ');
     }
 
     /*

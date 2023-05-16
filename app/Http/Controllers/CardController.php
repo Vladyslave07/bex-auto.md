@@ -36,6 +36,6 @@ class CardController extends Controller
         // Links for bloc link
         $links = $car->getCarLinks();
 
-        return view('card', compact('car', 'popularCars', 'brands', 'faqs', 'seoText', 'links'));
+        return view($car->cardTemplate(), compact('car', 'popularCars', 'brands', 'faqs', 'seoText', 'links'));
     }
 }

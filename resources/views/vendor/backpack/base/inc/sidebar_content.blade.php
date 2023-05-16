@@ -14,6 +14,7 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('category') }}'><i class='nav-icon la la-list'></i> Категории</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('brand') }}'><i class='nav-icon la la-cab'></i> Марки</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('car-model') }}'><i class='nav-icon la la-car-alt'></i> Модели</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('equipment') }}"><i class="nav-icon la la-plus-square"></i> Комплектация</a></li>
     </ul>
 </li>
 

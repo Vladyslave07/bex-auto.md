@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\SlugOrTitleTrait;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -50,8 +51,10 @@ class Brand extends Model
      */
     public static function brands()
     {
-        return Cache::remember(self::INDEX_BRANDS_CACHE_KEY, 86400, function () {
-            return self::query()->orderBy('sort')->orderBy('title')->active()->get(['slug', 'title']);
+        return Cache::remember(General::cacheKey(self::INDEX_BRANDS_CACHE_KEY), 86400, function () {
+            return self::query()->orderBy('sort')->orderBy('title')->whereHas('domains', function ($q) {
+                $q->where('brand_domain.domain_id', Domain::currentDomain()->id);
+            })->active()->get(['slug', 'title']);
         });
     }
 
@@ -94,6 +97,16 @@ class Brand extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * domains relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function domains(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Domain::class, 'brand_domain');
+    }
 
     /*
     |--------------------------------------------------------------------------

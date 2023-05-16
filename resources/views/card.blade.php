@@ -9,19 +9,8 @@
 @endpush
 
 @section('content')
-<!-- ///ХЛЕБНЫЕ КРОШКИ/// -->
-<div class="container">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="{{ route('index') }}">Bex Auto</a></li>
-            @if ($category = $car->category()->first())
-                <li class="breadcrumb-item"><a href="{{ route('category', ['category' => $category->slug]) }}">{{ $category->title }}</a></li>
-            @endif
-            <li class="breadcrumb-item" aria-current="page">{{ $car->titleWithYear }}</li>
-        </ol>
-    </nav>
-</div>
-<!-- ///:end/// -->
+{{-- Breadcrumbs --}}
+{{ Breadcrumbs::render() }}
 
 {{-- Car card --}}
 @include('partials.card.card')
