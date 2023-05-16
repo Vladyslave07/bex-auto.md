@@ -9,6 +9,7 @@ class EquipmentTemplate extends Component
     public $car;
     public $equipment;
     public $volume;
+    public $colorId;
 
 
     public function setEquipment($equipmentId)
@@ -31,6 +32,15 @@ class EquipmentTemplate extends Component
         $this->setCurrentEquipmentImages();
         $this->equipment->price = $price;
         $this->volume = $value;
+    }
+
+    public function setColor($equipmentId)
+    {
+        $equipment = $this->car->equipments->where('id', $equipmentId)->first();
+        if ($images = $equipment->images) {
+            $this->car->images = $images;
+        }
+        $this->colorId = $equipment->id;
     }
 
     public function setCurrentEquipmentImages()
@@ -57,11 +67,18 @@ class EquipmentTemplate extends Component
         $this->equipment = $equipment;
     }
 
+    public function setDefaultColorId()
+    {
+        $equipment = $this->car->equipments->first();
+        $this->colorId = $equipment->id;
+    }
+
     public function mount()
     {
         $this->setDefaultEquipment();
         $this->setDefaultVolume();
         $this->setCurrentEquipmentImages();
+        $this->setDefaultColorId();
     }
 
     public function render()

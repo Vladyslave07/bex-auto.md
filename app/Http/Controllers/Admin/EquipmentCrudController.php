@@ -74,6 +74,12 @@ class EquipmentCrudController extends CrudController
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'target'  => 'title', 'type' => 'slug', 'hint' => trans('backpack::hint.categories.slug'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'price', 'label' => trans('backpack::fields.price'), 'hint' => trans('backpack::hint.equipments.price'), 'type' => 'number', 'attributes' => ["step" => "any"]]);
         CRUD::addField([
+            'name' => 'color',
+            'multiple' => true,
+            'label' => trans('backpack::fields.color'),
+            'type' => 'color_picker'
+        ]);
+        CRUD::addField([
             'name' => 'volumes',
             'label' => trans('backpack::fields.volumes'),
             'type' => 'repeatable',
