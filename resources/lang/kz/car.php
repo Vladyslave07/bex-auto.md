@@ -20,7 +20,9 @@ return [
     ],
 
     'btn' => [
-        \App\Models\Car::ON_ORDER_STATUS => 'Тапсырыс'
+        \App\Models\Car::ON_ORDER_STATUS => 'Тапсырыс',
+        \App\Models\Car::EXPECTED_STATUS => 'Тапсырыс',
+        \App\Models\Car::IN_STOCK_STATUS => 'Тапсырыс',
     ],
 
     'price_null_info' => 'Сауда-саттық жалғасуда және соңғы лоттың бағасы басқаша болады',

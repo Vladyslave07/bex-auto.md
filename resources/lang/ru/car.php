@@ -20,7 +20,9 @@ return [
     ],
 
     'btn' => [
-        \App\Models\Car::ON_ORDER_STATUS => 'Заказать'
+        \App\Models\Car::ON_ORDER_STATUS => 'Заказать',
+        \App\Models\Car::EXPECTED_STATUS => 'Заказать',
+        \App\Models\Car::IN_STOCK_STATUS => 'Заказать',
     ],
 
     'price_null_info' => 'Идут торги и цена конечного лота будет отличаться',
