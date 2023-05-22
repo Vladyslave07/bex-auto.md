@@ -33,9 +33,9 @@
                 setTimeout(() => {
                     openModal('#modalDiscount');
                     window.removeEventListener('scroll', showDiscountForm);
+                    window.showForm = false;
+                    setSessionStorageItem('show-discount-modal', true);
                 }, 30000);
-                window.showForm = false;
-                setSessionStorageItem('show-discount-modal', true);
             }
         }
 

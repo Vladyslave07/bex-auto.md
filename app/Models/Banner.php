@@ -24,7 +24,7 @@ class Banner extends Model
     protected $guarded = ['id'];
     protected $fillable = ['active', 'sort', 'title', 'subtitle', 'text', 'image'];
     protected $attributes = ['sort' => 500, 'image' => ''];
-    protected $translatable = ['title', 'subtitle', 'text'];
+    protected $translatable = ['title', 'subtitle', 'text', 'image'];
     protected $casts = ['active' => 'bool'];
     public static $images = ['image'];
 
@@ -63,7 +63,7 @@ class Banner extends Model
     public static function getImageForPopup()
     {
         $domain = Domain::currentDomain();
-        return Cache::remember(self::BANNER_IMAGE_CACHE_KEY . '_' . $domain->slug, 86400, function () use($domain) {
+        return Cache::remember(self::BANNER_IMAGE_CACHE_KEY . '_' . $domain->slug . '_' . app()->getLocale(), 86400, function () use($domain) {
             $id = $domain->id == Domain::DEFAULT_DOMAIN ? self::IMAGE_FOR_POPUP_ID_UK : self::IMAGE_FOR_POPUP_ID_KZ;
             if ($banner = self::query()->where('id', $id)->first()) {
                 return $banner->image;
