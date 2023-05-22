@@ -87,6 +87,9 @@ class EquipmentCrudController extends CrudController
                 [
                     'name'    => 'value',
                     'type'    => 'number',
+                    'decimals' => 2,
+                    'dec_point' => ',',
+                    'attributes' => ["step" => "any"],
                     'label'   => trans('backpack::fields.volumes_value'),
                     'wrapper' => ['class' => 'form-group col-md-4'],
                 ],
