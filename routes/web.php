@@ -28,6 +28,7 @@ Route::group([
 
 function commonRoute()
 {
+    Route::post('livewire/message/{name}', '\Livewire\Controllers\HttpConnectionHandler');
 
     Route::get('sitemap.xml', function (){
         $xml = file_get_contents(public_path(SitemapGeneral::getSavePath('sitemap', app()->getLocale())));
