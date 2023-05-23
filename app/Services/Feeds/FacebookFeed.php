@@ -100,7 +100,6 @@ class FacebookFeed extends Feed
         return Car::query()
             ->where('domain_id', app('domain')->getDomain()->id)
             ->active()
-            ->take(1)
             ->get();
     }
 }
