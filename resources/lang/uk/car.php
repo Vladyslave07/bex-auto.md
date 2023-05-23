@@ -21,8 +21,8 @@ return [
 
     'btn' => [
         \App\Models\Car::ON_ORDER_STATUS => 'Заказати',
-        \App\Models\Car::EXPECTED_STATUS => 'Заказати',
-        \App\Models\Car::IN_STOCK_STATUS => 'Заказати',
+        \App\Models\Car::EXPECTED_STATUS => 'Купити',
+        \App\Models\Car::IN_STOCK_STATUS => 'Купити',
     ],
 
     'price_null_info' => 'Ідуть торги і ціна кінцевого лоту відрізнятиметься',
