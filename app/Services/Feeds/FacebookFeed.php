@@ -85,6 +85,8 @@ class FacebookFeed extends Feed
             File::append($this->getFileName(), "<url>" . $previewPicture . "</url>");
             File::append($this->getFileName(), '</image>');
 
+            File::append($this->getFileName(), "<address>" . htmlspecialchars($car->category) . "</address>");
+
             // Close item
             File::append($this->getFileName(), '</listing>');
         }
