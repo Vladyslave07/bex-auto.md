@@ -12,6 +12,7 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
+use function Symfony\Component\String\s;
 
 class Category extends Component
 {
@@ -42,6 +43,17 @@ class Category extends Component
             ->with(['properties'])
             ->active()
             ->filtered($filterQuery);
+
+
+
+        if ($cars->count() <= 0) {
+            $cars = $this->category
+                ->products()
+                ->productsForCurrentDomain()
+                ->with(['properties'])
+                ->active()
+                ->filtered($filterQuery);
+        }
 
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);

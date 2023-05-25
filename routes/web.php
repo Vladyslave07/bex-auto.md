@@ -47,6 +47,12 @@ function commonRoute()
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 
+    // Categories
+    Route::get(
+        '/products/{category}/{page?}/{filter?}',
+        [\App\Http\Controllers\CatalogController::class, 'category']
+    )->name('products');
+
     // Search
     Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
 

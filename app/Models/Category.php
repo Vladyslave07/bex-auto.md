@@ -12,6 +12,7 @@ use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\hasMany;
 use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Sitemap\Contracts\Sitemapable;
@@ -116,6 +117,11 @@ class Category extends Model implements Sitemapable
     public function cars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Car::class, 'car_category');
+    }
+
+    public function products(): hasMany
+    {
+        return $this->hasMany(Product::class, 'category_id');
     }
 
     /*

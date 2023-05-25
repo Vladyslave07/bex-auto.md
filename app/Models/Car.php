@@ -6,6 +6,7 @@ use App\Helper\General;
 use App\Http\Controllers\CatalogController;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
+use App\Traits\ProductCarsTrait;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -23,7 +24,7 @@ use Spatie\Sitemap\Contracts\Sitemapable;
 
 class Car extends Model
 {
-    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
+    use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -154,15 +155,6 @@ class Car extends Model
         });
     }
 
-    /**
-     *
-     * @return mixed
-     */
-    public function getCategoryProperties()
-    {
-        return Property::query()->active()->where('for', $this->table)->orderBy('id')->get();
-    }
-
     public function category()
     {
         return $this->categories;
@@ -276,21 +268,6 @@ class Car extends Model
     */
 
     /**
-     * Filter apply
-     *
-     * @param Builder $query
-     * @param $filterQuery
-     * @return Builder
-     */
-    public function scopeFiltered(Builder $query, $filterQuery = null): Builder
-    {
-        if (!$filterQuery) {
-            return $query;
-        }
-        return (new \App\filters\CarFilter($query, $filterQuery))->apply();
-    }
-
-    /**
      * Return cars only for current domain
      *
      * @param Builder $query
@@ -311,35 +288,11 @@ class Car extends Model
         return $query->where('domain_id', $id);
     }
 
-
-    public function scopeDefaultOrder(Builder $query): Builder
-    {
-        return $query->orderByRaw("FIELD(status, \"in_stock\", \"expect\", \"on_order\", \"on_order_usa\", \"on_order_korea\", \"sold\")");
-    }
-
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-
-    public function getPreviewPictureAttribute()
-    {
-        $previewImage = ($this->images && count($this->images) > 0) ? $this->images[0] : '';
-
-        return strlen($this->preview_image) > 0 ? $this->preview_image : $previewImage;
-    }
-
-    // The slug is created automatically from the "title" field if no slug exists.
-    public function getSlugOrTitleAttribute()
-    {
-        if ($this->slug != '') {
-            return $this->slug;
-        }
-
-        return $this->title;
-    }
-
 
     public function getPreparedBenefitsAttribute()
     {
@@ -370,32 +323,9 @@ class Car extends Model
         return $colors;
     }
 
-    public function getTitleWithYearAttribute()
-    {
-        if (!Str::contains($this->title, $this->year)) {
-            return sprintf('%s %s', $this->title, $this->year);
-        }
-        return $this->title;
-    }
-
-    public function getPriceFormatAttribute()
-    {
-        return '$' . number_format($this->price, 0, '.', ' ');
-    }
-
-    public function getSeoMetaTitleAttribute()
-    {
-        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
-    }
-
     public function getCountryAttribute()
     {
         return Domain::currentDomain()?->country;
-    }
-
-    public function getSeoMetaDescriptionAttribute()
-    {
-        return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
     }
 
     /**
@@ -416,34 +346,6 @@ class Car extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-
-    public function setPreviewImageAttribute($value)
-    {
-        $attribute_name = "preview_image";
-        $disk = "public";
-        $destination_path = Str::replace('_', '', $this->table);
-
-        if ($value == null) {
-            \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
-            $this->attributes[$attribute_name] = null;
-        } else {
-            if (Str::startsWith($value, 'data:image')) {
-                $ext = 'jpg';
-                if (Str::startsWith($value, 'data:image/png;base64')) $ext = 'png';
-                if (Str::startsWith($value, 'data:image/jpeg;base64')) $ext = 'jpeg';
-                if (Str::startsWith($value, 'data:image/webp;base64')) $ext = 'webp';
-
-                $image = \Image::make($value)->fit(289, 220, function ($constraint) {
-                    $constraint->upsize();
-                })->encode($ext, 90);
-
-                $filename = md5($value . time()) . '.' . $ext;
-                \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
-                \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
-                $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
-            } else $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
-        }
-    }
 
     public function setBenefitsAttribute($values)
     {

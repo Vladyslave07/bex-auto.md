@@ -4,19 +4,21 @@ namespace App\Models;
 
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
+use App\Traits\ProductCarsTrait;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Product extends Model
 {
-    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
+    use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -30,6 +32,7 @@ class Product extends Model
     protected $casts = ['images' => 'array'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title'];
+    protected $with = ['properties'];
 
     public static $images = ['images', 'preview_image'];
 
@@ -75,7 +78,7 @@ class Product extends Model
         return $this->belongsTo(Domain::class, 'domain_id');
     }
 
-    public function category(): BelongsTo
+    public function productCategories(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -92,6 +95,18 @@ class Product extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * Return cars only for current domain
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeProductsForCurrentDomain(Builder $query): Builder
+    {
+        return $query->where('domain_id', app('domain')->getDomain()->id);
+    }
+
 
     /*
     |--------------------------------------------------------------------------

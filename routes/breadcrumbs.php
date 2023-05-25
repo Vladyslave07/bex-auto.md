@@ -17,6 +17,12 @@ Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
     $trail->push($category->title, $category->url);
 });
 
+// products
+Breadcrumbs::for('products', function ($trail, \App\Models\Category $category) {
+    $trail->parent('index');
+    $trail->push($category->title, $category->url);
+});
+
 // card
 Breadcrumbs::for('car_detail', function ($trail, \App\Models\Car $car) {
     $trail->parent('index');
