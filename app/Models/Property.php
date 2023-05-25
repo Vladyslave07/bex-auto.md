@@ -22,12 +22,11 @@ class Property extends Model
     */
 
     protected $table = 'properties';
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'field_type', 'filter_type', 'options', 'relation', 'step', 'prefix', 'show', 'show_product', 'image'];
+    protected $fillable = ['for', 'active', 'sort', 'title', 'slug', 'field_type', 'filter_type', 'options', 'relation', 'step', 'prefix', 'show', 'show_product', 'image'];
     protected $casts = [
         'active' => 'boolean',
         'show' => 'boolean',
         'show_product' => 'boolean',
-//        'options' => 'array'
     ];
     protected $translatable = ['title', 'name', 'options', 'prefix'];
     protected $attributes = ['sort' => 500];
@@ -57,6 +56,16 @@ class Property extends Model
                 'source' => 'slug_or_title',
             ],
         ];
+    }
+
+    // The slug is created automatically from the "title" field if no slug exists.
+    public function getSlugOrTitleAttribute()
+    {
+        if ($this->slug != '') {
+            return $this->slug;
+        }
+
+        return $this->title;
     }
 
     /**

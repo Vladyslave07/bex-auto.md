@@ -23,7 +23,7 @@ class PropertyCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -35,7 +35,7 @@ class PropertyCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -66,7 +66,7 @@ class PropertyCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -78,6 +78,7 @@ class PropertyCrudController extends CrudController
             'name' => 'active',
             'label' => trans('backpack::fields.active'),
             'type' => 'checkbox',
+            'default' => 1,
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
@@ -110,6 +111,18 @@ class PropertyCrudController extends CrudController
             'label' => trans('backpack::fields.sort'),
             'type' => 'number',
             'default' => 500,
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+        ]);
+
+        CRUD::addField([
+            'name' => 'for',
+            'label' => trans('backpack::fields.for'),
+            'type' => 'select_from_array',
+            'options' => [
+                'cars' => trans('backpack::fields.option_for.cars'),
+                'products' => trans('backpack::fields.option_for.products')
+            ],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
         ]);
 
         CRUD::addField([
@@ -174,7 +187,7 @@ class PropertyCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

@@ -61,7 +61,7 @@ class Product extends Model
      */
     public function getCategoryProperties()
     {
-        return Property::query()->active()->orderBy('id')->get();
+        return Property::query()->active()->where('for', $this->table)->orderBy('id')->get();
     }
 
     /*
