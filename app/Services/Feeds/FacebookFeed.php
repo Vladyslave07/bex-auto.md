@@ -85,11 +85,28 @@ class FacebookFeed extends Feed
             File::append($this->getFileName(), "<url>" . $previewPicture . "</url>");
             File::append($this->getFileName(), '</image>');
 
-            File::append($this->getFileName(), "<address>" . htmlspecialchars($car->category) . "</address>");
+            File::append($this->getFileName(), '<address>');
+            File::append($this->getFileName(), "<region>" . mb_strtoupper($this->getLocale()) . "</region>");
+            File::append($this->getFileName(), "<street_address>" . mb_strtoupper($this->getLocale()) . "</street_address>");
+            File::append($this->getFileName(), "<city>" . mb_strtoupper($this->getLocale()) . "</city>");
+            File::append($this->getFileName(), "<country>" . $this->getCountry($car) . "</country>");
+
+            File::append($this->getFileName(), '</address>');
 
             // Close item
             File::append($this->getFileName(), '</listing>');
         }
+    }
+
+    public function getCountry(Car $car)
+    {
+        $countries = [1 => 'США', 2 => 'Корея', 4 => 'Китай'];
+        foreach ($car->categories as $category) {
+            if (key_exists($category->id, $countries)) {
+                return $countries[$category->id];
+            }
+        }
+        return 'США';
     }
 
     public function footer()
