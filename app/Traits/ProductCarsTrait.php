@@ -21,6 +21,14 @@ trait ProductCarsTrait
     */
 
     /**
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
+    /**
      *
      * @return mixed
      */

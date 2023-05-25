@@ -49,7 +49,7 @@ class Category extends Component
         if ($cars->count() <= 0) {
             $cars = $this->category
                 ->products()
-                ->productsForCurrentDomain()
+                ->forCurrentDomain()
                 ->with(['properties'])
                 ->active()
                 ->filtered($filterQuery);

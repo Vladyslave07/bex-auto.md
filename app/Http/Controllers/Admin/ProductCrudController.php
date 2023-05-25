@@ -122,7 +122,7 @@ class ProductCrudController extends CrudController
             'name' => 'category_id',
             'label' => trans('backpack::fields.category'),
             'type' => 'relationship',
-            'entity' => 'productCategories',
+            'entity' => 'category',
             'attribute' => 'title',
             'model' => Category::class,
             'options' => (function ($query) {

@@ -36,6 +36,7 @@ class Product extends Model
 
     public static $images = ['images', 'preview_image'];
 
+    public string $detailRouteName = 'product_detail';
 
     /*
     |--------------------------------------------------------------------------
@@ -78,7 +79,7 @@ class Product extends Model
         return $this->belongsTo(Domain::class, 'domain_id');
     }
 
-    public function productCategories(): BelongsTo
+    public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
@@ -102,7 +103,7 @@ class Product extends Model
      * @param Builder $query
      * @return Builder
      */
-    public function scopeProductsForCurrentDomain(Builder $query): Builder
+    public function scopeForCurrentDomain(Builder $query): Builder
     {
         return $query->where('domain_id', app('domain')->getDomain()->id);
     }

@@ -16,7 +16,6 @@
         @endif
         <a href="{{ route('car_detail', ['car' => $car->slug]) }}" aria-label="img product">
             @if (strlen($car->previewPicture) > 0)
-                {!! \App\Helper\ImageHelper::getPicture($car->previewPicture) !!}
             @endif
         </a>
     </div>

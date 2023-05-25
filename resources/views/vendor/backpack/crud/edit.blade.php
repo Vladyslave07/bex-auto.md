@@ -65,8 +65,8 @@
             <div class="d-none" id="parentLoadedAssets">{{ json_encode(Assets::loaded()) }}</div>
             @include('crud::inc.form_save_buttons')
 
-              @if(($entry = $crud->getCurrentEntry()) && $crud->getCurrentEntry()->getTable() === 'cars')
-                  <a href="{{ route('car_detail', $entry->slug) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
+              @if(($entry = $crud->getCurrentEntry()) && in_array($crud->getCurrentEntry()->getTable(), ['cars', 'products']))
+                  <a href="{{ route($crud->getCurrentEntry()->detailRouteName, $entry->slug) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
               @endif
 
 		  </form>

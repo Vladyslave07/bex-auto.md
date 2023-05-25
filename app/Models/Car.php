@@ -47,6 +47,7 @@ class Car extends Model
     protected $casts = ['images' => 'array', 'color' => 'array'];
     protected $with = ['properties', 'equipments'];
 
+    public string $detailRouteName = 'car_detail';
 
     const POPULAR_CARS_CACHE_KEY = 'popular_cars';
     const EXPECTED_CARS_CACHE_KEY = 'expected_cars_slider';
@@ -78,14 +79,6 @@ class Car extends Model
                 'unique' => true,
             ],
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 
     /**
