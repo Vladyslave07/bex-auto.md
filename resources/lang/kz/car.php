@@ -25,5 +25,8 @@ return [
         \App\Models\Car::IN_STOCK_STATUS => 'Тапсырыс',
     ],
 
+    'product_block_title' => 'Көлікке арналған тауарлар',
+
+
     'price_null_info' => 'Сауда-саттық жалғасуда және соңғы лоттың бағасы басқаша болады',
 ];

@@ -44,6 +44,11 @@ class Product extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function getKeyRouteName(): string
+    {
+        return 'product';
+    }
+
     /**
      * Return the sluggable configuration array for this model.
      *

@@ -14,13 +14,13 @@
                 <span>@lang('car.' . $car->status)</span>
             </div>
         @endif
-        <a href="{{ route('car_detail', ['car' => $car->slug]) }}" aria-label="img product">
+        <a href="{{ route($car->detailRouteName, [$car->getKeyRouteName() => $car->slug]) }}" aria-label="img product">
             @if (strlen($car->previewPicture) > 0)
             @endif
         </a>
     </div>
     <div class="body">
-        <a href="{{ route('car_detail',  ['car' => $car->slug]) }}" class="title">{{ $car->titleWithYear }}</a>
+        <a href="{{ route($car->detailRouteName,  [$car->getKeyRouteName() => $car->slug]) }}" class="title">{{ $car->titleWithYear }}</a>
         <div class="features">
             <div class="tr">
                 @foreach($car->properties as $property)
@@ -46,6 +46,6 @@
                 </div>
             @endif
         </div>
-        <a href="{{ route('car_detail', ['car' => $car->slug]) }}" class="btn">@lang('car.more')</a>
+        <a href="{{ route($car->detailRouteName, [$car->getKeyRouteName() => $car->slug]) }}" class="btn">@lang('car.more')</a>
     </div>
 </div>

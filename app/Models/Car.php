@@ -15,6 +15,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -60,6 +62,11 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function getKeyRouteName(): string
+    {
+        return 'car';
+    }
 
     public function cardTemplate()
     {
@@ -212,42 +219,32 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * categories relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function equipments(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'car_product');
+    }
+
+    public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class, 'car_equipment');
     }
 
-    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function domain(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
     }
 
-    /**
-     * categories relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'car_category');
     }
 
-    /**
-     * categories relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function links(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function links(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'categories_cars');
     }
 
-    public function properties(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function properties(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Property::class, 'car_property')
             ->withTimestamps()->withPivot('value', 'slug')

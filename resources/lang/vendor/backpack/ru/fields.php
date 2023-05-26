@@ -100,7 +100,7 @@ return [
     'volumes_value' => 'Значение',
     'text_image_block' => 'Текстовые блоки с картинкой',
     'for' => 'Для какой сущности',
-
+    'products' => 'Товары',
 
     'option' => [
         'expect' => 'Ожидается',

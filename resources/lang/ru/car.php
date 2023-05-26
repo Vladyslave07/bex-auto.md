@@ -25,5 +25,7 @@ return [
         \App\Models\Car::IN_STOCK_STATUS => 'Купить',
     ],
 
+    'product_block_title' => 'Товары для автомобиля',
+
     'price_null_info' => 'Идут торги и цена конечного лота будет отличаться',
 ];
