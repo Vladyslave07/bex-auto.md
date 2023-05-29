@@ -69,6 +69,17 @@ trait ProductCarsTrait
         return $query->orderByRaw("FIELD(status, \"in_stock\", \"expect\", \"on_order\", \"on_order_usa\", \"on_order_korea\", \"sold\")");
     }
 
+    /**
+     * Return items only for current domain
+     *
+     * @param Builder $query
+     * @return Builder
+     */
+    public function scopeForCurrentDomain(Builder $query): Builder
+    {
+        return $query->where('domain_id', app('domain')->getDomain()->id);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS

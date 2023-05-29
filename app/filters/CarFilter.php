@@ -17,6 +17,7 @@ class CarFilter
 {
     protected Builder $query;
     protected array $filterParams;
+    private $propertyPivotTableName;
 
     const CAR_STATUS_PROPERTY_SLUG = 'status';
     const FILTER_PRICE_PROPERTY_NAME = 'price';
@@ -27,6 +28,7 @@ class CarFilter
     public function __construct(Builder $query, string $queryString)
     {
         $this->query = $query;
+        $this->propertyPivotTableName = $this->query->getModel()->propertyPivotTableName;
         $this->filterParams = $this->prepareFilterParams($queryString);
     }
 
@@ -109,10 +111,10 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             $propValues = str_contains($propValue, '|') ? explode('|', $propValue) : [$propValue];
-            $query->where('property_id', $propId)->where('car_property.slug', array_shift($propValues));
+            $query->where('property_id', $propId)->where($this->getPivotName() . '.slug', array_shift($propValues));
             if (!empty($propValues)) {
                 foreach ($propValues as $propValue) {
-                    $query->orWhere('car_property.slug', $propValue);
+                    $query->orWhere($this->getPivotName() . '.slug', $propValue);
                 }
             }
         });
@@ -131,7 +133,7 @@ class CarFilter
             $to = (int)$to;
             $from = (int)$from;
 
-            $query->where('property_id', $propId)->whereBetween('car_property.value', [$from, $to]);
+            $query->where('property_id', $propId)->whereBetween($this->getPivotName() . '.value', [$from, $to]);
         });
     }
 
@@ -141,10 +143,10 @@ class CarFilter
 
         $this->query->whereHas('properties', function ($query) use ($propId, $propValue) {
             $propValues = str_contains($propValue, '|') ? explode('|', $propValue) : [$propValue];
-            $query->where('property_id', $propId)->where('car_property.value', array_shift($propValues));
+            $query->where('property_id', $propId)->where($this->getPivotName() . '.value', array_shift($propValues));
             if (!empty($propValues)) {
                 foreach ($propValues as $propValue) {
-                    $query->orWhere('car_property.value', $propValue);
+                    $query->orWhere($this->getPivotName() . '.value', $propValue);
                 }
             }
         });
@@ -162,7 +164,7 @@ class CarFilter
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
         // Нужно получать именно свойства а не товары возможно использовать car_property
-        $cars = $category->cars()->with('properties')->carsForCurrentDomain()->active()->get();
+        $cars = $category->carsOrProducts()->get();
 
         $properties = [];
 
@@ -292,7 +294,7 @@ class CarFilter
         $ranges = [];
         foreach ($cars as $car) {
             foreach ($car->properties as $property) {
-                if ($property->filter_type !== self::FROM_TO_PROPERTY_NAME || !$property->pivot->value) {
+                if ($property->filter_type !== self::FROM_TO_PROPERTY_NAME || !$property->pivot->value || !is_numeric($property->pivot->value)) {
                     continue;
                 }
                 $ranges[$property->slug]['name'] = $property->title;
@@ -420,4 +422,8 @@ class CarFilter
     }
 
 
+    public function getPivotName()
+    {
+        return $this->propertyPivotTableName;
+    }
 }

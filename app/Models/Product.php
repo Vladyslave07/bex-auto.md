@@ -37,6 +37,7 @@ class Product extends Model
     public static $images = ['images', 'preview_image'];
 
     public string $detailRouteName = 'product_detail';
+    public string $propertyPivotTableName = 'product_property';
 
     /*
     |--------------------------------------------------------------------------
@@ -101,17 +102,6 @@ class Product extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Return cars only for current domain
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeForCurrentDomain(Builder $query): Builder
-    {
-        return $query->where('domain_id', app('domain')->getDomain()->id);
-    }
 
 
     /*

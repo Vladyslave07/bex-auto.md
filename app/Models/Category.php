@@ -11,7 +11,10 @@ use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\hasMany;
 use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
@@ -83,6 +86,20 @@ class Category extends Model implements Sitemapable
         });
     }
 
+    /**
+     * Get cars or products if cars not exists for current category
+     *
+     */
+    public function carsOrProducts()
+    {
+        $items = $this->cars()->forCurrentDomain()->active();
+        if ($items->count() >= 1) {
+            return $items;
+        }
+
+        return $this->products()->forCurrentDomain()->active();
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -92,9 +109,9 @@ class Category extends Model implements Sitemapable
     /**
      * seo text
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function text(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function text(): BelongsTo
     {
         return $this->belongsTo(SeoText::class, 'domain_seo_text_id');
     }
@@ -102,9 +119,9 @@ class Category extends Model implements Sitemapable
     /**
      * categories relationship
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function faqs(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function faqs(): BelongsToMany
     {
         return $this->belongsToMany(Faq::class, 'category_faq');
     }
@@ -112,9 +129,9 @@ class Category extends Model implements Sitemapable
     /**
      * categories relationship
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function cars(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function cars(): BelongsToMany
     {
         return $this->belongsToMany(Car::class, 'car_category');
     }

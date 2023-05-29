@@ -50,6 +50,7 @@ class Car extends Model
     protected $with = ['properties', 'equipments'];
 
     public string $detailRouteName = 'car_detail';
+    public string $propertyPivotTableName = 'car_property';
 
     const POPULAR_CARS_CACHE_KEY = 'popular_cars';
     const EXPECTED_CARS_CACHE_KEY = 'expected_cars_slider';

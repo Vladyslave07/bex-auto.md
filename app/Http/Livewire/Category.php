@@ -18,7 +18,7 @@ class Category extends Component
 {
     use WithCustomPaginationTrait;
 
-    public $category;
+    public \App\Models\Category $category;
     public $orderBy = [];
     public $filterQuery = null;
 
@@ -37,23 +37,7 @@ class Category extends Component
         $this->page = $this->pageNum($this->page);
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
-        $cars = $this->category
-            ->cars()
-            ->carsForCurrentDomain()
-            ->with(['properties'])
-            ->active()
-            ->filtered($filterQuery);
-
-
-
-        if ($cars->count() <= 0) {
-            $cars = $this->category
-                ->products()
-                ->forCurrentDomain()
-                ->with(['properties'])
-                ->active()
-                ->filtered($filterQuery);
-        }
+        $cars = $this->category->carsOrProducts()->filtered($filterQuery);
 
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);
@@ -200,6 +184,7 @@ class Category extends Component
      */
     public function makeFilterUrl()
     {
+        // todo: чпу для страниц товаров
         $categoryUrl = route('category', ['category' => $this->category->slug], false);
         $filterUrl = '';
         if ($this->filterQuery) {
