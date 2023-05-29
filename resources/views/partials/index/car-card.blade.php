@@ -16,6 +16,7 @@
         @endif
         <a href="{{ route($car->detailRouteName, [$car->getKeyRouteName() => $car->slug]) }}" aria-label="img product">
             @if (strlen($car->previewPicture) > 0)
+                {!! \App\Helper\ImageHelper::getPicture($car->previewPicture) !!}
             @endif
         </a>
     </div>
@@ -27,7 +28,7 @@
                     @if($property->show_product && ($value = $property->getValue()))
                         <div class="item">
                             <img width="21" height="21" src="{{ Storage::disk('public')->url($property->image) }}">
-                            {{ $value }}
+                            {{ $value }} {{ $property->prefix ?: '' }}
                         </div>
                     @endif
                 @endforeach
