@@ -37,6 +37,7 @@ class Product extends Model
     public static $images = ['images', 'preview_image'];
 
     public string $detailRouteName = 'product_detail';
+    public string $categoryRouteName = 'category_products';
     public string $propertyPivotTableName = 'product_property';
 
     /*

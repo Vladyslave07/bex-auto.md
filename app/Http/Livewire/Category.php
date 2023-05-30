@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\filters\CarFilter;
 use App\Http\Controllers\CatalogController;
 use App\Models\Car;
+use App\Models\Product;
 use App\Models\Property;
 use App\Traits\WithCustomPaginationTrait;
 
@@ -25,6 +26,8 @@ class Category extends Component
     public $by = '';
     public $sort = '';
 
+    public Car|Product $currentModel;
+
     protected $cars;
 
     public $disabled = true;
@@ -38,6 +41,8 @@ class Category extends Component
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
         $cars = $this->category->carsOrProducts()->filtered($filterQuery);
+
+        $this->currentModel = $cars->getRelated();
 
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);
@@ -185,7 +190,7 @@ class Category extends Component
     public function makeFilterUrl()
     {
         // todo: чпу для страниц товаров
-        $categoryUrl = route('category', ['category' => $this->category->slug], false);
+        $categoryUrl = route($this->currentModel->categoryRouteName, ['category' => $this->category->slug], false);
         $filterUrl = '';
         if ($this->filterQuery) {
             $filterUrl = CarFilter::FILTER_PREFIX . $this->filterQuery;
