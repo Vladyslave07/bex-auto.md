@@ -360,7 +360,7 @@ class CarFilter
 
         $diff = $max - $min;
         if ($max <= 0 || $max <= $step || $diff <= $step) {
-            $properties['values'] = [];
+            $properties['values'] = ['from' => [0], 'to' => [0]];
         } else {
             $range = self::makeValueFroFromToField(range($min, $max, $step), '$');
             $range[$max] = '$' . $max;
