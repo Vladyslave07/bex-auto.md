@@ -25,7 +25,7 @@ class Brand extends Model
     */
 
     protected $table = 'brands';
-    protected $fillable = ['active', 'sort', 'title', 'slug'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'show_in_block'];
     protected $translatable = ['title'];
     protected $attributes = ['sort' => 500];
 
@@ -52,7 +52,9 @@ class Brand extends Model
     public static function brands()
     {
         return Cache::remember(General::cacheKey(self::INDEX_BRANDS_CACHE_KEY), 86400, function () {
-            return self::query()->orderBy('sort')->orderBy('title')->whereHas('domains', function ($q) {
+            return self::query()->orderBy('sort')->orderBy('title')
+                ->where('show_in_block', 1)
+                ->whereHas('domains', function ($q) {
                 $q->where('brand_domain.domain_id', Domain::currentDomain()->id);
             })->active()->get(['slug', 'title']);
         });

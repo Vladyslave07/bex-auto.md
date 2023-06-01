@@ -83,10 +83,11 @@ class BrandCrudController extends CrudController
     {
         CRUD::setValidation(BrandRequest::class);
 
-        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
-        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
-        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text']);
+        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'show_in_block', 'label' => trans('backpack::fields.show_in_block'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'default' => 1]);
+        CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'slug', 'target'  => 'title', 'label' => trans('backpack::fields.slug'), 'type' => 'slug', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField([
             'name' => 'domains',
             'label' => trans('backpack::fields.brand_domain'),
@@ -97,6 +98,7 @@ class BrandCrudController extends CrudController
             'options' => (function ($query) {
                 return $query->orderBy('title', 'asc')->get();
             }),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
     }
 
