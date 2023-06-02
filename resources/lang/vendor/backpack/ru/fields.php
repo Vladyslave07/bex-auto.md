@@ -87,6 +87,7 @@ return [
     'gtm' => 'Код Google Tag Manager',
     'menu_domains' => 'На каких доменах выводить меню',
     'brand_domain' => 'На каких доменах выводить марку',
+    'domain_seo_text' => 'На каких доменах выводить сео текст',
     'show_credit_btn' => 'Доступна для покупки в кредит',
     'column' => 'Колонка для вывода',
     'telegram' => 'Ссылка на Telegram',

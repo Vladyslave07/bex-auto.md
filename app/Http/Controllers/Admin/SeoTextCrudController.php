@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\SeoTextRequest;
+use App\Models\Domain;
 use App\Models\SeoText;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -26,7 +27,6 @@ class SeoTextCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation {
         destroy as traitDestroy;
     }
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     use BulkDeleteOperation;
 
     /**
@@ -85,10 +85,22 @@ class SeoTextCrudController extends CrudController
     {
         CRUD::setValidation(SeoTextRequest::class);
 
-        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'main', 'label' => trans('backpack::fields.main'), 'type' => 'checkbox']);
-        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
-        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
+        CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'main', 'label' => trans('backpack::fields.main'), 'type' => 'checkbox','wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField([
+            'name' => 'domains',
+            'label' => trans('backpack::fields.domain_seo_text'),
+            'type' => 'relationship',
+            'entity' => 'domains',
+            'attribute' => 'title',
+            'model' => Domain::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
         CRUD::addField([
             'name' => 'title',
             'label' => trans('backpack::fields.title'),

@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 
 class SeoText extends Model
@@ -53,8 +55,10 @@ class SeoText extends Model
      */
     public static function mainText()
     {
-        return Cache::remember( self::MAIN_SEO_TEXT_CACHE_KEY, 86400, function () {
-            return self::query()->where('main', 1)->active()->first(['title', 'text']);
+        return Cache::remember(General::cacheKey(self::MAIN_SEO_TEXT_CACHE_KEY), 86400, function () {
+            return self::query()->whereHas('domains', function ($q) {
+                $q->where('domain_seo_text.domain_id',app('domain')->getDomain()->id);
+            })->where('main', 1)->active()->first(['title', 'text']);
         });
     }
 
@@ -73,6 +77,16 @@ class SeoText extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    /**
+     * domains relationship
+     *
+     * @return BelongsToMany
+     */
+    public function domains(): BelongsToMany
+    {
+        return $this->belongsToMany(Domain::class, 'domain_seo_text');
+    }
 
     /*
     |--------------------------------------------------------------------------

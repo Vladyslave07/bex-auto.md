@@ -83,10 +83,7 @@ class General
      */
     public static function cacheKey($key): string
     {
-        // todo: Вынести установку домена глобально
-        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-
-        return $domainSlug . '_' . $key;
+        return app('domain')->getDomain()->slug . '_' . $key;
     }
 
 }
