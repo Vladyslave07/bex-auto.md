@@ -30,6 +30,10 @@ class NewsController extends Controller
 
     public function detail(News $article)
     {
+        if (!$article->forCurrentDomain()) {
+            abort(404);
+        }
+
         SEOTools::setTitle($article->seo_meta_title);
         SEOTools::setDescription($article->seo_meta_description);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\NewsRequest;
 use App\Models\Delivery;
+use App\Models\Domain;
 use App\Models\Faq;
 use App\Models\News;
 use App\Models\SeoText;
@@ -34,7 +35,7 @@ class NewsCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -46,7 +47,7 @@ class NewsCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -77,7 +78,7 @@ class NewsCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -88,7 +89,20 @@ class NewsCrudController extends CrudController
         CRUD::addField(['tab' => 'Новость', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Новость', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['tab' => 'Новость', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text']);
+        CRUD::addField(['tab' => 'Новость', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField([
+            'tab' => 'Новость',
+            'name' => 'domain',
+            'label' => trans('backpack::fields.domain'),
+            'type' => 'relationship',
+            'entity' => 'domain',
+            'attribute' => 'title',
+            'model' => Domain::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
         CRUD::addField(['tab' => 'Новость', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
 
 
@@ -123,7 +137,7 @@ class NewsCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

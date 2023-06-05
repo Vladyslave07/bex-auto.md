@@ -43,7 +43,7 @@ class IndexController extends Controller
         $faqs = Faq::defaultFaqs();
 
         // Seo text
-        $seoText = $city?->text ?? SeoText::seoTextBySlug(SeoText::MAIN_PAGE_SEO_TEXT_SLUG);
+        $seoText = $city?->text ?? SeoText::mainText();
 
         // Reviews
         $reviews = Review::reviews();
