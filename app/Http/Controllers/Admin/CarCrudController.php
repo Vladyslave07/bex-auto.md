@@ -14,6 +14,7 @@ use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Http\Request;
 
 /**
  * Class CarCrudController
@@ -60,6 +61,8 @@ class CarCrudController extends CrudController
 
         $this->addDomainFilter();
         $this->addCategoriesFilter();
+        $this->addBrandsFilter();
+        $this->addModelsFilter();
 
         CRUD::setColumns([
             [
