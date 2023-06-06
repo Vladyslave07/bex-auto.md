@@ -58,6 +58,15 @@ function commonRoute()
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 
+    // Product detail
+    Route::get('/car-product/{product}', [\App\Http\Controllers\CardController::class, 'product'])->name('product_detail');
+
+    // Product categories
+    Route::get(
+        '/products/{category}/{page?}/{filter?}',
+        [\App\Http\Controllers\CatalogController::class, 'category']
+    )->name('category_products');
+
     // Search
     Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
 

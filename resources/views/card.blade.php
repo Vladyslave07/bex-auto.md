@@ -16,6 +16,9 @@
 @include('partials.card.card')
 
 {{-- Popular cars --}}
+@include('partials.index.cars-expected', ['cars' => $car->products, 'title' => \Illuminate\Support\Facades\Lang::get('car.product_block_title'), 'more' => false])
+
+{{-- Popular cars --}}
 @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => \Illuminate\Support\Facades\Lang::get('category.title'), 'more' => false])
 
 {{-- Popular auto brand --}}

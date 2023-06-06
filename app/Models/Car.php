@@ -6,6 +6,7 @@ use App\Helper\General;
 use App\Http\Controllers\CatalogController;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
+use App\Traits\ProductCarsTrait;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -14,6 +15,8 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -23,7 +26,7 @@ use Spatie\Sitemap\Contracts\Sitemapable;
 
 class Car extends Model
 {
-    use MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
+    use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
     /*
     |--------------------------------------------------------------------------
@@ -46,6 +49,9 @@ class Car extends Model
     protected $casts = ['images' => 'array', 'color' => 'array'];
     protected $with = ['properties', 'equipments'];
 
+    public string $detailRouteName = 'car_detail';
+    public string $categoryRouteName = 'avto';
+    public string $propertyPivotTableName = 'car_property';
 
     const POPULAR_CARS_CACHE_KEY = 'popular_cars';
     const EXPECTED_CARS_CACHE_KEY = 'expected_cars_slider';
@@ -58,6 +64,11 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function getKeyRouteName(): string
+    {
+        return 'car';
+    }
 
     public function cardTemplate()
     {
@@ -77,14 +88,6 @@ class Car extends Model
                 'unique' => true,
             ],
         ];
-    }
-
-    /**
-     * @return string
-     */
-    public function getRouteKeyName()
-    {
-        return 'slug';
     }
 
     /**
@@ -154,15 +157,6 @@ class Car extends Model
         });
     }
 
-    /**
-     *
-     * @return mixed
-     */
-    public function getCategoryProperties()
-    {
-        return Property::query()->active()->orderBy('id')->get();
-    }
-
     public function category()
     {
         return $this->categories;
@@ -227,42 +221,32 @@ class Car extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * categories relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function equipments(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function products(): BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'car_product');
+    }
+
+    public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class, 'car_equipment');
     }
 
-    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    public function domain(): BelongsTo
     {
         return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
     }
 
-    /**
-     * categories relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'car_category');
     }
 
-    /**
-     * categories relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function links(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function links(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'categories_cars');
     }
 
-    public function properties(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function properties(): BelongsToMany
     {
         return $this->belongsToMany(\App\Models\Property::class, 'car_property')
             ->withTimestamps()->withPivot('value', 'slug')
@@ -274,21 +258,6 @@ class Car extends Model
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Filter apply
-     *
-     * @param Builder $query
-     * @param $filterQuery
-     * @return Builder
-     */
-    public function scopeFiltered(Builder $query, $filterQuery = null): Builder
-    {
-        if (!$filterQuery) {
-            return $query;
-        }
-        return (new \App\filters\CarFilter($query, $filterQuery))->apply();
-    }
 
     /**
      * Return cars only for current domain
@@ -311,35 +280,11 @@ class Car extends Model
         return $query->where('domain_id', $id);
     }
 
-
-    public function scopeDefaultOrder(Builder $query): Builder
-    {
-        return $query->orderByRaw("FIELD(status, \"in_stock\", \"expect\", \"on_order\", \"on_order_usa\", \"on_order_korea\", \"sold\")");
-    }
-
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
     |--------------------------------------------------------------------------
     */
-
-    public function getPreviewPictureAttribute()
-    {
-        $previewImage = ($this->images && count($this->images) > 0) ? $this->images[0] : '';
-
-        return strlen($this->preview_image) > 0 ? $this->preview_image : $previewImage;
-    }
-
-    // The slug is created automatically from the "title" field if no slug exists.
-    public function getSlugOrTitleAttribute()
-    {
-        if ($this->slug != '') {
-            return $this->slug;
-        }
-
-        return $this->title;
-    }
-
 
     public function getPreparedBenefitsAttribute()
     {
@@ -370,32 +315,9 @@ class Car extends Model
         return $colors;
     }
 
-    public function getTitleWithYearAttribute()
-    {
-        if (!Str::contains($this->title, $this->year)) {
-            return sprintf('%s %s', $this->title, $this->year);
-        }
-        return $this->title;
-    }
-
-    public function getPriceFormatAttribute()
-    {
-        return '$' . number_format($this->price, 0, '.', ' ');
-    }
-
-    public function getSeoMetaTitleAttribute()
-    {
-        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
-    }
-
     public function getCountryAttribute()
     {
         return Domain::currentDomain()?->country;
-    }
-
-    public function getSeoMetaDescriptionAttribute()
-    {
-        return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
     }
 
     /**
@@ -416,34 +338,6 @@ class Car extends Model
     | MUTATORS
     |--------------------------------------------------------------------------
     */
-
-    public function setPreviewImageAttribute($value)
-    {
-        $attribute_name = "preview_image";
-        $disk = "public";
-        $destination_path = Str::replace('_', '', $this->table);
-
-        if ($value == null) {
-            \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
-            $this->attributes[$attribute_name] = null;
-        } else {
-            if (Str::startsWith($value, 'data:image')) {
-                $ext = 'jpg';
-                if (Str::startsWith($value, 'data:image/png;base64')) $ext = 'png';
-                if (Str::startsWith($value, 'data:image/jpeg;base64')) $ext = 'jpeg';
-                if (Str::startsWith($value, 'data:image/webp;base64')) $ext = 'webp';
-
-                $image = \Image::make($value)->fit(289, 220, function ($constraint) {
-                    $constraint->upsize();
-                })->encode($ext, 90);
-
-                $filename = md5($value . time()) . '.' . $ext;
-                \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
-                \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
-                $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
-            } else $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
-        }
-    }
 
     public function setBenefitsAttribute($values)
     {

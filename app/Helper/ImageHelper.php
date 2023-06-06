@@ -13,6 +13,9 @@ class ImageHelper
 
     public static function getPicture($filename, $alt = null, $class = null): string
     {
+        if (!$filename) {
+            return false;
+        }
         $data = self::getImageData($filename);
 
         $picture = '<picture' . (isset($class) ? ' class="' . $class . '"' : '') .'>';

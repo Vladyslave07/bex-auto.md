@@ -17,6 +17,21 @@ Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
     $trail->push($category->title, $category->url);
 });
 
+// products category
+Breadcrumbs::for('category_products', function ($trail, \App\Models\Category $category) {
+    $trail->parent('index');
+    $trail->push($category->title, $category->url);
+});
+
+// products
+Breadcrumbs::for('product_detail', function ($trail, \App\Models\Product $product) {
+    $trail->parent('index');
+    if ($category = $product->category()->first()) {
+        $trail->push($category->title, route('category_products', $category->slug));
+    }
+    $trail->push($product->title, '');
+});
+
 // card
 Breadcrumbs::for('car_detail', function ($trail, \App\Models\Car $car) {
     $trail->parent('index');

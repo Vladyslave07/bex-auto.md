@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\filters\CarFilter;
 use App\Http\Controllers\CatalogController;
 use App\Models\Car;
+use App\Models\Product;
 use App\Models\Property;
 use App\Traits\WithCustomPaginationTrait;
 
@@ -12,17 +13,20 @@ use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
+use function Symfony\Component\String\s;
 
 class Category extends Component
 {
     use WithCustomPaginationTrait;
 
-    public $category;
+    public \App\Models\Category $category;
     public $orderBy = [];
     public $filterQuery = null;
 
     public $by = '';
     public $sort = '';
+
+    public Car|Product $currentModel;
 
     protected $cars;
 
@@ -36,12 +40,9 @@ class Category extends Component
         $this->page = $this->pageNum($this->page);
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
-        $cars = $this->category
-            ->cars()
-            ->carsForCurrentDomain()
-            ->with(['properties'])
-            ->active()
-            ->filtered($filterQuery);
+        $cars = $this->category->carsOrProducts()->filtered($filterQuery);
+
+        $this->currentModel = $cars->getRelated();
 
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);
@@ -188,7 +189,8 @@ class Category extends Component
      */
     public function makeFilterUrl()
     {
-        $categoryUrl = route('category', ['category' => $this->category->slug], false);
+        // todo: чпу для страниц товаров
+        $categoryUrl = route($this->currentModel->categoryRouteName, ['category' => $this->category->slug], false);
         $filterUrl = '';
         if ($this->filterQuery) {
             $filterUrl = CarFilter::FILTER_PREFIX . $this->filterQuery;
@@ -213,8 +215,8 @@ class Category extends Component
      */
     public function setDefaultValuesForRangeParams()
     {
-        foreach ($this->filters() as $filter) {
-            if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME || !key_exists('values', $filter)) {
+        foreach ($this->filters() as $key => $filter) {
+            if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME || !key_exists('values', $filter) || !$filter['values']) {
                 continue;
             }
 

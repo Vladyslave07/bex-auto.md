@@ -100,6 +100,8 @@ return [
     'volumes' => 'Объём двигателя \ Ёмкость аккумулятора',
     'volumes_value' => 'Значение',
     'text_image_block' => 'Текстовые блоки с картинкой',
+    'for' => 'Для какой сущности',
+    'products' => 'Товары',
     'show_in_block' => 'Популярные марки авто',
 
     'option' => [
@@ -109,6 +111,11 @@ return [
         'on_order_usa' => 'Copart',
         'on_order_korea' => 'Encar',
         'sold' => 'Продано',
+    ],
+
+    'option_for' => [
+        'cars' => 'Автомобили',
+        'products' => 'Товары',
     ],
 
     'footer_menu_option' => [

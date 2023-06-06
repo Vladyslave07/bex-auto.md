@@ -25,6 +25,9 @@ return [
         \App\Models\Car::IN_STOCK_STATUS => 'Buy',
     ],
 
+    'product_block_title' => 'Products for car',
+
+
     'price_null_info' => 'Bidding is ongoing and the price of the final lot will be different',
 
 ];

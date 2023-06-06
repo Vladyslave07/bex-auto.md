@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Car;
-use App\Models\Domain;
 use App\Models\Faq;
+use App\Models\Product;
 use App\Models\SeoText;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Http\Request;
 
 class CardController extends Controller
 {
@@ -37,5 +35,27 @@ class CardController extends Controller
         $links = $car->getCarLinks();
 
         return view($car->cardTemplate(), compact('car', 'popularCars', 'brands', 'faqs', 'seoText', 'links'));
+    }
+
+    public function product(Product $product)
+    {
+        if (!$product->forCurrentDomain()) {
+            abort(404);
+        }
+
+        // Popular cars
+        $popularCars = Car::popularCars();
+
+        // Brands
+        $brands = Brand::brands();
+
+        $faqs = Faq::defaultFaqs();
+
+        // Seo text category or main seo text
+        $seoText = SeoText::mainText();
+
+        $car = $product;
+        return view('card', compact('car', 'popularCars', 'brands', 'faqs', 'seoText'));
+
     }
 }
