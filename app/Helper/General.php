@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 class General
 {
 
+    const EXTRA_PLUGINS_FOR_CKEDITOR = 'justify,font,format,colorbutton,about,clipboard,dialogadvtab,div,elementspath,enterkey,entities,find,horizontalrule,htmlwriter,image,indentblock,justify,link,list,maximize,pagebreak,pastefromword,pastetext,preview,print,removeformat,resize,save,scayt,showblocks,showborders,smiley,sourcearea,specialchar,tab,table,tabletools,templates,toolbar,undo,wysiwygarea';
+
     /**
      * @param $table
      * @param $column

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\SeoTextRequest;
 use App\Models\Domain;
 use App\Models\SeoText;
@@ -110,7 +111,10 @@ class SeoTextCrudController extends CrudController
         CRUD::addField([
             'name' => 'text',
             'label' => trans('backpack::fields.text'),
-            'type' => 'tinymce',
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ],
             'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
     }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\FaqRequest;
 use App\Models\Faq;
 use App\Traits\BulkDeleteOperation;
@@ -31,7 +32,7 @@ class FaqCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -43,7 +44,7 @@ class FaqCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -72,7 +73,7 @@ class FaqCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -84,13 +85,20 @@ class FaqCrudController extends CrudController
         CRUD::addField(['name' => 'default', 'label' => trans('backpack::fields.default'), 'type' => 'checkbox', 'hint' => trans('backpack::hint.faqs.default')]);
         CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
         CRUD::addField(['name' => 'question', 'label' => trans('backpack::fields.question'), 'type' => 'text']);
-        CRUD::addField(['name' => 'answer', 'label' => trans('backpack::fields.answer'), 'type' => 'tinymce']);
+        CRUD::addField([
+            'name' => 'answer',
+            'label' => trans('backpack::fields.answer'),
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]
+        ]);
 
     }
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

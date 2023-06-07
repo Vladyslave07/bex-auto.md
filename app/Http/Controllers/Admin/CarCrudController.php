@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
@@ -147,7 +148,15 @@ class CarCrudController extends CrudController
 
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'), 'type' => 'text', 'hint' => trans('backpack::hint.cars.youtube_link'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'preview_image', 'label' => trans('backpack::fields.preview_image'), 'type' => 'image', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '', 'hint' => trans('backpack::hint.cars.preview_image')]);
-        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'ckeditor']);
+        CRUD::addField([
+            'tab' => 'Автомобиль',
+            'name' => 'description',
+            'label' => trans('backpack::fields.description'),
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]
+        ]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '',]);
 
         CRUD::addField([
@@ -337,6 +346,9 @@ class CarCrudController extends CrudController
                     'name' => 'text',
                     'type' => 'ckeditor',
                     'label' => trans('backpack::fields.text'),
+                    'options' => [
+                        'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                    ]
                 ],
                 [
                     'name' => 'image',
@@ -357,6 +369,9 @@ class CarCrudController extends CrudController
             'name' => 'equipment',
             'label' => trans('backpack::fields.equipment'),
             'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]
         ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\EquipmentRequest;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
@@ -123,6 +124,9 @@ class EquipmentCrudController extends CrudController
                     'name'  => 'text',
                     'type'  => 'ckeditor',
                     'label' => 'Текст',
+                    'options' => [
+                        'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                    ]
                 ],
             ],
             'max_rows' => 1,

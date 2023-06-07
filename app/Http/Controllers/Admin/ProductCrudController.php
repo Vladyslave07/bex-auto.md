@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
 use App\Models\Domain;
@@ -112,7 +113,15 @@ class ProductCrudController extends CrudController
 
         CRUD::addField(['tab' => 'Товар', 'name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
         CRUD::addField(['tab' => 'Товар', 'name' => 'updated_at', 'label' => trans('backpack::fields.updated_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
-        CRUD::addField(['tab' => 'Товар', 'name' => 'description', 'label' => trans('backpack::fields.description'), 'type' => 'tinymce']);
+        CRUD::addField([
+            'tab' => 'Товар',
+            'name' => 'description',
+            'label' => trans('backpack::fields.description'),
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]
+        ]);
         CRUD::addField(['tab' => 'Товар', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Товар', 'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'), 'type' => 'text', 'hint' => trans('backpack::hint.cars.youtube_link'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Товар', 'name' => 'preview_image', 'label' => trans('backpack::fields.preview_image'), 'type' => 'image', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '', 'hint' => trans('backpack::hint.cars.preview_image')]);

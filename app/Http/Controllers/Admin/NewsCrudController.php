@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\NewsRequest;
 use App\Models\Delivery;
 use App\Models\Domain;
@@ -106,8 +107,22 @@ class NewsCrudController extends CrudController
         CRUD::addField(['tab' => 'Новость', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
 
 
-        CRUD::addField(['tab' => 'Новость', 'name' => 'preview_text', 'label' => trans('backpack::fields.preview_text'), 'type' => 'tinymce']);
-        CRUD::addField(['tab' => 'Новость', 'name' => 'detail_text', 'label' => trans('backpack::fields.detail_text'), 'type' => 'tinymce']);
+        CRUD::addField([
+            'tab' => 'Новость',
+            'name' => 'preview_text',
+            'label' => trans('backpack::fields.preview_text'),
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]
+        ]);
+        CRUD::addField(['tab' => 'Новость',
+            'name' => 'detail_text',
+            'label' => trans('backpack::fields.detail_text'),
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]]);
 
         CRUD::addField([
             'tab' => 'Новость',

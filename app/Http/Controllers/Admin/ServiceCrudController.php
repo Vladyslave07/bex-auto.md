@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\ServiceRequest;
 use App\Models\Faq;
 use App\Models\News;
@@ -35,7 +36,7 @@ class ServiceCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -47,7 +48,7 @@ class ServiceCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -76,7 +77,7 @@ class ServiceCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -143,7 +144,15 @@ class ServiceCrudController extends CrudController
             }),
         ]);
 
-        CRUD::addField(['tab' => 'Услуга', 'name' => 'text', 'label' => trans('backpack::fields.text'), 'type' => 'tinymce']);
+        CRUD::addField([
+            'tab' => 'Услуга',
+            'name' => 'text',
+            'label' => trans('backpack::fields.text'),
+            'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+            ]
+        ]);
 
         CRUD::addField([
             'tab' => 'SEO',
@@ -164,7 +173,7 @@ class ServiceCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
