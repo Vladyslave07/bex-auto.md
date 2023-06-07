@@ -113,7 +113,8 @@ class SeoTextCrudController extends CrudController
             'label' => trans('backpack::fields.text'),
             'type' => 'ckeditor',
             'options' => [
-                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'height' => 500
             ],
             'hint' => 'color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);

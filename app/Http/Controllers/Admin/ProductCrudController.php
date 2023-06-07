@@ -119,7 +119,8 @@ class ProductCrudController extends CrudController
             'label' => trans('backpack::fields.description'),
             'type' => 'ckeditor',
             'options' => [
-                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'height' => 500
             ]
         ]);
         CRUD::addField(['tab' => 'Товар', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);

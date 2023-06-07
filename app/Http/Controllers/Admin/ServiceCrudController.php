@@ -150,7 +150,8 @@ class ServiceCrudController extends CrudController
             'label' => trans('backpack::fields.text'),
             'type' => 'ckeditor',
             'options' => [
-                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'height' => 500
             ]
         ]);
 

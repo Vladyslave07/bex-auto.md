@@ -154,7 +154,8 @@ class CarCrudController extends CrudController
             'label' => trans('backpack::fields.description'),
             'type' => 'ckeditor',
             'options' => [
-                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'height' => 500
             ]
         ]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'images', 'label' => trans('backpack::fields.images'), 'type' => 'dropzone', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '',]);

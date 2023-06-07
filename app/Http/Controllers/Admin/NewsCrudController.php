@@ -121,7 +121,8 @@ class NewsCrudController extends CrudController
             'label' => trans('backpack::fields.detail_text'),
             'type' => 'ckeditor',
             'options' => [
-                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'height' => 500
             ]]);
 
         CRUD::addField([

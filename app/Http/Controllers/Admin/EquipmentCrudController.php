@@ -125,7 +125,8 @@ class EquipmentCrudController extends CrudController
                     'type'  => 'ckeditor',
                     'label' => 'Текст',
                     'options' => [
-                        'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                        'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                        'height' => 500
                     ]
                 ],
             ],
