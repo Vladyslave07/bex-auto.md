@@ -26,6 +26,8 @@ class CatalogController extends Controller
         SEOTools::setTitle($category->seo_meta_title);
         SEOTools::setDescription($category->seo_meta_description);
 
+        app('admin-menu')->setModel($category);
+
         // Popular cars
         $popularCars = Car::popularCars();
 

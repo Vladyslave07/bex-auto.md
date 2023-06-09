@@ -17,7 +17,7 @@
         <meta name="phone_mask" content="{{ \App\Models\Domain::phoneMaskForCurrDomain() }}">
 
         <x-alternate></x-alternate>
-
+        <link rel="stylesheet" href="{{ mix('css/admin-menu.css') }}">
         @stack('styles')
         @livewireStyles
     </head>
@@ -26,6 +26,9 @@
         @include('partials.seo_scripts.after_body_start')
 
         <header class="main-header container">
+
+            {{-- Admin menu. Only for admins --}}
+            {!! App\Services\Admin\Menu::render() !!}
 
             @if (\App\Models\Domain::currentDomain()->id == 5)
                 <meta name="facebook-domain-verification" content="1ok4pz78y350j624157v7vyrnv4fk3" />

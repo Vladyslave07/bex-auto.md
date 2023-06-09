@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\AdminMenuInterface;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
@@ -20,7 +21,7 @@ use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Category extends Model implements Sitemapable
+class Category extends Model implements Sitemapable, AdminMenuInterface
 {
     use MakesWebp, CrudTrait, HasTranslations, DefaultScope, SeoSnippets, SaveImageAttribute, Sluggable, SluggableScopeHelpers, SlugOrTitleTrait;
 
@@ -46,6 +47,11 @@ class Category extends Model implements Sitemapable
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function adminEditPath():string
+    {
+        return '/' . config('backpack.base.route_prefix') . '/category/' . $this->id . '/edit';
+    }
 
     public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
     {

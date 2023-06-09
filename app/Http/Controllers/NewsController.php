@@ -34,6 +34,8 @@ class NewsController extends Controller
             abort(404);
         }
 
+        app('admin-menu')->setModel($article);
+
         SEOTools::setTitle($article->seo_meta_title);
         SEOTools::setDescription($article->seo_meta_description);
 

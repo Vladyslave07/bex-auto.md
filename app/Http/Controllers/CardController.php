@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Admin\CarCrudController;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Faq;
@@ -16,6 +17,8 @@ class CardController extends Controller
         if (!$car->forCurrentDomain()) {
             abort(404);
         }
+
+        app('admin-menu')->setModel($car);
 
         SEOTools::setTitle($car->seo_meta_title);
         SEOTools::setDescription($car->seo_meta_description);
@@ -42,6 +45,8 @@ class CardController extends Controller
         if (!$product->forCurrentDomain()) {
             abort(404);
         }
+
+        app('admin-menu')->setModel($product);
 
         // Popular cars
         $popularCars = Car::popularCars();

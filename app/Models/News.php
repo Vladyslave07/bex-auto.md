@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\AdminMenuInterface;
 use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
@@ -18,7 +19,7 @@ use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Sitemap\Contracts\Sitemapable;
 
-class News extends Model implements Sitemapable
+class News extends Model implements Sitemapable, AdminMenuInterface
 {
     use MakesWebp, CrudTrait, HasTranslations, Sluggable, SluggableScopeHelpers, SaveImageAttribute, SlugOrTitleTrait, DefaultScope, SeoSnippets;
 
@@ -43,6 +44,11 @@ class News extends Model implements Sitemapable
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function adminEditPath():string
+    {
+        return '/' . config('backpack.base.route_prefix') . '/news/' . $this->id . '/edit';
+    }
 
     public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
     {

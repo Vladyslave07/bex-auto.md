@@ -20,6 +20,8 @@ class ServiceController extends Controller
         SEOTools::setTitle($service->seo_meta_title);
         SEOTools::setDescription($service->seo_meta_description);
 
+        app('admin-menu')->setModel($service);
+
         // Categories which selected for show in slider
         $categories = Category::selectedCategory();
 

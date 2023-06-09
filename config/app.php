@@ -198,6 +198,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\DomainProvider::class,
+        App\Providers\MenuServiceProvider::class,
 
         SettingsServiceProvider::class
 

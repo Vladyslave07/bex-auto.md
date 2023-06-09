@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\AdminMenuInterface;
 use App\Helper\General;
 use App\Http\Controllers\CatalogController;
 use App\Traits\DefaultScope;
@@ -20,11 +21,9 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
-use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Car extends Model
+class Car extends Model implements AdminMenuInterface
 {
     use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
@@ -64,6 +63,11 @@ class Car extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function adminEditPath():string
+    {
+        return '/' . config('backpack.base.route_prefix') . '/car/' . $this->id . '/edit';
+    }
 
     public function getKeyRouteName(): string
     {

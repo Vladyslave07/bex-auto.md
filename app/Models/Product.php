@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Contracts\AdminMenuInterface;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
 use App\Traits\ProductCarsTrait;
@@ -16,7 +17,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Product extends Model
+class Product extends Model implements AdminMenuInterface
 {
     use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
@@ -45,6 +46,11 @@ class Product extends Model
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function adminEditPath():string
+    {
+        return '/' . config('backpack.base.route_prefix') . '/product/' . $this->id . '/edit';
+    }
 
     public function getKeyRouteName(): string
     {
