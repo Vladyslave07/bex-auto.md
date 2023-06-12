@@ -1,6 +1,6 @@
 <?php
 return [
-    \App\Models\Car::IN_STOCK_STATUS => 'В наяності',
+    \App\Models\Car::IN_STOCK_STATUS => 'В наявності',
     \App\Models\Car::EXPECTED_STATUS => 'Очікуємо',
     \App\Models\Car::ON_ORDER_STATUS => 'Під замовлення',
     'on_order_usa' => 'Copart',
