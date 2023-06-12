@@ -21,7 +21,6 @@ $domains->each(function ($domain) {
 // Main domain
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeCookieRedirect', 'setDefaultLocale', 'localizationRedirect']
 ], function () {
     commonRoute();
 });
