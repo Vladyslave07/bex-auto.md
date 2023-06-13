@@ -201,9 +201,6 @@ class Car extends Model implements AdminMenuInterface
             if (count($this->categories) > 0) {
                 return $this->categories;
             }
-            if($brand = $this->properties->where('slug', 'brand')->first()) {
-                return Category::query()->where('slug', 'like','%' . $brand->getValue() . '%')->get();
-            }
             return [];
         });
 

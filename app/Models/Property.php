@@ -33,10 +33,10 @@ class Property extends Model
     public static $images = ['image'];
 
     const FUEL_PROPERTY_SLUG = 'fuel';
-    const FUEL_PROPERTY_ID = 8;
     const FUEL_ELECTRIC_OPTION_SLUG = 'electro';
     const FUEL_MILEAGE_OPTION_SLUG = 'mileage';
-
+    const PROPERTY_BRAND_SLUG = 'brand';
+    const PROPERTY_CARCASE_TYPE_SLUG = 'carcase-type';
     const PROPERTY_POWER_RESERVE = 'power-reserve';
 
     /*

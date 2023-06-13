@@ -5,6 +5,7 @@ use App\Models\Domain;
 use App\Services\Sitemap\SitemapGeneral;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 // todo: Удалить после переноса 23311
