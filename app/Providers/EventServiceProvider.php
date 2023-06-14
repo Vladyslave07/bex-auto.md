@@ -33,7 +33,6 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Car::observe(new CarObserve());
         CarProperty::observe(new CarPropertyObserve());
     }
 

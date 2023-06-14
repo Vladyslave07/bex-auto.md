@@ -186,6 +186,7 @@ class SetCarCategoriesByProperty
 
     public function type($slug)
     {
+        $category = null;
         switch ($slug) {
             case 'moto':
                 $category = Category::findBySlug('motocikly');
@@ -198,12 +199,14 @@ class SetCarCategoriesByProperty
                 break;
         }
 
-        $this->addToCategories($category->id);
+        if ($category) {
+            $this->addToCategories($category->id);
+        }
     }
 
     public function isCar()
     {
-        return $this->getCarProperties()->where('slug', Property::PROPERTY_TYPE_SLUG)->first()->pivot->slug == 'auto';
+        return $this->getCarProperties()->where('slug', Property::PROPERTY_TYPE_SLUG)->first()?->pivot?->slug == 'auto';
     }
 
     public function createCategory(string $title)
