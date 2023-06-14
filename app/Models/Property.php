@@ -37,6 +37,9 @@ class Property extends Model
     const FUEL_MILEAGE_OPTION_SLUG = 'mileage';
     const PROPERTY_BRAND_SLUG = 'brand';
     const PROPERTY_CARCASE_TYPE_SLUG = 'carcase-type';
+    const PROPERTY_STATE_SLUG = 'state';
+    const PROPERTY_COUNTRY_SLUG = 'country';
+    const PROPERTY_TYPE_SLUG = 'type';
     const PROPERTY_POWER_RESERVE = 'power-reserve';
 
     /*

@@ -20,6 +20,7 @@ class SetCarCategoriesByProperty
     private CarProperty $carProperty;
     private $property;
     private $car;
+    private $carProperties;
     // Во время обработки скрипта в это поле собираются id всех
     // категорий которые нужно привязать к машине по определённой логике клиента
     private array $categories = [];
@@ -30,6 +31,7 @@ class SetCarCategoriesByProperty
         $this->carProperty = $carProperty;
         $this->setProperty();
         $this->setCar();
+        $this->setCarProperties();
     }
 
     public static function apply(CarProperty $carProperty)
@@ -41,7 +43,7 @@ class SetCarCategoriesByProperty
     public function setCarCategories()
     {
         // Вызов предустановленных методов для связи с категориями
-        foreach ($this->getCar()->properties as $property) {
+        foreach ($this->getCarProperties() as $property) {
             if (!$property->pivot->slug) {continue;}
             $method = Str::camel($property->slug);
             if (method_exists($this, $method)) {
@@ -49,14 +51,18 @@ class SetCarCategoriesByProperty
             }
         }
 
+        $this->setCategoryByCarStatus();
+
+//        dd($this->getCategories());
+
         $this->getCar()->categories()->sync($this->getCategories());
     }
 
     public function brand($slug)
     {
-        $category = Category::query()->where('slug', $slug)->first();
+        $category = Category::findBySlug($slug);
         if (!$category) {
-            $brand = Brand::query()->where('slug', $slug)->first();
+            $brand = Brand::findBySlug($slug);
             $category = $this->createCategory($brand->title);
         }
 
@@ -65,9 +71,9 @@ class SetCarCategoriesByProperty
 
     public function model($slug)
     {
-        $category = Category::query()->where('slug', $slug)->first();
+        $category = Category::findBySlug($slug);
         if (!$category) {
-            $model = CarModel::query()->where('slug', $slug)->first();
+            $model = CarModel::findBySlug($slug);
             $category = $this->createCategory($model->title);
         }
 
@@ -78,10 +84,126 @@ class SetCarCategoriesByProperty
     {
         $category = Category::query()->where('slug', $slug)->first();
         if (!$category) {
-            $property = Property::query()->where('slug', Property::PROPERTY_CARCASE_TYPE_SLUG)->first();
+            $property = Property::findBySlug(Property::PROPERTY_CARCASE_TYPE_SLUG);
             $category = $this->createCategory($property->getOptions()[$slug]);
         }
         $this->addToCategories($category->id);
+    }
+
+    public function fuel($slug)
+    {
+        if (!$this->isCar()) {
+            return;
+        }
+
+        switch ($slug) {
+            case 'electro':
+                $category = Category::findBySlug('elektromobili');
+                $this->addToCategories($category->id);
+                // Если статус авто новый и топливо электро - добавлять в категорию новые автомобили
+                if ($this->getCarProperties()->where('slug', Property::PROPERTY_STATE_SLUG)->first()?->pivot?->slug == 'new') {
+                    $category = Category::findBySlug('novye-elektromobili');
+                    $this->addToCategories($category->id);
+                }
+                // Если страна авто США, то добавить в категорию "электромобили из сша"
+                if ($this->getCarProperties()->where('slug', Property::PROPERTY_COUNTRY_SLUG)->first()?->pivot?->slug == 'usa') {
+                    $category = Category::findBySlug('elektromobili-iz-ssha');
+                    $this->addToCategories($category->id);
+                }
+                break;
+            case 'hybrid':
+                $category = Category::findBySlug('gibridy');
+                $this->addToCategories($category->id);
+                break;
+        }
+    }
+
+    public function country($slug)
+    {
+        if (!$this->isCar()) {
+            return;
+        }
+        $category = null;
+        switch ($slug){
+            case 'usa':
+                switch ($this->getCar()->status) {
+                    case Car::COPRAT_STATUS:
+                        $category = Category::findBySlug('aukcion-avto-iz-ssha');
+                        break;
+                    case Car::ON_ORDER_STATUS:
+                    case Car::SOLD_STATUS:
+                        $category = Category::findBySlug('avto-iz-ssha');
+                        $auctionCategory = Category::findBySlug('aukcion-avto-iz-ssha');
+                        $this->addToCategories($auctionCategory->id);
+                        break;
+                    default:
+                        $category = Category::findBySlug('avto-iz-ssha');
+                        break;
+                }
+                break;
+            case 'korea':
+                switch ($this->getCar()->status) {
+                    case Car::ENCAR_STATUS:
+                        $category = Category::findBySlug('aukcion-avto-iz-korei');
+                        break;
+                    case Car::ON_ORDER_STATUS:
+                        $category = Category::findBySlug('avto-iz-korei');
+                        $auctionCategory = Category::findBySlug('aukcion-avto-iz-ssha');
+                        $this->addToCategories($auctionCategory->id);
+                        break;
+                    default:
+                        $category = Category::findBySlug('avto-iz-korei');
+                        break;
+                }
+                break;
+            case 'china':
+                $category = Category::findBySlug('avto-iz-kitaya');
+                break;
+            case 'europe':
+                $category = Category::findBySlug('avto-iz-evropy');
+                break;
+        }
+
+        if ($category) {
+            $this->addToCategories($category->id);
+        }
+    }
+
+    public function setCategoryByCarStatus()
+    {
+        if (!$this->isCar()) {
+            return;
+        }
+
+        $status = $this->getCar()->status;
+        switch ($status) {
+            case Car::IN_STOCK_STATUS:
+            case Car::SOLD_STATUS:
+                $this->addToCategories(Category::findBySlug('avto-v-ukraine')?->id);
+                break;
+        }
+    }
+
+    public function type($slug)
+    {
+        switch ($slug) {
+            case 'moto':
+                $category = Category::findBySlug('motocikly');
+                break;
+            case 'truck':
+                $category = Category::findBySlug('pogruzchiki');
+                break;
+            case 'vodnyj-transport':
+                $category = Category::findBySlug('boats');
+                break;
+        }
+
+        $this->addToCategories($category->id);
+    }
+
+    public function isCar()
+    {
+        return $this->getCarProperties()->where('slug', Property::PROPERTY_TYPE_SLUG)->first()->pivot->slug == 'auto';
     }
 
     public function createCategory(string $title)
@@ -95,7 +217,9 @@ class SetCarCategoriesByProperty
 
     public function addToCategories($categoryId)
     {
-        $this->categories[] = $categoryId;
+        if (!in_array($categoryId, $this->getCategories())) {
+            $this->categories[] = $categoryId;
+        }
     }
 
     /**
@@ -109,6 +233,11 @@ class SetCarCategoriesByProperty
     public function getCarProperty(): CarProperty
     {
         return $this->carProperty;
+    }
+
+    public function getCarProperties()
+    {
+        return $this->carProperties;
     }
 
     public function getCar()
@@ -129,6 +258,11 @@ class SetCarCategoriesByProperty
     public function setCar()
     {
         $this->car = Car::query()->where('id', $this->getCarProperty()->car_id)->first();
+    }
+
+    public function setCarProperties()
+    {
+        $this->carProperties = $this->getCar()->properties;
     }
 
 }

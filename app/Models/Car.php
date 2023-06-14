@@ -37,6 +37,8 @@ class Car extends Model implements AdminMenuInterface
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
+    const COPRAT_STATUS = 'on_order_usa';
+    const ENCAR_STATUS = 'on_order_korea';
     const SOLD_STATUS = 'sold';
 
     protected $table = 'cars';
