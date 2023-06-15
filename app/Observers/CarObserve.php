@@ -29,36 +29,4 @@ class CarObserve
         SetCarCategoriesService::apply($car);
     }
 
-    /**
-     * Handle the Car "deleted" event.
-     *
-     * @param Car $car
-     * @return void
-     */
-    public function deleted(Car $car)
-    {
-        //
-    }
-
-    /**
-     * Handle the Car "restored" event.
-     *
-     * @param Car $car
-     * @return void
-     */
-    public function restored(Car $car)
-    {
-        //
-    }
-
-    /**
-     * Handle the Car "force deleted" event.
-     *
-     * @param Car $car
-     * @return void
-     */
-    public function forceDeleted(Car $car)
-    {
-        //
-    }
 }

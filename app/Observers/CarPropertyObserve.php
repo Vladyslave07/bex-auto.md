@@ -2,9 +2,9 @@
 
 namespace App\Observers;
 
+use App\Models\Car;
 use App\Models\CarProperty;
-use App\Services\Car\SetCarCategoriesByProperty;
-use Illuminate\Support\Facades\Log;
+use App\Services\Car\SetCarCategoriesService;
 
 class CarPropertyObserve
 {
@@ -16,7 +16,8 @@ class CarPropertyObserve
      */
     public function created(CarProperty $carProperty)
     {
-        SetCarCategoriesByProperty::apply($carProperty);
+        $car = Car::query()->where('id', $carProperty->car_id)->first();
+        SetCarCategoriesService::apply($car);
     }
 
     /**
@@ -27,7 +28,8 @@ class CarPropertyObserve
      */
     public function updated(CarProperty $carProperty)
     {
-        SetCarCategoriesByProperty::apply($carProperty);
+        $car = Car::query()->where('id', $carProperty->car_id)->first();
+        SetCarCategoriesService::apply($car);
     }
 
 }
