@@ -5,7 +5,6 @@ namespace App\Services\Car;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
-use App\Models\CarProperty;
 use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Support\Str;
@@ -47,7 +46,6 @@ class SetCarCategoriesService
         $this->setCategoryByCarStatus();
 
         $categoriesIds = $this->getCategories();
-        dump($categoriesIds);
         $this->getCar()->categories()->sync($categoriesIds);
     }
 
