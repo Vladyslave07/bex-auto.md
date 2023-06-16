@@ -103,6 +103,8 @@ return [
     'for' => 'Для какой сущности',
     'products' => 'Товары',
     'show_in_block' => 'Популярные марки авто',
+    'currency_symbol' => 'Символ валюты',
+    'exchange_rate' => 'Курс к доллару',
 
     'option' => [
         'expect' => 'Ожидается',
