@@ -37,6 +37,8 @@ class Car extends Model implements AdminMenuInterface
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
+    const COPRAT_STATUS = 'on_order_usa';
+    const ENCAR_STATUS = 'on_order_korea';
     const SOLD_STATUS = 'sold';
 
     protected $table = 'cars';
@@ -200,9 +202,6 @@ class Car extends Model implements AdminMenuInterface
         return Cache::remember(General::cacheKey($this->slug . '_links'), 86400, function () {
             if (count($this->categories) > 0) {
                 return $this->categories;
-            }
-            if($brand = $this->properties->where('slug', 'brand')->first()) {
-                return Category::query()->where('slug', 'like','%' . $brand->getValue() . '%')->get();
             }
             return [];
         });
