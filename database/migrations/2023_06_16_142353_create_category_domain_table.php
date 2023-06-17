@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('category_domain', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('domain_id');
-            $table->foreignId('category_id');
+            $table->foreignId('domain_id')->default(null);
+            $table->foreignId('category_id')->default(null);
         });
     }
 

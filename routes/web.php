@@ -19,6 +19,20 @@ Route::get('test', function () {
 //    }
 });
 
+// todo: Привязка категорий к доменам. Удалить после переноса задачи
+Route::get('test2', function () {
+    $categories = \App\Models\Category::query()->get();
+    $domains = ['6', '5'];
+    foreach ($categories as $category) {
+        foreach ($domains as $domain)  {
+            \Illuminate\Support\Facades\DB::table('category_domain')->insert([
+                'category_id' => $category->id,
+                'domain_id' => $domain,
+            ]);
+        }
+    }
+});
+
 // Sub-domains
 $domains = Domain::all();
 $domains->each(function ($domain) {
