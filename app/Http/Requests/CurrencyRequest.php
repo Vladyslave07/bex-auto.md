@@ -28,6 +28,7 @@ class CurrencyRequest extends FormRequest
              'title' => 'required',
              'currency_symbol' => 'required',
              'exchange_rate' => 'required',
+             'bank_code' => 'required',
         ];
     }
 

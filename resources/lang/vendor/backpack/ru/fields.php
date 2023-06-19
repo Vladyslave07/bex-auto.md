@@ -105,6 +105,8 @@ return [
     'show_in_block' => 'Популярные марки авто',
     'currency_symbol' => 'Символ валюты',
     'exchange_rate' => 'Курс к доллару',
+    'currency' => 'Валюта',
+    'bank_code' => 'Банковский код',
 
     'option' => [
         'expect' => 'Ожидается',

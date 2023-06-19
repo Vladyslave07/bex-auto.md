@@ -20,7 +20,7 @@ class Currency extends Model
 
     protected $table = 'currencies';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'currency_symbol', 'exchange_rate'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'currency_symbol', 'exchange_rate', 'bank_code'];
 
     /*
     |--------------------------------------------------------------------------

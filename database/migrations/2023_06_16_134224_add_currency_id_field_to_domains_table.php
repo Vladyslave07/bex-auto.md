@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::table('domains', function (Blueprint $table) {
-            //
+            $table->foreignId('currency_id')->nullable()->after('id');
+        });
+        Schema::table('currencies', function (Blueprint $table) {
+            $table->string('bank_code')->after('exchange_rate');
         });
     }
 
@@ -25,8 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('domains', function (Blueprint $table) {
-            //
-        });
+
     }
 };
