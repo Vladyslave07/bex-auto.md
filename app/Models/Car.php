@@ -142,6 +142,7 @@ class Car extends Model implements AdminMenuInterface
         return self::query()
             ->CarsForCurrentDomain()
             ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
+            ->defaultOrder()
             ->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
     }
 
