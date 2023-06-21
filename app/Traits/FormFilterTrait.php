@@ -49,7 +49,7 @@ trait FormFilterTrait
         }, function ($value) {
             $this->crud->query = $this->crud->query->whereHas('categories', function ($query) use ($value) {
                 $query->where('category_id', $value);
-            })->orWhere('category_id', $value);
+            });
         });
     }
 

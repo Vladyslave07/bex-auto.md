@@ -66,7 +66,7 @@
             @include('crud::inc.form_save_buttons')
 
               @if(($entry = $crud->getCurrentEntry()) && in_array($crud->getCurrentEntry()->getTable(), ['cars', 'products']))
-                  <a href="{{ route($crud->getCurrentEntry()->detailRouteName, $entry->slug) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
+                  <a href="{{ getenv(\Illuminate\Support\Str::upper($crud->getCurrentEntry()->domain->slug) . '_APP_URL') . route($crud->getCurrentEntry()->detailRouteName, $entry->slug, false) }}" class="btn btn-primary"><span class="la la-arrow-right"></span> &nbsp;{{ trans('backpack::crud.show_page') }}</a>
               @endif
 
 		  </form>
