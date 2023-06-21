@@ -80,6 +80,9 @@ class SetCarCategoriesService
         $category = Category::query()->where('slug', $slug)->first();
         if (!$category) {
             $property = Property::findBySlug(Property::PROPERTY_CARCASE_TYPE_SLUG);
+            if (!key_exists($slug, $property->getOptions())) {
+                return;
+            }
             $category = $this->createCategory($property->getOptions()[$slug]);
         }
         $this->addToCategories($category->id);
@@ -143,7 +146,7 @@ class SetCarCategoriesService
                         break;
                     case Car::ON_ORDER_STATUS:
                         $category = Category::findBySlug('avto-iz-korei');
-                        $auctionCategory = Category::findBySlug('aukcion-avto-iz-ssha');
+                        $auctionCategory = Category::findBySlug('aukcion-avto-iz-korei');
                         $this->addToCategories($auctionCategory->id);
                         break;
                     default:
