@@ -167,7 +167,10 @@
             </div>
             <div class="card-btn">
                 <div>
-                    <div class="price">$23 500</div>
+                    <div class="price">
+                        $23 500
+                        <small>10 550 734 ₸</small>
+                    </div>
                     <p>Под заказ</p>
                 </div>
                 <a href="#" class="btn">Заказать</a>

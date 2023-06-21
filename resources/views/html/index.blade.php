@@ -99,7 +99,10 @@
                         </div>
                         <div class="footer">
                             <div class="price">
-                                <span class="price-new">$25 200</span>
+                                <span class="price-new">
+                                    $25 200
+                                    <small>11 313 978 ₸</small>
+                                </span>
                                 <div class="tooltip">
                                     <svg width="14" height="19"><use xlink:href="#tooltip-icon"></use></svg>
                                     <div>БВ ціла - це вживане авто без слідів ушкодження.</div>
@@ -142,7 +145,10 @@
                         </div>
                         <div class="footer">
                             <div class="price">
-                                <span class="price-new">$12 400</span>
+                                <span class="price-new">
+                                    $12 400
+                                    <small>5 562 896 ₸</small>
+                                </span>
                                 <div class="tooltip">
                                     <svg width="14" height="19"><use xlink:href="#tooltip-icon"></use></svg>
                                     <div>БВ ціла - це вживане авто без слідів ушкодження.</div>
@@ -188,7 +194,10 @@
                         </div>
                         <div class="footer">
                             <div class="price">
-                                <span class="price-new">$9 200</span>
+                                <span class="price-new">
+                                    $155 400
+                                    <small>69 715 656 ₸</small>
+                                </span>
                                 <div class="tooltip">
                                     <svg width="14" height="19"><use xlink:href="#tooltip-icon"></use></svg>
                                     <div>БВ ціла - це вживане авто без слідів ушкодження.</div>
@@ -234,7 +243,10 @@
                         </div>
                         <div class="footer">
                             <div class="price">
-                                <span class="price-new">$25 200</span>
+                                <span class="price-new">
+                                    $25 200
+                                    <small>11 313 978 ₸</small>
+                                </span>
                                 <div class="tooltip">
                                     <svg width="14" height="19"><use xlink:href="#tooltip-icon"></use></svg>
                                     <div>БВ ціла - це вживане авто без слідів ушкодження.</div>
