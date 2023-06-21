@@ -30,7 +30,10 @@
             <div class="container">
                 <div class="card-title">
                     <h1 class="main-title">Kia Sorento 2015</h1>
-                    <div class="price">$23 500</div>
+                    <div class="price">
+                        $23 500
+                        <small>10 550 734 ₸</small>
+                    </div>
                 </div>
                 <div class="card-nav">
                     <span class="item active" data-target="Tab_1">Характеристики</span>

@@ -37,7 +37,12 @@
     </div>
     <div class="footer">
         <div class="price">
-            <span class="price-new">{{ $car->priceFormat }}</span>
+            <span class="price-new">
+                {{ $car->priceFormat }}
+                @if($car->price_for_current_country)
+                    <small>{{ $car->price_for_current_country }}</small>
+                @endif
+            </span>
             @if ($car->info)
                 <div class="tooltip">
                     <svg width="14" height="19">

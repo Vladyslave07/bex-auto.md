@@ -6,6 +6,8 @@ use App\Helper\General;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 
 class Domain extends Model
@@ -20,7 +22,7 @@ class Domain extends Model
 
     protected $table = 'domains';
     protected $guarded = ['id'];
-    protected $fillable = ['telegram', 'tiktok', 'instagram', 'youtube', 'gtm', 'slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country'];
+    protected $fillable = ['telegram', 'tiktok', 'instagram', 'youtube', 'gtm', 'slug', 'title', 'reviews_id', 'phone_mask', 'placeholder', 'lat', 'lng', 'phone', 'country', 'currency_id'];
     protected $translatable = ['country'];
 
     const DEFAULT_DOMAIN = 6;
@@ -132,12 +134,17 @@ class Domain extends Model
     |--------------------------------------------------------------------------
     */
 
+    public function currency(): BelongsTo
+    {
+        return $this->belongsTo(Currency::class, 'currency_id');
+    }
+
     /**
      * menu relationship
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     * @return BelongsToMany
      */
-    public function menus(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    public function menus(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'domain_menu');
     }
