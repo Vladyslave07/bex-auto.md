@@ -79,8 +79,9 @@ class CurrencyCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'slug', 'target'  => 'title', 'label' => trans('backpack::fields.slug'), 'type' => 'slug', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['name' => 'currency_symbol', 'label' => trans('backpack::fields.currency_symbol'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-        CRUD::addField(['name' => 'exchange_rate', 'label' => trans('backpack::fields.exchange_rate'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['name' => 'currency_symbol', 'label' => trans('backpack::fields.currency_symbol'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-4']]);
+        CRUD::addField(['name' => 'exchange_rate', 'label' => trans('backpack::fields.exchange_rate'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-4']]);
+        CRUD::addField(['name' => 'bank_code', 'label' => trans('backpack::fields.bank_code'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-4']]);
 
 
     }
