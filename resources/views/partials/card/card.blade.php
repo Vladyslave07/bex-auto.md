@@ -4,7 +4,12 @@
             <div class="container">
                 <div class="card-title">
                     <h1 class="main-title">{{ $car->titleWithYear }}</h1>
-                    <div class="price">{{ $car->price_format }}</div>
+                    @if($car->price_for_current_country)
+                        <div class="price">{{ $car->price_for_current_country }}</div>
+                        <div class="price usd">{{ $car->price_format }}</div>
+                    @else
+                        <div class="price">{{ $car->price_format }}</div>
+                    @endif
                 </div>
                 <div class="card-nav">
                     <span class="item active" data-target="Tab_1">{{ Lang::get('car.detail.characteristic')}}</span>

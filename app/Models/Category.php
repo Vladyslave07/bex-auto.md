@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Contracts\AdminMenuInterface;
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
@@ -87,8 +88,10 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
      */
     public static function selectedCategory()
     {
-        return Cache::remember(self::CATEGORIES_IN_SLIDER_CACHE_KEY, 86400, function () {
-            return self::query()->where('show_in_slider', true)->get(['id', 'title', 'slug']);
+        return Cache::remember(General::cacheKey(self::CATEGORIES_IN_SLIDER_CACHE_KEY), 86400, function () {
+            return self::query()->where('show_in_slider', true)->whereHas('domains', function ($q) {
+                $q->where('category_domain.domain_id', Domain::currentDomain()->id);
+            })->get(['id', 'title', 'slug']);
         });
     }
 
@@ -145,6 +148,16 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     public function products(): hasMany
     {
         return $this->hasMany(Product::class, 'category_id');
+    }
+
+    /**
+     * domains relationship
+     *
+     * @return BelongsToMany
+     */
+    public function domains(): BelongsToMany
+    {
+        return $this->belongsToMany(Domain::class, 'category_domain');
     }
 
     /*
