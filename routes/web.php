@@ -7,17 +7,6 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
-// todo: Удалить после переноса 23311
-Route::get('test', function () {
-//    $properties = \App\Models\CarProperty::query()->where('property_id', 11)->where('slug', 'krossover')->get();
-//    $properties = \App\Models\CarProperty::query()->where('property_id', 11)->where('slug', 'crossover')->get();
-    $properties = \App\Models\CarProperty::query()->where('property_id', 11)->where('slug', 'vnedorozhniki-i-krossovery')->get();
-    dump($properties);
-//    foreach ($properties as $property) {
-//        $property->update(['value' => 'vnedorozhniki-i-krossovery', 'slug' => 'vnedorozhniki-i-krossovery']);
-//    }
-});
-
 // Sub-domains
 $domains = Domain::all();
 $domains->each(function ($domain) {
