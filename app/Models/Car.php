@@ -37,6 +37,8 @@ class Car extends Model implements AdminMenuInterface
     const IN_STOCK_STATUS = 'in_stock';
     const EXPECTED_STATUS = 'expect';
     const ON_ORDER_STATUS = 'on_order';
+    const COPRAT_STATUS = 'on_order_usa';
+    const ENCAR_STATUS = 'on_order_korea';
     const SOLD_STATUS = 'sold';
 
     protected $table = 'cars';
@@ -202,9 +204,6 @@ class Car extends Model implements AdminMenuInterface
             if (count($this->categories) > 0) {
                 return $this->categories;
             }
-            if($brand = $this->properties->where('slug', 'brand')->first()) {
-                return Category::query()->where('slug', 'like','%' . $brand->getValue() . '%')->get();
-            }
             return [];
         });
 
@@ -343,6 +342,15 @@ class Car extends Model implements AdminMenuInterface
     | MUTATORS
     |--------------------------------------------------------------------------
     */
+
+    public function setPreviewImageAttribute($values)
+    {
+        $path = parse_url($values, PHP_URL_PATH);
+        if (str_contains($path, 'storage')) {
+            $path = preg_replace('/\/storage\//', '', $path);
+        }
+        $this->attributes['preview_image'] = $path;
+    }
 
     public function setBenefitsAttribute($values)
     {
