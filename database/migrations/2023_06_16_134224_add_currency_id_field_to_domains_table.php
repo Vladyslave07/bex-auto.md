@@ -13,10 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_domain', function (Blueprint $table) {
-            $table->id();
-            $table->foreignId('domain_id')->default(null);
-            $table->foreignId('category_id')->default(null);
+        Schema::table('domains', function (Blueprint $table) {
+            $table->foreignId('currency_id')->nullable()->after('id');
+        });
+        Schema::table('currencies', function (Blueprint $table) {
+            $table->string('bank_code')->after('exchange_rate');
         });
     }
 
@@ -27,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_domain');
+
     }
 };

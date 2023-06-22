@@ -110,6 +110,15 @@ trait ProductCarsTrait
         return $this->title;
     }
 
+    public function getPriceForCurrentCountryAttribute()
+    {
+        if ($currency = app('domain')->getDomain()->currency) {
+            $price = $this->price * $currency->exchange_rate;
+            return $currency->currency_symbol . number_format($price, 0, '.', ' ');
+        }
+        return null;
+    }
+
     public function getPriceFormatAttribute()
     {
         return '$' . number_format($this->price, 0, '.', ' ');

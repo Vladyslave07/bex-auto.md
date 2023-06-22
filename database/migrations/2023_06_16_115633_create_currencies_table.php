@@ -13,10 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('category_domain', function (Blueprint $table) {
+        Schema::create('currencies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('domain_id')->default(null);
-            $table->foreignId('category_id')->default(null);
+
+            $table->boolean('active')->default(1);
+            $table->integer('sort')->default(500);
+
+            $table->text('title');
+            $table->text('slug');
+            $table->text('currency_symbol');
+            $table->text('exchange_rate');
+
+
+            $table->timestamps();
         });
     }
 
@@ -27,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_domain');
+        Schema::dropIfExists('currencies');
     }
 };

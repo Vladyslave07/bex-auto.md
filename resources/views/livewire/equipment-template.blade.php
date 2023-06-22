@@ -13,7 +13,12 @@
                 </div>
                 <div class="card-btn">
                     <div>
-                        <div class="price">{{ $this->equipment ? $this->equipment->price_format : $car->price_format }}</div>
+                        <div class="price">
+                            {{ $this->equipment ? $this->equipment->price_format : $car->price_format }}
+                            @if($car->price_for_current_country)
+                                <small>{{ $car->price_for_current_country }}</small>
+                            @endif
+                        </div>
                         <p>@lang('car.' . $car->status)</p>
                     </div>
                     <button onclick="openModal('#applicationForCar')" class="btn">{{ __('car.btn.' . $car->status) }}</button>

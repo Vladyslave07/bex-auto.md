@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Admin\CarCrudController;
 use App\Models\Brand;
 use App\Models\Car;
+use App\Models\Domain;
 use App\Models\Faq;
 use App\Models\Product;
 use App\Models\SeoText;
@@ -17,6 +18,7 @@ class CardController extends Controller
         if (!$car->forCurrentDomain()) {
             abort(404);
         }
+        app('domain')->setDomain(Domain::query()->where('id', Domain::KAZACHSTAN_DOMAIN)->first());
 
         app('admin-menu')->setModel($car);
 

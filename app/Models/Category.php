@@ -37,6 +37,8 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id', 'meta_title', 'meta_description', 'image', 'sub_title', 'sub_title_text', 'h1'];
     protected $translatable = ['title', 'meta_title', 'meta_description', 'sub_title', 'sub_title_text', 'h1'];
     protected $attributes = ['sort' => 500];
+    protected $with = ['domains'];
+
     public static $images = ['image'];
     public static $imageSize = ['width' => 826, 'height' => 614];
 
@@ -89,9 +91,7 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     public static function selectedCategory()
     {
         return Cache::remember(General::cacheKey(self::CATEGORIES_IN_SLIDER_CACHE_KEY), 86400, function () {
-            return self::query()->where('show_in_slider', true)->whereHas('domains', function ($q) {
-                $q->where('category_domain.domain_id', Domain::currentDomain()->id);
-            })->get(['id', 'title', 'slug']);
+            return self::query()->where('show_in_slider', true)->forCurrentDomain()->get(['id', 'title', 'slug']);
         });
     }
 
@@ -165,6 +165,15 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     | SCOPES
     |--------------------------------------------------------------------------
     */
+
+    public function scopeForCurrentDomain(Builder $query)
+    {
+        return $query->whereHas('domains', function ($q) {
+            $q->where('category_domain.domain_id', Domain::currentDomain()->id)
+                ->orWhereNull('category_domain.domain_id');
+        });
+    }
+
 
     /*
     |--------------------------------------------------------------------------

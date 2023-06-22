@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\DomainRequest;
+use App\Models\Currency;
+use App\Models\Domain;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -73,6 +75,19 @@ class DomainCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'tab' => 'Общая информация']);
         CRUD::addField(['name' => 'country', 'label' => trans('backpack::fields.country'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.country'), 'tab' => 'Общая информация']);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'tab' => 'Общая информация']);
+        CRUD::addField([
+            'name' => 'currency',
+            'label' => trans('backpack::fields.currency'),
+            'type' => 'relationship',
+            'entity' => 'currency',
+            'attribute' => 'title',
+            'model' => Currency::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'tab' => 'Общая информация'
+        ]);
         CRUD::addField(['name' => 'reviews_id', 'label' => trans('backpack::fields.reviews_id'), 'type' => 'text', 'hint' => trans('backpack::hint.domains.reviews_id'), 'tab' => 'Общая информация']);
         CRUD::addField(['name' => 'phone_mask', 'label' => trans('backpack::fields.phone_mask'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.phone_mask'), 'tab' => 'Общая информация']);
         CRUD::addField(['name' => 'placeholder', 'label' => trans('backpack::fields.placeholder'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.domains.placeholder'), 'tab' => 'Общая информация']);
