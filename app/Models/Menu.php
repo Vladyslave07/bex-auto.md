@@ -71,7 +71,7 @@ class Menu extends Model
     {
         return Cache::remember(General::cacheKey(self::MAIN_MENU_CACHE_KEY), 86400, function () {
             return self::query()->orderBy('sort')->whereHas('domains', function ($q) {
-                $q->where('domain_menu.domain_id', Domain::currentDomain()->id);
+                $q->where('domain_menu.domain_id', app('domain')->getDomain()->id);
             })->active()->get(['slug', 'title', 'items', 'image', 'show_link']);
         });
     }
