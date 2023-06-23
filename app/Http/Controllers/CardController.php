@@ -18,7 +18,6 @@ class CardController extends Controller
         if (!$car->forCurrentDomain()) {
             abort(404);
         }
-        app('domain')->setDomain(Domain::query()->where('id', Domain::KAZACHSTAN_DOMAIN)->first());
 
         app('admin-menu')->setModel($car);
 

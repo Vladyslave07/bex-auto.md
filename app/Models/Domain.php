@@ -40,7 +40,6 @@ class Domain extends Model
 
     public static function currentDomain()
     {
-        // todo: Вынести установку домена глобально
         $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
         return self::domainBySlug($domainSlug);
     }
