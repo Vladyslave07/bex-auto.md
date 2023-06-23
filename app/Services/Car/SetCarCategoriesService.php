@@ -6,7 +6,9 @@ use App\Models\Brand;
 use App\Models\Car;
 use App\Models\CarModel;
 use App\Models\Category;
+use App\Models\Domain;
 use App\Models\Property;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class SetCarCategoriesService
@@ -46,6 +48,7 @@ class SetCarCategoriesService
         $this->setCategoryByCarStatus();
 
         $categoriesIds = $this->getCategories();
+        Log::debug(json_encode($categoriesIds));
         $this->getCar()->categories()->sync($categoriesIds);
     }
 
@@ -177,7 +180,18 @@ class SetCarCategoriesService
         switch ($status) {
             case Car::IN_STOCK_STATUS:
             case Car::SOLD_STATUS:
-                $this->addToCategories(Category::findBySlug('avto-v-ukraine')?->id);
+                $slug  = 'avto-v-ukraine';
+                if (!$this->getCar()->domain) {
+                    if (app('domain')->getDomain()->id == Domain::KAZACHSTAN_DOMAIN) {
+                        $slug = 'avto-v-kazahstane';
+                    }
+                } else {
+                    if ($this->getCar()->domain->id == Domain::KAZACHSTAN_DOMAIN) {
+                        $slug = 'avto-v-kazahstane';
+                    }
+                }
+
+                $this->addToCategories(Category::findBySlug($slug)?->id);
                 break;
         }
     }
