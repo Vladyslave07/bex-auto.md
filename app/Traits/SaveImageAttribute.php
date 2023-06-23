@@ -37,7 +37,14 @@ trait SaveImageAttribute
                 \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
                 \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
                 $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
-            } else $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
+            } else {
+                $path = parse_url($value, PHP_URL_PATH);
+                if (str_contains($path, 'storage')) {
+                    $path = preg_replace('/\/storage\//', '', $path);
+                }
+
+                $this->attributes[$attribute_name] = $path;
+            }
         }
     }
 }

@@ -343,15 +343,6 @@ class Car extends Model implements AdminMenuInterface
     |--------------------------------------------------------------------------
     */
 
-    public function setPreviewImageAttribute($values)
-    {
-        $path = parse_url($values, PHP_URL_PATH);
-        if (str_contains($path, 'storage')) {
-            $path = preg_replace('/\/storage\//', '', $path);
-        }
-        $this->attributes['preview_image'] = $path;
-    }
-
     public function setBenefitsAttribute($values)
     {
         $destination_path = Str::replace('_', '', $this->table);
