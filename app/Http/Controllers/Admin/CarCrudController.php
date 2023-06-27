@@ -16,6 +16,7 @@ use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 /**
  * Class CarCrudController
@@ -276,6 +277,8 @@ class CarCrudController extends CrudController
 
     public function update()
     {
+        request()->offsetUnset('categories');
+
         $response = $this->traitUpdate();
         // do something after update
 

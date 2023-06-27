@@ -48,7 +48,6 @@ class SetCarCategoriesService
         $this->setCategoryByCarStatus();
 
         $categoriesIds = $this->getCategories();
-        Log::debug(json_encode($categoriesIds));
         $this->getCar()->categories()->sync($categoriesIds);
     }
 
