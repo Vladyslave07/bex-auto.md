@@ -52,11 +52,12 @@ class Brand extends Model
     public static function brands()
     {
         return Cache::remember(General::cacheKey(self::INDEX_BRANDS_CACHE_KEY), 86400, function () {
-            return self::query()->orderBy('sort')->orderBy('title')
+            return self::query()->orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(brands.title, '$.ru')) ASC")
+                ->join('categories', 'brands.slug', '=', 'categories.slug')
                 ->where('show_in_block', 1)
                 ->whereHas('domains', function ($q) {
                 $q->where('brand_domain.domain_id', Domain::currentDomain()->id);
-            })->active()->get(['slug', 'title']);
+            })->where('brands.active', 1)->get(['brands.slug', 'brands.title']);
         });
     }
 
