@@ -81,4 +81,6 @@ return [
         'btn-back' => 'Back',
         'btn-reviews' => 'Customer reviews',
     ],
+
+    'from_country' => 'from',
 ];

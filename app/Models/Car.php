@@ -321,7 +321,31 @@ class Car extends Model implements AdminMenuInterface
 
     public function getCountryAttribute()
     {
-        return Domain::currentDomain()?->country;
+        return app('domain')->getDomain()->country;
+    }
+
+    public function getTypeAttribute()
+    {
+        return $this->properties?->where('slug', Property::PROPERTY_TYPE_SLUG)->first()?->getSlug();
+    }
+
+    public function getFromCountryAttribute()
+    {
+        return $this->properties?->where('slug', Property::PROPERTY_COUNTRY_SLUG)->first()?->getSlug();
+    }
+
+    public function getStateAttribute()
+    {
+        return $this->properties?->where('slug', Property::PROPERTY_STATE_SLUG)->first()?->getValue();
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        $template = $this->properties?->where('slug', 'country')->first()?->getValue() ?
+            config('settings.car_meta_description_default') :
+            config('settings.car_meta_description_new');
+
+        return $this->parseSnippets($this->meta_description ?: $template);
     }
 
     /**

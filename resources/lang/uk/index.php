@@ -80,4 +80,6 @@ return [
         'btn-back' => 'Назад',
         'btn-reviews' => 'Відгуки клієнтів',
     ],
+
+    'from_country' => 'з',
 ];

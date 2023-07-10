@@ -128,6 +128,20 @@ class Property extends Model
         return $this->pivot->value;
     }
 
+    /**
+     * Get property slug
+     *
+     * @return mixed
+     */
+    public function getSlug()
+    {
+        if ($this->pivot->value) {
+            $this->pivot->value;
+        }
+
+        return $this->pivot->slug;
+    }
+
 
     /**
      * return id property by slug

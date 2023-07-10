@@ -80,5 +80,6 @@ return [
         'btn-back' => 'Артқа',
         'btn-reviews' => 'Тұтынушы пікірлері',
     ],
-    
+
+    'from_country' => '',
 ];

@@ -239,4 +239,7 @@ return [
 
     'currency' => 'Валюта',
     'currencies' => 'Валюты',
+
+    'word_case' => 'Падеж',
+    'word_cases' => 'Падежи',
 ];

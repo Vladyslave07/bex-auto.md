@@ -131,7 +131,10 @@ trait ProductCarsTrait
 
     public function getSeoMetaDescriptionAttribute()
     {
-        return $this->parseSnippets($this->meta_description ?: config('settings.car_meta_description_default'));
+        if ($this->meta_description) {
+            return $this->parseSnippets($this->meta_description);
+        }
+        return '';
     }
 
     /*

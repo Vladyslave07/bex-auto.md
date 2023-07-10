@@ -47,4 +47,5 @@ Route::group([
     Route::crud('equipment', 'EquipmentCrudController');
     Route::crud('product', 'ProductCrudController');
     Route::crud('currency', 'CurrencyCrudController');
+    Route::crud('word-case', 'WordCaseCrudController');
 }); // this should be the absolute last line of this file
