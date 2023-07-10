@@ -56,10 +56,14 @@ class SetCarCategoriesService
         $category = Category::findBySlug($slug);
         if (!$category) {
             $brand = Brand::findBySlug($slug);
-            $category = $this->createCategory($brand->title);
+            if ($brand) {
+                $category = $this->createCategory($brand->title);
+            }
         }
 
-        $this->addToCategories($category->id);
+        if ($category) {
+            $this->addToCategories($category->id);
+        }
     }
 
     public function model($slug)

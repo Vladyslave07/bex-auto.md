@@ -17,16 +17,16 @@ return new class extends Migration
             $table->id();
 
             $table->string('slug')->nullable();
-            $table->string('i')->nullable();
-            $table->string('r')->nullable();
-            $table->string('d')->nullable();
-            $table->string('v')->nullable();
-            $table->string('t')->nullable();
-            $table->string('i_m')->nullable();
-            $table->string('r_m')->nullable();
-            $table->string('d_m')->nullable();
-            $table->string('v_m')->nullable();
-            $table->string('t_m')->nullable();
+            $table->text('i')->nullable();
+            $table->text('r')->nullable();
+            $table->text('d')->nullable();
+            $table->text('v')->nullable();
+            $table->text('t')->nullable();
+            $table->text('i_m')->nullable();
+            $table->text('r_m')->nullable();
+            $table->text('d_m')->nullable();
+            $table->text('v_m')->nullable();
+            $table->text('t_m')->nullable();
 
             $table->timestamps();
         });
