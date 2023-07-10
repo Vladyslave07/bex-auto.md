@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\General;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
@@ -25,6 +26,9 @@ class CatalogController extends Controller
     {
         SEOTools::setTitle($category->seo_meta_title);
         SEOTools::setDescription($category->seo_meta_description);
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         app('admin-menu')->setModel($category);
 

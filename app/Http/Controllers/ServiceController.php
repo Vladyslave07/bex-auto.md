@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\General;
 use App\Http\Controllers\Controller;
 use App\Models\Benefit;
 use App\Models\Brand;
@@ -19,6 +20,9 @@ class ServiceController extends Controller
     {
         SEOTools::setTitle($service->seo_meta_title);
         SEOTools::setDescription($service->seo_meta_description);
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         app('admin-menu')->setModel($service);
 

@@ -34,8 +34,7 @@
                 <meta name="facebook-domain-verification" content="1ok4pz78y350j624157v7vyrnv4fk3" />
             @endif
             <a href="{{ route('index') }}" class="logo" aria-label="logo">
-                @php $path = app()->getLocale() === 'uk' ? 'img/bex-logo-ua.svg' : 'img/bex-logo-ru.svg' @endphp
-                <img width="134" height="59" src="{{ asset($path) }}" alt="">
+                <img width="134" height="59" src="{{ asset(\App\Helper\ImageHelper::logoPath()) }}" alt="">
             </a>
 
             {{-- search form --}}

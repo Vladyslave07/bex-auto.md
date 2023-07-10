@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\General;
 use App\Models\Banner;
 use App\Models\Brand;
 use App\Models\Car;
@@ -13,6 +14,7 @@ use App\Models\Review;
 use App\Models\SeoText;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
 {
@@ -21,6 +23,9 @@ class IndexController extends Controller
     {
         SEOTools::setTitle($city?->seoMetaTitle ?? config('settings.index_meta_title'));
         SEOTools::setDescription($city?->seoMetaDescription ?? config('settings.index_meta_description'));
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         $banner = Banner::banner();
 
@@ -60,6 +65,9 @@ class IndexController extends Controller
 
         SEOTools::setTitle(config('settings.' . $routeName . '_meta_title'));
         SEOTools::setDescription(config('settings.' . $routeName . '_meta_description'));
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         // Brands
         $brands = Brand::brands();
@@ -81,6 +89,9 @@ class IndexController extends Controller
         SEOTools::setTitle(Lang::get('index.thanks.title'));
         SEOTools::setDescription(Lang::get('index.thanks.description'));
         SEOTools::metatags()->addMeta('robots', 'noindex, nofollow');
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         return view('thanks');
     }

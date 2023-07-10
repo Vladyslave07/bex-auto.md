@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helper\General;
 use App\Models\Brand;
 use App\Models\Faq;
 use App\Models\News;
@@ -15,6 +16,9 @@ class NewsController extends Controller
     {
         SEOTools::setTitle(config('settings.news_meta_title'));
         SEOTools::setDescription(config('settings.news_meta_description'));
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         // Brands
         $brands = Brand::brands();
@@ -38,6 +42,9 @@ class NewsController extends Controller
 
         SEOTools::setTitle($article->seo_meta_title);
         SEOTools::setDescription($article->seo_meta_description);
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
 
         // Brands
         $brands = Brand::brands();

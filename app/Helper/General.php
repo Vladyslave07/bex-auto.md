@@ -5,6 +5,7 @@ namespace App\Helper;
 
 
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class General
 {
@@ -86,6 +87,12 @@ class General
     public static function cacheKey($key): string
     {
         return app('domain')->getDomain()->slug . '_' . $key;
+    }
+
+    public static function getOgLocale()
+    {
+        $ogLocale = app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN ? 'KK' : Str::upper(app('domain')->getDomain()->slug);
+        return app()->getLocale() . '_' . $ogLocale;
     }
 
 }

@@ -74,4 +74,9 @@ class ImageHelper
         return [];
     }
 
+    public static function logoPath(): string
+    {
+        return app()->getLocale() === 'uk' ? 'img/bex-logo-ua.svg' : 'img/bex-logo-ru.svg';
+    }
+
 }
