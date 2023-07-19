@@ -67,22 +67,17 @@ class WordCaseCrudController extends CrudController
     {
         CRUD::setValidation(WordCaseRequest::class);
 
-        $slug = '';
-        if ($model = $this->crud->getCurrentEntry()) {
-            $slug = $model->slug;
-        }
-
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.case_slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-8']]);
-        CRUD::addField(['name' => 'i', 'label' => trans('backpack::fields.cases.i'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.i', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'i_m', 'label' => trans('backpack::fields.cases.i_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.i_m', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'r', 'label' => trans('backpack::fields.cases.r'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.r', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'r_m', 'label' => trans('backpack::fields.cases.r_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.r_m', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'd', 'label' => trans('backpack::fields.cases.d'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.d', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'd_m', 'label' => trans('backpack::fields.cases.d_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.d_m', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'v', 'label' => trans('backpack::fields.cases.v'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.v', ['slug' => $slug])]);
-        CRUD::addField(['name' => 'v_m', 'label' => trans('backpack::fields.cases.v_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.v_m', ['slug' => $slug])]);
-        CRUD::addField(['name' => 't', 'label' => trans('backpack::fields.cases.t'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.t', ['slug' => $slug])]);
-        CRUD::addField(['name' => 't_m', 'label' => trans('backpack::fields.cases.t_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.t_m', ['slug' => $slug])]);
+        CRUD::addField(['name' => 'i', 'label' => trans('backpack::fields.cases.i'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.i')]);
+        CRUD::addField(['name' => 'i_m', 'label' => trans('backpack::fields.cases.i_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.i_m')]);
+        CRUD::addField(['name' => 'r', 'label' => trans('backpack::fields.cases.r'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.r')]);
+        CRUD::addField(['name' => 'r_m', 'label' => trans('backpack::fields.cases.r_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.r_m')]);
+        CRUD::addField(['name' => 'd', 'label' => trans('backpack::fields.cases.d'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.d')]);
+        CRUD::addField(['name' => 'd_m', 'label' => trans('backpack::fields.cases.d_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.d_m')]);
+        CRUD::addField(['name' => 'v', 'label' => trans('backpack::fields.cases.v'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.v')]);
+        CRUD::addField(['name' => 'v_m', 'label' => trans('backpack::fields.cases.v_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.v_m')]);
+        CRUD::addField(['name' => 't', 'label' => trans('backpack::fields.cases.t'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.t')]);
+        CRUD::addField(['name' => 't_m', 'label' => trans('backpack::fields.cases.t_m'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'hint' => trans('backpack::hint.word_cases.t_m')]);
     }
 
     /**
