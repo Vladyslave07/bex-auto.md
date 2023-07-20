@@ -26,7 +26,7 @@ class SetDefaultLocale
             $redirection = app('laravellocalization')->getLocalizedURL(Domain::DEFAULT_SLUG_DOMAIN);
             $redirectResponse = new RedirectResponse($redirection, 302, ['Vary' => 'Accept-Language']);
 
-            return $redirectResponse->withCookie(cookie()->forever('locale', Domain::DEFAULT_SLUG_DOMAIN));
+            return $redirectResponse->withCookie(cookie()->forever('locale', Domain::DEFAULT_SLUG_DOMAIN, 'newbexhilltrading.redchameleon.dev'));
         }
 
         return $next($request);

@@ -34,7 +34,7 @@ class NewsController extends Controller
 
     public function detail(News $article)
     {
-        if (!$article->forCurrentDomain()) {
+        if (!$article->forCurrentDomain() || !$article->active()) {
             abort(404);
         }
 
