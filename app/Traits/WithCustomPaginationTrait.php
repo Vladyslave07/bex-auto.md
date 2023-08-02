@@ -25,7 +25,11 @@ trait WithCustomPaginationTrait
 
     public function nextPage()
     {
-        $this->page += 1;
+        if ($this->page) {
+            $this->page += 1;
+        } else {
+            $this->page = 2;
+        }
         $this->setPaginateUrl();
     }
 
