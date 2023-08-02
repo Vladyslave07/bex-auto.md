@@ -3,9 +3,9 @@
         Options -MultiViews -Indexes
     </IfModule>
 
-    #RewriteEngine On
-    #RewriteCond %{HTTPS} off
-    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+    RewriteEngine On
+    RewriteCond %{HTTPS} off
+    RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
     # for uk domain
     RewriteCond %{HTTP_HOST} ^bex-auto.local$
