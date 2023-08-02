@@ -1,41 +1,31 @@
-Options +FollowSymLinks -Indexes
-RewriteEngine On
+<IfModule mod_rewrite.c>
+    <IfModule mod_negotiation.c>
+        Options -MultiViews -Indexes
+    </IfModule>
 
-RewriteCond %{HTTP:Authorization} .
-RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+    #RewriteEngine On
+    #RewriteCond %{HTTPS} off
+    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^ index.php [L]
+    # for uk domain
+    RewriteCond %{HTTP_HOST} ^bex-auto.local$
+    RewriteRule ^robots\.txt$ /uploads/robots.txt [L]
 
-#<IfModule mod_rewrite.c>
-#    <IfModule mod_negotiation.c>
-#        Options -MultiViews -Indexes
-#    </IfModule>
-#
-#    #RewriteEngine On
-#    #RewriteCond %{HTTPS} off
-#    #RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
-#
-#    # for uk domain
-#    RewriteCond %{HTTP_HOST} ^bex-auto.local$
-#    RewriteRule ^robots\.txt$ /uploads/robots.txt [L]
-#
-#    # for kz domain
-#    RewriteCond %{HTTP_HOST} ^kz.bex-auto.local$
-#    RewriteRule ^robots\.txt$ /uploads/kz_robots.txt [L]
-#
-#    # Handle Authorization Header
-#    RewriteCond %{HTTP:Authorization} .
-#    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
-#
-#    # Redirect Trailing Slashes If Not A Folder...
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#    RewriteCond %{REQUEST_URI} (.+)/$
-#    RewriteRule ^ %1 [L,R=301]
-#
-#    # Send Requests To Front Controller...
-#    RewriteCond %{REQUEST_FILENAME} !-d
-#    RewriteCond %{REQUEST_FILENAME} !-f
-#    RewriteRule ^ index.php [L]
-#</IfModule>
+    # for kz domain
+    RewriteCond %{HTTP_HOST} ^kz.bex-auto.local$
+    RewriteRule ^robots\.txt$ /uploads/kz_robots.txt [L]
+
+    # Handle Authorization Header
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+    # Redirect Trailing Slashes If Not A Folder...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_URI} (.+)/$
+    RewriteRule ^ %1 [L,R=301]
+
+    # Send Requests To Front Controller...
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteRule ^ index.php [L]
+</IfModule>
