@@ -164,7 +164,7 @@ class CarFilter
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
         // Нужно получать именно свойства а не товары возможно использовать car_property
-        $cars = $category->carsOrProducts()->get();
+        $cars = $category->carsOrProducts()->take(500)->get();
 
         $properties = [];
 
