@@ -43,7 +43,7 @@ class Car extends Model implements AdminMenuInterface
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
+    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
@@ -115,7 +115,6 @@ class Car extends Model implements AdminMenuInterface
                 ->whereHas('categories', function ($query) use ($categories){
                     return $query->whereIn('category_id', $categories)->orderBy('category_id');
                 })
-                ->carsForCurrentDomain()
                 ->take(11)
                 ->get();
 
@@ -140,7 +139,6 @@ class Car extends Model implements AdminMenuInterface
     public static function carsSearch(string $q = '')
     {
         return self::query()
-            ->CarsForCurrentDomain()
             ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
             ->defaultOrder()
             ->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
@@ -158,7 +156,6 @@ class Car extends Model implements AdminMenuInterface
                 ->orderBy('id')
                 ->where('status', self::EXPECTED_STATUS)
                 ->active()
-                ->carsForCurrentDomain()
                 ->take(11)
                 ->get();
         });
@@ -178,7 +175,7 @@ class Car extends Model implements AdminMenuInterface
     {
         return Cache::remember(General::cacheKey(self::POPULAR_CARS_CACHE_KEY), 86400, function () {
             return self::query()->active()->orderBy('pin', 'desc')
-                ->orderBy('sort')->carsForCurrentDomain()->take(12)->get();
+                ->orderBy('sort')->take(12)->get();
         });
     }
 
@@ -209,16 +206,6 @@ class Car extends Model implements AdminMenuInterface
 
     }
 
-    /**
-     * Check car for current domain
-     *
-     * @return bool
-     */
-    public function forCurrentDomain()
-    {
-        return $this->domain_id === Domain::currentDomain()->id;
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -233,11 +220,6 @@ class Car extends Model implements AdminMenuInterface
     public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class, 'car_equipment');
-    }
-
-    public function domain(): BelongsTo
-    {
-        return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
     }
 
     public function categories(): BelongsToMany
@@ -262,27 +244,6 @@ class Car extends Model implements AdminMenuInterface
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Return cars only for current domain
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeCarsForCurrentDomain(Builder $query): Builder
-    {
-        // НУЖНО УСТАНОВИТЬ ГЛОБАЛЬНО ДЛЯ ВСЕГО САЙТА
-        // todo: Вынести установку домена глобально
-        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        $domain = Domain::domainBySlug($domainSlug);
-
-        $id = self::KZ_DOMAIN_ID;
-        if ($domain) {
-            $id = $domain->id;
-        }
-
-        return $query->where('domain_id', $id);
-    }
 
     /*
     |--------------------------------------------------------------------------

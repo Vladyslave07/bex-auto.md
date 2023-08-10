@@ -101,12 +101,12 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
      */
     public function carsOrProducts()
     {
-        $items = $this->cars()->forCurrentDomain()->active();
+        $items = $this->cars()->active();
         if ($items->count() >= 1) {
             return $items;
         }
 
-        return $this->products()->forCurrentDomain()->active();
+        return $this->products()->active();
     }
 
     /*
