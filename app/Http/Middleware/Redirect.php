@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class Redirect
 {
@@ -16,10 +17,11 @@ class Redirect
      */
     public function handle(Request $request, Closure $next)
     {
-        $redirect = \App\Models\Redirect::query()->where('url_from', $request->getUri())->first(['url_to', 'quantity', 'type']);
+        $urlWithoutLocale = LaravelLocalization::getNonLocalizedURL();
+        $redirect = \App\Models\Redirect::query()->where('url_from', $urlWithoutLocale)->first(['url_to', 'quantity', 'type']);
         if ($redirect) {
-            $redirect->increment('quantity', 1);
-            return redirect($redirect->url_to, $redirect->type);
+            $url = LaravelLocalization::getLocalizedUrl(null, $redirect->url_to);
+            return redirect($url, $redirect->type);
         }
         return $next($request);
     }

@@ -23,6 +23,8 @@ return [
         \App\Models\Car::ON_ORDER_STATUS => 'Тапсырыс',
         \App\Models\Car::EXPECTED_STATUS => 'Тапсырыс',
         \App\Models\Car::IN_STOCK_STATUS => 'Тапсырыс',
+        \App\Models\Car::COPRAT_STATUS => 'Тапсырыс',
+        \App\Models\Car::ENCAR_STATUS => 'Тапсырыс',
     ],
 
     'product_block_title' => 'Көлікке арналған тауарлар',

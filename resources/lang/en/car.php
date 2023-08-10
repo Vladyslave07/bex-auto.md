@@ -23,6 +23,8 @@ return [
         \App\Models\Car::ON_ORDER_STATUS => 'Order',
         \App\Models\Car::EXPECTED_STATUS => 'Buy',
         \App\Models\Car::IN_STOCK_STATUS => 'Buy',
+        \App\Models\Car::COPRAT_STATUS => 'Order',
+        \App\Models\Car::ENCAR_STATUS => 'Order',
     ],
 
     'product_block_title' => 'Products for car',

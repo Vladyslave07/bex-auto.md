@@ -182,7 +182,6 @@ class SetCarCategoriesService
         $status = $this->getCar()->status;
         switch ($status) {
             case Car::IN_STOCK_STATUS:
-            case Car::SOLD_STATUS:
                 $slug  = 'avto-v-ukraine';
                 if (!$this->getCar()->domain) {
                     if (app('domain')->getDomain()->id == Domain::KAZACHSTAN_DOMAIN) {

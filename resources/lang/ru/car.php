@@ -23,6 +23,8 @@ return [
         \App\Models\Car::ON_ORDER_STATUS => 'Заказать',
         \App\Models\Car::EXPECTED_STATUS => 'Купить',
         \App\Models\Car::IN_STOCK_STATUS => 'Купить',
+        \App\Models\Car::COPRAT_STATUS => 'Заказать',
+        \App\Models\Car::ENCAR_STATUS => 'Заказать',
     ],
 
     'product_block_title' => 'Товары для автомобиля',
