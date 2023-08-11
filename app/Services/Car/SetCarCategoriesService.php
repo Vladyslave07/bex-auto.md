@@ -160,6 +160,9 @@ class SetCarCategoriesService
                         break;
                 }
                 break;
+            case 'norway':
+                $category = Category::findBySlug('avto-iz-norvegii');
+                break;
             case 'china':
                 $category = Category::findBySlug('avto-iz-kitaya');
                 break;
