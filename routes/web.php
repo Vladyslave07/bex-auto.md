@@ -7,6 +7,61 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+
+Route::get('clear-car', function () {
+    $domain = app('domain')->getDomain();
+    // Очистка авто для домена
+//    $cars = \App\Models\Car::query()->whereNot('domain_id', $domain->id)->get();
+//    foreach ($cars as $car) {
+//        $car->delete();
+//    }
+    // Очистка категорий для домена
+//    $categories = \App\Models\Category::query()->whereHas('domains', function ($q) use ($domain) {
+//        return $q->whereNot('domain_id', $domain->id);
+//    })->get();
+//    dd($categories);
+//
+//    foreach ($categories as $category) {
+//        $category->delete();
+//    }
+    // Очистка марок автомобиля
+//    $brands = \App\Models\Brand::query()->whereHas('domains', function ($q) use ($domain) {
+//        return $q->whereNot('domain_id', $domain->id);
+//    })->get();
+//    dd($brands);
+//    foreach ($brands as $brand) {
+//        $brand->delete();
+//    }
+    // Очистка Сео текстов
+//    $seoTexts = \App\Models\SeoText::query()->whereHas('domains', function ($q) use ($domain) {
+//        return $q->whereNot('domain_id', $domain->id);
+//    })->get();
+//    dd($seoTexts);
+//    foreach ($brands as $brand) {
+//        $brand->delete();
+//    }
+
+    $categories = \App\Models\Category::all();
+
+    $key = $domain->slug;
+    foreach ($categories as $category) {
+        foreach ($category->getOriginal('meta_title') as $langTitle) {
+            $titleArray = json_decode($category->meta_title, true) ?? [];
+            $title = key_exists($key, $titleArray) ? $titleArray[$key] : '';
+            dd($title);
+        }
+        dd($category->getOriginal('meta_title'));
+
+        $category->update([
+            'seo_text_id' => $category->domain_seo_text_id ?: null
+        ]);
+    }
+
+    dd($domain->slug);
+
+
+});
+
 // Sub-domains
 $domains = Domain::all();
 $domains->each(function ($domain) {

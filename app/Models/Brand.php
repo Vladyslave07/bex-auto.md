@@ -55,9 +55,7 @@ class Brand extends Model
             return self::query()->orderByRaw("JSON_UNQUOTE(JSON_EXTRACT(brands.title, '$.ru')) ASC")
                 ->join('categories', 'brands.slug', '=', 'categories.slug')
                 ->where('show_in_block', 1)
-                ->whereHas('domains', function ($q) {
-                $q->where('brand_domain.domain_id', Domain::currentDomain()->id);
-            })->where('brands.active', 1)->get(['brands.slug', 'brands.title']);
+                ->where('brands.active', 1)->get(['brands.slug', 'brands.title']);
         });
     }
 
@@ -100,16 +98,6 @@ class Brand extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * domains relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function domains(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Domain::class, 'brand_domain');
-    }
 
     /*
     |--------------------------------------------------------------------------

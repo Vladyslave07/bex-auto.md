@@ -78,16 +78,6 @@ class SeoText extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * domains relationship
-     *
-     * @return BelongsToMany
-     */
-    public function domains(): BelongsToMany
-    {
-        return $this->belongsToMany(Domain::class, 'domain_seo_text');
-    }
-
     /*
     |--------------------------------------------------------------------------
     | SCOPES

@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
-use App\Models\Car;
 use App\Models\Category;
-use App\Models\Domain;
 use App\Models\Faq;
 use App\Models\SeoText;
 use App\Traits\BulkDeleteOperation;
@@ -93,19 +91,6 @@ class CategoryCrudController extends CrudController
         CRUD::addField(['tab' => 'Категория', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'],]);
         CRUD::addField(['tab' => 'Категория', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug') ,'wrapperAttributes' => ['class' => 'form-group col-md-6'],]);
 
-        CRUD::addField([
-            'tab' => 'Категория',
-            'name' => 'domains',
-            'label' => trans('backpack::fields.category_domain'),
-            'type' => 'relationship',
-            'entity' => 'domains',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
         CRUD::addField([
             'tab' => 'Категория',
             'name' => 'h1',
