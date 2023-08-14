@@ -112,18 +112,6 @@ class MenuCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name' => 'domains',
-            'label' => trans('backpack::fields.menu_domains'),
-            'type' => 'relationship',
-            'entity' => 'domains',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-        ]);
-
-        CRUD::addField([
             'name' => 'items',
             'label' => trans('backpack::fields.menu_items'),
             'type' => 'table',

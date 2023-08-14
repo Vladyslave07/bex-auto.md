@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\FooterMenuRequest;
-use App\Models\Domain;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -104,18 +103,6 @@ class FooterMenuCrudController extends CrudController
             'default'    => '1',
             'options' => trans('backpack::fields.footer_menu_option'),
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
-        ]);
-
-        CRUD::addField([
-            'name' => 'domains',
-            'label' => trans('backpack::fields.menu_domains'),
-            'type' => 'relationship',
-            'entity' => 'domains',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
         ]);
 
     }

@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::dropIfExists('category_domain');
         Schema::dropIfExists('brand_domain');
         Schema::dropIfExists('domain_seo_text');
+        Schema::dropIfExists('domain_footer_menu');
+        Schema::dropIfExists('domain_menu');
     }
 
     /**

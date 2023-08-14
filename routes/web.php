@@ -10,6 +10,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 Route::get('clear-car', function () {
     $domain = app('domain')->getDomain();
+
+    // Первым делом вручную удалить меню
+
     // Очистка авто для домена
 //    $cars = \App\Models\Car::query()->whereNot('domain_id', $domain->id)->get();
 //    foreach ($cars as $car) {
@@ -56,6 +59,35 @@ Route::get('clear-car', function () {
 //    foreach ($products as $product) {
 //        $product->delete();
 //    }
+
+    // Очистка филиалов для домена
+//    $branches = \App\Models\Branch::query()->whereNot('domain_id', $domain->id)->get();
+//    foreach ($branches as $branch) {
+//        $branch->delete();
+//    }
+
+    // Очистка городов
+    // ЗАПУСИТЬ ТОЛЬКО ДЛЯ KZ ДОМЕНА!!!!!
+//    $cities = \App\Models\City::all();
+//    dd(count($cities));
+//    foreach ($cities as $citiy) {
+//        $citiy->delete();
+//    }
+
+    // Очистка филиалов для домена
+//    $branches = \App\Models\Branch::query()->whereNot('domain_id', $domain->id)->get();
+//    dd(count($branches));
+//    foreach ($branches as $branch) {
+//        $branch->delete();
+//    }
+
+    // Очистка новостей для домена
+//    $news = \App\Models\News::query()->whereNot('domain_id', $domain->id)->get();
+//    dd($news->count());
+//    foreach ($news as $new) {
+//        $new->delete();
+//    }
+
 
 
     dd($domain->slug);

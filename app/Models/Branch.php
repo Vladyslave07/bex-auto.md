@@ -25,7 +25,7 @@ class Branch extends Model
 
     protected $table = 'branches';
     protected $guarded = ['id'];
-    protected $fillable = ['city', 'address', 'phone', 'sort', 'active', 'lat', 'lng', 'domain_id', 'images', 'weekdays', 'weekends'];
+    protected $fillable = ['city', 'address', 'phone', 'sort', 'active', 'lat', 'lng', 'images', 'weekdays', 'weekends'];
     protected $translatable = ['city', 'address', 'weekdays', 'weekends'];
     protected $casts = ['active' => 'bool', 'images' => 'array'];
     protected $attributes = ['images' => ''];
@@ -48,7 +48,6 @@ class Branch extends Model
     {
         return Cache::remember(General::cacheKey(self::BRANCHES_ITEMS_CACHE_KEY), 86400, function () {
             return  self::query()
-                ->branchesForCurrentDomain()
                 ->orderBy('sort')
                 ->active()
                 ->get(['city', 'address', 'phone', 'lat', 'lng', 'images']);
@@ -61,30 +60,11 @@ class Branch extends Model
     |--------------------------------------------------------------------------
     */
 
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(Domain::class);
-    }
-
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Оnly for current domain
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeBranchesForCurrentDomain(Builder $query): Builder
-    {
-        return $query->where('domain_id', Domain::currentDomain()->id);
-    }
 
     /*
     |--------------------------------------------------------------------------

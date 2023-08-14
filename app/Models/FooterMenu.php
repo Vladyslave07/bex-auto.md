@@ -35,9 +35,7 @@ class FooterMenu extends Model
     public static function footerMenu()
     {
         return Cache::remember(General::cacheKey(self::FOOTER_MENU_CACHE_KEY), 86400, function () {
-            return self::query()->orderBy('sort')->whereHas('domains', function ($q) {
-                $q->where('domain_footer_menu.domain_id', Domain::currentDomain()->id);
-            })->active()->get(['slug', 'title', 'column']);
+            return self::query()->orderBy('sort')->active()->get(['slug', 'title', 'column']);
         });
     }
 
@@ -46,16 +44,6 @@ class FooterMenu extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * domains relationship
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function domains(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
-    {
-        return $this->belongsToMany(Domain::class, 'domain_footer_menu');
-    }
 
     /*
     |--------------------------------------------------------------------------
