@@ -29,7 +29,7 @@ class Product extends Model implements AdminMenuInterface
 
     protected $table = 'products';
     protected $guarded = ['id'];
-    protected $fillable = ['sub_title', 'domain_id', 'category_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'youtube_link', 'meta_title', 'meta_description', 'preview_image'];
+    protected $fillable = ['sub_title', 'category_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'youtube_link', 'meta_title', 'meta_description', 'preview_image'];
     protected $casts = ['images' => 'array'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title'];
@@ -86,11 +86,6 @@ class Product extends Model implements AdminMenuInterface
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function domain(): BelongsTo
-    {
-        return $this->belongsTo(Domain::class, 'domain_id');
-    }
 
     public function category(): BelongsTo
     {

@@ -32,9 +32,9 @@ class DatabaseMiddleware
     {
         // Логика для определения соединения на основе домена
         switch ($domain) {
-            case 'bex-auto.local':
+            case getenv('APP_DOMAIN'):
                 return 'mysql';
-            case 'kz.bex-auto.local':
+            case getenv('KZ_APP_DOMAIN'):
                 return 'kz_mysql';
             default:
                 return 'mysql'; // соединение по умолчанию

@@ -15,6 +15,7 @@ return new class extends Migration
     {
         Schema::dropIfExists('category_domain');
         Schema::dropIfExists('brand_domain');
+        Schema::dropIfExists('domain_seo_text');
     }
 
     /**

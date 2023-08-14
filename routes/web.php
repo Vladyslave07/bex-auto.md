@@ -32,30 +32,31 @@ Route::get('clear-car', function () {
 //    foreach ($brands as $brand) {
 //        $brand->delete();
 //    }
+    // Назначение сео текстов для категорий домена
+    // todo: Сделать тоже самое для title и description
+//    $categories = \App\Models\Category::all();
+//    $key = $domain->slug;
+//    foreach ($categories as $category) {
+//        $seoTextId = $category->domain_seo_text_id;
+//        $category->update([
+//            'seo_text_id' => $seoTextId ?: null
+//        ]);
+//    }
     // Очистка Сео текстов
 //    $seoTexts = \App\Models\SeoText::query()->whereHas('domains', function ($q) use ($domain) {
 //        return $q->whereNot('domain_id', $domain->id);
 //    })->get();
 //    dd($seoTexts);
-//    foreach ($brands as $brand) {
-//        $brand->delete();
+//    foreach ($seoTexts as $seoText) {
+//        $seoText->delete();
 //    }
 
-    $categories = \App\Models\Category::all();
+    // Очистка Товаров для домена
+//    $products = \App\Models\Product::query()->whereNot('domain_id', $domain->id)->get();
+//    foreach ($products as $product) {
+//        $product->delete();
+//    }
 
-    $key = $domain->slug;
-    foreach ($categories as $category) {
-        foreach ($category->getOriginal('meta_title') as $langTitle) {
-            $titleArray = json_decode($category->meta_title, true) ?? [];
-            $title = key_exists($key, $titleArray) ? $titleArray[$key] : '';
-            dd($title);
-        }
-        dd($category->getOriginal('meta_title'));
-
-        $category->update([
-            'seo_text_id' => $category->domain_seo_text_id ?: null
-        ]);
-    }
 
     dd($domain->slug);
 

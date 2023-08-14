@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use App\Helper\General;
 use App\Http\Requests\ProductRequest;
 use App\Models\Category;
-use App\Models\Domain;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -45,7 +44,6 @@ class ProductCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        $this->addDomainFilter();
         $this->addCategoriesFilter();
 
         CRUD::setColumns([
@@ -94,21 +92,6 @@ class ProductCrudController extends CrudController
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
 
-        CRUD::addField([
-            'name' => 'domain',
-            'label' => trans('backpack::fields.domain'),
-            'type' => 'relationship',
-            'entity' => 'domain',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-            'tab' => 'Товар',
-            'default' => Domain::DEFAULT_DOMAIN,
-            'hint' => trans('backpack::hint.domains.car'),
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
         CRUD::addField(['tab' => 'Товар', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"], 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField(['tab' => 'Товар', 'name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);

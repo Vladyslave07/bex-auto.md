@@ -136,7 +136,7 @@ class CategoryCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'Категория',
-            'name' => 'domain_seo_text_id',
+            'name' => 'seo_text_id',
             'label' => trans('backpack::fields.seo_text'),
             'type' => 'relationship',
             'entity'    => 'text',
@@ -193,7 +193,7 @@ class CategoryCrudController extends CrudController
             $this->crud->getRequest()->request->add(['meta_description'=> $description]);
         }
 
-        $seoText = $this->crud->getRequest()->request->get('domain_seo_text_id');
+        $seoText = $this->crud->getRequest()->request->get('seo_text_id');
         if (strlen($seoText) > 0){
             $this->crud->addField(['type' => 'hidden', 'name' => 'seo_text_id']);
             $this->crud->getRequest()->request->add(['seo_text_id'=> $seoText]);
