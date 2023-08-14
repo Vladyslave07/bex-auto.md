@@ -33,7 +33,7 @@ class BranchCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -45,7 +45,7 @@ class BranchCrudController extends CrudController
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -60,7 +60,7 @@ class BranchCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -118,13 +118,6 @@ class BranchCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name'       => 'domain',
-            'label'      => trans('backpack::fields.domain'),
-            'type'       => 'select',
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
-
-        CRUD::addField([
             'name'       => 'weekdays',
             'label'      => trans('backpack::fields.weekdays'),
             'type'       => 'text',
@@ -151,7 +144,7 @@ class BranchCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */
