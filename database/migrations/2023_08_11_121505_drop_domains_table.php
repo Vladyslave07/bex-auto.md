@@ -18,6 +18,22 @@ return new class extends Migration
         Schema::dropIfExists('domain_seo_text');
         Schema::dropIfExists('domain_footer_menu');
         Schema::dropIfExists('domain_menu');
+
+        Schema::table('branches', function (Blueprint $table) {
+            $table->dropdropColumn('domain_id');
+        });
+        Schema::table('form_results', function (Blueprint $table) {
+            $table->dropdropColumn('domain_id');
+        });
+        Schema::table('news', function (Blueprint $table) {
+            $table->dropdropColumn('domain_id');
+        });
+        Schema::table('products', function (Blueprint $table) {
+            $table->dropdropColumn('domain_id');
+        });
+        Schema::table('reviews', function (Blueprint $table) {
+            $table->dropdropColumn('domain_id');
+        });
     }
 
     /**
