@@ -32,6 +32,7 @@ return new class extends Migration
             $table->dropColumn('domain_id');
         });
         Schema::table('reviews', function (Blueprint $table) {
+            $table->dropForeign('reviews_domain_id_foreign');
             $table->dropColumn('domain_id');
         });
     }
