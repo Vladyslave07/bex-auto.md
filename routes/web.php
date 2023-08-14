@@ -88,7 +88,12 @@ Route::get('clear-car', function () {
 //        $new->delete();
 //    }
 
-
+    // Очистка результатов форм для домена
+//    $results = \App\Models\FormResult::query()->whereNot('domain_id', $domain->id)->get();
+//    dd($results->count());
+//    foreach ($results as $result) {
+//        $result->delete();
+//    }
 
     dd($domain->slug);
 
