@@ -95,6 +95,13 @@ Route::get('clear-car', function () {
 //        $result->delete();
 //    }
 
+    // Очистка Отзывов для домена
+//    $reviews = \App\Models\Review::query()->whereNot('domain_id', $domain->id)->get();
+//    dd($reviews->count());
+//    foreach ($reviews as $review) {
+//        $review->delete();
+//    }
+
     dd($domain->slug);
 
 

@@ -82,10 +82,7 @@ class Domain extends Model
     public static function phoneMaskForCurrDomain()
     {
         return Cache::remember( General::cacheKey(self::PHONE_MASK_CACHE_KEY), now()->addMonth(), function () {
-            // todo: Вынести установку домена глобально
-            $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-
-            return self::query()->where('slug', $domainSlug)->first()?->phone_mask;
+            return self::query()->where('slug', app('domain')->getDomain()->slug)->first()?->phone_mask;
         });
     }
 
@@ -95,10 +92,7 @@ class Domain extends Model
     public static function phonePlaceholderForCurrDomain()
     {
         return Cache::remember( General::cacheKey(self::PHONE_PLACEHOLDER_CACHE_KEY), now()->addMonth(), function () {
-            // todo: Вынести установку домена глобально
-            $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-
-            return self::query()->where('slug', $domainSlug)->first()?->placeholder;
+            return self::query()->where('slug', app('domain')->getDomain()->slug)->first()?->placeholder;
         });
     }
 
@@ -108,10 +102,7 @@ class Domain extends Model
     public static function phoneForCurrDomain()
     {
         return Cache::remember( General::cacheKey(self::PHONE_CACHE_KEY), now()->addMonth(), function () {
-            // todo: Вынести установку домена глобально
-            $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-
-            return self::query()->where('slug', $domainSlug)->first()?->phone;
+            return self::query()->where('slug', app('domain')->getDomain()->slug)->first()?->phone;
         });
     }
 

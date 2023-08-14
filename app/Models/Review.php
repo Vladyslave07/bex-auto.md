@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
@@ -20,7 +21,7 @@ class Review extends Model
 
     protected $table = 'reviews';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'text', 'rating', 'date_created_review', 'user_name', 'user_icon', 'domain_id'];
+    protected $fillable = ['active', 'sort', 'text', 'rating', 'date_created_review', 'user_name', 'user_icon'];
     public static $images = ['user_icon'];
 
     /*
@@ -34,21 +35,9 @@ class Review extends Model
      */
     public static function reviews()
     {
-        // todo: Кешировать и сбрасывать кеш при изменении
-//        return Cache::remember('index_reviews', 86400, function () {
-//            return self::query()->orderBy('sort')->active()->take(12)->get();
-//        });
-
-        // todo: Вынести установку домена глобально
-        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-
-        $query = self::query()->orderBy('sort')->active();
-        $domain = Domain::domainBySlug($domainSlug);
-        if ($domain) {
-            $query->where('domain_id', $domain->id);
-        }
-
-        return $query->take(12)->get();
+        return Cache::remember(General::cacheKey('index_reviews'), 86400, function () {
+            return self::query()->orderBy('sort')->active()->take(12)->get();
+        });
     }
 
     /*
@@ -56,11 +45,6 @@ class Review extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function domain(): \Illuminate\Database\Eloquent\Relations\BelongsTo
-    {
-        return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
-    }
 
     /*
     |--------------------------------------------------------------------------
