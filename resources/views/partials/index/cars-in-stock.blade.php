@@ -3,10 +3,13 @@
         <div class="main-title text-center">{{ config('settings.title_in_stock') }}</div>
         @if (count($categories) > 0)
             <div class="nav-tabs">
-                @php($first = true)
+                @php
+                    $first = true;
+                    $categoryId = 0;
+                @endphp
                 @foreach($categories as $category)
                     @if (in_array($category->id, array_keys($carsInStock)))
-                        <span class="nav-link @if($first) active @endif"
+                        <span class="nav-link @if($first) @php $categoryId = $category->id @endphp active @endif"
                               data-toggle="tab"
                               data-target="#availabTab_{{ $category->id }}">{{ $category->title }}</span>
                         @php($first = false)
@@ -17,7 +20,7 @@
         <div class="tab-content">
             @foreach($carsInStock as $key => $cars)
                 <div id="availabTab_{{ $key }}"
-                     class="tab-pane @if($loop->last) active @endif">
+                     class="tab-pane @if($key == $categoryId) active @endif">
                     <div class="swiper product-swiper">
                         <div class="swiper-wrapper">
                             @foreach($cars as $car)

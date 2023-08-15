@@ -4,9 +4,18 @@ use App\Http\Controllers\ReviewsController;
 use App\Models\Domain;
 use App\Services\Sitemap\SitemapGeneral;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
+Route::get('job', function () {
+   $connection = \Illuminate\Support\Facades\DB::connection();
+   $db = \Illuminate\Support\Facades\DB::table('jobs')->get();
+   dump($db);
+//   foreach ($db as $item) {
+//       \Illuminate\Support\Facades\DB::table('jobs')->where('id', $item->id)->delete();
+//   }
+});
 
 Route::get('clear-car', function () {
     $domain = app('domain')->getDomain();

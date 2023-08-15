@@ -44,6 +44,11 @@ class Domain extends Model
         return self::domainBySlug($domainSlug);
     }
 
+    public function getQueueConnection()
+    {
+        return $this->id == self::DEFAULT_DOMAIN ? 'database' : 'kz_database';
+    }
+
     public static function defaultDomain()
     {
         return self::domainBySlug(self::DEFAULT_SLUG_DOMAIN);

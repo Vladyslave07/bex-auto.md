@@ -40,7 +40,7 @@ class ApplicationForCredit extends Component implements BaseForm
 
         // Send result to B24
         if ($result->id > 0) {
-            FormResultToB24::dispatch($result->id)->onQueue('formResultToB24');
+            FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
         return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));

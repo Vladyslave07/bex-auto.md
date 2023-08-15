@@ -4,14 +4,11 @@ namespace App\Jobs;
 
 use App\Models\Domain;
 use App\Models\FormResult;
-use App\Utilities\Bitrix24\Entity\Contact;
-use App\Utilities\Bitrix24\Entity\Deal;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class FormResultToB24 implements ShouldQueue

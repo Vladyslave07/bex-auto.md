@@ -38,6 +38,16 @@ return [
             'driver' => 'database',
             'table' => 'jobs',
             'queue' => 'default',
+            'connection' => 'mysql',
+            'retry_after' => 90,
+            'after_commit' => false,
+        ],
+
+        'kz_database' => [
+            'driver' => 'database',
+            'table' => 'jobs',
+            'queue' => 'default',
+            'connection' => 'kz_mysql',
             'retry_after' => 90,
             'after_commit' => false,
         ],
