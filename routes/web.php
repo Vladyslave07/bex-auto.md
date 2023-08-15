@@ -22,98 +22,16 @@ Route::get('clear-car', function () {
 
     // Первым делом вручную удалить меню
 
-    // Очистка авто для домена
-//    $cars = \App\Models\Car::query()->whereNot('domain_id', $domain->id)->get();
-//    foreach ($cars as $car) {
-//        $car->delete();
-//    }
-    // Очистка категорий для домена
-//    $categories = \App\Models\Category::query()->whereHas('domains', function ($q) use ($domain) {
-//        return $q->whereNot('domain_id', $domain->id);
-//    })->get();
-//    dd($categories);
-//
-//    foreach ($categories as $category) {
-//        $category->delete();
-//    }
-    // Очистка марок автомобиля
-//    $brands = \App\Models\Brand::query()->whereHas('domains', function ($q) use ($domain) {
-//        return $q->whereNot('domain_id', $domain->id);
-//    })->get();
-//    dd($brands);
-//    foreach ($brands as $brand) {
-//        $brand->delete();
-//    }
     // Назначение сео текстов для категорий домена
     // todo: Сделать тоже самое для title и description
 //    $categories = \App\Models\Category::all();
-//    $key = $domain->slug;
 //    foreach ($categories as $category) {
 //        $seoTextId = $category->domain_seo_text_id;
 //        $category->update([
 //            'seo_text_id' => $seoTextId ?: null
 //        ]);
 //    }
-    // Очистка Сео текстов
-//    $seoTexts = \App\Models\SeoText::query()->whereHas('domains', function ($q) use ($domain) {
-//        return $q->whereNot('domain_id', $domain->id);
-//    })->get();
-//    dd($seoTexts);
-//    foreach ($seoTexts as $seoText) {
-//        $seoText->delete();
-//    }
-
-    // Очистка Товаров для домена
-//    $products = \App\Models\Product::query()->whereNot('domain_id', $domain->id)->get();
-//    foreach ($products as $product) {
-//        $product->delete();
-//    }
-
-    // Очистка филиалов для домена
-//    $branches = \App\Models\Branch::query()->whereNot('domain_id', $domain->id)->get();
-//    foreach ($branches as $branch) {
-//        $branch->delete();
-//    }
-
-    // Очистка городов
-    // ЗАПУСИТЬ ТОЛЬКО ДЛЯ KZ ДОМЕНА!!!!!
-//    $cities = \App\Models\City::all();
-//    dd(count($cities));
-//    foreach ($cities as $citiy) {
-//        $citiy->delete();
-//    }
-
-    // Очистка филиалов для домена
-//    $branches = \App\Models\Branch::query()->whereNot('domain_id', $domain->id)->get();
-//    dd(count($branches));
-//    foreach ($branches as $branch) {
-//        $branch->delete();
-//    }
-
-    // Очистка новостей для домена
-//    $news = \App\Models\News::query()->whereNot('domain_id', $domain->id)->get();
-//    dd($news->count());
-//    foreach ($news as $new) {
-//        $new->delete();
-//    }
-
-    // Очистка результатов форм для домена
-//    $results = \App\Models\FormResult::query()->whereNot('domain_id', $domain->id)->get();
-//    dd($results->count());
-//    foreach ($results as $result) {
-//        $result->delete();
-//    }
-
-    // Очистка Отзывов для домена
-//    $reviews = \App\Models\Review::query()->whereNot('domain_id', $domain->id)->get();
-//    dd($reviews->count());
-//    foreach ($reviews as $review) {
-//        $review->delete();
-//    }
-
     dd($domain->slug);
-
-
 });
 
 // Sub-domains
