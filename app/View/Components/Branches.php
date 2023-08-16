@@ -19,7 +19,7 @@ class Branches extends Component
     public function __construct()
     {
         $this->domains = Domain::list();
-        $this->branches = Branch::query()->with(['domain'])->get()->groupBy('domain_id');
+        $this->branches = Branch::query()->get();
     }
 
     /**
