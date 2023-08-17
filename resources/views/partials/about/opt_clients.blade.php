@@ -1,7 +1,7 @@
 <div class="section-cooperation container">
     <div class="main-title text-center">
-        <span class="color-red">{{ config('settings.about_parthner_title') }}</span>
-        <div class="h3">{{ config('settings.about_parthner_text') }}</div>
+        <span class="color-red">{{ Setting::get('about_parthner_title') }}</span>
+        <div class="h3">{{ Setting::get('about_parthner_text') }}</div>
     </div>
     <div class="list">
         <div class="item">

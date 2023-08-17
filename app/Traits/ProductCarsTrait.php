@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Property;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -115,7 +116,7 @@ trait ProductCarsTrait
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
+        return $this->parseSnippets($this->meta_title ?: Setting::get('car_meta_title_default'));
     }
 
     public function getSeoMetaDescriptionAttribute()

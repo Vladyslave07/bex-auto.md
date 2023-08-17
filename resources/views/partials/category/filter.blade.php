@@ -9,6 +9,6 @@
             @endif
 
         @endforeach
-        <a href="#" class="clear-filter" wire:click.prevent="cleanFilters()">{{ config('settings.clear_all_filters') }}</a>
+        <a href="#" class="clear-filter" wire:click.prevent="cleanFilters()">{{ Setting::get('clear_all_filters') }}</a>
     </form>
 </aside>

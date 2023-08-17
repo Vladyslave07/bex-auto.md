@@ -86,12 +86,12 @@ class City extends Model
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.city_meta_title_default'));
+        return $this->parseSnippets($this->meta_title ?: Setting::get('city_meta_title_default'));
     }
 
     public function getSeoMetaDescriptionAttribute()
     {
-        return $this->parseSnippets($this->meta_description ?: config('settings.city_meta_description_default'));
+        return $this->parseSnippets($this->meta_description ?: Setting::get('city_meta_description_default'));
     }
 
     /*

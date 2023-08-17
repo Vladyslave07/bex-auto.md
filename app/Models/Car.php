@@ -303,8 +303,8 @@ class Car extends Model implements AdminMenuInterface
     public function getSeoMetaDescriptionAttribute()
     {
         $template = $this->properties?->where('slug', 'country')->first()?->getValue() ?
-            config('settings.car_meta_description_new'):
-            config('settings.car_meta_description_default');
+            Setting::get('car_meta_description_new'):
+            Setting::get('car_meta_description_default');
 
         return $this->parseSnippets($this->meta_description ?: $template);
     }

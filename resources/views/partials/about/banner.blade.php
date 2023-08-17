@@ -1,7 +1,7 @@
 <div class="about">
     <div class="container">
         <h1 class="h1 color-red text-center">BEX AUTO</h1>
-        <h2 class="main-title text-center noline">{!! config('settings.about_sub_title') !!}</h2>
+        <h2 class="main-title text-center noline">{!! Setting::get('about_sub_title') !!}</h2>
         <div class="img">
             <picture>
                 <source type="image/webp" srcset="{{ asset('img/map_mob.webp') }}" media="(max-width: 767px)">

@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Faq;
 use App\Models\News;
 use App\Models\SeoText;
+use App\Models\Setting;
 use App\View\Components\NewsCallBack;
 use Artesaos\SEOTools\Facades\SEOTools;
 
@@ -14,8 +15,8 @@ class NewsController extends Controller
 {
     public function index()
     {
-        SEOTools::setTitle(config('settings.news_meta_title'));
-        SEOTools::setDescription(config('settings.news_meta_description'));
+        SEOTools::setTitle(Setting::get('news_meta_title'));
+        SEOTools::setDescription(Setting::get('news_meta_description'));
         SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
         SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
         SEOTools::opengraph()->addProperty('url', request()->url());

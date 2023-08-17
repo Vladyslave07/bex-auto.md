@@ -1,7 +1,7 @@
 @if (count($reviews) > 0)
     <div class="section-reviews container hidden-xs" id="reviews">
-        <div class="main-title text-center noline">{{ config('settings.reviews_block_title') }}</div>
-        <div class="h3 text-center">{{ config('settings.reviews_block_sub_title') }}</div>
+        <div class="main-title text-center noline">{{ Setting::get('reviews_block_title') }}</div>
+        <div class="h3 text-center">{{ Setting::get('reviews_block_sub_title') }}</div>
         <div class="swiper reviews-swiper">
             <div class="swiper-wrapper">
                 @foreach($reviews as $review)

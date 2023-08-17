@@ -1,6 +1,6 @@
 @if(count($carsInStock) > 0)
     <div class="section-swiper container">
-        <div class="main-title text-center">{{ config('settings.title_in_stock') }}</div>
+        <div class="main-title text-center">{{ Setting::get('title_in_stock') }}</div>
         @if (count($categories) > 0)
             <div class="nav-tabs">
                 @php

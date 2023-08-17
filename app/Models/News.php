@@ -144,7 +144,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.news_meta_title'));
+        return $this->parseSnippets($this->meta_title ?: Setting::get('news_meta_title'));
     }
 
     public function getDetailTextSnippetAttribute()
@@ -157,7 +157,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaDescriptionAttribute()
     {
-        return $this->parseSnippets($this->meta_description ?: config('settings.news_meta_description'));
+        return $this->parseSnippets($this->meta_description ?: Setting::get('news_meta_description'));
     }
 
 }

@@ -12,6 +12,7 @@ use App\Models\Faq;
 use App\Models\PopularRequest;
 use App\Models\Review;
 use App\Models\SeoText;
+use App\Models\Setting;
 use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Storage;
@@ -21,8 +22,8 @@ class IndexController extends Controller
 
     public function index(City $city = null)
     {
-        SEOTools::setTitle($city?->seoMetaTitle ?? config('settings.index_meta_title'));
-        SEOTools::setDescription($city?->seoMetaDescription ?? config('settings.index_meta_description'));
+        SEOTools::setTitle($city?->seoMetaTitle ?? Setting::get('index_meta_title'));
+        SEOTools::setDescription($city?->seoMetaDescription ?? Setting::get('index_meta_description'));
         SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
         SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
         SEOTools::opengraph()->addProperty('url', request()->url());
@@ -63,8 +64,8 @@ class IndexController extends Controller
     {
         $routeName = \Request::route()->getName();
 
-        SEOTools::setTitle(config('settings.' . $routeName . '_meta_title'));
-        SEOTools::setDescription(config('settings.' . $routeName . '_meta_description'));
+        SEOTools::setTitle(Setting::get($routeName . '_meta_title'));
+        SEOTools::setDescription(Setting::get($routeName . '_meta_description'));
         SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
         SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
         SEOTools::opengraph()->addProperty('url', request()->url());

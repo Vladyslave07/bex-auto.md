@@ -16,7 +16,7 @@
 @include('partials.service.banner')
 
 {{-- Call back form --}}
-<livewire:forms.call-back :title="config('settings.application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
+<livewire:forms.call-back :title="Setting::get('application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
 
 @if ($service->is_diller_page)
 

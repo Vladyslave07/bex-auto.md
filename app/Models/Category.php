@@ -192,13 +192,13 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaTitleAttribute()
     {
-        $title = $this->domain_meta_title ?: config('settings.category_meta_title_default');
+        $title = $this->domain_meta_title ?: Setting::get('category_meta_title_default');
         return $this->parseSnippets($title);
     }
 
     public function getSeoMetaDescriptionAttribute()
     {
-        return $this->parseSnippets($this->domain_meta_description ?: config('settings.category_meta_description_default'));
+        return $this->parseSnippets($this->domain_meta_description ?: Setting::get('category_meta_description_default'));
     }
 
     public function getSeoTextAttribute()

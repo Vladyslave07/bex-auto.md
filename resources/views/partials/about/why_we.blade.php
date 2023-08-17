@@ -1,7 +1,7 @@
 <div class="section-advantages">
     <div class="container">
         <div class="main-title text-center color-red noline">
-            {!!  config('settings.about_easy_with') !!}
+            {!! Setting::get('about_easy_with') !!}
         </div>
     </div>
     <div class="img">

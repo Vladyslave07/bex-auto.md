@@ -1,6 +1,6 @@
 <form class="form-choose-car" action="{{ route('news-callback') }}">
     @csrf
-    <div class="title">{{ config('settings.call_back_form_title') }}</div>
+    <div class="title">{{ Setting::get('call_back_form_title') }}</div>
     <div class="form-group">
         <input name="name" class="form-control" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');">
     </div>
