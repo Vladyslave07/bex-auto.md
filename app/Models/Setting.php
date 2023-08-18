@@ -35,10 +35,16 @@ class Setting extends Model
 
     public static function get(string $key)
     {
-        return Cache::remember(General::cacheKey(self::SETTING_CACHE_KEY . '_' . $key), 86400, function () use ($key) {
+        return Cache::remember(General::cacheKey(self::makeCacheKey($key)), 86400, function () use ($key) {
             return self::query()->where('key', $key)->first(['value'])?->value;
         });
     }
+
+    public static function makeCacheKey($key)
+    {
+        return General::cacheKey(self::SETTING_CACHE_KEY . '_' . $key . '_' . app()->getLocale());
+    }
+
 
     /*
     |--------------------------------------------------------------------------

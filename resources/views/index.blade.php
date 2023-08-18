@@ -23,7 +23,7 @@
 @include('partials.index.cars-expected',
     [
         'cars' => $expectedCars,
-        'title' => config('settings.title_expected'),
+        'title' => Setting::get('title_expected'),
         'more' => true
     ]
 )
