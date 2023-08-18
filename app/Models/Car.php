@@ -21,9 +21,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Car extends Model implements AdminMenuInterface
+class Car extends Model implements AdminMenuInterface, Sitemapable
 {
     use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
@@ -65,6 +67,12 @@ class Car extends Model implements AdminMenuInterface
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    {
+        $url = app('domain')->getDomainUrl() . route('car_detail', ['car' => $this], false);
+        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+    }
 
     public function adminEditPath():string
     {
