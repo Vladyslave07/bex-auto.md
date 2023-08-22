@@ -90,7 +90,8 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     public static function selectedCategory()
     {
         return Cache::remember(General::cacheKey(self::CATEGORIES_IN_SLIDER_CACHE_KEY), 86400, function () {
-            return self::query()->where('show_in_slider', true)->get(['id', 'title', 'slug']);
+            return self::query()->where('show_in_slider', true)
+                ->orderBy('sort')->get(['id', 'title', 'slug']);
         });
     }
 
