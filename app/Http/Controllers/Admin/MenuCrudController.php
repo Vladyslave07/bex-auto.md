@@ -3,8 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\MenuRequest;
-use App\Models\Domain;
-use App\Models\Faq;
 use App\Models\Menu;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
@@ -112,18 +110,6 @@ class MenuCrudController extends CrudController
         ]);
 
         CRUD::addField([
-            'name' => 'domains',
-            'label' => trans('backpack::fields.menu_domains'),
-            'type' => 'relationship',
-            'entity' => 'domains',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-        ]);
-
-        CRUD::addField([
             'name' => 'items',
             'label' => trans('backpack::fields.menu_items'),
             'type' => 'table',
@@ -131,7 +117,6 @@ class MenuCrudController extends CrudController
             'columns' => [
                 'name'  => trans('backpack::fields.title'),
                 'url'  => trans('backpack::fields.link'),
-                'domain'  => trans('backpack::fields.domain') . ' (id домена через двоеточие)',
             ],
             'min' => 0,
         ]);

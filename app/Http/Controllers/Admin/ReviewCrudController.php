@@ -23,7 +23,7 @@ class ReviewCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -74,7 +74,6 @@ class ReviewCrudController extends CrudController
         CRUD::addField(['name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['name' => 'domain', 'label' => trans('backpack::fields.domain'), 'type' => 'select', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'rating', 'label' => trans('backpack::fields.rating'), 'type' => 'number', 'attributes' => ["max" => "5"], 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'date_created_review', 'label' => trans('backpack::fields.date_created_review'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'text', 'label' => trans('backpack::fields.text_review'), 'type' => 'text']);

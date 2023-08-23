@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <svg class="close-modal" width="10" height="10"><use xlink:href="#close-icon"></use></svg>
                 <div class="modal-body">
-                    <p class="text-center">{{ config('settings.buy_car_from') }}</p>
+                    <p class="text-center">{{ Setting::get('buy_car_from') }}</p>
                     <form wire:submit.prevent="submit" novalidate autocomplete="off">
                         <div class="form-group">
                             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>

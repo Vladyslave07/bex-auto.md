@@ -2,10 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Models\Domain;
 use App\Models\FormResult;
-use App\Utilities\Bitrix24\Entity\Contact;
-use App\Utilities\Bitrix24\Entity\Deal;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -17,6 +14,8 @@ use Illuminate\Support\Str;
 class FormResultToB24 implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+
+    const DEFAULT_CONNECTION = 'database';
 
     protected $formResult;
 
@@ -40,7 +39,7 @@ class FormResultToB24 implements ShouldQueue
         $lead = new \App\Utilities\Bitrix24\Entity\Lead(getenv('B24_WEBHOOK_LEAD_CREATE'));
 
         $domain = env('KZ_APP_URL');
-        if ($this->formResult?->domain_id == Domain::DEFAULT_DOMAIN) {
+        if ($this->connection == self::DEFAULT_CONNECTION) {
             $domain = env('UK_APP_URL');
         }
 

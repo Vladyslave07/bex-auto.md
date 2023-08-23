@@ -51,7 +51,7 @@ class SitemapGeneral
 
         // Машины
         SitemapCustom::create()
-            ->add(Car::query()->active()->carsForCurrentDomain()->get())
+            ->add(Car::query()->active()->get())
             ->writeToFile(public_path($this->getSavePath('cars', $this->locale)));
 
         // Услуги

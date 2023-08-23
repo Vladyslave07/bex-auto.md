@@ -18,9 +18,9 @@
 
     {{-- Cars list --}}
     @include('partials.search.cars')
-    
+
     {{-- Popular cars --}}
-    @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => config('settings.popular_auto_title'), 'more' => false])
+    @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => Setting::get('popular_auto_title'), 'more' => false])
 
     {{-- Popular auto brand --}}
     @include('partials.index.popular-brand-auto')

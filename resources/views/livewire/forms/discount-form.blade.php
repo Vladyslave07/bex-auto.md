@@ -5,7 +5,7 @@
                 <svg class="close-modal" width="10" height="10"><use xlink:href="#close-icon"></use></svg>
                 <div class="modal-body">
                     <img width="500" height="500" src="{{ Storage::disk('public')->url(\App\Models\Banner::getImageForPopup()) }}" alt="" loading="lazy">
-                    <!-- <p class="text-center">{{ config('settings.discount_form_title') }}</p> -->
+                    <!-- <p class="text-center">{{ Setting::get('discount_form_title') }}</p> -->
                     <form wire:submit.prevent="submit" class="form-discount" novalidate autocomplete="off">
                         <div class="form-group">
                             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>

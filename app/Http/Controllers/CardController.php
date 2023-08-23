@@ -15,9 +15,6 @@ class CardController extends Controller
 {
     public function index(Car $car)
     {
-        if (!$car->forCurrentDomain()) {
-            abort(404);
-        }
 
         app('admin-menu')->setModel($car);
 
@@ -46,9 +43,6 @@ class CardController extends Controller
 
     public function product(Product $product)
     {
-        if (!$product->forCurrentDomain()) {
-            abort(404);
-        }
 
         app('admin-menu')->setModel($product);
 

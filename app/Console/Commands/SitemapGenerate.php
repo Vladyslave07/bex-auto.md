@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Domain;
 use App\Services\Sitemap\SitemapGeneral;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 class SitemapGenerate extends Command
@@ -14,7 +15,7 @@ class SitemapGenerate extends Command
      *
      * @var string
      */
-    protected $signature = 'sitemap:generate';
+    protected $signature = 'sitemap:generate {domain?}';
 
     /**
      * The console command description.
@@ -30,27 +31,32 @@ class SitemapGenerate extends Command
      */
     public function handle()
     {
-        $domains = Domain::query()->whereIn('id', [Domain::DEFAULT_DOMAIN, Domain::KAZACHSTAN_DOMAIN])->get(['slug', 'id']);
+        $connection = 'mysql';
+        $domainSlug = Domain::DEFAULT_SLUG_DOMAIN;
+        if ($this->argument('domain') === 'kz') {
+            $connection = 'kz_mysql';
+            $domainSlug = Domain::KAZACHSTAN_SLUG_DOMAIN;
+        }
+        Config::set('database.default', $connection);
 
-        foreach ($domains as $domain) {
-            app('domain')->setDomain($domain);
+        $domain = Domain::query()->where('slug', $domainSlug)->first(['slug', 'id']);
 
-            $locales = LaravelLocalization::getSupportedLocales();
-            // Delete uk lang for kz domain
-            if ($domain->id == Domain::DEFAULT_DOMAIN) {
-                unset($locales['kz']);
-            }
+        app('domain')->setDomain($domain);
 
-            // Delete kz lang for uk domain
-            if ($domain->id == Domain::KAZACHSTAN_DOMAIN) {
-                unset($locales['uk']);
-            }
+        $locales = LaravelLocalization::getSupportedLocales();
+        // Delete uk lang for kz domain
+        if ($domain->id == Domain::DEFAULT_DOMAIN) {
+            unset($locales['kz']);
+        }
 
-            foreach ($locales as $key => $locale) {
-                $sitemap = new SitemapGeneral($key);
-                $sitemap->generate();
-            }
+        // Delete kz lang for uk domain
+        if ($domain->id == Domain::KAZACHSTAN_DOMAIN) {
+            unset($locales['uk']);
+        }
 
+        foreach ($locales as $key => $locale) {
+            $sitemap = new SitemapGeneral($key);
+            $sitemap->generate();
         }
     }
 }

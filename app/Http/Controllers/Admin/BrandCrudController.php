@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\BrandRequest;
 use App\Models\Brand;
-use App\Models\Domain;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -88,18 +87,6 @@ class BrandCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'slug', 'target'  => 'title', 'label' => trans('backpack::fields.slug'), 'type' => 'slug', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-        CRUD::addField([
-            'name' => 'domains',
-            'label' => trans('backpack::fields.brand_domain'),
-            'type' => 'relationship',
-            'entity' => 'domains',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
     }
 
     /**

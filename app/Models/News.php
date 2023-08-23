@@ -31,7 +31,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     protected $table = 'news';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'preview_text', 'detail_text', 'image', 'meta_title', 'domain_id', 'meta_description'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'preview_text', 'detail_text', 'image', 'meta_title', 'meta_description'];
     public static $images = ['image'];
     protected $attributes = ['sort' => 500];
     protected $translatable = ['title', 'preview_text', 'detail_text', 'meta_title', 'meta_description'];
@@ -96,10 +96,9 @@ class News extends Model implements Sitemapable, AdminMenuInterface
     public static function newsList($page)
     {
         return Cache::remember(General::cacheKey(self::NEWS_LIST_CACHE_TAG . $page), 86400, function () {
-            return self::query()
-                ->where('domain_id', app('domain')->getDomain()->id)
-                ->orWhereNull('domain_id')
-                ->orderBy('sort', 'asc')->orderBy('id', 'desc')->active()->paginate(4);
+            return self::query()->orderBy('sort')
+                ->orderBy('id', 'desc')
+                ->active()->paginate(4);
         });
     }
 
@@ -119,21 +118,11 @@ class News extends Model implements Sitemapable, AdminMenuInterface
         }
     }
 
-    public function forCurrentDomain(): bool
-    {
-        return $this->domain_id == app('domain')->getDomain()->id || $this->domain_id === null;
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    public function domain(): BelongsTo
-    {
-        return $this->belongsTo(Domain::class, 'domain_id');
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -155,7 +144,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.news_meta_title'));
+        return $this->parseSnippets($this->meta_title ?: Setting::get('news_meta_title'));
     }
 
     public function getDetailTextSnippetAttribute()
@@ -168,7 +157,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaDescriptionAttribute()
     {
-        return $this->parseSnippets($this->meta_description ?: config('settings.news_meta_description'));
+        return $this->parseSnippets($this->meta_description ?: Setting::get('news_meta_description'));
     }
 
 }

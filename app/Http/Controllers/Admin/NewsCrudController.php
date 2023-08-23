@@ -5,10 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Helper\General;
 use App\Http\Requests\NewsRequest;
 use App\Models\Delivery;
-use App\Models\Domain;
-use App\Models\Faq;
 use App\Models\News;
-use App\Models\SeoText;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -91,19 +88,6 @@ class NewsCrudController extends CrudController
         CRUD::addField(['tab' => 'Новость', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField(['tab' => 'Новость', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-        CRUD::addField([
-            'tab' => 'Новость',
-            'name' => 'domain',
-            'label' => trans('backpack::fields.domain'),
-            'type' => 'relationship',
-            'entity' => 'domain',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
         CRUD::addField(['tab' => 'Новость', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
 
 

@@ -21,9 +21,11 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
+use Spatie\Sitemap\Contracts\Sitemapable;
 
-class Car extends Model implements AdminMenuInterface
+class Car extends Model implements AdminMenuInterface, Sitemapable
 {
     use ProductCarsTrait, MakesWebp, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope, Sluggable, SluggableScopeHelpers, SeoSnippets;
 
@@ -43,7 +45,7 @@ class Car extends Model implements AdminMenuInterface
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'domain_id', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
+    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
@@ -65,6 +67,12 @@ class Car extends Model implements AdminMenuInterface
     | FUNCTIONS
     |--------------------------------------------------------------------------
     */
+
+    public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
+    {
+        $url = app('domain')->getDomainUrl() . route('car_detail', ['car' => $this], false);
+        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+    }
 
     public function adminEditPath():string
     {
@@ -115,7 +123,6 @@ class Car extends Model implements AdminMenuInterface
                 ->whereHas('categories', function ($query) use ($categories){
                     return $query->whereIn('category_id', $categories)->orderBy('category_id');
                 })
-                ->carsForCurrentDomain()
                 ->take(11)
                 ->get();
 
@@ -140,7 +147,6 @@ class Car extends Model implements AdminMenuInterface
     public static function carsSearch(string $q = '')
     {
         return self::query()
-            ->CarsForCurrentDomain()
             ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
             ->defaultOrder()
             ->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
@@ -158,7 +164,6 @@ class Car extends Model implements AdminMenuInterface
                 ->orderBy('id')
                 ->where('status', self::EXPECTED_STATUS)
                 ->active()
-                ->carsForCurrentDomain()
                 ->take(11)
                 ->get();
         });
@@ -178,7 +183,7 @@ class Car extends Model implements AdminMenuInterface
     {
         return Cache::remember(General::cacheKey(self::POPULAR_CARS_CACHE_KEY), 86400, function () {
             return self::query()->active()->orderBy('pin', 'desc')
-                ->orderBy('sort')->carsForCurrentDomain()->take(12)->get();
+                ->orderBy('sort')->take(12)->get();
         });
     }
 
@@ -209,16 +214,6 @@ class Car extends Model implements AdminMenuInterface
 
     }
 
-    /**
-     * Check car for current domain
-     *
-     * @return bool
-     */
-    public function forCurrentDomain()
-    {
-        return $this->domain_id === Domain::currentDomain()->id;
-    }
-
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
@@ -233,11 +228,6 @@ class Car extends Model implements AdminMenuInterface
     public function equipments(): BelongsToMany
     {
         return $this->belongsToMany(Equipment::class, 'car_equipment');
-    }
-
-    public function domain(): BelongsTo
-    {
-        return $this->belongsTo(\App\Models\Domain::class, 'domain_id');
     }
 
     public function categories(): BelongsToMany
@@ -262,27 +252,6 @@ class Car extends Model implements AdminMenuInterface
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * Return cars only for current domain
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeCarsForCurrentDomain(Builder $query): Builder
-    {
-        // НУЖНО УСТАНОВИТЬ ГЛОБАЛЬНО ДЛЯ ВСЕГО САЙТА
-        // todo: Вынести установку домена глобально
-        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
-        $domain = Domain::domainBySlug($domainSlug);
-
-        $id = self::KZ_DOMAIN_ID;
-        if ($domain) {
-            $id = $domain->id;
-        }
-
-        return $query->where('domain_id', $id);
-    }
 
     /*
     |--------------------------------------------------------------------------
@@ -342,8 +311,8 @@ class Car extends Model implements AdminMenuInterface
     public function getSeoMetaDescriptionAttribute()
     {
         $template = $this->properties?->where('slug', 'country')->first()?->getValue() ?
-            config('settings.car_meta_description_new'):
-            config('settings.car_meta_description_default');
+            Setting::get('car_meta_description_new'):
+            Setting::get('car_meta_description_default');
 
         return $this->parseSnippets($this->meta_description ?: $template);
     }

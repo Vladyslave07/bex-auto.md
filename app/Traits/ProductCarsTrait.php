@@ -3,6 +3,7 @@
 namespace App\Traits;
 
 use App\Models\Property;
+use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 
@@ -69,17 +70,6 @@ trait ProductCarsTrait
         return $query->orderByRaw("FIELD(status, \"in_stock\", \"expect\", \"on_order\", \"on_order_usa\", \"on_order_korea\", \"sold\")");
     }
 
-    /**
-     * Return items only for current domain
-     *
-     * @param Builder $query
-     * @return Builder
-     */
-    public function scopeForCurrentDomain(Builder $query): Builder
-    {
-        return $query->where('domain_id', app('domain')->getDomain()->id);
-    }
-
     /*
     |--------------------------------------------------------------------------
     | ACCESSORS
@@ -126,7 +116,7 @@ trait ProductCarsTrait
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: config('settings.car_meta_title_default'));
+        return $this->parseSnippets($this->meta_title ?: Setting::get('car_meta_title_default'));
     }
 
     public function getSeoMetaDescriptionAttribute()

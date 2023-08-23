@@ -2,5 +2,5 @@
     <br>
     <br>
     <br>
-    <p>{{ config('settings.under_auction_text_block') }}</p>
+    <p>{{ Setting::get('under_auction_text_block') }}</p>
 </div>

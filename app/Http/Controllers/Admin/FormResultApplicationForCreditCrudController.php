@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Livewire\Forms\ApplicationForCar;
 use App\Http\Livewire\Forms\ApplicationForCredit;
-use App\Http\Livewire\Forms\DiscountForm;
 use App\Http\Requests\FormResultRequest;
-use App\Models\Domain;
 use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -46,8 +43,6 @@ class FormResultApplicationForCreditCrudController extends CrudController
     {
         CRUD::addClause('where', 'slug_form', ApplicationForCredit::SLUG_FORM);
 
-        $this->addDomainFilter();
-
         CRUD::column('id');
         CRUD::column('name');
         CRUD::column('phone');
@@ -86,20 +81,6 @@ class FormResultApplicationForCreditCrudController extends CrudController
             'name' => 'id',
             'label' => trans('backpack::fields.id'),
             'type' => 'text',
-            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
-
-        CRUD::addField([
-            'name' => 'domain',
-            'label' => trans('backpack::fields.domain'),
-            'type' => 'relationship',
-            'entity' => 'domain',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);

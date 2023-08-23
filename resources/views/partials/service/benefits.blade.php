@@ -1,6 +1,6 @@
 @if (count($benefits) > 0)
     <div class="section-cooperation container">
-        <div class="main-title text-center">{{ config('settings.benefits_block_title') }}</div>
+        <div class="main-title text-center">{{ Setting::get('benefits_block_title') }}</div>
         <div class="list">
             @foreach($benefits as $benefit)
                 <div class="item">

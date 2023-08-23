@@ -1,6 +1,6 @@
 <div class="section-services">
     <div class="container">
-        <div class="h3 text-center">{{ config('settings.service_block_title') }}</div>
+        <div class="h3 text-center">{{ Setting::get('service_block_title') }}</div>
         <div class="swiper services-swiper">
             <div class="swiper-wrapper">
                 <div class="swiper-slide">

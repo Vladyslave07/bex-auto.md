@@ -43,7 +43,7 @@
                     <li>
                     </li>
                     <li>
-                        <a href="mailto:{{ config('settings.main-email') }}">{{ config('settings.main-email') }}</a>
+                        <a href="mailto:{{ Setting::get('main-email') }}">{{ Setting::get('main-email') }}</a>
                     </li>
                 </ul>
             </div>

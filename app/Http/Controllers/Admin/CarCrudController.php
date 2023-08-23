@@ -6,7 +6,6 @@ use App\Helper\General;
 use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
-use App\Models\Domain;
 use App\Models\Equipment;
 use App\Models\Product;
 use App\Traits\BulkDeleteOperation;
@@ -15,8 +14,6 @@ use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 
 /**
  * Class CarCrudController
@@ -61,7 +58,6 @@ class CarCrudController extends CrudController
     protected function setupListOperation()
     {
 
-        $this->addDomainFilter();
         $this->addCategoriesFilter();
         $this->addBrandsFilter();
         $this->addModelsFilter();
@@ -108,22 +104,6 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'pin', 'label' => trans('backpack::fields.pin'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'show_credit_btn', 'label' => trans('backpack::fields.show_credit_btn'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-
-        CRUD::addField([
-            'name' => 'domain',
-            'label' => trans('backpack::fields.domain'),
-            'type' => 'relationship',
-            'entity' => 'domain',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-            'tab' => 'Автомобиль',
-            'default' => Domain::DEFAULT_DOMAIN,
-            'hint' => trans('backpack::hint.domains.car'),
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
 
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'updated_at', 'label' => trans('backpack::fields.updated_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);

@@ -5,8 +5,8 @@
             <img width="855" height="604" src="{{ asset('img/section-social-mob.png') }}" loading="lazy" alt="">
         </picture>
         <div class="text">
-            <div class="main-title noline">{!! config('settings.get_offer_title') !!}</div>
-            <p>{!! config('settings.get_offer_sub_title') !!}</p>
+            <div class="main-title noline">{!! Setting::get('get_offer_title') !!}</div>
+            <p>{!! Setting::get('get_offer_sub_title') !!}</p>
             <picture class="img visible-sm">
                 <source type="image/webp" srcset="{{ asset('img/section-social-mob.webp') }}">
                 <img width="855" height="604" src="{{ asset('img/section-social-mob.png') }}" loading="lazy" alt="">

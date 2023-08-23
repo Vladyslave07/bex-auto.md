@@ -37,7 +37,6 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id', 'meta_title', 'meta_description', 'image', 'sub_title', 'sub_title_text', 'h1'];
     protected $translatable = ['title', 'meta_title', 'meta_description', 'sub_title', 'sub_title_text', 'h1'];
     protected $attributes = ['sort' => 500];
-    protected $with = ['domains'];
 
     public static $images = ['image'];
     public static $imageSize = ['width' => 826, 'height' => 614];
@@ -91,7 +90,8 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     public static function selectedCategory()
     {
         return Cache::remember(General::cacheKey(self::CATEGORIES_IN_SLIDER_CACHE_KEY), 86400, function () {
-            return self::query()->where('show_in_slider', true)->forCurrentDomain()->get(['id', 'title', 'slug']);
+            return self::query()->where('show_in_slider', true)
+                ->orderBy('sort')->get(['id', 'title', 'slug']);
         });
     }
 
@@ -101,12 +101,12 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
      */
     public function carsOrProducts()
     {
-        $items = $this->cars()->forCurrentDomain()->active();
+        $items = $this->cars()->active();
         if ($items->count() >= 1) {
             return $items;
         }
 
-        return $this->products()->forCurrentDomain()->active();
+        return $this->products()->active();
     }
 
     /*
@@ -122,7 +122,7 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
      */
     public function text(): BelongsTo
     {
-        return $this->belongsTo(SeoText::class, 'domain_seo_text_id');
+        return $this->belongsTo(SeoText::class, 'seo_text_id');
     }
 
     /**
@@ -150,30 +150,11 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
         return $this->hasMany(Product::class, 'category_id');
     }
 
-    /**
-     * domains relationship
-     *
-     * @return BelongsToMany
-     */
-    public function domains(): BelongsToMany
-    {
-        return $this->belongsToMany(Domain::class, 'category_domain');
-    }
-
     /*
     |--------------------------------------------------------------------------
     | SCOPES
     |--------------------------------------------------------------------------
     */
-
-    public function scopeForCurrentDomain(Builder $query)
-    {
-        return $query->whereHas('domains', function ($q) {
-            $q->where('category_domain.domain_id', Domain::currentDomain()->id)
-                ->orWhereNull('category_domain.domain_id');
-        });
-    }
-
 
     /*
     |--------------------------------------------------------------------------
@@ -212,19 +193,19 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaTitleAttribute()
     {
-        $title = $this->domain_meta_title ?: config('settings.category_meta_title_default');
+        $title = $this->domain_meta_title ?: Setting::get('category_meta_title_default');
         return $this->parseSnippets($title);
     }
 
     public function getSeoMetaDescriptionAttribute()
     {
-        return $this->parseSnippets($this->domain_meta_description ?: config('settings.category_meta_description_default'));
+        return $this->parseSnippets($this->domain_meta_description ?: Setting::get('category_meta_description_default'));
     }
 
     public function getSeoTextAttribute()
     {
-        return Cache::remember( $this->domain_seo_text_id . '_' . self::SEO_TEXT_CACHE_KEY, 86400, function () {
-            return SeoText::query()->find($this->domain_seo_text_id, ['title', 'text']);
+        return Cache::remember($this->seo_text_id . '_' . self::SEO_TEXT_CACHE_KEY, 86400, function () {
+            return SeoText::query()->find($this->seo_text_id, ['title', 'text']);
         });
     }
 
@@ -253,7 +234,6 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
         }
         return $this->seo_text_id;
     }
-
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
@@ -282,14 +262,4 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
         }
     }
 
-    public function setSeoTextIdAttribute($value)
-    {
-        if (strlen($this->seo_text_id) > 0) {
-            $seoTextArray = json_decode($this->seo_text_id, true);
-            $seoTextArray[Domain::currentDomain()->slug] = $value;
-            $this->attributes['seo_text_id'] = json_encode($seoTextArray);
-        } else {
-            $this->attributes['seo_text_id'] = json_encode([Domain::currentDomain()->slug => $value]);
-        }
-    }
 }

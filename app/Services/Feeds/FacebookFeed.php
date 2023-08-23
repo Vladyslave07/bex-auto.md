@@ -152,7 +152,6 @@ class FacebookFeed extends Feed
     public function getCars()
     {
         return Car::query()
-            ->where('domain_id', app('domain')->getDomain()->id)
             ->active()
             ->get();
     }

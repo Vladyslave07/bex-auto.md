@@ -3,9 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\CategoryRequest;
-use App\Models\Car;
 use App\Models\Category;
-use App\Models\Domain;
 use App\Models\Faq;
 use App\Models\SeoText;
 use App\Traits\BulkDeleteOperation;
@@ -95,19 +93,6 @@ class CategoryCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'Категория',
-            'name' => 'domains',
-            'label' => trans('backpack::fields.category_domain'),
-            'type' => 'relationship',
-            'entity' => 'domains',
-            'attribute' => 'title',
-            'model' => Domain::class,
-            'options' => (function ($query) {
-                return $query->orderBy('title', 'asc')->get();
-            }),
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
-        CRUD::addField([
-            'tab' => 'Категория',
             'name' => 'h1',
             'label' => trans('backpack::fields.h1'),
             'type' => 'simplemde',
@@ -151,7 +136,7 @@ class CategoryCrudController extends CrudController
 
         CRUD::addField([
             'tab' => 'Категория',
-            'name' => 'domain_seo_text_id',
+            'name' => 'seo_text_id',
             'label' => trans('backpack::fields.seo_text'),
             'type' => 'relationship',
             'entity'    => 'text',
@@ -208,7 +193,7 @@ class CategoryCrudController extends CrudController
             $this->crud->getRequest()->request->add(['meta_description'=> $description]);
         }
 
-        $seoText = $this->crud->getRequest()->request->get('domain_seo_text_id');
+        $seoText = $this->crud->getRequest()->request->get('seo_text_id');
         if (strlen($seoText) > 0){
             $this->crud->addField(['type' => 'hidden', 'name' => 'seo_text_id']);
             $this->crud->getRequest()->request->add(['seo_text_id'=> $seoText]);

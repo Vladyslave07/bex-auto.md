@@ -56,9 +56,7 @@ class SeoText extends Model
     public static function mainText()
     {
         return Cache::remember(General::cacheKey(self::MAIN_SEO_TEXT_CACHE_KEY), 86400, function () {
-            return self::query()->whereHas('domains', function ($q) {
-                $q->where('domain_seo_text.domain_id',app('domain')->getDomain()->id);
-            })->where('main', 1)->active()->first(['title', 'text']);
+            return self::query()->where('main', 1)->active()->first(['title', 'text']);
         });
     }
 
@@ -77,16 +75,6 @@ class SeoText extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
-
-    /**
-     * domains relationship
-     *
-     * @return BelongsToMany
-     */
-    public function domains(): BelongsToMany
-    {
-        return $this->belongsToMany(Domain::class, 'domain_seo_text');
-    }
 
     /*
     |--------------------------------------------------------------------------
