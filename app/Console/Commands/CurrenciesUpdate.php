@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 
 class CurrenciesUpdate extends Command
 {
@@ -11,7 +12,7 @@ class CurrenciesUpdate extends Command
      *
      * @var string
      */
-    protected $signature = 'currency:update';
+    protected $signature = 'currency:update {domain?}';
 
     /**
      * The console command description.
@@ -27,6 +28,13 @@ class CurrenciesUpdate extends Command
      */
     public function handle()
     {
+        $connection = 'mysql';
+        if ($this->argument('domain') === 'kz') {
+            $connection = 'kz_mysql';
+        }
+
+        Config::set('database.default', $connection);
+
         $currencies = new \App\Services\Currency\CurrencyRequest();
         $currencies->updateCurrenciesRate();
         return self::SUCCESS;
