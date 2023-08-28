@@ -47,7 +47,7 @@
                                                 <div class="item">
                                                     <img width="60" height="60" src="<?= Storage::disk('public')->url($bank->image) ?>" loading="lazy" alt="<?= $bank->title ?>">
                                                     <?= $bank->title ?>
-                                                    <a href="<?= $bank->link_for_new_cars ?>" class="btn"><?= $bank->btn_text ?></a>
+                                                    <a target="_blank" rel="nofollow" href="<?= $bank->link_for_new_cars ?>" class="btn"><?= $bank->btn_text ?></a>
                                                 </div>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
@@ -60,7 +60,7 @@
                                                 <div class="item">
                                                     <img width="60" height="60" src="<?= Storage::disk('public')->url($bank->image) ?>" loading="lazy" alt="<?= $bank->title ?>">
                                                         <?= $bank->title ?>
-                                                    <a href="<?= $bank->link_for_old_cars ?>" class="btn"><?= $bank->btn_text ?></a>
+                                                    <a target="_blank" rel="nofollow" href="<?= $bank->link_for_old_cars ?>" class="btn"><?= $bank->btn_text ?></a>
                                                 </div>
                                             <?php endif; ?>
                                         <?php endforeach; ?>
