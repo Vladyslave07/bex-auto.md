@@ -91,8 +91,8 @@ class ServiceCrudController extends CrudController
         CRUD::addField(['tab' => 'Услуга', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
         CRUD::addField(['tab' => 'Услуга', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug')]);
 
-        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'simplemde']);
-        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'simplemde']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'ckeditor']);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'ckeditor']);
 
         CRUD::addField([
             'tab' => 'Услуга',
