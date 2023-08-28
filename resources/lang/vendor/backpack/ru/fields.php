@@ -109,6 +109,9 @@ return [
     'currency' => 'Валюта',
     'bank_code' => 'Банковский код',
     'case_slug' => 'Ключ',
+    'btn_text' => 'Текст кнопки',
+    'link_for_new_cars' => 'Ссылка для новых авто',
+    'link_for_old_cars' => 'Ссылка для Б\У авто',
 
     'option' => [
         'expect' => 'Ожидается',

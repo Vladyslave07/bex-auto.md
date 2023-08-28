@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms;
 
 use App\Jobs\FormResultToB24;
+use App\Models\Bank;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
 use App\Traits\UtmMarkTrait;
@@ -19,8 +20,14 @@ class ApplicationForCredit extends Component implements BaseForm
     public $name;
     public $phone;
     public $car;
+    public $banks;
 
     const SLUG_FORM = 'application_for_credit';
+
+    public function mount()
+    {
+        $this->banks = Bank::query()->orderBy('sort')->get();
+    }
 
     public function render()
     {
