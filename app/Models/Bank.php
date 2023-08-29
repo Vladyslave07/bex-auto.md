@@ -74,7 +74,7 @@ class Bank extends Model
     |--------------------------------------------------------------------------
     */
 
-    public function setPreviewImageAttribute($value)
+    public function setImageAttribute($value)
     {
         $attribute_name = "image";
         $disk = "public";
