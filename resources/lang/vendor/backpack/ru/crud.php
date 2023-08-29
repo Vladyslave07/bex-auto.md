@@ -242,4 +242,7 @@ return [
 
     'word_case' => 'Падеж',
     'word_cases' => 'Падежи',
+
+    'country' => 'Страна',
+    'countries' => 'Страны',
 ];

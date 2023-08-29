@@ -109,6 +109,9 @@ return [
     'currency' => 'Валюта',
     'bank_code' => 'Банковский код',
     'case_slug' => 'Ключ',
+    'country_text' => 'Текст',
+    'auction_images' => 'Картинки аукционов',
+    'auction_logo' => 'Логотип аукциона',
 
     'option' => [
         'expect' => 'Ожидается',
