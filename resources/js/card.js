@@ -3,6 +3,7 @@ import Phone from './import/phone';
 import Dropdown from './import/dropdown';
 import ProductSwiper from './import/product-swiper';
 import GallerySwiper from './import/gallery-swiper';
+import Tabs from './import/tabs';
 import Modal from './import/modal';
 import { Fancybox } from "@fancyapps/ui";
 
@@ -11,6 +12,7 @@ Phone();
 Dropdown();
 ProductSwiper();
 GallerySwiper();
+Tabs();
 Modal();
 
 document.addEventListener('livewire:load', function () {

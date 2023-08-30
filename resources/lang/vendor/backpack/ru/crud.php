@@ -245,4 +245,7 @@ return [
 
     'country' => 'Страна',
     'countries' => 'Страны',
+
+    'bank' => 'Банк',
+    'banks' => 'Банки',
 ];
