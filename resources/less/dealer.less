@@ -16,6 +16,11 @@
 @import "partials/section-team.less";
 @import "partials/modal.less";
 
+.tab-content {
+    .tab-pane:not(.active) {
+        display: none;
+    }
+}
 @media (max-width: 767px) {
     .banner {
         .h1 {

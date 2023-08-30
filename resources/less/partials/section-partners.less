@@ -14,6 +14,7 @@
         padding: 15px 0;
         margin: -15px -20px;
         display: flex;
+        flex-wrap: wrap;
         gap: 16px;
         justify-content: center;
         &::-webkit-scrollbar {
@@ -71,6 +72,8 @@
             margin-bottom: 27px;
         }
         .auctions {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
             gap: 10px;
             .item {
                 padding-top: 5px;
