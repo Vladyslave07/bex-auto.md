@@ -18,30 +18,8 @@
 {{-- Call back form --}}
 <livewire:forms.call-back :title="Setting::get('application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
 
-@if ($service->is_diller_page)
-
-    {{-- Auto in stock --}}
-    @include('partials.index.cars-in-stock')
-
-    {{-- Official partner --}}
-    @include('partials.index.partner')
-
-    <hr class="hr mb-1">
-
-    {{-- Benefits --}}
-    @include('partials.service.benefits')
-
-@endif
-
 {{-- Youtube video --}}
 @include('partials.service.youtube')
-
-@if ($service->is_diller_page)
-
-    {{-- Become partner --}}
-    @include('partials.service.become_partner')
-
-@endif
 
 {{-- Seo text --}}
 @include('partials.service.text')
