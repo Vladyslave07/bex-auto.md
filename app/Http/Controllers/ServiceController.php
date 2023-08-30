@@ -38,9 +38,9 @@ class ServiceController extends Controller
         // Brands
         $brands = Brand::brands();
 
-        $service->is_diller_page = false;
+        $service->dealer_page = false;
         if ($service->id === 1) {
-            $service->is_diller_page = true;
+            $service->dealer_page = true;
         }
 
         // Show default seo text if current not exist
@@ -53,6 +53,11 @@ class ServiceController extends Controller
             $service->faqs = Faq::defaultFaqs();
         }
 
-        return view('service', compact('service', 'categories', 'carsInStock', 'benefits', 'brands'));
+        return view($this->getTemplate($service->dealer_page), compact('service', 'categories', 'carsInStock', 'benefits', 'brands'));
+    }
+
+    public function getTemplate($isDealerPage)
+    {
+        return $isDealerPage ? 'dealer_service' : 'service';
     }
 }
