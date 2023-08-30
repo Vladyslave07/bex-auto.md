@@ -115,6 +115,9 @@ return [
     'country_text' => 'Текст',
     'auction_images' => 'Картинки аукционов',
     'auction_logo' => 'Логотип аукциона',
+    'employee_name' => 'ФИО сотрудника',
+    'email' => 'Почта (email)',
+    'photo' => 'Фото',
 
     'option' => [
         'expect' => 'Ожидается',
