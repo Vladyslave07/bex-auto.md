@@ -41,7 +41,7 @@
     @include('partials.index.faq', ['faqs' => $service->faqs])
 
     {{-- Employees --}}
-    @include('partials.service.employees')
+    @include('partials.service.employees', ['employees' => $employees])
 
     {{-- Seo text --}}
     @include('partials.index.seo-text', ['seoText' => $service->seo_text])

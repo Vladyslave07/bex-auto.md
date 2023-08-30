@@ -3,16 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Helper\General;
-use App\Http\Controllers\Controller;
 use App\Models\Benefit;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Employee;
 use App\Models\Faq;
 use App\Models\SeoText;
 use App\Models\Service;
 use Artesaos\SEOTools\Facades\SEOTools;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -38,9 +37,12 @@ class ServiceController extends Controller
         // Brands
         $brands = Brand::brands();
 
+        $employees = [];
         $service->dealer_page = false;
         if ($service->id === 1) {
             $service->dealer_page = true;
+            $employees = Employee::employees();
+
         }
 
         // Show default seo text if current not exist
@@ -53,7 +55,7 @@ class ServiceController extends Controller
             $service->faqs = Faq::defaultFaqs();
         }
 
-        return view($this->getTemplate($service->dealer_page), compact('service', 'categories', 'carsInStock', 'benefits', 'brands'));
+        return view($this->getTemplate($service->dealer_page), compact('service', 'categories', 'carsInStock', 'benefits', 'brands', 'employees'));
     }
 
     public function getTemplate($isDealerPage)
