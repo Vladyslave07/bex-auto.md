@@ -111,6 +111,7 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('setting') }}'><i class='nav-icon la la-cog'></i> <span>Список настроек</span></a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('log') }}'><i class='nav-icon la la-terminal'></i> Логи</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('currency') }}"><i class="nav-icon la la-sort-amount-up"></i> Валюты</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('bank') }}"><i class="nav-icon la la-bank"></i> Банки</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('word-case') }}"><i class="nav-icon la la-question"></i> {{ trans('backpack::crud.word_cases') }}</a></li>
     </ul>
 </li>

@@ -3,6 +3,9 @@ export default function() {
         if(!!e.target.closest('.modal') && !!!e.target.closest('.modal-body') || e.target.closest('.close-modal-js')) {
             closeModal();
         }
+        if (e.target.classList.contains('close-modal')) {
+            closeModal();
+        }
         if(!!e.target.closest('[data-toggle="modal"]')) {
             closeModal();
             openModal(e.target.closest('[data-toggle="modal"]').dataset.target);
