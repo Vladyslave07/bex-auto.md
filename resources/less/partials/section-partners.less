@@ -7,8 +7,49 @@
         font-weight: 600;
         font-size: 20px;
         line-height: 30px;
-        margin: 32px auto 57px;
-        max-width: 800px;
+        margin: 0 0 38px;
+    }
+    .auctions {
+        overflow: auto;
+        padding: 15px 0;
+        margin: -15px -20px;
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        .item {
+            background: #FAFAFA;
+            border-radius: 5px;
+            box-shadow: 4px 4px 12px 0 rgba(0, 0, 0, 0.10);
+            overflow: hidden;
+            padding-top: 15px;
+            min-height: 204px;
+            min-width: 209px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: none;
+            .img {
+                margin-top: auto;
+                margin-bottom: 30px;
+            }
+            a {
+                font-size: 13px;
+                font-weight: 600;
+                background: #FBFBFB;
+                box-shadow: 3.2px 3.2px 10px 0 rgba(0, 0, 0, 0.10);
+                padding: 12px 0;
+                text-align: center;
+                text-decoration: underline;
+                display: block;
+                width: 100%;
+                &:hover {
+                    text-decoration: none;
+                }
+            }
+        }
     }
 }
 @media (max-width: 991px) {
@@ -16,6 +57,35 @@
         margin-bottom: 50px;
         .main-title {
             margin-bottom: 17px;
+        }
+    }
+}
+@media (max-width: 767px) {
+    .section-partners {
+        .main-title {
+            font-size: 24px;
+            line-height: 34px;
+            margin-bottom: 10px;
+        }
+        p {
+            margin-bottom: 27px;
+        }
+        .auctions {
+            gap: 10px;
+            .item {
+                padding-top: 5px;
+                min-height: 149px;
+                min-width: 152px;
+                .img {
+                    margin-bottom: 0;
+                    img {
+                        transform: scale(0.8);
+                    }
+                }
+                a {
+                    font-size: 9px;
+                }
+            }
         }
     }
 }
