@@ -14,15 +14,14 @@
                             <input wire:model.defer="phone" class="form-control @error('phone') is-invalid @enderror" type="text" placeholder="{{ \App\Models\Domain::phonePlaceholderForCurrDomain() }}" data-type="tel" required>
                             @error('phone')<div class="invalid-feedback">{{ $message }}</div>@enderror
                         </div>
-                        <!-- <button class="btn" type="submit">{{ Lang::get('forms.discount.btn') }}</button> -->
-                        <button class="btn" type="button" onclick="closeModal('#applicationForCredit');openModal('#linksForCredit')">{{ Lang::get('forms.discount.btn') }}</button>
+                        <button class="btn" type="submit">{{ Lang::get('forms.discount.btn') }}</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
     <?php if (count($this->banks) > 0): ?>
-    <div id="linksForCredit" class="modal links-credit @if($show === true) is-visible @endif">
+    <div id="linksForCredit" class="modal links-credit @if($showBanks === true) is-visible @endif">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
