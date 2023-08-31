@@ -17,6 +17,7 @@ class ApplicationForCredit extends Component implements BaseForm
     use UtmMarkTrait;
 
     public $show;
+    public $showBanks = false;
     public $name;
     public $phone;
     public $car;
@@ -44,13 +45,12 @@ class ApplicationForCredit extends Component implements BaseForm
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
         $this->show = false;
+        $this->showBanks = true;
 
         // Send result to B24
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
-
-        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 
     protected function rules()
