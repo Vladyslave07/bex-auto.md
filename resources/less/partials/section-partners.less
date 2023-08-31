@@ -10,13 +10,9 @@
         margin: 0 0 38px;
     }
     .auctions {
-        overflow: auto;
-        padding: 15px 0;
-        margin: -15px -20px;
         display: flex;
         flex-wrap: wrap;
         gap: 16px;
-        justify-content: center;
         &::-webkit-scrollbar {
             display: none;
         }
@@ -72,8 +68,6 @@
             margin-bottom: 27px;
         }
         .auctions {
-            flex-wrap: nowrap;
-            justify-content: flex-start;
             gap: 10px;
             .item {
                 padding-top: 5px;
@@ -88,6 +82,16 @@
                 a {
                     font-size: 9px;
                 }
+            }
+        }
+    }
+}
+@media (max-width: 547px) {
+    .section-partners {
+        .auctions {
+            justify-content: center;
+            .item {
+                flex: 0 0 calc(50% - 10px);
             }
         }
     }

@@ -169,48 +169,6 @@
                         </picture>
                         <a href="#">Детальніше</a>
                     </div>
-                    <div class="item">
-                        <picture class="img">
-                            <source type="image/webp" srcset="{{ asset('img/example/img_50.webp') }}">
-                            <img width="159" height="92" src="{{ asset('img/example/img_50.png') }}" loading="lazy" alt="">
-                        </picture>
-                        <a href="#">Детальніше</a>
-                    </div>
-                    <div class="item">
-                        <picture class="img">
-                            <source type="image/webp" srcset="{{ asset('img/example/img_51.webp') }}">
-                            <img width="171" height="64" src="{{ asset('img/example/img_51.png') }}" loading="lazy" alt="">
-                        </picture>
-                        <a href="#">Детальніше</a>
-                    </div>
-                    <div class="item">
-                        <picture class="img">
-                            <source type="image/webp" srcset="{{ asset('img/example/img_52.webp') }}">
-                            <img width="135" height="80" src="{{ asset('img/example/img_52.png') }}" loading="lazy" alt="">
-                        </picture>
-                        <a href="#">Детальніше</a>
-                    </div>
-                    <div class="item">
-                        <picture class="img">
-                            <source type="image/webp" srcset="{{ asset('img/example/img_50.webp') }}">
-                            <img width="159" height="92" src="{{ asset('img/example/img_50.png') }}" loading="lazy" alt="">
-                        </picture>
-                        <a href="#">Детальніше</a>
-                    </div>
-                    <div class="item">
-                        <picture class="img">
-                            <source type="image/webp" srcset="{{ asset('img/example/img_51.webp') }}">
-                            <img width="171" height="64" src="{{ asset('img/example/img_51.png') }}" loading="lazy" alt="">
-                        </picture>
-                        <a href="#">Детальніше</a>
-                    </div>
-                    <div class="item">
-                        <picture class="img">
-                            <source type="image/webp" srcset="{{ asset('img/example/img_52.webp') }}">
-                            <img width="135" height="80" src="{{ asset('img/example/img_52.png') }}" loading="lazy" alt="">
-                        </picture>
-                        <a href="#">Детальніше</a>
-                    </div>
                 </div>
             </div>
             <div id="partnerTab_2" class="tab-pane">
