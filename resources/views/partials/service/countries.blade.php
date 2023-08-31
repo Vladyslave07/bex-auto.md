@@ -1,6 +1,8 @@
 @if(count($countries) > 0)
     <div class="section-countries container">
-        <!-- <div class="main-title text-center">Заголовок</div> -->
+        @if(strlen(\App\Models\Setting::get('country_title_block')) > 0)
+            <div class="main-title text-center">{{ \App\Models\Setting::get('country_title_block') }}</div>
+        @endif
         <div class="swiper countries-swiper">
             <div class="swiper-wrapper nav-tabs">
                 @foreach($countries as $key => $country)
