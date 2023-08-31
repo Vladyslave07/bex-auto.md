@@ -242,4 +242,7 @@ return [
 
     'word_case' => 'Падеж',
     'word_cases' => 'Падежи',
+
+    'bank' => 'Банк',
+    'banks' => 'Банки',
 ];

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms;
 
 use App\Jobs\FormResultToB24;
+use App\Models\Bank;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
 use App\Traits\UtmMarkTrait;
@@ -16,11 +17,18 @@ class ApplicationForCredit extends Component implements BaseForm
     use UtmMarkTrait;
 
     public $show;
+    public $showBanks = false;
     public $name;
     public $phone;
     public $car;
+    public $banks;
 
     const SLUG_FORM = 'application_for_credit';
+
+    public function mount()
+    {
+        $this->banks = Bank::query()->orderBy('sort')->get();
+    }
 
     public function render()
     {
@@ -37,13 +45,12 @@ class ApplicationForCredit extends Component implements BaseForm
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
         $this->show = false;
+        $this->showBanks = true;
 
         // Send result to B24
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
-
-        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
     }
 
     protected function rules()
