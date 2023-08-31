@@ -7,6 +7,7 @@ use App\Models\Benefit;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
+use App\Models\Country;
 use App\Models\Employee;
 use App\Models\Faq;
 use App\Models\SeoText;
@@ -38,11 +39,12 @@ class ServiceController extends Controller
         $brands = Brand::brands();
 
         $employees = [];
+        $countries = [];
         $service->dealer_page = false;
         if ($service->id === 1) {
             $service->dealer_page = true;
             $employees = Employee::employees();
-
+            $countries = Country::list();
         }
 
         // Show default seo text if current not exist
@@ -54,8 +56,7 @@ class ServiceController extends Controller
         if (count($service->faqs) <= 0) {
             $service->faqs = Faq::defaultFaqs();
         }
-
-        return view($this->getTemplate($service->dealer_page), compact('service', 'categories', 'carsInStock', 'benefits', 'brands', 'employees'));
+        return view($this->getTemplate($service->dealer_page), compact('service', 'categories', 'carsInStock', 'benefits', 'brands', 'employees', 'countries'));
     }
 
     public function getTemplate($isDealerPage)

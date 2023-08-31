@@ -20,7 +20,7 @@
                               :btnText="Lang::get('service.form_btn')">
 
     {{-- Countries --}}
-    @include('partials.service.countries')
+    @include('partials.service.countries', ['countries' => $countries])
 
     {{-- Benefits --}}
     @include('partials.service.benefits')

@@ -133,11 +133,12 @@ class CountryCrudController extends CrudController
                 [
                     'name' => 'link',
                     'type' => 'text',
+                    'hint' => 'Добавлять ссылку без домена и языковой версии',
                     'label' => trans('backpack::fields.link'),
                     'wrapper' => ['class' => 'form-group col-md-6'],
                 ],
             ],
-            'max_rows' => 5,
+            'max_rows' => 6,
         ]);
 
         CRUD::addField(['name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
