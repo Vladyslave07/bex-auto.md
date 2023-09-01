@@ -26,7 +26,10 @@ class CountryRequest extends FormRequest
     {
         return [
              'title' => 'required|min:3|max:255',
-             'image' => 'required'
+             'image' => 'required',
+             'auction_images.*.logo' => 'required',
+             'text.*.title' => 'max:255',
+             'text.*.text' => 'max:25000',
         ];
     }
 
@@ -50,7 +53,9 @@ class CountryRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'auction_images.*.logo.required' => 'Логотип аукциона обязателен для заполнения',
+            'text.*.title.max' => 'Максимальное число символов в заголовке текста - 255',
+            'text.*.text.max' => 'Максимальное число символов в тексте - 25000',
         ];
     }
 }
