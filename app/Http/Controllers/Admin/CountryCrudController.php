@@ -109,6 +109,7 @@ class CountryCrudController extends CrudController
                     'label' => 'Текст',
                     'options' => [
                         'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                        'enterMode' => 2, 'shiftEnterMode' => 1,
                         'height' => 500
                     ]
                 ],

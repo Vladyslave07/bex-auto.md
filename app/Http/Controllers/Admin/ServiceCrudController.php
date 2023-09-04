@@ -91,8 +91,8 @@ class ServiceCrudController extends CrudController
         CRUD::addField(['tab' => 'Услуга', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
         CRUD::addField(['tab' => 'Услуга', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug')]);
 
-        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'ckeditor', 'options' => ['extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR, 'height' => 200],]);
-        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'ckeditor', 'options' => ['extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR, 'height' => 200]]);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'ckeditor', 'options' => ['extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR, 'enterMode' => 2, 'shiftEnterMode' => 1, 'height' => 200],]);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'ckeditor', 'options' => ['extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR, 'enterMode' => 2, 'shiftEnterMode' => 1, 'height' => 200]]);
 
         CRUD::addField([
             'tab' => 'Услуга',
@@ -151,6 +151,7 @@ class ServiceCrudController extends CrudController
             'type' => 'ckeditor',
             'options' => [
                 'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'enterMode' => 2, 'shiftEnterMode' => 1,
                 'height' => 500
             ]
         ]);

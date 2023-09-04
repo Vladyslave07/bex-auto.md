@@ -136,6 +136,7 @@ class CarCrudController extends CrudController
             'type' => 'ckeditor',
             'options' => [
                 'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'enterMode' => 2, 'shiftEnterMode' => 1,
                 'height' => 500
             ]
         ]);
@@ -331,7 +332,8 @@ class CarCrudController extends CrudController
                     'type' => 'ckeditor',
                     'label' => trans('backpack::fields.text'),
                     'options' => [
-                        'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                        'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                        'enterMode' => 2, 'shiftEnterMode' => 1,
                     ]
                 ],
                 [
@@ -354,7 +356,8 @@ class CarCrudController extends CrudController
             'label' => trans('backpack::fields.equipment'),
             'type' => 'ckeditor',
             'options' => [
-                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'enterMode' => 2, 'shiftEnterMode' => 1,
             ]
         ]);
     }
