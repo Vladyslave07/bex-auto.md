@@ -13,7 +13,22 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::connection('mysql')->create('countries', function (Blueprint $table) {
+            $table->id();
+
+            $table->boolean('active')->default(1);
+            $table->integer('sort')->default(500);
+
+            $table->text('title');
+            $table->string('slug')->unique();
+            $table->text('image')->nullable();
+            $table->longText('text')->nullable();
+            $table->longText('auction_images')->nullable();
+
+            $table->timestamps();
+        });
+
+        Schema::connection('kz_mysql')->create('countries', function (Blueprint $table) {
             $table->id();
 
             $table->boolean('active')->default(1);

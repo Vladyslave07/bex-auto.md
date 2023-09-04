@@ -13,7 +13,21 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('employees', function (Blueprint $table) {
+        Schema::connection('mysql')->create('employees', function (Blueprint $table) {
+            $table->id();
+
+            $table->boolean('active')->default(1);
+            $table->integer('sort')->default(500);
+
+            $table->text('name');
+            $table->text('image')->nullable();
+            $table->text('phone')->nullable();
+            $table->text('email')->nullable();
+
+            $table->timestamps();
+        });
+
+        Schema::connection('kz_mysql')->create('employees', function (Blueprint $table) {
             $table->id();
 
             $table->boolean('active')->default(1);
