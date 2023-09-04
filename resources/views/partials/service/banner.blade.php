@@ -8,7 +8,7 @@
             <span class="color-red">{!! $service->title !!}</span>
         </h1>
         @if ($subtitle = $service->sub_title)
-            <div class="h2 color-blue">{{ $subtitle }}</div>
+            <div class="h2 color-blue">{!! $subtitle !!}</div>
         @endif
         @if ($subtitleText = $service->sub_title_text)
             <span class="line"></span>
