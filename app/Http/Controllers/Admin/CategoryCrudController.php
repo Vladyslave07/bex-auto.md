@@ -64,8 +64,8 @@ class CategoryCrudController extends CrudController
                 'label' => trans('backpack::fields.sort'),
             ],
             [
-                'name'  => 'seo_text_id',
-                'label' => 'Сео текст',
+                'name'  => 'slug',
+                'label' => trans('backpack::fields.slug'),
             ],
             [
                 'name'  => 'active',
