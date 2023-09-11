@@ -9,6 +9,8 @@ class FormResult extends Model
 {
     use CrudTrait;
 
+    const DEALER_SLUG_FORM = 'dealer_service_call_back';
+
     const FORM_NAMES = [
         'order_calculate' => 'Расчет стоимости',
         'buy_and_delivery' => 'Услуги приобретения и доставки авто',
@@ -16,6 +18,7 @@ class FormResult extends Model
         'discount' => 'Получить скидку',
         'application_for_credit' => 'Заявка на покупку авто в Кредит',
         'buy_car_from' => 'Заявка на покупку авто',
+        self::DEALER_SLUG_FORM => 'Обратная связь - Дилерские услуги',
     ];
 
     /*

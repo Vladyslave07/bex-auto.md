@@ -83,6 +83,11 @@
             >
                 <i class='nav-icon la la-percent'></i> Получить скидку
             </a>
+            <a class='nav-link'
+               href='{{ backpack_url('form-result', [\App\Models\FormResult::DEALER_SLUG_FORM]) }}'
+            >
+                <i class='nav-icon la la-handshake-o'></i> Дилерские услуги
+            </a>
         </li>
     </ul>
 </li>

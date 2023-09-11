@@ -18,6 +18,7 @@ class OrderCalculate extends Component implements BaseForm
     public $phone;
     public $name;
     public $btnText;
+    public $dealerService = false;
 
     const SLUG_FORM = 'order_calculate';
 
@@ -29,10 +30,17 @@ class OrderCalculate extends Component implements BaseForm
     public function submit()
     {
         $this->validate();
+
+        $slugForm = self::SLUG_FORM;
+
+        if ($this->dealerService) {
+            $slugForm = FormResult::DEALER_SLUG_FORM;
+        }
+
         $fields = [
             'name' => $this->name,
             'phone' => Str::phoneNumber($this->phone),
-            'slug_form' => self::SLUG_FORM,
+            'slug_form' => $slugForm,
         ];
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);

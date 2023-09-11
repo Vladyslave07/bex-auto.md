@@ -1,7 +1,11 @@
 <div class="section-order-calculation container">
     <div class="text">
         <div class="main-title noline">{!! Setting::get('order_calc_title') !!}</div>
-        @livewire('forms.order-calculate')
+        @if (isset($dealerService) && $dealerService)
+            @livewire('forms.order-calculate', ['dealerService' => true])
+        @else
+            @livewire('forms.order-calculate')
+        @endif
     </div>
     <picture class="img">
         <source type="image/webp" srcset="{{ asset('img/order-calculation.webp') }}">

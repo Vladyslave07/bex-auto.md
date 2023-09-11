@@ -37,7 +37,7 @@
     @include('partials.index.offer')
 
     {{-- Become partner --}}
-    @include('partials.service.become_partner')
+    @include('partials.service.become_partner', ['dealerService' => false])
 
     {{-- Seo text --}}
     @include('partials.index.seo-text', ['seoText' => \App\Models\SeoText::aboutSeoText()])

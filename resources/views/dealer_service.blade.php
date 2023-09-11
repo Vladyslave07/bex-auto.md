@@ -17,7 +17,8 @@
 
     {{-- Call back form --}}
     <livewire:forms.call-back :title="Setting::get('application_for_coop_title')"
-                              :btnText="Lang::get('service.form_btn')">
+                              :btnText="Lang::get('service.form_btn')"
+                              :dealerService="true">
 
     {{-- Countries --}}
     @include('partials.service.countries', ['countries' => $countries])
@@ -29,7 +30,7 @@
     @include('partials.service.youtube')
 
     {{-- Become partner --}}
-    @include('partials.service.become_partner')
+    @include('partials.service.become_partner', ['dealerService' => true])
 
     {{-- Seo text --}}
     @include('partials.service.text')
@@ -47,6 +48,6 @@
     @include('partials.index.seo-text', ['seoText' => $service->seo_text])
 
     {{-- Order a calculation form --}}
-    @include('partials.index.order-a-calculation')
+    @include('partials.index.order-a-calculation', ['dealerService' => true])
 
 @endsection

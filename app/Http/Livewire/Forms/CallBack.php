@@ -20,6 +20,7 @@ class CallBack extends Component implements BaseForm
     public $name;
     public $title;
     public $btnText;
+    public $dealerService = false;
 
     const SLUG_FORM = 'call_back';
 
@@ -29,10 +30,16 @@ class CallBack extends Component implements BaseForm
 
         $formattedPhone = Str::phoneNumber($this->phone);
 
+        $slugForm = self::SLUG_FORM;
+
+        if ($this->dealerService) {
+            $slugForm = FormResult::DEALER_SLUG_FORM;
+        }
+
         $data = [
             'name' => $this->name,
             'phone' => $formattedPhone,
-            'slug_form' => self::SLUG_FORM,
+            'slug_form' => $slugForm,
         ];
 
         $data = $this->addUtmMarks($data);

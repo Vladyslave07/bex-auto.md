@@ -27,6 +27,7 @@ Route::group([
     Route::crud('form-result/' . \App\Http\Livewire\Forms\DiscountForm::SLUG_FORM, 'FormResultDiscountCrudController');
     Route::crud('form-result/' . \App\Http\Livewire\Forms\ApplicationForCar::SLUG_FORM, 'FormResultApplicationForCarCrudController');
     Route::crud('form-result/' . \App\Http\Livewire\Forms\ApplicationForCredit::SLUG_FORM, 'FormResultApplicationForCreditCrudController');
+    Route::crud('form-result/' . \App\Models\FormResult::DEALER_SLUG_FORM, 'FormResultDealerServiceCrudController');
     Route::crud('car', 'CarCrudController');
     Route::crud('category', 'CategoryCrudController');
     Route::crud('popular-request', 'PopularRequestCrudController');
