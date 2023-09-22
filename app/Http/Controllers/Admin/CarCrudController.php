@@ -112,6 +112,8 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'slug', 'target' => 'title', 'hint' => trans('backpack::hint.categories.slug'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"], 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'show_price_from', 'label' => trans('backpack::fields.show_price_from'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+
 
         CRUD::addField([
             'name' => 'products',

@@ -45,7 +45,7 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
+    protected $fillable = ['show_price_from', 'show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color'];
     public static $images = ['images', 'preview_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];

@@ -118,6 +118,7 @@ return [
     'employee_name' => 'ФИО сотрудника',
     'email' => 'Почта (email)',
     'photo' => 'Фото',
+    'show_price_from' => 'Цена от',
 
     'option' => [
         'expect' => 'Ожидается',
