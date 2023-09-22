@@ -17,6 +17,7 @@ return [
         'characteristic' => 'Characteristics',
         'description' => 'Description of the car',
         'sold' => 'Sold',
+        'know_price' => 'Get the current price',
     ],
 
     'btn' => [

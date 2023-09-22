@@ -26,7 +26,7 @@
                         @include('partials.card.card-btn')
                     @else
                         <button onclick="openModal('#applicationForCar')"
-                                class="btn btn-blue">{{ Lang::get('car.detail.sold') }}</button>
+                                class="btn">{{ __('car.detail.know_price') }}</button>
                     @endif
                 </div>
                 <div class="card-features">

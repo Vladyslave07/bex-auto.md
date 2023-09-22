@@ -17,6 +17,7 @@ return [
         'characteristic' => 'Характеристики',
         'description' => 'Опис авто',
         'sold' => 'Продано',
+        'know_price' => 'Дізнатися ціну',
     ],
 
     'btn' => [
