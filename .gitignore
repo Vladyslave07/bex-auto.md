@@ -11,6 +11,8 @@
 /public/vendor
 /public/uploads
 /public/img
+/public/robots.txt
+/public/kz-robots.txt
 /public/mix-manifest.json
 /storage/*.key
 /vendor

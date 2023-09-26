@@ -6,7 +6,7 @@
                     <h1 class="main-title">{{ $car->titleWithYear }}</h1>
                         <div class="price">
                            @if($car->show_price_from)
-                                {{ __('car.price_from') }}
+                                <span>{{ __('car.price_from') }}</span>
                             @endif
                                {{ $car->price_format }}
                             @if($car->price_for_current_country)
