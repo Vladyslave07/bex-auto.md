@@ -30,6 +30,7 @@ class SettingCrudController extends CrudController
         CRUD::setModel(\App\Models\Setting::class);
         CRUD::setRoute(backpack_url('setting'));
         CRUD::setEntityNameStrings(trans('backpack::settings.setting_singular'), trans('backpack::settings.setting_plural'));
+        CRUD::enableExportButtons();
     }
 
     /**

@@ -39,6 +39,7 @@ class BrandCrudController extends CrudController
         CRUD::setModel(\App\Models\Brand::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/brand');
         CRUD::setEntityNameStrings(trans('backpack::crud.brand'), trans('backpack::crud.brands'));
+        CRUD::enableExportButtons();
     }
 
     /**

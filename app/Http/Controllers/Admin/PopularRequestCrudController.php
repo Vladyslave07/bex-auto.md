@@ -31,7 +31,7 @@ class PopularRequestCrudController extends CrudController
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
-     * 
+     *
      * @return void
      */
     public function setup()
@@ -39,11 +39,12 @@ class PopularRequestCrudController extends CrudController
         CRUD::setModel(\App\Models\PopularRequest::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/popular-request');
         CRUD::setEntityNameStrings(trans('backpack::crud.popular_request'), trans('backpack::crud.popular_requests'));
+        CRUD::enableExportButtons();
     }
 
     /**
      * Define what happens when the List operation is loaded.
-     * 
+     *
      * @see  https://backpackforlaravel.com/docs/crud-operation-list-entries
      * @return void
      */
@@ -73,7 +74,7 @@ class PopularRequestCrudController extends CrudController
 
     /**
      * Define what happens when the Create operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-create
      * @return void
      */
@@ -90,7 +91,7 @@ class PopularRequestCrudController extends CrudController
 
     /**
      * Define what happens when the Update operation is loaded.
-     * 
+     *
      * @see https://backpackforlaravel.com/docs/crud-operation-update
      * @return void
      */

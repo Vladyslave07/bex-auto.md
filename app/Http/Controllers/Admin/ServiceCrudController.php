@@ -44,6 +44,7 @@ class ServiceCrudController extends CrudController
         CRUD::setModel(\App\Models\Service::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/service');
         CRUD::setEntityNameStrings(trans('backpack::crud.service'), trans('backpack::crud.services'));
+        CRUD::enableExportButtons();
     }
 
     /**

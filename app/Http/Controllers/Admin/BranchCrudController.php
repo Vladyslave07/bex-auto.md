@@ -41,6 +41,7 @@ class BranchCrudController extends CrudController
         CRUD::setModel(\App\Models\Branch::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/branch');
         CRUD::setEntityNameStrings(trans('backpack::crud.branch'), trans('backpack::crud.branches'));
+        CRUD::enableExportButtons();
     }
 
     /**

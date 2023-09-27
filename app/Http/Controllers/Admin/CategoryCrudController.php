@@ -40,6 +40,7 @@ class CategoryCrudController extends CrudController
         CRUD::setModel(\App\Models\Category::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/category');
         CRUD::setEntityNameStrings(trans('backpack::crud.category'), trans('backpack::crud.categories'));
+        CRUD::enableExportButtons();
     }
 
     /**

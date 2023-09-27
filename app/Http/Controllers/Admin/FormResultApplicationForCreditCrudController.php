@@ -31,6 +31,7 @@ class FormResultApplicationForCreditCrudController extends CrudController
         CRUD::setModel(\App\Models\FormResult::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/form-result/' . ApplicationForCredit::SLUG_FORM);
         CRUD::setEntityNameStrings(trans('backpack::crud.result'), trans('backpack::crud.results'));
+        CRUD::enableExportButtons();
     }
 
     /**

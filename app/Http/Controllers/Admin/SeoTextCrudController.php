@@ -39,6 +39,7 @@ class SeoTextCrudController extends CrudController
         CRUD::setModel(\App\Models\SeoText::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/seo-text');
         CRUD::setEntityNameStrings(trans('backpack::crud.seo_text'), trans('backpack::crud.seo_texts'));
+        CRUD::enableExportButtons();
     }
 
     /**

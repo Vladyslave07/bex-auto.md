@@ -31,6 +31,7 @@ class PropertyCrudController extends CrudController
         CRUD::setModel(\App\Models\Property::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/property');
         CRUD::setEntityNameStrings(trans('backpack::crud.property'), trans('backpack::crud.properties'));
+        CRUD::enableExportButtons();
     }
 
     /**

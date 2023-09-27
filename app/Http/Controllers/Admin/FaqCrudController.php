@@ -40,6 +40,7 @@ class FaqCrudController extends CrudController
         CRUD::setModel(\App\Models\Faq::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/faq');
         CRUD::setEntityNameStrings(trans('backpack::crud.faq'), trans('backpack::crud.faqs'));
+        CRUD::enableExportButtons();
     }
 
     /**

@@ -1,38 +1,13 @@
 <?php
 
 use App\Http\Controllers\ReviewsController;
+use App\Http\Controllers\RobotsController;
 use App\Models\Domain;
 use App\Services\Sitemap\SitemapGeneral;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-
-Route::get('job', function () {
-   $connection = \Illuminate\Support\Facades\DB::connection();
-   $db = \Illuminate\Support\Facades\DB::table('jobs')->get();
-   dump($db);
-//   foreach ($db as $item) {
-//       \Illuminate\Support\Facades\DB::table('jobs')->where('id', $item->id)->delete();
-//   }
-});
-
-Route::get('clear-car', function () {
-    $domain = app('domain')->getDomain();
-
-    // Первым делом вручную удалить меню
-
-    // Назначение сео текстов для категорий домена
-    // todo: Сделать тоже самое для title и description
-//    $categories = \App\Models\Category::all();
-//    foreach ($categories as $category) {
-//        $seoTextId = $category->domain_seo_text_id;
-//        $category->update([
-//            'seo_text_id' => $seoTextId ?: null
-//        ]);
-//    }
-    dd($domain->slug);
-});
 
 // Sub-domains
 $domains = Domain::all();
@@ -55,6 +30,8 @@ Route::group([
 
 function commonRoute()
 {
+    Route::get('robots.txt', RobotsController::class);
+
     Route::post('livewire/message/{name}', '\Livewire\Controllers\HttpConnectionHandler');
 
     Route::get('sitemap.xml', function (){

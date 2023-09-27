@@ -39,6 +39,7 @@ class MenuCrudController extends CrudController
         CRUD::setModel(\App\Models\Menu::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/menu');
         CRUD::setEntityNameStrings('меню', 'меню');
+        CRUD::enableExportButtons();
     }
 
     /**
