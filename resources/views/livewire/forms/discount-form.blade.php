@@ -1,4 +1,5 @@
 <div>
+    @if($popup)
     <div id="modalDiscount" class="modal @if($show === true) is-visible @endif">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -51,6 +52,7 @@
         }
 
     </script>
+    @endif
 </div>
 
 
