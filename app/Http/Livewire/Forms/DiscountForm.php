@@ -3,7 +3,9 @@
 namespace App\Http\Livewire\Forms;
 
 use App\Jobs\FormResultToB24;
+use App\Models\Category;
 use App\Models\FormResult;
+use App\Models\Popup;
 use App\Rules\PhoneNumber;
 use App\Traits\UtmMarkTrait;
 use Illuminate\Support\Facades\Lang;
@@ -18,12 +20,29 @@ class DiscountForm extends Component implements BaseForm
     public $phone;
     public $name;
     public $show;
+    public $popup;
 
     const SLUG_FORM = 'discount';
 
     public function render()
     {
+        $this->popup();
+        dd($this->popup);
         return view('livewire.forms.discount-form');
+    }
+
+    public function popup()
+    {
+        $currentUrl = request()->url();
+        $parts = explode('/', $currentUrl);
+        $url = end($parts);
+
+        $category = Category::findBySlug($url);
+        if ($category) {
+            $this->popup = Popup::getPopupByCategory($category);
+        } else {
+            $this->popup = Popup::getMainPopup();
+        }
     }
 
     public function submit()

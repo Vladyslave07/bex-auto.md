@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\File;
 
 class PopupRequest extends FormRequest
 {
@@ -26,7 +27,7 @@ class PopupRequest extends FormRequest
     {
         return [
              'title' => 'required|min:3|max:255',
-             'image' => 'required|max:1024',
+             'image' => ['required', File::image()->max(1024)],
         ];
     }
 
@@ -50,7 +51,7 @@ class PopupRequest extends FormRequest
     public function messages()
     {
         return [
-            'image.max' => 'Максимальный размер изображения 1 МБ',
+            'image.size' => 'Максимальный размер изображения 1 МБ',
         ];
     }
 }
