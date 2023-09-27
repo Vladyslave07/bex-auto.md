@@ -31,6 +31,7 @@ class FooterMenuCrudController extends CrudController
         CRUD::setModel(\App\Models\FooterMenu::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/footer_menus');
         CRUD::setEntityNameStrings('footer menu', 'footer menus');
+        CRUD::enableExportButtons();
     }
 
     /**

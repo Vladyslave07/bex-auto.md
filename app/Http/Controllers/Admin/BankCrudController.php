@@ -29,6 +29,7 @@ class BankCrudController extends CrudController
         CRUD::setModel(\App\Models\Bank::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/bank');
         CRUD::setEntityNameStrings(trans('backpack::crud.bank'), trans('backpack::crud.banks'));
+        CRUD::enableExportButtons();
     }
 
     /**

@@ -30,6 +30,7 @@ class CityCrudController extends CrudController
         CRUD::setModel(\App\Models\City::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/city');
         CRUD::setEntityNameStrings(trans('backpack::crud.city'), trans('backpack::crud.cities'));
+        CRUD::enableExportButtons();
     }
 
     /**

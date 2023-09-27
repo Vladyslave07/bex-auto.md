@@ -29,6 +29,7 @@ class CurrencyCrudController extends CrudController
         CRUD::setModel(\App\Models\Currency::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/currency');
         CRUD::setEntityNameStrings(trans('backpack::crud.currency'), trans('backpack::crud.currencies'));
+        CRUD::enableExportButtons();
     }
 
     /**

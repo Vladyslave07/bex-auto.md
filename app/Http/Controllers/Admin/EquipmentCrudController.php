@@ -36,6 +36,7 @@ class EquipmentCrudController extends CrudController
         CRUD::setModel(\App\Models\Equipment::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/equipment');
         CRUD::setEntityNameStrings(trans('backpack::crud.equipment'), trans('backpack::crud.equipments'));
+        CRUD::enableExportButtons();
     }
 
     /**

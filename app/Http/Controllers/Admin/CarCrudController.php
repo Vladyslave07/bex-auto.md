@@ -47,6 +47,7 @@ class CarCrudController extends CrudController
         CRUD::setModel(\App\Models\Car::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/car');
         CRUD::setEntityNameStrings(trans('backpack::crud.car'), trans('backpack::crud.cars'));
+        CRUD::enableExportButtons();
     }
 
     /**
@@ -75,6 +76,10 @@ class CarCrudController extends CrudController
             [
                 'name' => 'title',
                 'label' => trans('backpack::fields.title'),
+            ],
+            [
+                'name' => 'slug',
+                'label' => trans('backpack::fields.slug'),
             ],
             [
                 'name' => 'preview_image',

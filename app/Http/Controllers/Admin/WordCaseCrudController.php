@@ -29,6 +29,7 @@ class WordCaseCrudController extends CrudController
         CRUD::setModel(\App\Models\WordCase::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/word-case');
         CRUD::setEntityNameStrings(trans('backpack::crud.word_case'), trans('backpack::crud.word_cases'));
+        CRUD::enableExportButtons();
     }
 
     /**

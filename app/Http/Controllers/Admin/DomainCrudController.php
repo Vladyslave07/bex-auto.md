@@ -31,6 +31,7 @@ class DomainCrudController extends CrudController
         CRUD::setModel(\App\Models\Domain::class);
         CRUD::setRoute(config('backpack.base.route_prefix') . '/domain');
         CRUD::setEntityNameStrings(trans('backpack::crud.domain'), trans('backpack::crud.domains'));
+        CRUD::enableExportButtons();
     }
 
     /**
