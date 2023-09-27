@@ -21,13 +21,13 @@ class DiscountForm extends Component implements BaseForm
     public $name;
     public $show;
     public $popup;
+    public $category;
 
     const SLUG_FORM = 'discount';
 
     public function render()
     {
         $this->popup();
-        dd($this->popup);
         return view('livewire.forms.discount-form');
     }
 
@@ -37,12 +37,19 @@ class DiscountForm extends Component implements BaseForm
         $parts = explode('/', $currentUrl);
         $url = end($parts);
 
+        $popup = false;
         $category = Category::findBySlug($url);
         if ($category) {
-            $this->popup = Popup::getPopupByCategory($category);
-        } else {
-            $this->popup = Popup::getMainPopup();
+            $this->category = $category;
+            $popup = Popup::getPopupByCategory($category);
         }
+
+        if ($popup) {
+            $this->popup = $popup;
+            return;
+        }
+
+        $this->popup = Popup::getMainPopup();
     }
 
     public function submit()
@@ -54,6 +61,8 @@ class DiscountForm extends Component implements BaseForm
             'name' => $this->name,
             'phone' => Str::phoneNumber($this->phone),
             'slug_form' => self::SLUG_FORM,
+            'popup_id' => $this->popup->id,
+            'category_id' => $this->category?->id,
         ];
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);

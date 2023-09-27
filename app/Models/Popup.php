@@ -13,6 +13,7 @@ use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 
 class Popup extends Model
@@ -45,7 +46,7 @@ class Popup extends Model
         parent::boot();
 
         static::saving(function() {
-            Cache::forget(General::cacheKey(self::MAIN_POPUP_KEY));
+            Artisan::call("cache:clear");
         });
     }
 

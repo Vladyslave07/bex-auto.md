@@ -29,7 +29,7 @@ class FormResult extends Model
 
     protected $table = 'form_results';
     protected $guarded = ['id'];
-     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country', 'utm_source', 'utm_medium', 'utm_campaign'];
+     protected $fillable = ['slug_form', 'name', 'phone', 'car', 'country', 'category_id', 'popup_id', 'utm_source', 'utm_medium', 'utm_campaign'];
 
     /*
     |--------------------------------------------------------------------------
@@ -42,6 +42,16 @@ class FormResult extends Model
     | RELATIONS
     |--------------------------------------------------------------------------
     */
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function popup()
+    {
+        return $this->belongsTo(Popup::class);
+    }
 
     /*
     |--------------------------------------------------------------------------

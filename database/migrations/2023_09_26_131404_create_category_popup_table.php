@@ -13,19 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-//        Schema::connection('mysql')->create('category_popup', function (Blueprint $table) {
-//            $table->id();
-//            $table->foreignId('category_id')->default(null);
-//            $table->foreignId('popup_id')->default(null);
-//            $table->timestamps();
-//        });
-//
-//        Schema::connection('kz_mysql')->create('category_popup', function (Blueprint $table) {
-//            $table->id();
-//            $table->foreignId('category_id')->default(null);
-//            $table->foreignId('popup_id')->default(null);
-//            $table->timestamps();
-//        });
+        Schema::connection('mysql')->create('category_popup', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('category_id')->default(null);
+            $table->foreignId('popup_id')->default(null);
+            $table->timestamps();
+        });
+
+        Schema::connection('kz_mysql')->create('category_popup', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('category_id')->default(null);
+            $table->foreignId('popup_id')->default(null);
+            $table->timestamps();
+        });
     }
 
     /**

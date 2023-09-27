@@ -2,6 +2,7 @@
 
 namespace App\Jobs;
 
+use App\Http\Livewire\Forms\DiscountForm;
 use App\Models\FormResult;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -18,6 +19,7 @@ class FormResultToB24 implements ShouldQueue
     const DEFAULT_CONNECTION = 'database';
 
     protected $formResult;
+    protected $domain;
 
     /**
      * Create a new job instance.
@@ -27,6 +29,7 @@ class FormResultToB24 implements ShouldQueue
     public function __construct($formResultId)
     {
         $this->formResult = FormResult::query()->find($formResultId);
+        $this->setDomain();
     }
 
     /**
@@ -38,15 +41,8 @@ class FormResultToB24 implements ShouldQueue
     {
         $lead = new \App\Utilities\Bitrix24\Entity\Lead(getenv('B24_WEBHOOK_LEAD_CREATE'));
 
-        $domain = env('KZ_APP_URL');
-        if ($this->connection == self::DEFAULT_CONNECTION) {
-            $domain = env('UK_APP_URL');
-        }
-
-        $title = sprintf("Заявка ID: %s с формы - %s сайт: %s", $this->formResult->id, FormResult::FORM_NAMES[$this->formResult->slug_form], $domain);
-
         $data = [
-            'TITLE' => $title,
+            'TITLE' => $this->title(),
             "NAME"=> $this->formResult->name,
             "STATUS_ID"=> "NEW",
         ];
@@ -73,6 +69,25 @@ class FormResultToB24 implements ShouldQueue
         $lead->create($preparedData);
     }
 
+
+    public function title()
+    {
+        if ($this->formResult->slug_form == DiscountForm::SLUG_FORM) {
+            $categoryTitle = $this->formResult->category?->title;
+            $popupTitle = "\"" . $this->formResult->popup->title . "\"";
+
+            $title = "Заявка ID: %s с попапа - %s ";
+            if ($categoryTitle) {
+                $title .= "категория: %s ";
+            }
+            $title .= "сайт: %s";
+
+            return sprintf($title, $this->formResult->id, $popupTitle, $categoryTitle, $this->domain);
+        }
+
+        return sprintf("Заявка ID: %s с формы - %s сайт: %s", $this->formResult->id, FormResult::FORM_NAMES[$this->formResult->slug_form], $this->domain);
+    }
+
     /**
      * @return array
      */
@@ -85,6 +100,17 @@ class FormResultToB24 implements ShouldQueue
         if ($campaign = $this->formResult->utm_campaign) {$data['UTM_CAMPAIGN'] = $campaign;}
 
         return $data;
+    }
+
+    /**
+     * @return void
+     */
+    public function setDomain()
+    {
+        $this->domain = env('KZ_APP_URL');
+        if ($this->connection == self::DEFAULT_CONNECTION) {
+            $this->domain = env('UK_APP_URL');
+        }
     }
 
 }

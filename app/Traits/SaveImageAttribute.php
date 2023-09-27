@@ -35,7 +35,12 @@ trait SaveImageAttribute
                 $image = $image->encode($ext, 90);
                 $filename = md5($value . time()) . '.' . $ext;
                 \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
-                \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
+
+                // Если модель без переводов или если модель с переводом, но атрибут не переводимый - удаляем картинку
+                if (!method_exists($this, 'isTranslatableAttribute') ||
+                    (method_exists($this, 'isTranslatableAttribute') && !$this->isTranslatableAttribute($attribute_name))) {
+                    \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
+                }
                 $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
             } else {
                 $path = parse_url($value, PHP_URL_PATH);

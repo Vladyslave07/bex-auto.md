@@ -27,7 +27,7 @@ class PopupRequest extends FormRequest
     {
         return [
              'title' => 'required|min:3|max:255',
-             'image' => ['required', File::image()->max(1024)],
+             'image' => ['required'],
         ];
     }
 
