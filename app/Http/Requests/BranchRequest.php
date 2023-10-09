@@ -26,7 +26,6 @@ class BranchRequest extends FormRequest
     {
         return [
             'city' => 'required|min:3|max:255',
-            'domain' => 'required',
             'phone' => 'required',
             'address' => 'required',
         ];
