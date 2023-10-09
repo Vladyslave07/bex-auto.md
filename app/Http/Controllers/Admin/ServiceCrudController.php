@@ -8,6 +8,7 @@ use App\Models\Faq;
 use App\Models\News;
 use App\Models\SeoText;
 use App\Models\Service;
+use App\Models\FormResult;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -90,7 +91,8 @@ class ServiceCrudController extends CrudController
         CRUD::addField(['tab' => 'Услуга', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField(['tab' => 'Услуга', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
-        CRUD::addField(['tab' => 'Услуга', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug')]);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug'),  'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField(['tab' => 'Услуга', 'name' => 'form_slug', 'label' => trans('backpack::fields.form_slug'), 'type' => 'select_from_array', 'options' => ['call_back' => FormResult::FORM_NAMES['call_back'], 'auto_for_zsu' => FormResult::FORM_NAMES['auto_for_zsu']], 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title', 'label' => trans('backpack::fields.sub_title'), 'type' => 'ckeditor', 'options' => ['extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR, 'enterMode' => 2, 'shiftEnterMode' => 1, 'height' => 200],]);
         CRUD::addField(['tab' => 'Услуга', 'name' => 'sub_title_text', 'label' => trans('backpack::fields.sub_title_text'), 'type' => 'ckeditor', 'options' => ['extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR, 'enterMode' => 2, 'shiftEnterMode' => 1, 'height' => 200]]);

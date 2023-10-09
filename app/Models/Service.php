@@ -27,7 +27,7 @@ class Service extends Model implements Sitemapable, AdminMenuInterface
     */
 
     protected $table = 'services';
-    protected $fillable = ['active', 'sort', 'image', 'sub_title', 'sub_title_text', 'title', 'slug', 'youtube_link', 'faq_id', 'seo_text_id', 'text', 'meta_title', 'meta_description'];
+    protected $fillable = ['active', 'sort', 'image', 'sub_title', 'sub_title_text', 'title', 'slug', 'form_slug', 'youtube_link', 'faq_id', 'seo_text_id', 'text', 'meta_title', 'meta_description'];
     protected $translatable = ['title', 'text', 'sub_title', 'sub_title_text', 'meta_title', 'meta_description'];
     protected $attributes = ['sort' => 500];
     protected $casts = ['active' => 'boolean'];

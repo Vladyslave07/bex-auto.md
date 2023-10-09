@@ -22,6 +22,7 @@ Route::group([
     Route::crud('banner', 'BannerCrudController');
     Route::crud('form-result', 'FormResultCrudController');
     Route::crud('form-result/' . \App\Http\Livewire\Forms\CallBack::SLUG_FORM, 'FormResultCallBackCrudController');
+    Route::crud('form-result/' . \App\Http\Livewire\Forms\AutoForZsu::SLUG_FORM, 'FormResultAutoForZsuCrudController');
     Route::crud('form-result/' . \App\Http\Livewire\Forms\BuyAndDeliveryAuto::SLUG_FORM, 'FormResultBuyAndDeliveryAutoCrudController');
     Route::crud('form-result/' . \App\Http\Livewire\Forms\OrderCalculate::SLUG_FORM, 'FormResultOrderCalculationCrudController');
     Route::crud('form-result/' . \App\Http\Livewire\Forms\DiscountForm::SLUG_FORM, 'FormResultDiscountCrudController');

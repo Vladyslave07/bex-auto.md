@@ -36,7 +36,7 @@ class FormResultToB24 implements ShouldQueue
      */
     public function handle()
     {
-        $lead = new \App\Utilities\Bitrix24\Entity\Lead(getenv('B24_WEBHOOK_LEAD_CREATE'));
+        $lead = new \App\Utilities\Bitrix24\Entity\Lead($this->formResult->slug_form == 'auto_for_zsu' ? getenv('B24_WEBHOOK_LEAD_AUTO_FOR_ZSU_CREATE') : getenv('B24_WEBHOOK_LEAD_CREATE'));
 
         $domain = env('KZ_APP_URL');
         if ($this->connection == self::DEFAULT_CONNECTION) {

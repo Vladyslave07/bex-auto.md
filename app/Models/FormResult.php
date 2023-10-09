@@ -19,6 +19,7 @@ class FormResult extends Model
         'application_for_credit' => 'Заявка на покупку авто в Кредит',
         'buy_car_from' => 'Заявка на покупку авто',
         self::DEALER_SLUG_FORM => 'Обратная связь - Дилерские услуги',
+        'auto_for_zsu' => 'Авто для ЗСУ'
     ];
 
     /*
