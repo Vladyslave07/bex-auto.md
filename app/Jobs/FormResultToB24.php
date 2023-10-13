@@ -54,10 +54,14 @@ class FormResultToB24 implements ShouldQueue
             $title = "Заявка ID: %s с попапа - %s ";
             if ($categoryTitle) {
                 $title .= "категория: %s ";
-            }
-            $title .= "сайт: %s";
+                $title .= "сайт: %s";
+                $title = sprintf($title, $this->formResult->id, $popupTitle, $categoryTitle, $domain);
 
-            $title = sprintf($title, $this->formResult->id, $popupTitle, $categoryTitle, $domain);
+            } else {
+                $title .= "сайт: %s";
+                $title = sprintf($title, $this->formResult->id, $popupTitle, $domain);
+            }
+
         }
 
         $data = [
