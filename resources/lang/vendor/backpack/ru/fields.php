@@ -120,6 +120,7 @@ return [
     'email' => 'Почта (email)',
     'photo' => 'Фото',
     'show_price_from' => 'Цена от',
+    'main_popup' => 'Главный попап',
 
     'option' => [
         'expect' => 'Ожидается',

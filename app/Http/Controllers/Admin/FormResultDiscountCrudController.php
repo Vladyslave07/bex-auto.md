@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Category;
 use App\Http\Livewire\Forms\DiscountForm;
 use App\Http\Requests\FormResultRequest;
+use App\Models\Popup;
 use App\Traits\FormFilterTrait;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
@@ -61,21 +63,7 @@ class FormResultDiscountCrudController extends CrudController
 
         CRUD::setValidation(FormResultRequest::class);
 
-        CRUD::addField([
-            'name' => 'created_at',
-            'label' => trans('backpack::fields.created_at'),
-            'type' => 'text',
-            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
 
-        CRUD::addField([
-            'name' => 'updated_at',
-            'label' => trans('backpack::fields.updated_at'),
-            'type' => 'text',
-            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
-        ]);
 
         CRUD::addField([
             'name' => 'id',
@@ -89,18 +77,46 @@ class FormResultDiscountCrudController extends CrudController
             'label' => trans('backpack::fields.id'),
             'type' => 'text',
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
         ]);
         CRUD::addField([
             'name' => 'name',
             'label' => trans('backpack::fields.name'),
             'type' => 'text',
-            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
         ]);
         CRUD::addField([
             'name' => 'phone',
             'label' => trans('backpack::fields.phone'),
             'type' => 'text',
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+
+        CRUD::addField([
+            'name' => 'popup_id',
+            'label' => trans('backpack::fields.brand'),
+            'type' => 'relationship',
+            'entity'    => 'popup',
+            'model'     => Popup::class,
+            'attribute' => 'title',
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name' => 'category_id',
+            'label' => trans('backpack::fields.category'),
+            'type' => 'relationship',
+            'entity' => 'category',
+            'attribute' => 'title',
+            'model' => Category::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
         CRUD::addField([
@@ -123,6 +139,22 @@ class FormResultDiscountCrudController extends CrudController
             'type' => 'text',
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+
+        CRUD::addField([
+            'name' => 'created_at',
+            'label' => trans('backpack::fields.created_at'),
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
+
+        CRUD::addField([
+            'name' => 'updated_at',
+            'label' => trans('backpack::fields.updated_at'),
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
         ]);
     }
 

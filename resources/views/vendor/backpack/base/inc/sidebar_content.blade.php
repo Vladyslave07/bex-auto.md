@@ -37,6 +37,7 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('news') }}'><i class='nav-icon la la-newspaper-o'></i> Новости</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('popular-request') }}'><i class='nav-icon la la-question-circle'></i> Популярные запросы</a></li>
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('review') }}'><i class='nav-icon la la-voicemail'></i> Отзывы</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('popup') }}"><i class="nav-icon la la-windows"></i> Поп-апы</a></li>
     </ul>
 </li>
 
