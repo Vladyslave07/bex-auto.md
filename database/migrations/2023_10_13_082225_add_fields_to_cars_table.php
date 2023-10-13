@@ -14,11 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::connection('mysql')->table('cars', function (Blueprint $table) {
-            $table->bolean('commission_car')->default(false)->after('price');
+            $table->boolean('commission_car')->default(false)->after('price');
             $table->integer('status_sort')->default(500)->after('price');
         });
         Schema::connection('kz_mysql')->table('cars', function (Blueprint $table) {
-            $table->bolean('commission_car')->default(false)->after('price');
+            $table->boolean('commission_car')->default(false)->after('price');
             $table->integer('status_sort')->default(500)->after('price');
         });
     }
