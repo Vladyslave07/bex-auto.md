@@ -16,11 +16,15 @@
 @include('partials.service.banner')
 
 {{-- Form --}}
-@if($service->form_slug == \App\Http\Livewire\Forms\CallBack::SLUG_FORM)
+@if(App\Models\Domain::currentDomain()?->slug == App\Models\Domain::DEFAULT_SLUG_DOMAIN)
+    @if($service->form_slug == \App\Http\Livewire\Forms\CallBack::SLUG_FORM)
+        <livewire:forms.call-back :title="Setting::get('application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
+    @endif
+    @if($service->form_slug == \App\Http\Livewire\Forms\AutoForZsu::SLUG_FORM)
+        <livewire:forms.auto-for-zsu :title="Setting::get('application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
+    @endif
+@else
     <livewire:forms.call-back :title="Setting::get('application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
-@endif
-@if($service->form_slug == \App\Http\Livewire\Forms\AutoForZsu::SLUG_FORM)
-    <livewire:forms.auto-for-zsu :title="Setting::get('application_for_coop_title')" :btnText="Lang::get('service.form_btn')">
 @endif
 
 {{-- Youtube video --}}
