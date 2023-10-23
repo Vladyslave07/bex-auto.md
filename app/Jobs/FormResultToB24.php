@@ -63,7 +63,7 @@ class FormResultToB24 implements ShouldQueue
             }
 
         }
-
+        Log::info('B24 lead title', ['form_result_id' => $this->formResult->id, 'title' => $title]);
         $data = [
             'TITLE' => $title,
             "NAME"=> $this->formResult->name,
