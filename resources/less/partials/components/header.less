@@ -41,6 +41,7 @@
         }
     }
     .lang-switcher {
+        position: relative;
         font-weight: 600;
         span {
             cursor: pointer;
@@ -52,6 +53,24 @@
                     content: "/";
                     margin-right: 4px;
                 }
+            }
+        }
+        .lang-btn {
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            line-height: 18px;
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: var(--gray3);
+            box-shadow: 4px 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            padding: 10px;
+            white-space: nowrap;
+            z-index: 1;
+            &::before {
+                content: none;
             }
         }
     }
@@ -169,6 +188,11 @@
                             content: none;
                         }
                     }
+                }
+                .lang-btn {
+                    right: auto;
+                    left: 0;
+                    margin: 0;
                 }
             }
             .main-menu {
