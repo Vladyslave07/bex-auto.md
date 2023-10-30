@@ -6,5 +6,9 @@
             <a href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL($localeCode) }}">{{ $properties['native'] }}</a>
         @endif
     @endforeach
-    <a href="#" class="lang-btn">Оберіть Укр мову сайту</a>
+    @if (!$hideLangSwitchBtn)
+        <a href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL('uk') }}" class="lang-btn">
+            {{ __('header.uk_lang_btm') }}
+        </a>
+    @endif
 </div>

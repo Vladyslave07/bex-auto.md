@@ -5,11 +5,14 @@ namespace App\View\Components;
 use App\Models\Domain;
 use Illuminate\View\Component;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
+use Illuminate\Support\Facades\Cookie;
 
 class LangSwitcher extends Component
 {
     public $locales;
     public $currentLocale;
+
+    public $hideLangSwitchBtn = true;
 
     /**
      * Create a new component instance.
@@ -20,6 +23,7 @@ class LangSwitcher extends Component
     {
         $this->currentLocale = LaravelLocalization::getCurrentLocale();
         $this->setLocales();
+        $this->hideLangBtn();
     }
 
 
@@ -39,9 +43,15 @@ class LangSwitcher extends Component
      */
     public function currentDomain()
     {
-        // todo: Вынести установку домена глобально
-        $domainSlug = trim(preg_replace('/(.*)\/\//', '', str_replace(env('APP_DOMAIN'), '', request()->root())), '.') ?: 'uk';
+        $domainSlug = app('domain')?->getDomain()->slug ?: 'uk';
         return Domain::domainBySlug($domainSlug);
+    }
+
+    public function hideLangBtn()
+    {
+        if ($this->currentLocale == 'ru' && !Cookie::get('show_lang_switch_btn')) {
+            $this->hideLangSwitchBtn = false;
+        }
     }
 
     /**
