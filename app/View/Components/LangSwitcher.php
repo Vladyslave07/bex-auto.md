@@ -49,8 +49,10 @@ class LangSwitcher extends Component
 
     public function hideLangBtn()
     {
-        if ($this->currentLocale == 'ru' && !Cookie::get('show_lang_switch_btn')) {
-            $this->hideLangSwitchBtn = false;
+        if ($this->currentDomain()?->slug == Domain::DEFAULT_SLUG_DOMAIN) {
+            if ($this->currentLocale == 'ru' && !Cookie::get('show_lang_switch_btn')) {
+                $this->hideLangSwitchBtn = false;
+            }
         }
     }
 
