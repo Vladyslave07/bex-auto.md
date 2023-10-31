@@ -5,6 +5,7 @@ return [
     'car' => 'Desired car',
     'country' => 'Auto market',
     'call_back_button' => 'Choose a car',
+    'budget' => 'Desired budget',
     'buy-and-delivery' => [
         'title' => 'Let\'s find the car of your dreams!',
         'sub_title' => 'Leave a request and our managers will select a car for your budget and request',

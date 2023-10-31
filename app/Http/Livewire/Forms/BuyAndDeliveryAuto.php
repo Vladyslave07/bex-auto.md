@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Forms;
 
 use App\Jobs\FormResultToB24;
+use App\Models\Domain;
 use App\Models\FormResult;
 use App\Rules\PhoneNumber;
 use App\Traits\UtmMarkTrait;
@@ -21,6 +22,12 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
     public $name;
     public $car;
     public $country;
+    public $placeholder;
+
+    public function mount()
+    {
+        $this->setPlaceholder();
+    }
 
     public function render()
     {
@@ -52,6 +59,13 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
             'car' => ['max:100'],
             'country' => ['max:100'],
         ];
+    }
+
+    private function setPlaceholder()
+    {
+        $this->placeholder = app('domain')->getDomain()->slug === Domain::KAZACHSTAN_SLUG_DOMAIN ?
+            Lang::get('forms.budget') :
+            Lang::get('forms.country');
     }
 
     protected function messages()

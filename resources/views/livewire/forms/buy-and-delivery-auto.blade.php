@@ -27,7 +27,7 @@
             </div>
             <div class="form-group">
                 <input class="form-control @error('country') is-invalid @enderror" wire:model.defer="country"
-                       placeholder="@lang('forms.country')" type="text">
+                       placeholder="{{ $placeholder }}" type="text">
                 @error('country')
                 <div class="invalid-feedback">{{ $message }}</div>@enderror
             </div>
