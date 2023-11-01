@@ -2582,7 +2582,32 @@
             <div class="swiper-bullets"></div>
             <div class="swiper-button-next team-next"><svg width="24" height="30"><use xlink:href="#arrow-icon"></use></svg></div>
         </div>
-        <a href="#" class="link-more">Дивитись усі відгуки</a>
+    </div>
+    <div class="reviews-video">
+        <div class="item">
+            <video controls>
+                <source src="/video/video_1.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="item">
+            <video controls>
+                <source src="/video/video_2.mp4" type="video/mp4" />
+            </video>
+        </div>
+        <div class="item">
+            <video controls>
+                <source src="/video/video_1.mp4" type="video/mp4" />
+            </video>
+        </div>
+    </div>
+    <div class="reviews-social">
+        <div class="h3">Смотрите больше отзывов в нашем Instagram</div>
+        <a href="https://instagram.com/bex_auto?igshid=ZDdkNTZiNTM=" target="_blank" rel="noopener">
+            <svg width="23" height="23">
+                <use xlink:href="#insta-icon"></use>
+            </svg>
+            bex-auto
+        </a>
     </div>
 </div>
 <!-- ///:end/// -->
