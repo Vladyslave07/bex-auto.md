@@ -8,8 +8,8 @@
                 <p class="color-red">@lang('index.buy-and-delivery.countries')</p>
                 <div class="img">
                     <picture>
-                        <source type="image/webp" srcset="{{ asset('img/section-order-car.webp') }}">
-                        <img width="607" height="314" src="{{ asset('img/section-order-car.png') }}" loading="lazy" alt="">
+                        <source type="image/webp" srcset="{{ asset('img/' . \App\Helper\General::siteDirectory() . '/section-order-car.webp') }}">
+                        <img width="607" height="314" src="{{ asset('img/' . \App\Helper\General::siteDirectory() . '/section-order-car.png') }}" loading="lazy" alt="">
                     </picture>
                     <picture>
                         <source type="image/webp" srcset="{{ asset('img/section-order-car-map.webp') }}">

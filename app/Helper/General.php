@@ -4,6 +4,7 @@
 namespace App\Helper;
 
 
+use App\Models\Domain;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -95,4 +96,12 @@ class General
         return app()->getLocale() . '_' . $ogLocale;
     }
 
+
+    /**
+     * @return string
+     */
+    public static function siteDirectory()
+    {
+        return app('domain')->getDomain()?->slug ?? Domain::DEFAULT_SLUG_DOMAIN;
+    }
 }
