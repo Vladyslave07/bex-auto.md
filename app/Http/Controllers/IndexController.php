@@ -54,7 +54,10 @@ class IndexController extends Controller
         // Reviews
         $reviews = Review::reviews();
 
-        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText', 'reviews'));
+        // Video reviews
+        $videoReviews = \App\Models\VideoReview::getLastThreeVideo();
+
+        return view('index', compact('banner', 'carsInStock', 'categories', 'expectedCars', 'popularRequests', 'brands', 'faqs', 'seoText', 'reviews', 'videoReviews'));
     }
 
     /**

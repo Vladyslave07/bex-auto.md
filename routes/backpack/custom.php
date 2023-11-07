@@ -54,4 +54,5 @@ Route::group([
     Route::crud('country', 'CountryCrudController');
     Route::crud('employee', 'EmployeeCrudController');
     Route::crud('popup', 'PopupCrudController');
+    Route::crud('video-review', 'VideoReviewCrudController');
 }); // this should be the absolute last line of this file

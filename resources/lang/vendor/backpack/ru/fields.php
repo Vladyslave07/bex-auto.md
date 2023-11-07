@@ -123,6 +123,7 @@ return [
     'main_popup' => 'Главный попап',
     'commission_car' => 'Комиссионное авто',
     'status_sort' => 'Сортировка внутри статуса авто',
+    'popup_id' => 'Попап',
 
     'option' => [
         'expect' => 'Ожидается',

@@ -51,6 +51,28 @@
                     </svg>
                 </div>
             </div>
+            @if(app('domain')->getDomain()?->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+                @if ($videoReviews && $videoReviews->count() > 0)
+                <div class="reviews-video">
+                    @foreach($videoReviews as $videoReview)
+                        <div class="item">
+                            <video controls>
+                                <source src="{{ $videoReview->video }}" type="video/mp4" />
+                            </video>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="reviews-social">
+                    <div class="h3">{{ __('index.reviews.more_video') }}</div>
+                    <a href="https://instagram.com/bex_auto?igshid=ZDdkNTZiNTM=" target="_blank" rel="noopener">
+                        <svg width="23" height="23">
+                            <use xlink:href="#insta-icon"></use>
+                        </svg>
+                        bex-auto
+                    </a>
+                </div>
+                @endif
+            @endif
         </div>
     </div>
 @endif

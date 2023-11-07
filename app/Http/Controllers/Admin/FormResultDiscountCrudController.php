@@ -94,7 +94,7 @@ class FormResultDiscountCrudController extends CrudController
 
         CRUD::addField([
             'name' => 'popup_id',
-            'label' => trans('backpack::fields.brand'),
+            'label' => trans('backpack::fields.popup_id'),
             'type' => 'relationship',
             'entity'    => 'popup',
             'model'     => Popup::class,

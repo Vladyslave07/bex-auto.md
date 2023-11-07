@@ -42,6 +42,7 @@ return [
         'title' => 'They talk about <span class="bline">us</span>',
         'sub_title' => 'Every feedback about our work is important to us',
         'more' => 'See all reviews',
+        'more_video' => 'See more reviews on our Instagram',
     ],
 
     'why_we' => [

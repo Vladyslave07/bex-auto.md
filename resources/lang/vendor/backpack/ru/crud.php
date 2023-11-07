@@ -254,4 +254,7 @@ return [
 
     'popup' => 'Поп-ап',
     'popups' => 'Поп-апы',
+
+    'video_review' => 'Видео отзыв',
+    'video_reviews' => 'Видео отзывы',
 ];
