@@ -36,7 +36,7 @@ class Review extends Model
     public static function reviews()
     {
         return Cache::remember(General::cacheKey('index_reviews'), 86400, function () {
-            return self::query()->orderBy('sort')->active()->take(12)->get();
+            return self::query()->where('rating', '>=', 4)->orderBy('sort')->active()->take(12)->get();
         });
     }
 
