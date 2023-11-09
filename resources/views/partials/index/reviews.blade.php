@@ -1,7 +1,29 @@
 @if (count($reviews) > 0)
-    <div class="section-reviews container hidden-xs" id="reviews">
+    <div class="section-reviews container" id="reviews">
         <div class="main-title text-center noline">{{ Setting::get('reviews_block_title') }}</div>
         <div class="h3 text-center">{{ Setting::get('reviews_block_sub_title') }}</div>
+        @if(app('domain')->getDomain()?->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+            @if ($videoReviews && $videoReviews->count() > 0)
+            <div class="reviews-video">
+                @foreach($videoReviews as $videoReview)
+                    <div class="item">
+                        <video controls>
+                            <source src="{{ $videoReview->video }}" type="video/mp4" />
+                        </video>
+                    </div>
+                @endforeach
+            </div>
+            <div class="reviews-social">
+                <div class="h3">{{ __('index.reviews.more_video') }}</div>
+                <a href="https://instagram.com/bex_auto?igshid=ZDdkNTZiNTM=" target="_blank" rel="noopener">
+                    <svg width="23" height="23">
+                        <use xlink:href="#insta-icon"></use>
+                    </svg>
+                    bex-auto
+                </a>
+            </div>
+            @endif
+        @endif
         <div class="swiper reviews-swiper">
             <div class="swiper-wrapper">
                 @foreach($reviews as $review)
@@ -51,28 +73,6 @@
                     </svg>
                 </div>
             </div>
-            @if(app('domain')->getDomain()?->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
-                @if ($videoReviews && $videoReviews->count() > 0)
-                <div class="reviews-video">
-                    @foreach($videoReviews as $videoReview)
-                        <div class="item">
-                            <video controls>
-                                <source src="{{ $videoReview->video }}" type="video/mp4" />
-                            </video>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="reviews-social">
-                    <div class="h3">{{ __('index.reviews.more_video') }}</div>
-                    <a href="https://instagram.com/bex_auto?igshid=ZDdkNTZiNTM=" target="_blank" rel="noopener">
-                        <svg width="23" height="23">
-                            <use xlink:href="#insta-icon"></use>
-                        </svg>
-                        bex-auto
-                    </a>
-                </div>
-                @endif
-            @endif
         </div>
     </div>
 @endif

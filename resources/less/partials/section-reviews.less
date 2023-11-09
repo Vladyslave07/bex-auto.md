@@ -137,6 +137,7 @@
     }
 }
 .reviews-social {
+    margin-bottom: 30px;
     .h3 {
         margin-bottom: 20px;
     }
@@ -152,5 +153,25 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+}
+@media (max-width: 767px) {
+    .section-reviews {
+        margin-bottom: 40px;
+    }
+    .reviews-swiper {
+        .swiper-slide {
+            margin-bottom: 0;
+        }
+    }
+    .reviews-video {
+        display: flex;
+        white-space: nowrap;
+        overflow: auto;
+        padding: 0 20px 10px;
+        margin: 15px -20px;
+        .item {
+            min-width: 300px;
+        }
     }
 }
