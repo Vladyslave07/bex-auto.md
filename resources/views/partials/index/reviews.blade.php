@@ -15,12 +15,15 @@
             </div>
             <div class="reviews-social">
                 <div class="h3">{{ __('index.reviews.more_video') }}</div>
-                <a href="https://instagram.com/bex_auto?igshid=ZDdkNTZiNTM=" target="_blank" rel="noopener">
-                    <svg width="23" height="23">
-                        <use xlink:href="#insta-icon"></use>
-                    </svg>
-                    bex-auto
-                </a>
+                @if($instagram = app('domain')->getDomain()->instagram)
+                    <a href="{{ $instagram }}" target="_blank" rel="noopener">
+                        <svg width="23" height="23">
+                            <use xlink:href="#insta-icon"></use>
+                        </svg>
+                        bex-auto
+                    </a>
+                @endif
+
             </div>
             @endif
         @endif
