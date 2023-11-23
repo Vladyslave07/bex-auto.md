@@ -26,6 +26,7 @@ return [
         \App\Models\Car::IN_STOCK_STATUS => 'Buy',
         \App\Models\Car::COPRAT_STATUS => 'Order',
         \App\Models\Car::ENCAR_STATUS => 'Order',
+        \App\Models\Car::SOLD_STATUS => 'Find out the price',
     ],
 
     'product_block_title' => 'Products for car',

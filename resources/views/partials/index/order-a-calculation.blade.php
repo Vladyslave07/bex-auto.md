@@ -8,7 +8,7 @@
         @endif
     </div>
     <picture class="img">
-        <source type="image/webp" srcset="{{ asset('img/order-calculation.webp') }}">
-        <img width="340" height="346" src="{{ asset('img/order-calculation.png') }}" loading="lazy" alt="">
+        <source type="image/webp" srcset="{{ asset('img/order-calculation-new.webp') }}">
+        <img width="340" height="346" src="{{ asset('img/order-calculation-new.png') }}" loading="lazy" alt="">
     </picture>
 </div>

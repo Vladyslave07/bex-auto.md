@@ -26,6 +26,7 @@ return [
         \App\Models\Car::IN_STOCK_STATUS => 'Тапсырыс',
         \App\Models\Car::COPRAT_STATUS => 'Тапсырыс',
         \App\Models\Car::ENCAR_STATUS => 'Тапсырыс',
+        \App\Models\Car::SOLD_STATUS => 'Бағасын біліңіз',
     ],
 
     'product_block_title' => 'Көлікке арналған тауарлар',

@@ -26,6 +26,7 @@ return [
         \App\Models\Car::IN_STOCK_STATUS => 'Купити',
         \App\Models\Car::COPRAT_STATUS => 'Замовити',
         \App\Models\Car::ENCAR_STATUS => 'Замовити',
+        \App\Models\Car::SOLD_STATUS => 'Дізнатись ціну',
     ],
 
     'product_block_title' => 'Товари для автомобіля',
