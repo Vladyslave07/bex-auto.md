@@ -15,4 +15,14 @@ export default function() {
         expirationDate.setMonth(expirationDate.getMonth() + 1); // Добавляем один месяц к текущей дате
         document.cookie = `${name}=${value}; expires=${expirationDate.toUTCString()}; path=/`;
     }
+
+    document.querySelectorAll('.menu-icons-mob .item').forEach(btn => btn.addEventListener('click', () => {
+        const active = document.querySelector('.menu-icons-mob .item.active');
+        const check = document.querySelector('.main-header').id == btn.dataset.target;
+
+        active != btn && active?.classList.remove('active');
+        btn.classList.toggle('active');
+        document.querySelector('.main-header').id = check ? '' : btn.dataset.target ?? '';
+        document.body.dataset.over = check ? '' : 'modal-open';
+    }));
 }
