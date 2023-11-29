@@ -6,6 +6,7 @@ use App\Jobs\FormResultToB24;
 use App\Models\Category;
 use App\Models\FormResult;
 use App\Models\Popup;
+use App\Models\Service;
 use App\Rules\PhoneNumber;
 use App\Traits\UtmMarkTrait;
 use Illuminate\Support\Facades\Lang;
@@ -22,6 +23,7 @@ class DiscountForm extends Component implements BaseForm
     public $show;
     public $popup;
     public $category;
+    public $service;
 
     const SLUG_FORM = 'discount';
 
@@ -44,6 +46,12 @@ class DiscountForm extends Component implements BaseForm
             $popup = Popup::getPopupByCategory($category);
         }
 
+        $service = Service::findBySlug($url);
+        if ($service) {
+            $this->service = $service;
+            $popup = Popup::getPopupByService($service);
+        }
+
         if ($popup) {
             $this->popup = $popup;
             return;
@@ -63,6 +71,7 @@ class DiscountForm extends Component implements BaseForm
             'slug_form' => self::SLUG_FORM,
             'popup_id' => $this->popup->id,
             'category_id' => $this->category?->id,
+            'service_id' => $this->service?->id,
         ];
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);

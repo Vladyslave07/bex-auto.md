@@ -49,6 +49,7 @@ class FormResultToB24 implements ShouldQueue
 
         if ($this->formResult->slug_form == DiscountForm::SLUG_FORM) {
             $categoryTitle = $this->formResult->category?->title;
+            $serviceTitle = $this->formResult->service?->title;
             $popupTitle = "\"" . $this->formResult->popup->title . "\"";
 
             $title = "Заявка ID: %s с попапа - %s ";
@@ -56,7 +57,10 @@ class FormResultToB24 implements ShouldQueue
                 $title .= "категория: %s ";
                 $title .= "сайт: %s";
                 $title = sprintf($title, $this->formResult->id, $popupTitle, $categoryTitle, $domain);
-
+            } elseif ($serviceTitle) {
+                $title .= "услуга: %s ";
+                $title .= "сайт: %s";
+                $title = sprintf($title, $this->formResult->id, $popupTitle, $serviceTitle, $domain);
             } else {
                 $title .= "сайт: %s";
                 $title = sprintf($title, $this->formResult->id, $popupTitle, $domain);
