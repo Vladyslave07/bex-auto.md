@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\PopupRequest;
 use App\Models\Category;
+use App\Models\Service;
 use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
@@ -96,6 +97,24 @@ class PopupCrudController extends CrudController
                 return $query->orderBy('title', 'asc')->get();
             }),
         ]);
+
+        CRUD::addField([
+            'name' => 'services',
+            'label' => trans('backpack::fields.services'),
+            'type' => 'relationship',
+            'entity' => 'services',
+            'attribute' => 'title',
+            'model' => Service::class,
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'options' => (function ($query) {
+                $services = $query->orderBy('title', 'asc')->get();
+                return $services->map(function ($service) {
+                    $service->title = strip_tags($service->title);
+                    return $service;
+                });
+            }),
+        ]);
+
         CRUD::addField(['name' => 'image', 'label' => trans('backpack::fields.image'), 'type' => 'image', 'disk' => 'public', 'destination_path' => 'popups', 'thumb_prefix' => '', 'hint' => 'size 500x500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField(['name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
