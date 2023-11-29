@@ -257,4 +257,7 @@ return [
 
     'video_review' => 'Видео отзыв',
     'video_reviews' => 'Видео отзывы',
+
+    'header_menu' => 'Верхнее меню',
+    'header_menus' => 'Верхние меню',
 ];
