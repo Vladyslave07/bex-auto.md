@@ -69,6 +69,15 @@ class Popup extends Model
         });
     }
 
+    public static function getPopupByService(Service $service)
+    {
+        return Cache::remember(General::cacheKey(self::POPUP_SLUG_KEY . $service->slug), 86400, function () use ($service) {
+            return self::query()->active()->whereHas('services', function ($query) use ($service) {
+                return $query->where('service_id', $service->id);
+            })->first();
+        });
+    }
+
     public static function getMainPopup()
     {
         return Cache::remember(General::cacheKey(self::MAIN_POPUP_KEY), 86400, function () {
@@ -85,6 +94,11 @@ class Popup extends Model
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class, 'category_popup');
+    }
+
+    public function services(): BelongsToMany
+    {
+        return $this->belongsToMany(Service::class, 'service_popup');
     }
 
     /*

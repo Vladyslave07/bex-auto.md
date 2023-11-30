@@ -124,6 +124,7 @@ return [
     'commission_car' => 'Комиссионное авто',
     'status_sort' => 'Сортировка внутри статуса авто',
     'popup_id' => 'Попап',
+    'services' => 'Услуги',
 
     'option' => [
         'expect' => 'Ожидается',
