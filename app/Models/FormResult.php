@@ -51,7 +51,7 @@ class FormResult extends Model
 
     public function service()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(Service::class);
     }
 
     public function popup()
