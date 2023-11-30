@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class HeaderMenuRequest extends FormRequest
 {
@@ -26,7 +27,8 @@ class HeaderMenuRequest extends FormRequest
     {
         return [
              'title' => 'required',
-             'link' => 'required'
+             'link' => 'required',
+             'slug' => Rule::unique('header_menus')->ignore($this->route('id')),
         ];
     }
 
@@ -50,7 +52,9 @@ class HeaderMenuRequest extends FormRequest
     public function messages()
     {
         return [
-            //
+            'title.required' => __('validation.required', ['attribute' => trans('backpack::fields.title')]),
+            'link.required' => __('validation.required', ['attribute' => trans('backpack::fields.link')]),
+            'slug.unique' => __('validation.unique', ['attribute' => trans('backpack::fields.slug')]),
         ];
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Requests\HeaderMenuRequest;
+use App\Traits\BulkDeleteOperation;
 use Backpack\CRUD\app\Http\Controllers\CrudController;
 use Backpack\CRUD\app\Library\CrudPanel\CrudPanelFacade as CRUD;
 
@@ -17,7 +18,8 @@ class HeaderMenuCrudController extends CrudController
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
+    use BulkDeleteOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
@@ -39,10 +41,29 @@ class HeaderMenuCrudController extends CrudController
      */
     protected function setupListOperation()
     {
-        CRUD::column('active');
-        CRUD::column('title');
-        CRUD::column('sort');
-        CRUD::column('link');
+        CRUD::setColumns([
+            [
+                'name'  => 'id',
+                'label' => '№',
+            ],
+            [
+                'name'  => 'active',
+                'label' => trans('backpack::fields.active'),
+                'type'  => 'check'
+            ],
+            [
+                'name'  => 'title',
+                'label' => trans('backpack::fields.name'),
+            ],
+            [
+                'name'  => 'link',
+                'label' => trans('backpack::fields.link'),
+            ],
+            [
+                'name'  => 'sort',
+                'label' => trans('backpack::fields.sort'),
+            ],
+        ]);
 
     }
 
@@ -76,6 +97,7 @@ class HeaderMenuCrudController extends CrudController
             'label'      => trans('backpack::fields.symbol_code'),
             'type'       => 'text',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'hint' => trans('backpack::hint.categories.slug'),
         ]);
 
         CRUD::addField([
@@ -91,6 +113,7 @@ class HeaderMenuCrudController extends CrudController
             'label'      => trans('backpack::fields.link'),
             'type'       => 'text',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'hint' => trans('backpack::hint.categories.slug'),
         ]);
 
 
