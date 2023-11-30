@@ -21,5 +21,11 @@ class UserAdminSeeder extends Seeder
             'email' => 'redchameleon@gmail.com',
             'password' => Hash::make('upZ972%S3T!X'),
         ]);
+
+        DB::table('model_has_roles')->insert([
+            'role_id' => '1',
+            'model_type' => 'App\Models\User',
+            'model_id' => '1',
+        ]);
     }
 }

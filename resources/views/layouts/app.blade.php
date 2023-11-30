@@ -24,35 +24,86 @@
     <body>
         {{-- Сео скрипты --}}
         @include('partials.seo_scripts.after_body_start')
+        <div class="menu-icons-mob">
+            <a href="tel:+380503816953" class="item">
+                <div class="icon">
+                    <svg width="37" height="36"><use xlink:href="#phone-icon"></use></svg>
+                </div>
+                <span class="name">Контакти</span>
+            </a>
+            <div class="item" data-target="menuOpen">
+                <div class="icon">
+                    <svg width="24" height="24"><use xlink:href="#bar-icon"></use></svg>
+                </div>
+                <span class="name">Меню</span>
+            </div>
+            <div class="item" data-target="catalogOpen">
+                <div class="icon">
+                    <svg width="24" height="24"><use xlink:href="#catalog-icon"></use></svg>
+                </div>
+                <span class="name">Каталог</span>
+            </div>
+            <div class="item" data-target="searchOpen">
+                <div class="icon">
+                    <svg width="25" height="24"><use xlink:href="#search-icon"></use></svg>
+                </div>
+                <span class="name">Пошук</span>
+            </div>
+        </div>
+        <header class="main-header">
+            <div class="header-top">
+                <div class="container">
+                    <nav class="menu-info">
+                        <a href="#">Нові електромобілі</a>
+                        <a href="#">Електромобілі</a>
+                        <a href="#">Зарядні станції</a>
+                        <a href="#">Послуги для автобізнесу</a>
+                        <a href="#">Cпецтехніка</a>
+                    </nav>
 
-        <header class="main-header container">
+                    {{-- select site lang --}}
+                    <x-lang-switcher></x-lang-switcher>
+                </div>
+            </div>
+            <div class="header-middle">
+                <div class="container">
+                    <div class="burger visible-sm" aria-label="burger" onclick="document.querySelector('[data-target=menuOpen]').click()">
+                        <span></span>
+                    </div>
+                    {{-- Admin menu. Only for admins --}}
+                    {!! App\Services\Admin\Menu::render() !!}
 
-            {{-- Admin menu. Only for admins --}}
-            {!! App\Services\Admin\Menu::render() !!}
-
-            @if (\App\Models\Domain::currentDomain()->id == 5)
-                <meta name="facebook-domain-verification" content="1ok4pz78y350j624157v7vyrnv4fk3" />
-            @endif
-            <a href="{{ route('index') }}" class="logo" aria-label="logo">
+                    @if (\App\Models\Domain::currentDomain()->id == 5)
+                        <meta name="facebook-domain-verification" content="1ok4pz78y350j624157v7vyrnv4fk3" />
+                    @endif
+                    <a href="{{ route('index') }}" class="logo" aria-label="logo">
                 <img width="134" height="59" src="{{ asset(\App\Helper\ImageHelper::logoPath()) }}" alt="">
             </a>
 
-            {{-- search form --}}
-            @include('partials.search.search-form')
+                    {{-- search form --}}
+                    @include('partials.search.search-form')
 
-            {{-- main phone --}}
-            @include('partials.header.phone')
+                    <nav class="menu-search">
+                        <a href="#">Geely</a>
+                        <a href="#">Honda</a>
+                        <a href="#">Weltmeister</a>
+                        <a href="#">Mitsubishi</a>
+                        <a href="#">BYD</a>
+                        <a href="#">BMW</a>
+                        <a href="#">Ford</a>
+                    </nav>
 
-            <div class="burger toggle-btn visible-sm">
-                <span></span>
+                    {{-- main phone --}}
+                    @include('partials.header.phone')
+
+                    <div class="search-btn visible-sm" aria-label="Search" onclick="document.querySelector('[data-target=searchOpen]').click()">
+                        <svg width="25" height="24"><use xlink:href="#search-icon"></use></svg>
+                    </div>
+
+                    {{-- menu --}}
+                    @include('partials.header.main-menu', ['items' => \App\Models\Menu::menuItems()])
+                </div>
             </div>
-
-            {{-- select site lang --}}
-            <x-lang-switcher></x-lang-switcher>
-
-            {{-- menu --}}
-            @include('partials.header.main-menu', ['items' => \App\Models\Menu::menuItems()])
-
         </header>
 
         <main class="main">

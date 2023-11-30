@@ -2,11 +2,18 @@
     <ul>
         @foreach($items as $item)
             <li>
-                <a @if ($item->show_link) href="{{ \App\Models\Menu::localeMenuLink($item->slug) }}" @else class="toggle-btn" @endif>{{ $item->title }}</a>
+                <a @if ($item->show_link) href="{{ \App\Models\Menu::localeMenuLink($item->slug) }}" @else @if($loop->first) onclick="document.querySelector('[data-target=catalogOpen]').click()" @else class="toggle-btn" @endif @endif>
+                    @if($loop->first)
+                        <svg width="15" height="14"><use xlink:href="#catalog-icon"></use></svg>
+                    @endif
+                    {{ $item->title }}
+                </a>
                 @if(count($item->children) > 0)
-                    <svg class="toggle-btn" width="13" height="7">
-                        <use xlink:href="#arrow-icon"></use>
-                    </svg>
+                    @if(!$loop->first)
+                        <svg class="toggle-btn" width="13" height="7">
+                            <use xlink:href="#arrow-icon"></use>
+                        </svg>
+                    @endif
                     <div class="menu-dropdown">
                         <div class="submenu">
                             @foreach($item->children as $child)
