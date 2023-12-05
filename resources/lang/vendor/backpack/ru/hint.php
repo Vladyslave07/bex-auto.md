@@ -58,6 +58,6 @@ return [
     ],
 
     'header_menu' => [
-        'link' => 'Относительная ссылка без домена. Пример: /about',
+        'link' => 'Абсолютная ссылка или относительная Пример: <code>https:bex-auto.com/about</code> или <code>/about</code>',
     ]
 ];

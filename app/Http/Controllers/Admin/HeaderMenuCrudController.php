@@ -113,7 +113,7 @@ class HeaderMenuCrudController extends CrudController
             'label'      => trans('backpack::fields.link'),
             'type'       => 'text',
             'wrapperAttributes' => ['class' => 'form-group col-md-6'],
-            'hint' => trans('backpack::hint.categories.slug'),
+            'hint' => trans('backpack::hint.header_menu.link'),
         ]);
 
 
