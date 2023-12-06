@@ -1,5 +1,5 @@
 <div class="menu-icons-mob">
-    <a href="tel:{{ Str::phoneNumber(\App\Models\Domain::phoneForCurrDomain()) }}" class="item">
+    <a href="{{ route('static.contacts') }}" class="item">
         <div class="icon">
             <svg width="37" height="36"><use xlink:href="#phone-icon"></use></svg>
         </div>
