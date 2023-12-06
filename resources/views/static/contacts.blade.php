@@ -6,7 +6,7 @@
 
 @push('scripts')
     <script src="{{ mix('js/contacts.js') }}" defer></script>
-    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyAItZW2LYCrijLfT29n2PPC6oFGSJgRy3Q&#038;callback=initMap'></script>
+    <script async defer src='https://maps.googleapis.com/maps/api/js?key=AIzaSyBUNXuMito23uou4dxrhuPY22n2r4B4ntc&#038;callback=initMap'></script>
 @endpush
 
 @section('content')
