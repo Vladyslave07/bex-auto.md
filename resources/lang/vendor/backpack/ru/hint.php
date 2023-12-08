@@ -55,5 +55,9 @@ return [
         'd_m' => 'Модификатор сниппета: <code>|d_m</code>',
         'v_m' => 'Модификатор сниппета: <code>|v_m</code>',
         't_m' => 'Модификатор сниппета: <code>|t_m</code>',
+    ],
+
+    'header_menu' => [
+        'link' => 'Абсолютная ссылка или относительная Пример: <code>https:bex-auto.com/about</code> или <code>/about</code>',
     ]
 ];
