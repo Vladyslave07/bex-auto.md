@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('sort')->default(500);
 
             $table->text('title');
-            $table->text('slug')->unique();
+            $table->string('slug')->unique();
             $table->text('link');
 
             $table->timestamps();
@@ -33,7 +33,7 @@ return new class extends Migration
             $table->integer('sort')->default(500);
 
             $table->text('title');
-            $table->text('slug');
+            $table->string('slug')->unique();
             $table->text('link');
 
             $table->timestamps();
