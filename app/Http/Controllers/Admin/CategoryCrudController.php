@@ -86,8 +86,9 @@ class CategoryCrudController extends CrudController
     {
         CRUD::setValidation(CategoryRequest::class);
 
-        CRUD::addField(['tab' => 'Категория', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox']);
-        CRUD::addField(['tab' => 'Категория', 'name' => 'show_in_slider', 'label' => trans('backpack::fields.show_in_slider'), 'type' => 'checkbox']);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-3']]);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'show_in_slider', 'label' => trans('backpack::fields.show_in_slider'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-3']]);
+        CRUD::addField(['tab' => 'Категория', 'name' => 'add_to_feed', 'label' => trans('backpack::fields.add_to_feed'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-5']]);
         CRUD::addField(['tab' => 'Категория', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500']);
         CRUD::addField(['tab' => 'Категория', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'],]);
         CRUD::addField(['tab' => 'Категория', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'hint' => trans('backpack::hint.categories.slug') ,'wrapperAttributes' => ['class' => 'form-group col-md-6'],]);
