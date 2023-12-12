@@ -52,7 +52,7 @@ class FacebookCsvFeed extends Feed
                 $this->carCondition($car),
                 str_replace(["\r\n", "\r", "\n", "\t"], '', strip_tags($car->description)),
                 $this->carPreviewImage($car),
-                route('car_detail', $car->slug),
+                env('UK_APP_URL') . route('car_detail', $car->slug, false),
                 $car->titleWithYear,
                 $car->price . ' USD',
                 $this->carBrand($car),
