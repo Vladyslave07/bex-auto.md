@@ -12,7 +12,7 @@
     @endforeach
     @if (!$hideLangSwitchBtn)
         <a href="{{ \Mcamara\LaravelLocalization\Facades\LaravelLocalization::getLocalizedURL('uk') }}" class="lang-btn">
-            {{ __('header.uk_lang_btm') }}
+            {!! __('header.uk_lang_btm') !!}
         </a>
     @endif
 </div>
