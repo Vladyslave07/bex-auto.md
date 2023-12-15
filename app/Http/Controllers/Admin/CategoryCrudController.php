@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Helper\General;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
 use App\Models\Faq;
@@ -105,6 +106,11 @@ class CategoryCrudController extends CrudController
             'name' => 'sub_title',
             'label' => trans('backpack::fields.sub_title'),
             'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'enterMode' => 2, 'shiftEnterMode' => 1,
+                'height' => 500
+            ],
             'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([
@@ -112,6 +118,11 @@ class CategoryCrudController extends CrudController
             'name' => 'sub_title_text',
             'label' => trans('backpack::fields.sub_title_text'),
             'type' => 'ckeditor',
+            'options' => [
+                'extraPlugins' => General::EXTRA_PLUGINS_FOR_CKEDITOR,
+                'enterMode' => 2, 'shiftEnterMode' => 1,
+                'height' => 500
+            ],
             'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([
