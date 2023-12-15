@@ -104,14 +104,14 @@ class CategoryCrudController extends CrudController
             'tab' => 'Категория',
             'name' => 'sub_title',
             'label' => trans('backpack::fields.sub_title'),
-            'type' => 'simplemde',
+            'type' => 'ckeditor',
             'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([
             'tab' => 'Категория',
             'name' => 'sub_title_text',
             'label' => trans('backpack::fields.sub_title_text'),
-            'type' => 'simplemde',
+            'type' => 'ckeditor',
             'hint' => 'Доступные сниппеты: <code>#country#</code> <br> color-red: <span style="color: #e53934">Текст</span> <br> color-blue: <span style="color:#2a3d68">Текст</span>'
         ]);
         CRUD::addField([

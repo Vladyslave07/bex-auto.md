@@ -1,6 +1,6 @@
 <div class="section-advantages">
     <div class="container">
-        <div class="main-title text-center color-red noline">
+        <div class="main-title text-center color-red">
             {!! Setting::get('about_easy_with') !!}
         </div>
     </div>
