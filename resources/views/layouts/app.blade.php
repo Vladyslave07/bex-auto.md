@@ -56,15 +56,7 @@
                     {{-- search form --}}
                     @include('partials.search.search-form')
 
-                    <nav class="menu-search">
-                        <a href="#">Geely</a>
-                        <a href="#">Honda</a>
-                        <a href="#">Weltmeister</a>
-                        <a href="#">Mitsubishi</a>
-                        <a href="#">BYD</a>
-                        <a href="#">BMW</a>
-                        <a href="#">Ford</a>
-                    </nav>
+                    <x-search-tips></x-search-tips>
 
                     {{-- main phone --}}
                     @include('partials.header.phone')
