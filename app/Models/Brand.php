@@ -25,11 +25,12 @@ class Brand extends Model
     */
 
     protected $table = 'brands';
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'show_in_block'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'show_in_block', 'is_search'];
     protected $translatable = ['title'];
     protected $attributes = ['sort' => 500];
 
     const INDEX_BRANDS_CACHE_KEY = 'index_brands';
+    const SEARCH_TIPS_CACHE_KEY = 'search_tips';
 
     /*
     |--------------------------------------------------------------------------
@@ -56,6 +57,16 @@ class Brand extends Model
                 ->join('categories', 'brands.slug', '=', 'categories.slug')
                 ->where('show_in_block', 1)
                 ->where('brands.active', 1)->get(['brands.slug', 'brands.title']);
+        });
+    }
+
+    /**
+     * @return mixed
+     */
+    public static function searchTips()
+    {
+        return Cache::remember(General::cacheKey(self::SEARCH_TIPS_CACHE_KEY), 86400, function () {
+            return self::query()->where('is_search', 1)->active()->get(['slug', 'title']);
         });
     }
 
