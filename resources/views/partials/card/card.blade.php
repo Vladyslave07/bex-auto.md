@@ -13,9 +13,13 @@
                             <small>{{ $car->price_for_current_country }}</small>
                         @endif
                     </div>
-                    <div class="card-btn">
-                        <button onclick="openModal('#applicationForCar')" class="btn">Бесплатная консультация</button>
-                    </div>
+                    @if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+                        <div class="card-btn">
+                            <button onclick="openModal('#applicationForCar')" class="btn">
+                                {{ Setting::get('free_consultation') }}
+                            </button>
+                        </div>
+                    @endif
                 </div>
                 <div class="card-nav">
                     <span class="item active" data-target="Tab_1">{{ Lang::get('car.detail.characteristic')}}</span>
@@ -24,14 +28,16 @@
 
                 @include('partials.card.gallery')
 
-                <div class="card-btn">
-                    @if ($car->status != \App\Models\Car::SOLD_STATUS)
-                        @include('partials.card.card-btn')
-                    @else
-                        <button onclick="openModal('#applicationForCar')"
-                                class="btn">{{ __('car.detail.know_price') }}</button>
-                    @endif
-                </div>
+                @if(app('domain')->getDomain()->slug !== \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+                    <div class="card-btn">
+                        @if ($car->status != \App\Models\Car::SOLD_STATUS)
+                            @include('partials.card.card-btn')
+                        @else
+                            <button onclick="openModal('#applicationForCar')"
+                                    class="btn">{{ __('car.detail.know_price') }}</button>
+                        @endif
+                    </div>
+                @endif
                 <div class="card-features">
                     <strong class="title">{{ Lang::get('car.detail.characteristic')}}:</strong>
                     <ul class="list">
@@ -72,6 +78,12 @@
                 {!! $car->description !!}
             </div>
         @endif
+
+        @if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+            {{-- Call back form --}}
+            @livewire('forms.call-back', ['btnText' => Setting::get('call_back_btn_form'), 'title' => Setting::get('call_back_form_title_2')])
+        @endif
+
     </div>
     <div class="card-btn_mob">
         @include('partials.card.card-btn')
