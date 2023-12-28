@@ -325,14 +325,28 @@
             }
         }
         &-title {
+            margin-bottom: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
             .main-title {
                 font-variant: small-caps;
                 margin: 0 0 13px;
                 padding: 0 0 11px;
+                flex: 100%;
             }
             .price {
                 font-size: 30px;
-                margin-bottom: 27px;
+                margin-bottom: 0;
+                flex: 0 0 50%;
+            }
+            .card-btn {
+                margin: 0 0 0 auto;
+                padding: 0;
+                flex: 0 0 50%;
+                .btn {
+                    margin: 0;
+                }
             }
         }
         &-nav {

@@ -4,15 +4,18 @@
             <div class="container">
                 <div class="card-title">
                     <h1 class="main-title">{{ $car->titleWithYear }}</h1>
-                        <div class="price">
-                           @if($car->show_price_from)
-                                <span>{{ __('car.price_from') }}</span>
-                            @endif
-                               {{ $car->price_format }}
-                            @if($car->price_for_current_country)
-                                <small>{{ $car->price_for_current_country }}</small>
-                            @endif
-                        </div>
+                    <div class="price">
+                        @if($car->show_price_from)
+                            <span>{{ __('car.price_from') }}</span>
+                        @endif
+                            {{ $car->price_format }}
+                        @if($car->price_for_current_country)
+                            <small>{{ $car->price_for_current_country }}</small>
+                        @endif
+                    </div>
+                    <div class="card-btn">
+                        <button onclick="openModal('#applicationForCar')" class="btn">Бесплатная консультация</button>
+                    </div>
                 </div>
                 <div class="card-nav">
                     <span class="item active" data-target="Tab_1">{{ Lang::get('car.detail.characteristic')}}</span>
