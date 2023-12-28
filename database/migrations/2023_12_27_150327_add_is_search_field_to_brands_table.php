@@ -13,7 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('brands', function (Blueprint $table) {
+        Schema::connection('mysql')->table('brands', function (Blueprint $table) {
+            $table->boolean('is_search')->default(0)->after('show_in_block');
+        });
+        Schema::connection('kz_mysql')->table('brands', function (Blueprint $table) {
             $table->boolean('is_search')->default(0)->after('show_in_block');
         });
     }
@@ -25,8 +28,5 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('brands', function (Blueprint $table) {
-            //
-        });
     }
 };
