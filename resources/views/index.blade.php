@@ -14,7 +14,11 @@
 @include('partials.banner.banner')
 
 {{-- Call back form --}}
-@livewire('forms.call-back')
+@if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+    @livewire('forms.call-back', ['btnText' => Setting::get('call_back_btn_form'), 'title' => Setting::get('call_back_form_title_2')])
+@else
+    @livewire('forms.call-back')
+@endif
 
 {{-- Auto in stock --}}
 @include('partials.index.cars-in-stock')
