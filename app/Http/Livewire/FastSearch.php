@@ -31,13 +31,13 @@ class FastSearch extends Component
         $this->cars = Car::fastSearch($value);
         $this->showResults = strlen($value) > 2;
 
-        $brand = Brand::query()
+        $brands = Brand::query()
             ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '" . strtoupper($value) . "%'")->take(5)->get();
 
-        if ($brand->count() > 0) {
-            $brand = $brand->first();
+        if ($brands->count() > 0) {
+            $brand = $brands->first();
             $models = CarModel::query()->with('brand')
-                ->where('brand_id', $brand->id)->take(5)->get();
+                ->where('brand_id', $brand->id)->get();
 
             // Если не нашли модели по марке авто, то ищем по названию модели
             if ($models->count() <= 0) {
@@ -67,7 +67,7 @@ class FastSearch extends Component
         if ($models->count() > 0) {
             $this->fastResults = $models->sortByDesc('car_count')->take(5);
         } else {
-            $this->fastResults = $brand;
+            $this->fastResults = $brands;
         }
     }
 
