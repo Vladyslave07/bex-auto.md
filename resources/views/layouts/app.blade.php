@@ -54,7 +54,7 @@
             </a>
 
                     {{-- search form --}}
-                    @include('partials.search.search-form')
+                    <livewire:fast-search />
 
                     <x-search-tips></x-search-tips>
 

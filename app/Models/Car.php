@@ -146,10 +146,23 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
      */
     public static function carsSearch(string $q = '')
     {
+        return self::search($q)->active()->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
+    }
+
+    public static function fastSearch(string $q = '')
+    {
+        return self::search($q)->active()->whereNotNull('preview_image')->take(3)->get();
+    }
+
+    /**
+     * @param string $q
+     * @return mixed
+     */
+    public static function search(string $q = '')
+    {
         return self::query()
             ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
-            ->defaultOrder()
-            ->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
+            ->defaultOrder();
     }
 
     /**
