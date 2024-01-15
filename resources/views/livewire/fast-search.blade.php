@@ -14,7 +14,7 @@
 
     <div class="search-result" style="display: @if ($showResults) block @else none @endif">
         <div class="search-result__inner">
-            <a class="all-result" href="/{{ route('search') }}?q={{ $query }}">
+            <a class="all-result" href="{{ route('search') }}?q={{ $query }}">
                 {{ __('search.all_results') }}
             </a>
             @if (count($fastResults) > 0)
