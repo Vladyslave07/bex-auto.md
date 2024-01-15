@@ -16,7 +16,7 @@
                     @if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
                         <div class="card-btn">
                             <button onclick="openModal('#applicationForCar')" class="btn">
-                                {{ Setting::get('free_consultation') }}
+                                {{ $car->btn_text }}
                             </button>
                         </div>
                     @endif

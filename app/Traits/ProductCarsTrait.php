@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Domain;
 use App\Models\Property;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
@@ -9,6 +10,9 @@ use Illuminate\Support\Str;
 
 trait ProductCarsTrait
 {
+
+    public $carsFromUsa = 'avto-iz-ssha';
+
     /*
     |--------------------------------------------------------------------------
     | GLOBAL VARIABLES
@@ -102,7 +106,7 @@ trait ProductCarsTrait
 
     public function getPriceForCurrentCountryAttribute()
     {
-        if ($currency = app('domain')->getDomain()->currency) {
+        if (($currency = app('domain')->getDomain()->currency) && !in_array($this->carsFromUsa, $this->categories()->pluck('slug')->toArray())) {
             $price = $this->price * $currency->exchange_rate;
             return $currency->currency_symbol . number_format($price, 0, '.', ' ');
         }
@@ -125,6 +129,15 @@ trait ProductCarsTrait
             return $this->parseSnippets($this->meta_description);
         }
         return '';
+    }
+
+    public function getBtnTextAttribute()
+    {
+        if (in_array($this->carsFromUsa, $this->categories()->pluck('slug')->toArray())
+            && app('domain')->getDomain()->slug === Domain::KAZACHSTAN_SLUG_DOMAIN) {
+            return Setting::get('calc_by_key');
+        }
+        return Setting::get('free_consultation');
     }
 
     /*
