@@ -39,6 +39,7 @@
         <li class='nav-item'><a class='nav-link' href='{{ backpack_url('review') }}'><i class='nav-icon la la-voicemail'></i> Отзывы</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('video-review') }}"><i class="nav-icon la la-file-video"></i>Видео-отзывы</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ backpack_url('popup') }}"><i class="nav-icon la la-windows"></i> Поп-апы</a></li>
+        <li class="nav-item"><a class="nav-link" href="{{ backpack_url('btn-text') }}"><i class="nav-icon la la-grip-horizontal"></i> Текст кнопок</a></li>
     </ul>
 </li>
 
