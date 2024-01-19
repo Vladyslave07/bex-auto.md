@@ -81,6 +81,11 @@ class Product extends Model implements AdminMenuInterface
         return Property::query()->active()->where('for', $this->table)->orderBy('id')->get();
     }
 
+    public function categories()
+    {
+        return collect($this->category());
+    }
+
     /*
     |--------------------------------------------------------------------------
     | RELATIONS
