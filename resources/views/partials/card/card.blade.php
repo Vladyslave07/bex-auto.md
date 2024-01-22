@@ -29,15 +29,9 @@
                 @include('partials.card.gallery')
 
                 @if(app('domain')->getDomain()->slug !== \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
-                    <div class="card-btn">
-                        @if ($car->status != \App\Models\Car::SOLD_STATUS)
-                            @include('partials.card.card-btn')
-                        @else
-                            <button onclick="openModal('#applicationForCar')"
-                                    class="btn">{{ __('car.detail.know_price') }}</button>
-                        @endif
-                    </div>
+                     @include('partials.card.card-btn')
                 @endif
+
                 <div class="card-features">
                     <strong class="title">{{ Lang::get('car.detail.characteristic')}}:</strong>
                     <ul class="list">

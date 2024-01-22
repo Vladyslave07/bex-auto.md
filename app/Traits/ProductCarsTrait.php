@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\Models\Domain;
 use App\Models\Property;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
@@ -131,13 +130,10 @@ trait ProductCarsTrait
         return '';
     }
 
-    public function getBtnTextAttribute()
+    public function getBtnTextAttribute(): ?string
     {
-        if (in_array($this->carsFromUsa, $this->categories()->pluck('slug')->toArray())
-            && app('domain')->getDomain()->slug === Domain::KAZACHSTAN_SLUG_DOMAIN) {
-            return Setting::get('calc_by_key');
-        }
-        return Setting::get('free_consultation');
+        $btnTxt = new \App\Services\Car\BtnTextService($this);
+        return  $btnTxt->getBtnText();
     }
 
     /*

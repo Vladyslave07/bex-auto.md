@@ -56,4 +56,5 @@ Route::group([
     Route::crud('popup', 'PopupCrudController');
     Route::crud('video-review', 'VideoReviewCrudController');
     Route::crud('header-menu', 'HeaderMenuCrudController');
+    Route::crud('btn-text', 'BtnTextCrudController');
 }); // this should be the absolute last line of this file
