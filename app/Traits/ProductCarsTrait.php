@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Models\Domain;
 use App\Models\Property;
 use App\Models\Setting;
 use Illuminate\Database\Eloquent\Builder;
@@ -134,6 +135,15 @@ trait ProductCarsTrait
     {
         $btnTxt = new \App\Services\Car\BtnTextService($this);
         return  $btnTxt->getBtnText();
+    }
+
+    public function getPriceFromTextAttribute()
+    {
+        if (app('domain')->getDomain()->slug === Domain::KAZACHSTAN_SLUG_DOMAIN &&
+            $this->categories?->pluck('slug')->contains('avto-iz-ssha')) {
+            return  __('car.price_in_usa');
+        }
+        return  __('car.price_in_usa');
     }
 
     /*

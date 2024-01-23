@@ -34,4 +34,5 @@ return [
 
     'price_null_info' => 'Bidding is ongoing and the price of the final lot will be different',
     'price_from' => 'price from:',
+    'price_in_usa' => 'Price in USA:',
 ];
