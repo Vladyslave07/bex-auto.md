@@ -47,6 +47,9 @@ class FormResultCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('phone');
         CRUD::column('created_at');
+        CRUD::column('utm_source');
+        CRUD::column('utm_medium');
+        CRUD::column('utm_campaign');
     }
 
     /**

@@ -50,6 +50,11 @@ class FormResultDiscountCrudController extends CrudController
         CRUD::column('name');
         CRUD::column('phone');
         CRUD::column('created_at');
+        CRUD::column('category_id');
+        CRUD::column('popup_id');
+        CRUD::column('utm_source');
+        CRUD::column('utm_medium');
+        CRUD::column('utm_campaign');
     }
 
     /**
