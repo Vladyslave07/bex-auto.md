@@ -61,7 +61,7 @@ function commonRoute()
     )->name('category_products');
 
     // Search
-    Route::get('/search', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
+    Route::get('/search/{page?}/{filter?}', [\App\Http\Controllers\SearchController::class, 'search'])->name('search');
 
     // Thanks
     Route::get('/thanks', [\App\Http\Controllers\IndexController::class, 'thanks'])->name('thanks');

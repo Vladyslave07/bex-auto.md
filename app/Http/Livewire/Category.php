@@ -19,7 +19,7 @@ class Category extends Component
 {
     use WithCustomPaginationTrait;
 
-    public \App\Models\Category $category;
+    public \App\Models\Category|null $category = null;
     public $orderBy = [];
     public $filterQuery = null;
 

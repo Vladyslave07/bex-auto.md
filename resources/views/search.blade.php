@@ -13,11 +13,8 @@
     {{-- Breadcrumbs --}}
     {{ Breadcrumbs::render() }}
 
-    {{-- Title --}}
-    @include('partials.search.h1')
-
     {{-- Cars list --}}
-    @include('partials.search.cars')
+    @livewire('search-page', ['q' => request()->get('q')])
 
     {{-- Popular cars --}}
     @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => Setting::get('popular_auto_title'), 'more' => false])

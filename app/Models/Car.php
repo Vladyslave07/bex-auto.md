@@ -146,12 +146,12 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
      */
     public static function carsSearch(string $q = '')
     {
-        return self::search($q)->active()->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
+        return self::search($q)->defaultOrder()->active()->paginate(CatalogController::COUNT_CARS_ON_PAGE)->withQueryString();
     }
 
     public static function fastSearch(string $q = '')
     {
-        return self::search($q)->active()->whereNotNull('preview_image')->take(3)->get();
+        return self::search($q)->defaultOrder()->active()->whereNotNull('preview_image')->take(3)->get();
     }
 
     /**
@@ -161,8 +161,7 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
     public static function search(string $q = '')
     {
         return self::query()
-            ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'")
-            ->defaultOrder();
+            ->whereRaw("UPPER(JSON_UNQUOTE(JSON_EXTRACT(`title`, '$.ru'))) LIKE '%" . strtoupper($q) . "%'");
     }
 
     /**
