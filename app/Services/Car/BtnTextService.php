@@ -32,9 +32,11 @@ class BtnTextService
             $this->setBtnText($text);
         }
 
-        // Текст кнопки по категории
-        if ($text = $this->getBtnTextByCategory()) {
-            $this->setBtnText($text);
+        if ($this->getCar() instanceof Car) {
+            // Текст кнопки по категории
+            if ($text = $this->getBtnTextByCategory()) {
+                $this->setBtnText($text);
+            }
         }
 
         // Текст кнопки для конкретного авто
