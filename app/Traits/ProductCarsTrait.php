@@ -143,7 +143,7 @@ trait ProductCarsTrait
             $this->categories?->pluck('slug')->contains('avto-iz-ssha')) {
             return  __('car.price_in_usa');
         }
-        return  __('car.price_in_usa');
+        return  __('car.price_from');
     }
 
     /*
