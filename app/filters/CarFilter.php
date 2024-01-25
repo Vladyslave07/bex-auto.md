@@ -160,11 +160,13 @@ class CarFilter
      * @param null $filterQuery
      * @return array
      */
-    public static function getCurrentPropertiesFilter(Category $category, $filterQuery = null)
+    public static function getCurrentPropertiesFilter(Category|null $category, $filterQuery = null, $cars = null)
     {
         // todo: Кешировать по тегу. Тегом будет выступать строка фильтра
         // Нужно получать именно свойства а не товары возможно использовать car_property
-        $cars = $category->carsOrProducts()->take(500)->get();
+        if (!$cars) {
+            $cars = $category->carsOrProducts()->take(500)->get();
+        }
 
         $properties = [];
 

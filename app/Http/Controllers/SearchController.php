@@ -31,11 +31,6 @@ class SearchController extends Controller
         // Faq
         $faqs = Faq::defaultFaqs();
 
-        $cars = [];
-        if ($q = $request->get('q')) {
-            $cars = Car::carsSearch($q);
-        }
-
-        return view('search', compact('popularCars', 'brands', 'faqs', 'cars'));
+        return view('search', compact('popularCars', 'brands', 'faqs'));
     }
 }
