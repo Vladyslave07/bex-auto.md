@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Helper\General;
 use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -35,12 +36,12 @@ class Faq extends Model
 
     public static function categoryFaqs(Category $category)
     {
-        $faqs = Cache::remember($category->slug . '_faqs', 86400, function () use ($category) {
+        $faqs = Cache::remember(General::cacheKey($category->slug . '_faqs'), 86400, function () use ($category) {
             return self::query()->whereHas('categories', function ($query) use ($category) {
                 return $query->where('category_id', $category->id);
             })->get();
         });
-        
+
         if (count($faqs) <= 0) {
             return self::defaultFaqs();
         }
@@ -53,7 +54,7 @@ class Faq extends Model
      */
     public static function defaultFaqs()
     {
-        return Cache::remember(self::INDEX_FAQS_CACHE_KEY, 86400, function () {
+        return Cache::remember(General::cacheKey(self::INDEX_FAQS_CACHE_KEY), 86400, function () {
             return self::query()->orderBy('sort')->active()->default()->get(['question', 'answer']);
         });
     }
