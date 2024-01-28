@@ -5,7 +5,6 @@ use App\Http\Controllers\RobotsController;
 use App\Models\Domain;
 use App\Services\Sitemap\SitemapGeneral;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 

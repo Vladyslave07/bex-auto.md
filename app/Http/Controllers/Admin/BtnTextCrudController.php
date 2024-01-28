@@ -114,17 +114,12 @@ class BtnTextCrudController extends CrudController
         CRUD::addField([
             'name' => 'cars',
             'label' => trans('backpack::fields.option_for.cars'),
-            'type' => 'relationship',
+            'type' => 'select2_from_ajax_multiple',
             'entity' => 'cars',
             'attribute' => 'title',
-            'model' => Car::class,
-            'options' => (function ($query) {
-                $cars = $query->orderBy('title', 'asc')->get();
-                return $cars->map(function ($car) {
-                    $car->title = sprintf('%s, ID: %s', $car->title, $car->id);
-                    return $car;
-                });
-            }),
+            'data_source' => url("api/car"),
+            'pivot' => true,
+            'minimum_input_length' => 2,
         ]);
 
         CRUD::addField(['name' => 'created_at', 'label' => trans('backpack::fields.created_at'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'], 'attributes' => ['disabled' => 'disabled']]);
