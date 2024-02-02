@@ -43,6 +43,13 @@ trait DropzoneTrait
 
             $file_path .= '/' . $filename;
 
+            if (isset($this::$imageSize) && is_array($this::$imageSize)) {
+                $image = $image->fit($this::$imageSize['width'], $this::$imageSize['height'], function ($constraint) {
+                    $constraint->upsize();
+                });
+
+            }
+
             $big_image = Image::make($image)->stream();
 
             Storage::disk($request->disk)->put($file_path, $big_image->__toString());

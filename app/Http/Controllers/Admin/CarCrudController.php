@@ -37,6 +37,8 @@ class CarCrudController extends CrudController
     use FormFilterTrait;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CloneOperation;
 
+    public static $imageSize = ['width' => 890, 'height' => 670];
+
     /**
      * Configure the CrudPanel object. Apply settings to all operations.
      *
