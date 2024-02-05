@@ -11,7 +11,7 @@
             <div class="h2 color-blue-xs">{!! $banner->subtitle !!}</div>
         @endif
         @if (strlen($banner->image) > 0)
-            {!! \App\Helper\ImageHelper::getPicture($banner->image, null, 'img') !!}
+            {!! \App\Helper\ImageHelper::getPicture($banner->image, null, null, 'img') !!}
         @endif
         @if($banner->text)
             <br>

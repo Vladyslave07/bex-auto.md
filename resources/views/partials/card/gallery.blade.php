@@ -4,7 +4,10 @@
             <div class="swiper-wrapper">
                 @foreach($car->images as $key => $image)
                     <a data-fancybox="gallery" href="{{ Storage::disk('public')->url($image) }}" class="swiper-slide">
-                        {!! \App\Helper\ImageHelper::getPicture($image) !!}
+                        {!! \App\Helper\ImageHelper::getPicture($image,
+                        \App\Helper\ImageHelper::alt($car->titleWithYear, $loop->index, getenv(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN ? 'KZ_APP_DOMAIN' : 'APP_DOMAIN')),
+                        \App\Helper\ImageHelper::title($car->titleWithYear, $loop->index)
+                        ) !!}
                     </a>
                     @if ($key === 0 && ($link = $car->youtube_link))
                         <a href="https://www.youtube.com/embed/{{ $link }}" data-fancybox="gallery" data-type="iframe" class="swiper-slide video">
@@ -29,7 +32,10 @@
         <div class="gallery-thumbs">
             @foreach($car->images as $key =>  $image)
                 <div class="item @if($key === 0) active @endif">
-                    {!! \App\Helper\ImageHelper::getPicture($image) !!}
+                    {!! \App\Helper\ImageHelper::getPicture($image,
+                        \App\Helper\ImageHelper::alt($car->titleWithYear, $loop->index, getenv(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN ? 'KZ_APP_DOMAIN' : 'APP_DOMAIN')),
+                        \App\Helper\ImageHelper::title($car->titleWithYear, $loop->index)
+                        ) !!}
                     @if($key === 3 && count($car->images) > 4)
                         <span class="more toggle-btn">{{ Lang::get('car.detail.more_photo', ['num' => count($car->images) - 4]) }}</span>
                     @endif

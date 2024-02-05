@@ -17,7 +17,7 @@
             <div class="h3 color-blue">{!! $category->domain_sub_title_text !!}</div>
         @endif
         @if (strlen($category->image) > 0)
-            {!! \App\Helper\ImageHelper::getPicture($category->image, $category->title, 'img') !!}
+            {!! \App\Helper\ImageHelper::getPicture($category->image, $category->title, null, 'img') !!}
         @endif
     </div>
 </div>

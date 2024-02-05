@@ -11,7 +11,7 @@ use Illuminate\Support\Str;
 class ImageHelper
 {
 
-    public static function getPicture($filename, $alt = null, $class = null): string
+    public static function getPicture($filename, $alt = null, $title = null, $class = null): string
     {
         if (!$filename) {
             return false;
@@ -30,6 +30,7 @@ class ImageHelper
             (isset($data['width']) ? ' width="' . $data['width'] . '"' : '') .
             (isset($data['height']) ? ' height="' . $data['height'] . '"' : '') .
             ' alt="' . ($alt ?? '') .
+            '" title="' . ($title ?? '') .
             '"></picture>';
 
         return $picture;
@@ -77,6 +78,19 @@ class ImageHelper
     public static function logoPath(): string
     {
         return app()->getLocale() === 'uk' ? 'img/bex-logo-ua.svg' : 'img/bex-logo-ru.svg';
+    }
+
+    public static function alt($alt, $pos = '', $site = ''): string
+    {
+        $pos = $pos ? "- $pos" : '';
+        $site = $site ? "| $site" : '';
+        return sprintf('%s %s %s', $alt, $pos, $site);
+    }
+
+    public static function title($alt, $pos = ''): string
+    {
+        $pos = $pos ? "- $pos" : '';
+        return sprintf('%s %s', $alt, $pos);
     }
 
 }

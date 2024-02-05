@@ -38,7 +38,7 @@
                             <div class="auctions">
                                 @foreach($country->auction_images as $image)
                                     <div class="item">
-                                        {!! \App\Helper\ImageHelper::getPicture($image['logo'], null, 'img') !!}
+                                        {!! \App\Helper\ImageHelper::getPicture($image['logo'], null, null, 'img') !!}
                                         @if($image['link'])
                                             <a href="{{ LaravelLocalization::localizeURL($image['link']) }}">
                                                 {{ __('service.more') }}

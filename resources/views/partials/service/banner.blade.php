@@ -15,7 +15,7 @@
             {!! $subtitleText !!}
         @endif
         @if(strlen($service->image) > 0)
-            {!! \App\Helper\ImageHelper::getPicture($service->image, $service->title, 'img') !!}
+            {!! \App\Helper\ImageHelper::getPicture($service->image, $service->title, null, 'img') !!}
         @endif
     </div>
 </div>

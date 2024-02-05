@@ -16,7 +16,10 @@
         @endif
         <a href="{{ route($car->detailRouteName, [$car->getKeyRouteName() => $car->slug]) }}" aria-label="img product">
             @if (strlen($car->previewPicture) > 0)
-                {!! \App\Helper\ImageHelper::getPicture($car->previewPicture) !!}
+                {!! \App\Helper\ImageHelper::getPicture($car->previewPicture,
+                    \App\Helper\ImageHelper::alt($car->titleWithYear, $loop->index, getenv(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN ? 'KZ_APP_DOMAIN' : 'APP_DOMAIN')),
+                    \App\Helper\ImageHelper::title($car->titleWithYear, $loop->index)
+                    ) !!}
             @endif
         </a>
     </div>
