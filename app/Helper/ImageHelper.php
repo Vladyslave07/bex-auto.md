@@ -84,7 +84,10 @@ class ImageHelper
     {
         $pos = $pos ? "- $pos" : '';
         $site = $site ? "| $site" : '';
-        return sprintf('%s %s %s', $alt, $pos, $site);
+        if ($pos) {
+            return sprintf('%s %s %s', $alt, $pos, $site);
+        }
+        return sprintf('%s %s', $alt, $site);
     }
 
     public static function title($alt, $pos = ''): string

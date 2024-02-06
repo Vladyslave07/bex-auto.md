@@ -149,6 +149,23 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     public function getDetailTextSnippetAttribute()
     {
+        preg_match_all('/<img(.*)alt=""(.*)\/>/', $this->detail_text, $matches);
+        if (count($matches[0]) > 0) {
+            foreach ($matches[0] as $key => $match) {
+                $alt = $this->title;
+                if ($key >= 1) {
+                    $alt .= ' - ' . $key;
+                }
+                $alt .= ' | ' . (app('domain')->getDomain()->slug == Domain::KAZACHSTAN_SLUG_DOMAIN ? getenv('KZ_APP_DOMAIN') : getenv('APP_DOMAIN'));
+                $title = $alt;
+                $imageWithAttributes = preg_replace('/<img/', '<img alt="' . $alt . '"', $match);
+                if (!preg_match('/title=/', $match)) {
+                    $imageWithAttributes = preg_replace('/<img/', '<img title="' . $title . '"', $imageWithAttributes);
+                }
+
+                $this->detail_text = str_replace($match, $imageWithAttributes, $this->detail_text);
+            }
+        }
         if (preg_match('/\#call_back\#/', $this->detail_text)) {
             return preg_replace('/\#call_back\#/', (new \App\View\Components\NewsCallBack)->render(), $this->detail_text);
         }
