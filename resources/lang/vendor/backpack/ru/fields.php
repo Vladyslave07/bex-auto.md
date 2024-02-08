@@ -128,6 +128,7 @@ return [
     'services' => 'Услуги',
     'is_search' => 'Подсказка для поиска',
     'car_status' => 'Статус авто',
+    'mobile_image' => 'Мобильная картинка',
 
     'option' => [
         'expect' => 'Ожидается',

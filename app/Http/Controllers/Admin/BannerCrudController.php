@@ -105,6 +105,13 @@ class BannerCrudController extends CrudController
             'type'       => 'image',
             'disk' => 'public',
         ]);
+
+        CRUD::addField([
+            'name'       => 'mobile_image',
+            'label'      => trans('backpack::fields.mobile_image'),
+            'type'       => 'image',
+            'disk' => 'public',
+        ]);
     }
 
     /**

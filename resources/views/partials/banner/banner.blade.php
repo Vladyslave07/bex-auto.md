@@ -11,7 +11,12 @@
             <div class="h2 color-blue-xs">{!! $banner->subtitle !!}</div>
         @endif
         @if (strlen($banner->image) > 0)
-            {!! \App\Helper\ImageHelper::getPicture($banner->image, null, null, 'img') !!}
+            <picture class="img">
+                @if ($banner->mobile_image)
+                    <source media="(max-width: 990px)" srcset="{{ Storage::url($banner->mobile_image) }}">
+                @endif
+                <img src="{{ Storage::url($banner->image) }}" width="729" height="512" alt="" title="">
+            </picture>
         @endif
         @if($banner->text)
             <br>
