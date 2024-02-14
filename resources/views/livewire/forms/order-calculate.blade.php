@@ -1,6 +1,6 @@
 <div>
     <form class="form" wire:submit.prevent="submit" novalidate autocomplete="off">
-        <strong class="title">{{ \Illuminate\Support\Facades\Lang::get('forms.order-calc.sub_title') }}</strong>
+        <h4 class="title">{{ \Illuminate\Support\Facades\Lang::get('forms.order-calc.sub_title') }}</h4>
         <div class="form-group">
             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');">
             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror

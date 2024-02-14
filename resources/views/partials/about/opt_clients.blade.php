@@ -1,6 +1,6 @@
 <div class="section-cooperation container">
     <div class="main-title text-center">
-        <span class="color-red">{{ Setting::get('about_parthner_title') }}</span>
+        <h2 class="h2 color-red">{{ Setting::get('about_parthner_title') }}</h2>
         <div class="h3">{{ Setting::get('about_parthner_text') }}</div>
     </div>
     <div class="list">

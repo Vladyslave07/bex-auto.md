@@ -1,6 +1,6 @@
 <div>
     <div class="section-branches container">
-        <div class="main-title text-center">{{ __('about.branch') }}</div>
+        <h2 class="main-title text-center">{{ __('about.branch') }}</h2>
         <div class="nav-tabs">
                 <span class="nav-link active" data-toggle="tab"
                       data-target="#brancheTab_1">

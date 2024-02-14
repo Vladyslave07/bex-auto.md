@@ -1,6 +1,6 @@
 <div class="section-partners">
     <div class="container">
-        <div class="main-title text-center noline">{!! Setting::get('auction_block_title') !!}</div>
+        <h2 class="main-title text-center noline">{!! Setting::get('auction_block_title') !!}</h2>
         <p class="text-center">{{ Setting::get('auction_block_sub_title') }}</p>
         <div class="text-center">
             <picture>

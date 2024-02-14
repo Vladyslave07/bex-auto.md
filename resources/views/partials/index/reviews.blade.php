@@ -1,6 +1,6 @@
 @if (count($reviews) > 0)
     <div class="section-reviews container" id="reviews">
-        <div class="main-title text-center noline">{{ Setting::get('reviews_block_title') }}</div>
+        <h2 class="main-title text-center noline">{{ Setting::get('reviews_block_title') }}</h2>
         <div class="h3 text-center">{{ Setting::get('reviews_block_sub_title') }}</div>
         @if(app('domain')->getDomain()?->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
             @if ($videoReviews && $videoReviews->count() > 0)

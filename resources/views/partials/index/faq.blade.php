@@ -1,6 +1,6 @@
 @if (count($faqs) > 0)
     <div class="section-faq container">
-        <div class="main-title text-center">{{ Setting::get('faq_block_title') }}</div>
+        <h2 class="main-title text-center">{{ Setting::get('faq_block_title') }}</h2>
         @foreach($faqs as $faq)
             <div class="item">
                 <div class="title toggle-btn">

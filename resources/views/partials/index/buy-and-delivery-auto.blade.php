@@ -1,6 +1,6 @@
 <div class="section-order-car">
     <div class="container">
-        <div class="main-title text-center">{{ Setting::get('buy_and_delivery_title') }}</div>
+        <h2 class="main-title text-center">{{ Setting::get('buy_and_delivery_title') }}</h2>
         <div class="row">
             <div class="text">
                 <div class="main-title noline"></div>

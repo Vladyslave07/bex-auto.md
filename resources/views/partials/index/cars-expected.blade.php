@@ -1,6 +1,6 @@
 @if ($cars && count($cars) > 0)
     <div class="section-swiper container">
-        <div class="main-title text-center">{{ $title }}</div>
+        <h2 class="main-title text-center">{{ $title }}</h2>
         <div class="swiper product-swiper">
             <div class="swiper-wrapper">
 

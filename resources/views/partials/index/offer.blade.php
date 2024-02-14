@@ -5,7 +5,7 @@
             <img width="855" height="604" src="{{ asset('img/' . \App\Helper\General::siteDirectory() . '/section-social-mob.png') }}" loading="lazy" alt="">
         </picture>
         <div class="text">
-            <div class="main-title noline">{!! Setting::get('get_offer_title') !!}</div>
+            <h2 class="main-title noline">{!! Setting::get('get_offer_title') !!}</h2>
             <p>{!! Setting::get('get_offer_sub_title') !!}</p>
             <picture class="img visible-sm">
                 <source type="image/webp" srcset="{{ asset('img/' . \App\Helper\General::siteDirectory() . '/section-social-mob.webp') }}">

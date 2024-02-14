@@ -4,11 +4,11 @@
         <br>
         <br>
         <br>
-        <h1 class="h1">
-            <span class="color-red">{{ $banner->title }}</span>
+        <h1 class="h1 color-red">
+            {{ $banner->title }}
         </h1>
         @if($banner->subtitle)
-            <div class="h2 color-blue-xs">{!! $banner->subtitle !!}</div>
+            <h2 class="h2 color-blue-xs">{!! $banner->subtitle !!}</h2>
         @endif
         @if (strlen($banner->image) > 0)
             <picture class="img">

@@ -33,7 +33,7 @@
                 @endif
 
                 <div class="card-features">
-                    <strong class="title">{{ Lang::get('car.detail.characteristic')}}:</strong>
+                    <h2 class="title">{{ Lang::get('car.detail.characteristic')}}:</h2>
                     <ul class="list">
                         @foreach($car->properties as $property)
                             @if($value = $property->getValue())
@@ -68,7 +68,7 @@
 
         @if ($car->description)
             <div class="card-description container">
-                <div class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</div>
+                <h2 class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</h2>
                 {!! $car->description !!}
             </div>
         @endif

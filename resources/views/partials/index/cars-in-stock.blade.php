@@ -1,6 +1,6 @@
 @if(count($carsInStock) > 0)
     <div class="section-swiper container">
-        <div class="main-title text-center">{{ Setting::get('title_in_stock') }}</div>
+        <h2 class="main-title text-center">{{ Setting::get('title_in_stock') }}</h2>
         @if (count($categories) > 0)
             <div class="nav-tabs">
                 @php
@@ -9,9 +9,9 @@
                 @endphp
                 @foreach($categories as $category)
                     @if (in_array($category->id, array_keys($carsInStock)))
-                        <span class="nav-link @if($first) @php $categoryId = $category->id @endphp active @endif"
+                        <h3 class="nav-link @if($first) @php $categoryId = $category->id @endphp active @endif"
                               data-toggle="tab"
-                              data-target="#availabTab_{{ $category->id }}">{{ $category->title }}</span>
+                              data-target="#availabTab_{{ $category->id }}">{{ $category->title }}</h3>
                         @php($first = false)
                     @endif
                 @endforeach
