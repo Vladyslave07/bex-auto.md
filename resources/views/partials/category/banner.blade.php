@@ -14,7 +14,7 @@
         @endif
         <span class="line"></span>
         @if ($category->sub_title_text)
-            <div class="h3 color-blue">{!! $category->domain_sub_title_text !!}</div>
+            <h3 class="h3 color-blue">{!! $category->domain_sub_title_text !!}</h3>
         @endif
         @if (strlen($category->image) > 0)
             {!! \App\Helper\ImageHelper::getPicture($category->image, $category->title, null, 'img') !!}
