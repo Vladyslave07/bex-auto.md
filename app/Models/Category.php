@@ -9,6 +9,7 @@ use App\Traits\MakesWebp;
 use App\Traits\SaveImageAttribute;
 use App\Traits\SeoSnippets;
 use App\Traits\SlugOrTitleTrait;
+use Artesaos\SEOTools\Facades\SEOTools;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
@@ -43,6 +44,7 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
 
     const CATEGORIES_IN_SLIDER_CACHE_KEY = 'categories_show_in_slider';
     const SEO_TEXT_CACHE_KEY = 'seo_text';
+    const INDEX_CATEGORY_SLUG = 'avto';
 
     /*
     |--------------------------------------------------------------------------
@@ -107,6 +109,25 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
         }
 
         return $this->products()->active();
+    }
+
+    /**
+     * @return Category
+     */
+    public static function indexCategory(): Category
+    {
+        return Cache::remember(General::cacheKey(self::INDEX_CATEGORY_SLUG), 86400, function () {
+            return self::query()->where('slug', self::INDEX_CATEGORY_SLUG)->first();
+        });
+    }
+
+    public function setSeo()
+    {
+        SEOTools::setTitle($this->seo_meta_title);
+        SEOTools::setDescription($this->seo_meta_description);
+        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
+        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
+        SEOTools::opengraph()->addProperty('url', request()->url());
     }
 
     /*
@@ -234,6 +255,12 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
         }
         return $this->seo_text_id;
     }
+
+    public function getIsIndexAttribute(): bool
+    {
+        return $this->slug === self::INDEX_CATEGORY_SLUG;
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS

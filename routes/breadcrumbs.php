@@ -12,7 +12,17 @@ Breadcrumbs::for('index', function ($trail) {
 });
 
 // category
-Breadcrumbs::for('category', function ($trail, \App\Models\Category $category) {
+Breadcrumbs::for('avto', function ($trail) {
+    $category = \App\Models\Category::indexCategory();
+    $trail->parent('index');
+    $trail->push($category->title, $category->url);
+});
+
+// category
+Breadcrumbs::for('category', function ($trail, \App\Models\Category $category = null) {
+    if (!$category) {
+        $category = \App\Models\Category::indexCategory();
+    }
     $trail->parent('index');
     $trail->push($category->title, $category->url);
 });

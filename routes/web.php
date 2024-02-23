@@ -46,7 +46,13 @@ function commonRoute()
 
     // Categories
     Route::get(
-        '/avto/{category}/{page?}/{filter?}',
+        '/avto/filter/{filter?}',
+        [\App\Http\Controllers\CatalogController::class, 'index']
+    )->name('avto');
+
+    // Categories
+    Route::get(
+        '/avto/{category?}/{page?}/{filter?}',
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 

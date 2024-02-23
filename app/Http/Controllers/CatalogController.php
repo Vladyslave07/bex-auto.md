@@ -2,19 +2,41 @@
 
 namespace App\Http\Controllers;
 
-use App\Helper\General;
 use App\Models\Brand;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Faq;
 use App\Models\SeoText;
-use Artesaos\SEOTools\Facades\SEOTools;
 use Illuminate\Http\Request;
 
 class CatalogController extends Controller
 {
 
     const COUNT_CARS_ON_PAGE = 9;
+
+    public function index(Request $request, $page = 1)
+    {
+        $category = Category::indexCategory();
+
+        $category->setSeo();
+
+        // Popular cars
+        $popularCars = Car::popularCars();
+
+        // Brands
+        $brands = Brand::brands();
+
+        // Selected categories
+        $categories = Category::selectedCategory();
+
+        // Faq
+        $faqs = Faq::defaultFaqs();
+
+        // Seo text category or main seo text
+        $seoText = $category->seoText ?? SeoText::mainText();
+
+        return view('category', compact('category', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
+    }
 
     /**
      * Category method handle
@@ -24,11 +46,11 @@ class CatalogController extends Controller
      */
     public function category(Category $category, Request $request, $page = 1)
     {
-        SEOTools::setTitle($category->seo_meta_title);
-        SEOTools::setDescription($category->seo_meta_description);
-        SEOTools::opengraph()->addImage(asset(\App\Helper\ImageHelper::logoPath()));
-        SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
-        SEOTools::opengraph()->addProperty('url', request()->url());
+        if (!$category->active) {
+            $category = Category::indexCategory();
+        }
+
+        $category->setSeo();
 
         app('admin-menu')->setModel($category);
 

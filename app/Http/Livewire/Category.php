@@ -29,6 +29,7 @@ class Category extends Component
     public Car|Product $currentModel;
 
     protected $cars;
+    protected $allCars = null;
 
     public $disabled = true;
 
@@ -40,9 +41,14 @@ class Category extends Component
         $this->page = $this->pageNum($this->page);
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
-        $cars = $this->category->carsOrProducts()->filtered($filterQuery);
 
-        $this->currentModel = $cars->getRelated();
+        if (!$this->category->is_index) {
+            $cars = $this->category->carsOrProducts()->filtered($filterQuery);
+            $this->currentModel = $cars->getRelated();
+        } else {
+            $cars = Car::query()->active()->filtered($filterQuery);
+            $this->currentModel = new Car();
+        }
 
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);
@@ -193,8 +199,16 @@ class Category extends Component
      */
     public function makeFilterUrl()
     {
-        // todo: чпу для страниц товаров
         $categoryUrl = route($this->currentModel->categoryRouteName, ['category' => $this->category->slug], false);
+
+        if ($this->category->slug == \App\Models\Category::INDEX_CATEGORY_SLUG) {
+            $categoryUrl = route('avto');
+            if ($this->filterQuery) {
+                return $categoryUrl . $this->filterQuery;
+            }
+            return $categoryUrl;
+        }
+
         $filterUrl = '';
         if ($this->filterQuery) {
             $filterUrl = CarFilter::FILTER_PREFIX . $this->filterQuery;
@@ -208,7 +222,11 @@ class Category extends Component
      */
     public function filters()
     {
-        return CarFilter::getCurrentPropertiesFilter($this->category, $this->filterQuery);
+        if ($this->category && $this->category->slug === \App\Models\Category::INDEX_CATEGORY_SLUG && $this->allCars === null) {
+            $this->allCars = Car::query()->active()->get();
+        }
+
+        return CarFilter::getCurrentPropertiesFilter($this->category, $this->filterQuery, $this->allCars);
     }
 
     /**
