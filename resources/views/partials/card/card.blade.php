@@ -58,6 +58,12 @@
                                 <div class="dd">{{ $car->vin }}</div>
                             </li>
                         @endif
+                            <li>
+                                <div class="dt">
+                                    ID:
+                                </div>
+                                <div class="dd">{{ $car->id }}</div>
+                            </li>
                     </ul>
                 </div>
             </div>
