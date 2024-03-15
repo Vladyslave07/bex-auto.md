@@ -4,15 +4,17 @@
             <div class="container">
                 <div class="card-title">
                     <h1 class="main-title">{{ $car->titleWithYear }}</h1>
-                    <div class="price">
-                        @if($car->show_price_from)
-                            <span>{{ $car->price_from_text }}</span>
-                        @endif
-                            {{ $car->price_format }}
-                        @if($car->price_for_current_country)
-                            <small>{{ $car->price_for_current_country }}</small>
-                        @endif
-                    </div>
+                    @if($car->price > 0)
+                        <div class="price">
+                            @if($car->show_price_from)
+                                <span>{{ $car->price_from_text }}</span>
+                            @endif
+                                {{ $car->price_format }}
+                            @if($car->price_for_current_country)
+                                <small>{{ $car->price_for_current_country }}</small>
+                            @endif
+                        </div>
+                    @endif
                     @if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
                         <div class="card-btn">
                             <button onclick="openModal('#applicationForCar')" class="btn">
