@@ -40,7 +40,7 @@ class ApplicationForCredit extends Component implements BaseForm
         $this->show = true;
         $fields = $this->validate();
         $fields['phone'] = Str::phoneNumber($fields['phone']);
-        $fields['car'] = $this->car;
+        $fields['car'] = $this->car->title;
         $fields['slug_form'] = self::SLUG_FORM;
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
@@ -51,6 +51,11 @@ class ApplicationForCredit extends Component implements BaseForm
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
+
+        $this->dispatchBrowserEvent('submitCreditForm', [
+            'car_id' => $this->car->id,
+            'price' => $this->car->price,
+        ]);
     }
 
     protected function rules()

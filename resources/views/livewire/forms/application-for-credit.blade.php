@@ -73,3 +73,18 @@
         </div>
     <?php endif; ?>
 </div>
+
+<script>
+    window.addEventListener('submitCreditForm', event => {
+        if (typeof fbq == 'funciton') {
+            fbq('track', 'addToCart', {
+                    content_type: 'product',
+                    content_ids: [`${event.detail.car_id}`],
+                    value: event.detail.price,
+                    currency: 'USD'
+                }
+            );
+        }
+    })
+</script>
+

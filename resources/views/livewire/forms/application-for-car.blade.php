@@ -21,3 +21,17 @@
         </div>
     </div>
 </div>
+
+<script>
+    window.addEventListener('submitCarForm', event => {
+        if (typeof fbq == 'funciton') {
+            fbq('track', 'addToCart', {
+                    content_type: 'product',
+                    content_ids: [`${event.detail.car_id}`],
+                    value: event.detail.price,
+                    currency: 'USD'
+                }
+            );
+        }
+    })
+</script>

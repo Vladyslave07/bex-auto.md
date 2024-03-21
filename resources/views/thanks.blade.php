@@ -28,4 +28,19 @@
     @include('partials.footer.social')
 </div>
 
+@if($car)
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof fbq == 'funciton') {
+                fbq('track', 'Purchase', {
+                        content_type: 'product',
+                        content_ids: ['{{ $car->id }}'],
+                        value: {{ $car->price }},
+                        currency: 'USD'
+                    }
+                );
+            }
+        });
+    </script>
+@endif
 @endsection

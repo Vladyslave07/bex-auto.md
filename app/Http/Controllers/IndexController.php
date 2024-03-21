@@ -14,8 +14,8 @@ use App\Models\Review;
 use App\Models\SeoText;
 use App\Models\Setting;
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Lang;
-use Illuminate\Support\Facades\Storage;
 
 class IndexController extends Controller
 {
@@ -88,7 +88,7 @@ class IndexController extends Controller
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function thanks()
+    public function thanks(Request $request)
     {
         SEOTools::setTitle(Lang::get('index.thanks.title'));
         SEOTools::setDescription(Lang::get('index.thanks.description'));
@@ -97,6 +97,7 @@ class IndexController extends Controller
         SEOTools::opengraph()->addProperty('locale', General::getOgLocale());
         SEOTools::opengraph()->addProperty('url', request()->url());
 
-        return view('thanks');
+        $car = $request->car_id ? Car::find($request->car_id) : null;
+        return view('thanks', compact('car'));
     }
 }
