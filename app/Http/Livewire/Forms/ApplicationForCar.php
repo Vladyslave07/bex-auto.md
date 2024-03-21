@@ -31,6 +31,12 @@ class ApplicationForCar extends Component implements BaseForm
     {
         $this->show = true;
         $fields = $this->validate();
+
+        $this->dispatchBrowserEvent('submitCarForm', [
+            'car_id' => $this->car->id,
+            'price' => $this->car->price,
+        ]);
+
         $fields['phone'] = Str::phoneNumber($fields['phone']);
         $fields['car'] = $this->car->title;
         $fields['slug_form'] = self::SLUG_FORM;
@@ -42,11 +48,6 @@ class ApplicationForCar extends Component implements BaseForm
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
-
-        $this->dispatchBrowserEvent('submitCreditForm', [
-            'car_id' => $this->car->id,
-            'price' => $this->car->price,
-        ]);
 
         redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks', ['car_id' => $this->car->id])));
     }

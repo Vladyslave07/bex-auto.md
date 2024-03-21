@@ -76,7 +76,7 @@
 
 <script>
     window.addEventListener('submitCreditForm', event => {
-        if (typeof fbq == 'funciton') {
+        if (typeof fbq == 'function') {
             fbq('track', 'addToCart', {
                     content_type: 'product',
                     content_ids: [`${event.detail.car_id}`],
