@@ -11,13 +11,19 @@
     @if($car)
         <script>
             document.addEventListener('DOMContentLoaded', () => {
-                    fbq('track', 'Purchase', {
-                            content_ids: ['{{ $car->id }}'],
-                            content_type: 'product',
-                            value: {{ $car->price }},
-                            currency: 'USD'
-                        }
-                    );
+                setTimeout(() => {
+                    if (!localStorage.getItem('car_id')
+                        || localStorage.getItem('car_id') !== '{{ $car->id }}') {
+                        fbq('track', 'Purchase', {
+                                content_ids: ['{{ $car->id }}'],
+                                content_type: 'product',
+                                value: {{ $car->price }},
+                                currency: 'USD'
+                            }
+                        );
+                        localStorage.setItem('car_id', '{{ $car->id }}');
+                    }
+                }, 1000);
             });
         </script>
     @endif

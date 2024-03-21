@@ -6,6 +6,19 @@
 
 @push('scripts')
     <script src="{{ mix('js/card.js') }}" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setTimeout(() => {
+                fbq('track', 'ViewContent', {
+                        content_type: 'product',
+                        content_ids: ['<?= $car->id ?>'],
+                        value: <?= $car->price ?>,
+                        currency: 'USD'
+                    }
+                );
+            }, 1000);
+        });
+    </script>
 @endpush
 
 @section('content')
@@ -32,21 +45,6 @@
 
 {{-- Order a calculation form --}}
 @include('partials.index.order-a-calculation')
-
-
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        if (typeof fbq == 'funciton') {
-            fbq('track', 'ViewContent', {
-                    content_type: 'product',
-                    content_ids: ['<?= $car->id ?>'],
-                    value: <?= $car->price ?>,
-                    currency: 'USD'
-                }
-            );
-        }
-    });
-</script>
 
 {{-- Modal form for application for a car --}}
 <livewire:forms.application-for-car :car="$car"/>
