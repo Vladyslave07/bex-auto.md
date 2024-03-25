@@ -41,12 +41,14 @@
                             @endif
                             <div class="name">
                                 {{ $car->title }}
-                                <span class="price">
-                                {{ $car->price_format }}
+                                @if ($car->price)
+                                    <span class="price">
+                                    {{ $car->price_format }}
                                     @if($car->price_for_current_country)
                                         <span>{{ $car->price_for_current_country }}</span>
                                     @endif
-                            </span>
+                                    </span>
+                                @endif
                             </div>
                             <svg width="12" height="12">
                                 <use xlink:href="#arrowL-icon"></use>
