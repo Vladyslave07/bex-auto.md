@@ -39,7 +39,7 @@ trait ProductCarsTrait
      */
     public function getCategoryProperties()
     {
-        return Property::query()->active()->where('for', $this->table)->orderBy('id')->get();
+        return Property::query()->active()->where('slug', '!=', Property::PROPERTY_STATUS)->where('for', $this->table)->orderBy('id')->get();
     }
 
     /*

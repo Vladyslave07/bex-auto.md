@@ -282,6 +282,24 @@ class CarFilter
             $status['values'][$car->status]['value'] = $car->status;
             $status['values'][$car->status]['active'] = false;
         }
+
+        // На основе свойства из админки сортируем и выводим статусы автомобилей
+        $statuses = Property::getStatuses();
+        if (isset($status['values']) && $statuses) {
+            $options = $statuses->getOptions();
+            $values = array_intersect_key($status['values'], array_flip($options));
+            $values = array_intersect_key($status['values'], $values);
+
+            $sortedValues = [];
+            foreach ($options as $name => $value) {
+                if (array_key_exists($value, $values)) {
+                    $sortedValues[$value] = $values[$value];
+//                    $sortedValues[$value]['value'] = $name;
+                }
+            }
+            $status['values'] = $sortedValues;
+        }
+
         return $status;
     }
 

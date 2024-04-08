@@ -41,6 +41,7 @@ class Property extends Model
     const PROPERTY_COUNTRY_SLUG = 'country';
     const PROPERTY_TYPE_SLUG = 'type';
     const PROPERTY_POWER_RESERVE = 'power-reserve';
+    const PROPERTY_STATUS = 'status';
 
     /*
     |--------------------------------------------------------------------------
@@ -169,6 +170,11 @@ class Property extends Model
         $property->update(['options' => $options]);
 
         return $optionSlug;
+    }
+
+    public static function getStatuses()
+    {
+        return self::query()->where('slug', self::PROPERTY_STATUS)->first();
     }
 
     /*
