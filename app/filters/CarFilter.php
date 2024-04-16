@@ -294,7 +294,7 @@ class CarFilter
             foreach ($options as $name => $value) {
                 if (array_key_exists($value, $values)) {
                     $sortedValues[$value] = $values[$value];
-                    $sortedValues[$value]['value'] = $name;
+                    $sortedValues[$value]['name'] = $name;
                 }
             }
             $status['values'] = $sortedValues;
