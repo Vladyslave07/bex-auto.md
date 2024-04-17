@@ -98,16 +98,16 @@ class FacebookCsvFeed extends Feed
      */
     public function carPreviewImage(Car $car): string
     {
-        if ($car->preview_image) {
-            return Storage::url($car->preview_image);
-        }
-
         if(isset($car->images)) {
             foreach($car->images as $key => $image) {
                 if($key == 0){
                     return Storage::url($image);
                 }
             }
+        }
+
+        if ($car->preview_image) {
+            return Storage::url($car->preview_image);
         }
 
         return '';
@@ -122,7 +122,7 @@ class FacebookCsvFeed extends Feed
         $images = [];
         if(isset($car->images)) {
             foreach($car->images as $key => $image) {
-                if($key == 0){
+                if($key != 0){
                     $images[] = Storage::url($image);
                 }
             }
@@ -156,7 +156,10 @@ class FacebookCsvFeed extends Feed
 
     public function getCars()
     {
-        return Car::query()->active()->whereHas('categories', function ($query) {
+        return Car::query()
+            ->active()
+            ->where('price', '>', 0)
+            ->whereHas('categories', function ($query) {
             $query->where('add_to_feed', 1);
         })->get();
     }

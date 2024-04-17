@@ -14,7 +14,7 @@ class GenerateFacebookCsvFeed extends Command
      *
      * @var string
      */
-    protected $signature = 'generate:facebook-csv';
+    protected $signature = 'generate:facebook-csv {domain?}';
 
     /**
      * The console command description.
@@ -32,13 +32,20 @@ class GenerateFacebookCsvFeed extends Command
     {
         $connection = 'mysql';
         $domainSlug = Domain::DEFAULT_SLUG_DOMAIN;
+        if ($this->argument('domain') === 'kz') {
+            $connection = 'kz_mysql';
+            $domainSlug = Domain::KAZACHSTAN_SLUG_DOMAIN;
+        }
         Config::set('database.default', $connection);
 
         $domain = Domain::query()->where('slug', $domainSlug)->first(['slug', 'id']);
 
         app('domain')->setDomain($domain);
 
-        $locale = 'uk';
+        $locale = 'ru';
+        if ($domainSlug == Domain::DEFAULT_SLUG_DOMAIN) {
+            $locale = 'uk';
+        }
         $fileName = sprintf('public/facebook_feed_%s.csv', $domain->slug);
         $feed = new FacebookCsvFeed($fileName, $locale);
         $feed->apply();
