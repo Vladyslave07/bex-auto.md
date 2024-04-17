@@ -98,6 +98,10 @@ class FacebookCsvFeed extends Feed
      */
     public function carPreviewImage(Car $car): string
     {
+        if (isset($car->feed_image)) {
+            return Storage::url($car->feed_image);
+        }
+
         if(isset($car->images)) {
             foreach($car->images as $key => $image) {
                 if($key == 0){

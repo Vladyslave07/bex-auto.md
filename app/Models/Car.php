@@ -45,8 +45,8 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_price_from', 'show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color', 'commission_car', 'status_sort'];
-    public static $images = ['images', 'preview_image'];
+    protected $fillable = ['show_price_from', 'show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color', 'commission_car', 'status_sort', 'feed_image'];
+    public static $images = ['images', 'preview_image', 'feed_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $casts = ['images' => 'array', 'color' => 'array'];
@@ -392,6 +392,29 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
         }
 
         return $this->attributes['color'] = json_encode($values);
+    }
+
+    public function setFeedImageAttribute($value)
+    {
+        $attribute_name = "feed_image";
+        $disk = "public";
+        $destination_path = Str::replace('_', '', $this->table);
+
+        if ($value == null) {
+            \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
+            $this->attributes[$attribute_name] = null;
+        } else {
+            if (Str::startsWith($value, 'data:image')) {
+                $image = \Image::make($value)->resize(1080, 1080)->encode('png', 90);
+
+                $filename = md5($value . time()) . '.' . 'png';
+                \Storage::disk($disk)->put($destination_path . '/' . $filename, $image->stream());
+                \Storage::disk($disk)->delete($this->{$attribute_name} ?? '');
+                $this->attributes[$attribute_name] = $destination_path . '/' . $filename;
+            } else {
+                $this->attributes[$attribute_name] = Str::replace(env('APP_URL') . '/storage', '', $value);
+            }
+        }
     }
 
 }

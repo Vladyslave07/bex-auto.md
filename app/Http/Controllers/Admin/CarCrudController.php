@@ -140,6 +140,8 @@ class CarCrudController extends CrudController
 
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'youtube_link', 'label' => trans('backpack::fields.youtube_link'), 'type' => 'text', 'hint' => trans('backpack::hint.cars.youtube_link'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'preview_image', 'label' => trans('backpack::fields.preview_image'), 'type' => 'image', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '', 'hint' => trans('backpack::hint.cars.preview_image')]);
+        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'feed_image', 'label' => trans('backpack::fields.feed_image'), 'type' => 'image', 'disk' => 'public', 'destination_path' => 'products', 'thumb_prefix' => '', 'hint' => trans('backpack::hint.cars.feed_image')]);
+
         CRUD::addField([
             'tab' => 'Автомобиль',
             'name' => 'description',
