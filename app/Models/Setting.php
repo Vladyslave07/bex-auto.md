@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Helper\General;
+use App\Traits\DefaultScope;
 use App\Traits\SaveImageAttribute;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
 use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
@@ -12,7 +13,7 @@ use Illuminate\Support\Facades\Cache;
 
 class Setting extends Model
 {
-    use HasFactory, CrudTrait, HasTranslations, SaveImageAttribute;
+    use HasFactory, CrudTrait, HasTranslations, SaveImageAttribute, DefaultScope;
 
     /*
     |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ class Setting extends Model
     public static function get(string $key)
     {
         return Cache::remember(General::cacheKey(self::makeCacheKey($key)), 86400, function () use ($key) {
-            return self::query()->where('key', $key)->first(['value'])?->value;
+            return self::query()->where('key', $key)->active()->first(['value'])?->value;
         });
     }
 
