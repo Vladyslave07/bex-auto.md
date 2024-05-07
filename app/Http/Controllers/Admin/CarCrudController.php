@@ -7,6 +7,7 @@ use App\Http\Requests\CarRequest;
 use App\Models\Car;
 use App\Models\Category;
 use App\Models\Equipment;
+use App\Models\PricePrefix;
 use App\Models\Product;
 use App\Traits\BulkDeleteOperation;
 use App\Traits\DropzoneTrait;
@@ -121,7 +122,19 @@ class CarCrudController extends CrudController
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'slug', 'target' => 'title', 'hint' => trans('backpack::hint.categories.slug'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'price', 'label' => trans('backpack::fields.price'), 'type' => 'number', 'attributes' => ["step" => "any"], 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Автомобиль', 'name' => 'info', 'label' => trans('backpack::fields.info'), 'type' => 'text', 'hint' => trans('backpack::hint.info'), 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
-        CRUD::addField(['tab' => 'Автомобиль', 'name' => 'show_price_from', 'label' => trans('backpack::fields.show_price_from'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+
+        CRUD::addField([
+            'tab' => 'Автомобиль',
+            'name' => 'pricePrefix',
+            'label' => trans('backpack::fields.price_prefix'),
+            'type' => 'relationship',
+            'attribute' => 'title',
+            'model' => PricePrefix::class,
+            'options' => (function ($query) {
+                return $query->orderBy('title', 'asc')->get();
+            }),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6']
+        ]);
 
 
         CRUD::addField([

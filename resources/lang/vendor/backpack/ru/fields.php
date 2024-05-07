@@ -130,6 +130,7 @@ return [
     'car_status' => 'Статус авто',
     'mobile_image' => 'Мобильная картинка',
     'feed_image' => 'Картинка для фида',
+    'price_prefix' => 'Префикс цены',
 
     'option' => [
         'expect' => 'Ожидается',

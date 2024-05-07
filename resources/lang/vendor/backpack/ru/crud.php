@@ -263,4 +263,7 @@ return [
 
     'btn_text' => 'Текст кнопки',
     'btn_texts' => 'Текста кнопок',
+
+    'price_prefix' => 'Префикс цены',
+    'price_prefixes' => 'Префиксы цены',
 ];

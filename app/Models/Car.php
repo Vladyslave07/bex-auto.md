@@ -45,12 +45,12 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
 
     protected $table = 'cars';
     protected $guarded = ['id'];
-    protected $fillable = ['show_price_from', 'show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color', 'commission_car', 'status_sort', 'feed_image'];
+    protected $fillable = ['show_price_from', 'show_credit_btn', 'equipment', 'benefits', 'sub_title', 'full_template', 'active', 'sort', 'title', 'slug', 'description', 'images', 'price', 'info', 'status', 'category_id', 'year', 'pin', 'youtube_link', 'meta_title', 'meta_description', 'lot_id', 'vin', 'preview_image', 'color', 'commission_car', 'status_sort', 'feed_image', 'price_prefix_id'];
     public static $images = ['images', 'preview_image', 'feed_image'];
     protected $translatable = ['title', 'description', 'info', 'meta_title', 'meta_description', 'sub_title', 'sub_title', 'benefits', 'equipment'];
     protected $attributes = ['sort' => 500, 'images' => ''];
     protected $casts = ['images' => 'array', 'color' => 'array'];
-    protected $with = ['properties', 'equipments'];
+    protected $with = ['properties', 'equipments', 'pricePrefix'];
 
     public string $detailRouteName = 'car_detail';
     public string $categoryRouteName = 'category';
@@ -259,6 +259,14 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
             ->using(\App\Models\CarProperty::class);
     }
 
+    /**
+     * @return BelongsTo
+     */
+    public function pricePrefix(): BelongsTo
+    {
+        return $this->belongsTo(PricePrefix::class);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | SCOPES
@@ -416,5 +424,7 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
             }
         }
     }
+
+
 
 }
