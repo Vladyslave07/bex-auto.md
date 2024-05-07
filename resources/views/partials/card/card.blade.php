@@ -9,9 +9,18 @@
                             @if($car->show_price_from)
                                 <span>{{ $car->price_from_text }}</span>
                             @endif
-                                {{ $car->price_format }}
-                            @if($car->price_for_current_country)
-                                <small>{{ $car->price_for_current_country }}</small>
+                            @if (app('domain')->getDomain()->slug === \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+                                @if (!$car->price_for_current_country)
+                                    {{ $car->priceFormat }}
+                                @else
+                                    {{ $car->price_for_current_country }}
+                                    <small>{{ $car->priceFormat }}</small>
+                                @endif
+                            @else
+                                {{ $car->priceFormat }}
+                                @if($car->price_for_current_country)
+                                    <small>{{ $car->price_for_current_country }}</small>
+                                @endif
                             @endif
                         </div>
                     @endif

@@ -106,7 +106,7 @@ trait ProductCarsTrait
 
     public function getPriceForCurrentCountryAttribute()
     {
-        if (($currency = app('domain')->getDomain()->currency) && !in_array($this->carsFromUsa, $this->categories()->pluck('slug')->toArray())) {
+        if ($currency = app('domain')->getDomain()->currency) {
             $price = $this->price * $currency->exchange_rate;
             return $currency->currency_symbol . number_format($price, 0, '.', ' ');
         }
