@@ -46,7 +46,7 @@
                         @if (!$car->price_for_current_country)
                             {{ $car->priceFormat }}
                         @else
-                            {{ $car->price_for_current_country }}
+                            <span>{{ $car->price_for_current_country }}</span>
                             <small>{{ $car->priceFormat }}</small>
                         @endif
                     @else
