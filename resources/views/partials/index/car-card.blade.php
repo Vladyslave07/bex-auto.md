@@ -42,9 +42,18 @@
         <div class="price">
             @if($car->price > 0)
                 <span class="price-new">
-                    {{ $car->priceFormat }}
-                    @if($car->price_for_current_country)
-                        <small>{{ $car->price_for_current_country }}</small>
+                    @if (app('domain')->getDomain()->slug === \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+                        @if (!$car->price_for_current_country)
+                            {{ $car->priceFormat }}
+                        @else
+                            <span>{{ $car->price_for_current_country }}</span>
+                            <small>{{ $car->priceFormat }}</small>
+                        @endif
+                    @else
+                        {{ $car->priceFormat }}
+                        @if($car->price_for_current_country)
+                            <small>{{ $car->price_for_current_country }}</small>
+                        @endif
                     @endif
                 </span>
             @endif
