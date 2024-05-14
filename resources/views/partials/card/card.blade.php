@@ -13,7 +13,7 @@
                                 @if (!$car->price_for_current_country)
                                     {{ $car->priceFormat }}
                                 @else
-                                    {{ $car->price_for_current_country }}
+                                    <br>{{ $car->price_for_current_country }}
                                     <small>{{ $car->priceFormat }}</small>
                                 @endif
                             @else
@@ -24,13 +24,6 @@
                             @endif
                         </div>
                     @endif
-                    @if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
-                        <div class="card-btn">
-                            <button onclick="openModal('#applicationForCar')" class="btn">
-                                {{ $car->btn_text }}
-                            </button>
-                        </div>
-                    @endif
                 </div>
                 <div class="card-nav">
                     <span class="item active" data-target="Tab_1">{{ Lang::get('car.detail.characteristic')}}</span>
@@ -38,6 +31,14 @@
                 </div>
 
                 @include('partials.card.gallery')
+
+                @if(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
+                    <div class="card-btn">
+                        <button onclick="openModal('#applicationForCar')" class="btn">
+                            {{ $car->btn_text }}
+                        </button>
+                    </div>
+                @endif
 
                 @if(app('domain')->getDomain()->slug !== \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN)
                      @include('partials.card.card-btn')
