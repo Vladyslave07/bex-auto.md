@@ -21,9 +21,6 @@
     {{-- Popular cars --}}
     @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => \Illuminate\Support\Facades\Lang::get('category.title'), 'more' => false])
 
-    {{-- Popular auto brand --}}
-    @include('partials.index.popular-brand-auto')
-
     {{-- Faqs --}}
     @include('partials.index.faq')
 
@@ -33,6 +30,8 @@
     {{-- Order a calculation form --}}
     @include('partials.index.order-a-calculation')
 
+    {{-- Popular auto brand --}}
+    @include('partials.index.popular-brand-auto')
 
     {{-- Modal form for application for a car --}}
     <livewire:forms.application-for-car :car="$car->title"/>

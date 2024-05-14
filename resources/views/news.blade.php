@@ -16,9 +16,6 @@
     {{-- News list --}}
     @livewire('news-list')
 
-    {{-- Popular auto brand --}}
-    @include('partials.index.popular-brand-auto')
-
     {{-- Faqs --}}
     @include('partials.index.faq')
 
@@ -27,5 +24,8 @@
 
     {{-- Order a calculation form --}}
     @include('partials.index.order-a-calculation')
+
+    {{-- Popular auto brand --}}
+    @include('partials.index.popular-brand-auto')
 
 @endsection

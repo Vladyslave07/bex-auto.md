@@ -33,9 +33,6 @@
 {{-- Seo text --}}
 @include('partials.service.text')
 
-{{-- Popular auto brand --}}
-@include('partials.index.popular-brand-auto')
-
 {{-- Faqs --}}
 @include('partials.index.faq', ['faqs' => $service->faqs])
 
@@ -44,5 +41,8 @@
 
 {{-- Order a calculation form --}}
 @include('partials.index.order-a-calculation')
+
+ {{-- Popular auto brand --}}
+ @include('partials.index.popular-brand-auto')
 
 @endsection

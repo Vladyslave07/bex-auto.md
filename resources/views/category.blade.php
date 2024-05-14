@@ -27,9 +27,6 @@
     {{-- Popular cars --}}
     @include('partials.index.cars-expected', ['cars' => $popularCars, 'title' => Setting::get('popular_auto_title'), 'more' => false])
 
-    {{-- Popular auto brand --}}
-    @include('partials.index.popular-brand-auto')
-
     {{-- Faqs --}}
     @include('partials.index.faq')
 
@@ -38,4 +35,7 @@
 
     {{-- Order a calculation form --}}
     @include('partials.index.order-a-calculation')
+
+    {{-- Popular auto brand --}}
+    @include('partials.index.popular-brand-auto')
 @endsection
