@@ -55,6 +55,7 @@ class CollectFormResults extends Command
             'utm_source',
             'utm_medium',
             'utm_campaign',
+            'utm_term',
         ]);
 
         // Add data to CSV
@@ -67,6 +68,7 @@ class CollectFormResults extends Command
                 $row->utm_source,
                 $row->utm_medium,
                 $row->utm_campaign,
+                $row->utm_term,
             ]);
         }
 
