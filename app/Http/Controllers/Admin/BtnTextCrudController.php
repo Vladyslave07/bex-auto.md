@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Enums\BtnTextType;
 use App\Http\Requests\BtnTextRequest;
 use App\Models\Car;
 use App\Models\Category;
@@ -83,12 +84,21 @@ class BtnTextCrudController extends CrudController
         CRUD::addField(['name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-4']]);
         CRUD::addField(['name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-4']]);
 
+        CRUD::addField([
+            'name' => 'btn_type',
+            'label' => trans('backpack::fields.btn_type'),
+            'type' => 'select_from_array',
+            'options' => BtnTextType::getOptions(),
+            'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'hint' => trans('backpack::hint.btn_text.btn_type'),
+        ]);
+
         CRUD::addField(['name' => 'btn_text', 'label' => trans('backpack::fields.btn_text'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
         CRUD::addField([
-            'name'        => 'car_status',
-            'label'       => trans('backpack::fields.car_status'),
-            'type'        => 'select_from_array',
+            'name' => 'car_status',
+            'label' => trans('backpack::fields.car_status'),
+            'type' => 'select_from_array',
             'options' => [
                 'in_stock' => trans('backpack::fields.option.in_stock'),
                 'expect' => trans('backpack::fields.option.expect'),

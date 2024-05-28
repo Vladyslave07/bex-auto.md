@@ -131,6 +131,7 @@ return [
     'mobile_image' => 'Мобильная картинка',
     'feed_image' => 'Картинка для фида',
     'price_prefix' => 'Префикс цены',
+    'btn_type' => 'Тип кнопки',
 
     'option' => [
         'expect' => 'Ожидается',

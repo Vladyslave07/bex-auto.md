@@ -23,7 +23,7 @@ class BtnText extends Model
 
     protected $table = 'btn_text';
     protected $guarded = ['id'];
-    protected $fillable = ['active', 'sort', 'title', 'slug', 'btn_text', 'car_status'];
+    protected $fillable = ['active', 'sort', 'title', 'slug', 'btn_text', 'car_status', 'btn_type'];
     protected $translatable = ['btn_text'];
 
     /*

@@ -2,6 +2,7 @@
 
 namespace App\Traits;
 
+use App\Enums\BtnTextType;
 use App\Models\Domain;
 use App\Models\Property;
 use App\Models\Setting;
@@ -133,8 +134,14 @@ trait ProductCarsTrait
 
     public function getBtnTextAttribute(): ?string
     {
-        $btnTxt = new \App\Services\Car\BtnTextService($this);
-        return  $btnTxt->getBtnText();
+        $btnTxt = new \App\Services\Car\BtnTextService($this, BtnTextType::BuyBtn->value);
+        return $btnTxt->getBtnText();
+    }
+
+    public function getBtnCreditTextAttribute(): ?string
+    {
+        $btnTxt = new \App\Services\Car\BtnTextService($this, BtnTextType::CreditBtn->value);
+        return $btnTxt->getBtnText();
     }
 
     public function getPriceFromTextAttribute()

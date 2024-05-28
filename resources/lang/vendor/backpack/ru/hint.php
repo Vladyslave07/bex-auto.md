@@ -60,5 +60,9 @@ return [
 
     'header_menu' => [
         'link' => 'Абсолютная ссылка или относительная Пример: <code>https:bex-auto.com/about</code> или <code>/about</code>',
+    ],
+
+    'btn_text' => [
+        'btn_type' => 'Определяет в какую кнопку выводить текст',
     ]
 ];

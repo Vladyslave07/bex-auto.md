@@ -2,6 +2,7 @@
 
 namespace App\Services\Car;
 
+use App\Enums\BtnTextType;
 use App\Helper\General;
 use App\Models\BtnText;
 use App\Models\Car;
@@ -15,17 +16,23 @@ class BtnTextService
 
     public string|null $btnText;
     public Car|Product $car;
+    public string $type;
 
-    public function __construct(Car|Product $car)
+    public function __construct(Car|Product $car, string $type)
     {
         $this->setCar($car);
+        $this->setType($type);
         $this->btnText();
     }
 
     public function btnText()
     {
-        // Текст кнопки по умолчанию
-        $this->btnText = Setting::get('default_btn_text');
+        $this->btnText = null;
+
+        if ($this->getType() === BtnTextType::BuyBtn->value) {
+            // Текст кнопки по умолчанию
+            $this->btnText = Setting::get('default_btn_text');
+        }
 
         // Текст кнопки по статусу авто
         if ($text = $this->getBtnTextByCarStatus()) {
@@ -49,7 +56,7 @@ class BtnTextService
     public function getBtnTextByCarStatus()
     {
         return Cache::remember(General::cacheKey(self::BTN_TEXT_CACHE_KEY . $this->getCar()->status), 86400, function () {
-            return BtnText::query()->active()->where('car_status', $this->getCar()->status)->orderBy('sort')->first()?->btn_text;
+            return $this->defaultQuery()->where('car_status', $this->getCar()->status)->orderBy('sort')->first()?->btn_text;
         });
     }
 
@@ -58,7 +65,7 @@ class BtnTextService
         $categoriesId = $this->getCar()->categories?->pluck('id')->toArray();
 
         return Cache::remember(General::cacheKey(self::BTN_TEXT_CACHE_KEY . implode('_', $categoriesId) . $this->getCar()->id), 86400, function () use ($categoriesId) {
-            return BtnText::query()->active()->whereHas('categories', function ($query) use ($categoriesId) {
+            return $this->defaultQuery()->whereHas('categories', function ($query) use ($categoriesId) {
                 $query->whereIn('category_id', $categoriesId);
             })->orderBy('sort')->first()?->btn_text;
         });
@@ -67,12 +74,16 @@ class BtnTextService
     public function getBtnTextByCar()
     {
         return Cache::remember(General::cacheKey(self::BTN_TEXT_CACHE_KEY . $this->getCar()->id), 86400, function () {
-            return BtnText::query()->active()->whereHas('cars', function ($query) {
+            return $this->defaultQuery()->whereHas('cars', function ($query) {
                 $query->where('car_id', $this->getCar()->id);
             })->orderBy('sort')->first()?->btn_text;
         });
     }
 
+    public function defaultQuery()
+    {
+        return BtnText::query()->active()->where('btn_type', $this->getType());
+    }
 
     /**
      * @return string|null
@@ -106,5 +117,17 @@ class BtnTextService
         $this->car = $car;
     }
 
+    public function getType(): string
+    {
+       return $this->type;
+    }
+
+    /**
+     * @param string $type
+     */
+    public function setType(string $type): void
+    {
+        $this->type = $type;
+    }
 
 }
