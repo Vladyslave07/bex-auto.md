@@ -20,6 +20,7 @@ class UtmMark
             'utm_source',
             'utm_medium',
             'utm_campaign',
+            'utm_term',
         ]);
 
         if(!session('checked_utm') && !empty($utmMarks)) {

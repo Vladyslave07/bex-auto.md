@@ -52,6 +52,7 @@ class FormResultApplicationForCreditCrudController extends CrudController
         CRUD::column('utm_source');
         CRUD::column('utm_medium');
         CRUD::column('utm_campaign');
+        CRUD::column('utm_term');
     }
 
     /**
@@ -129,6 +130,14 @@ class FormResultApplicationForCreditCrudController extends CrudController
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-4']
         ]);
+        CRUD::addField([
+            'name' => 'utm_term',
+            'label' => 'utm_term',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
+
 
     }
 

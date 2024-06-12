@@ -50,6 +50,8 @@ class FormResultCrudController extends CrudController
         CRUD::column('utm_source');
         CRUD::column('utm_medium');
         CRUD::column('utm_campaign');
+        CRUD::column('utm_term');
+
     }
 
     /**
