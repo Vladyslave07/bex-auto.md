@@ -20,12 +20,12 @@ class SearchPage extends Category
         $this->getSortParams();
         $this->currentModel = new Car();
 
-        return $this->search(($this->q))->get();
+        return $this->search((string)$this->q)->get();
     }
 
     public function carsForCurrentPage()
     {
-        $cars = $this->search(($this->q))->filtered($this->filterQuery);
+        $cars = $this->search((string)$this->q)->filtered($this->filterQuery);
 
         if (strlen($this->by) > 0 && strlen($this->sort) > 0) {
             $cars->orderBy($this->by, $this->sort);
@@ -38,6 +38,11 @@ class SearchPage extends Category
 
     public function search(string $q = '')
     {
+        // Если запроса нет возвращать невозможный билдер (поправить)
+        if (!$q) {
+            return Car::query()->where('id', 0);
+        }
+
         return Car::search($q)->active();
     }
 
