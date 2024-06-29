@@ -36,7 +36,8 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     protected $table = 'categories';
     protected $guarded = ['id'];
     protected $fillable = ['title', 'active', 'slug', 'sort', 'show_in_slider', 'seo_text_id', 'meta_title', 'meta_description', 'image', 'sub_title', 'sub_title_text', 'h1', 'add_to_feed'];
-    protected $translatable = ['title', 'meta_title', 'meta_description', 'sub_title', 'sub_title_text', 'h1'];
+//    protected $translatable = ['title', 'meta_title', 'meta_description', 'sub_title', 'sub_title_text', 'h1'];
+    protected $translatable = ['title', 'sub_title', 'sub_title_text',];
     protected $attributes = ['sort' => 500];
 
     public static $images = ['image'];
@@ -186,7 +187,7 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     public function getDomainH1Attribute()
     {
         if (strlen($this->h1) <= 0) {
-            return '';
+            return __('category.default_h1', ['title' => $this->title, 'country' =>  app('domain')->getDomain()->country]);
         }
         return $this->parseSnippets($this->h1);
     }

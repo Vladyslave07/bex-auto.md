@@ -1,6 +1,7 @@
 <?php
 return [
     'title' => 'Popular auto',
+    'default_h1' => ':title in :country',
     'sort' => [
         'price_desc' => 'From expensive to cheap',
         'price_asc' => 'From cheap to expensive',

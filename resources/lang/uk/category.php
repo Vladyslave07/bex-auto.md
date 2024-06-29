@@ -1,6 +1,7 @@
 <?php
 return [
   'title' => 'Популярнi авто',
+    'default_h1' => ':title в :country',
     'sort' => [
         'price_desc' => 'Від дорогих до дешевих',
         'price_asc' => 'Від дешевих до дорогих',

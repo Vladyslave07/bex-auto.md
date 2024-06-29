@@ -1,7 +1,7 @@
 <?php
 return [
     'title' => 'Танымал автомобильдер',
-
+    'default_h1' => ':title',
     'sort' => [
         'price_desc' => 'Қымбаттан арзанға',
         'price_asc' => 'Арзаннан қымбатқа',
