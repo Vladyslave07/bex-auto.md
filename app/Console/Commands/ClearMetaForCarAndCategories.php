@@ -56,7 +56,7 @@ class ClearMetaForCarAndCategories extends Command
             'aukcion-avto-iz-ssha',
         ];
 
-        \App\Models\Car::chunk(100, function ($cars) {
+        \App\Models\Car::query()->whereNotNull('meta_title')->chunk(100, function ($cars) {
             foreach ($cars as $car) {
                 $car->update([
                     'meta_title' => null,
