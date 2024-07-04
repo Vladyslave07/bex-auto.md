@@ -1,4 +1,4 @@
-@if(strlen($category->image) > 0 || strlen($category->h1) > 0)
+@if(strlen($category->image) > 0 || strlen($category->h1) > 0 || strlen($category->domain_h1))
 <div class="banner bg">
     <div class="container">
         {{-- Breadcrumbs --}}
