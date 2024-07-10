@@ -46,8 +46,11 @@ class CatalogController extends Controller
      */
     public function category(Category $category, Request $request, $page = 1)
     {
-        if (!$category->active) {
+        if ($category->id > 0 && !$category->active) {
             abort(404);
+        }
+        if (!$category->id && ($mainCategory = Category::indexCategory())) {
+            $category = $mainCategory;
         }
 
         $category->setSeo();

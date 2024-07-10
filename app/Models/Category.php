@@ -117,7 +117,7 @@ class Category extends Model implements Sitemapable, AdminMenuInterface
     public static function indexCategory(): Category
     {
         return Cache::remember(General::cacheKey(self::INDEX_CATEGORY_SLUG), 86400, function () {
-            return self::query()->where('slug', self::INDEX_CATEGORY_SLUG)->first();
+            return self::query()->active()->where('slug', self::INDEX_CATEGORY_SLUG)->first();
         });
     }
 
