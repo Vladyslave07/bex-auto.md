@@ -69,6 +69,7 @@ class EquipmentTemplate extends Component
 
     public function setDefaultColorId()
     {
+        if (!$this->equipment) {return;}
         $equipment = $this->car->equipments->first();
         $this->colorId = $equipment->id;
     }

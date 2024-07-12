@@ -23,14 +23,7 @@
                     </div>
                     <button onclick="openModal('#applicationForCar')" class="btn">{{ __('car.btn.' . $car->status) }}</button>
                 </div>
-                {{--            <div class="card-btn">--}}
-                {{--                <div>--}}
-                {{--                    <p>Кредит (Условия)</p>--}}
-                {{--                    <div class="price-credit">926$ / мес</div>--}}
-                {{--                </div>--}}
-                {{--                <a href="#" class="btn btn-blue">В кредит</a>--}}
-                {{--            </div>--}}
-                @if ($car->equipments)
+                @if (count($car->equipments) > 0)
                     <div class="card-options">
                         <div class="item">
                             <div class="title">{{ __('car.equipment') }}</div>
