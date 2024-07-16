@@ -44,15 +44,33 @@ function commonRoute()
     // Car detail
     Route::get('/car-details/{car}', [\App\Http\Controllers\CardController::class, 'index'])->name('car_detail');
 
-    // Categories
+    // Main category
     Route::get(
-        '/avto/filter/{filter?}',
+        '/avto/',
+        [\App\Http\Controllers\CatalogController::class, 'index']
+    )->name('main-category');
+
+    // Main category with pagination
+    Route::get(
+        '/avto/page-{page?}',
+        [\App\Http\Controllers\CatalogController::class, 'indexPagination']
+    )->name('avto-page');
+
+    // Main category with filter
+    Route::get(
+        '/avto/filter/{filter?}/{page?}',
         [\App\Http\Controllers\CatalogController::class, 'index']
     )->name('avto');
 
+    // Filter category
+    Route::get(
+        '/avto/{category?}/filter/{filter?}/{page?}',
+        [\App\Http\Controllers\CatalogController::class, 'filter']
+    )->name('category-filter');
+
     // Categories
     Route::get(
-        '/avto/{category?}/{page?}/{filter?}',
+        '/avto/{category?}/{page?}',
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category');
 
@@ -61,7 +79,7 @@ function commonRoute()
 
     // Product categories
     Route::get(
-        '/products/{category}/{page?}/{filter?}',
+        '/products/{category}/{filter?}/{page?}',
         [\App\Http\Controllers\CatalogController::class, 'category']
     )->name('category_products');
 

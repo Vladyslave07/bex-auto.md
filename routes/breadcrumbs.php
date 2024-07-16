@@ -18,6 +18,29 @@ Breadcrumbs::for('avto', function ($trail) {
     $trail->push($category->title, $category->url);
 });
 
+// Main category
+Breadcrumbs::for('main-category', function ($trail) {
+    $category = \App\Models\Category::indexCategory();
+    $trail->parent('index');
+    $trail->push($category->title, $category->url);
+});
+
+// category-filter
+Breadcrumbs::for('avto-page', function ($trail, $page) {
+    $category = \App\Models\Category::indexCategory();
+    $trail->parent('index');
+    $trail->push($category->title, $category->url);
+});
+
+// category-filter
+Breadcrumbs::for('category-filter', function ($trail, \App\Models\Category $category = null) {
+    if (!$category) {
+        $category = \App\Models\Category::indexCategory();
+    }
+    $trail->parent('index');
+    $trail->push($category->title, $category->url);
+});
+
 // category
 Breadcrumbs::for('category', function ($trail, \App\Models\Category $category = null) {
     if (!$category) {
