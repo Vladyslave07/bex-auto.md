@@ -66,6 +66,35 @@
                         @include('partials.full_card.colors')
 
                     </div>
+                @else
+                    <div class="card-features-car">
+                        <h2 class="title">{{ Lang::get('car.detail.characteristic')}}:</h2>
+                        <ul class="list">
+                            @foreach($car->properties as $property)
+                                @if(($value = $property->getValue()) && $property->slug !== \App\Models\Property::PROPERTY_TYPE_SLUG)
+                                    <li>
+                                        <div class="dt">
+                                            @if ($image = $property->image)
+                                                <div class="icon">
+                                                    <img src="{{ Storage::disk('public')->url($image) }}">
+                                                </div>
+                                            @endif
+                                            {{ $property->title }}:
+                                        </div>
+                                        <div class="dd">{{ Str::ucfirst($value) }} {{ $property->prefix }}</div>
+                                    </li>
+                                @endif
+                            @endforeach
+                            @if($car->vin)
+                                <li>
+                                    <div class="dt">
+                                        Vin code:
+                                    </div>
+                                    <div class="dd">{{ $car->vin }}</div>
+                                </li>
+                            @endif
+                        </ul>
+                    </div>
                 @endif
                 @if ($this->equipment && ($characteristic = $this->equipment->prepared_characteristic))
                     <div class="card-features">
