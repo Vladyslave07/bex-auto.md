@@ -104,13 +104,23 @@
                 @endif
             </div>
         </div>
-        <div class="container">
-            {{-- Benefits --}}
-            @include('partials.full_card.benefits')
-
-            <div class="card-equipments">
-                {!! $car->equipment !!}
+        @if (!$this->equipment)
+            {{-- Links --}}
+            @include('partials.card.links')
+        @endif
+        @if (!$this->equipment && $car->description)
+            <div class="card-description container">
+                <h2 class="main-title text-center hidden-sm">{{ Lang::get('car.detail.description') }}</h2>
+                {!! $car->description !!}
             </div>
-        </div>
-    </div>
+        @endif
+<div class="container">
+   {{-- Benefits --}}
+   @include('partials.full_card.benefits')
+
+   <div class="card-equipments">
+       {!! $car->equipment !!}
+   </div>
+</div>
+</div>
 </div>
