@@ -7,6 +7,7 @@ use Livewire\Component;
 class EquipmentTemplate extends Component
 {
     public $car;
+    public $links;
     public $equipment;
     public $volume;
     public $colorId;

@@ -15,7 +15,7 @@
     {{ Breadcrumbs::render() }}
 
     <!-- ///КАРТОЧКА ТОВАРА/// -->
-    @livewire('equipment-template', compact('car'))
+    @livewire('equipment-template', compact('car', 'links'))
     <!-- ///:end/// -->
 
     {{-- Popular cars --}}
