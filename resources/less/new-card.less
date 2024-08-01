@@ -66,6 +66,56 @@
             margin-top: 20px;
         }
     }
+    &-features-car {
+        .title {
+            font-weight: 600;
+            font-size: 20px;
+            line-height: 24px;
+            margin-bottom: 28px;
+            display: table;
+        }
+        .list {
+            margin: 0;
+            padding: 0;
+            li {
+                list-style: none;
+                margin-bottom: 28px;
+                display: flex;
+                align-items: flex-start;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+                .icon {
+                    line-height: 1;
+                    width: 36px;
+                    flex: none;
+                    img {
+                        max-width: 21px;
+                    }
+                }
+                .dt {
+                    color: var(--blue);
+                    font-weight: 600;
+                    font-size: 16px;
+                    line-height: 20px;
+                    width: 54%;
+                    display: flex;
+                    align-items: center;
+                }
+                .dd {
+                    font-weight: 600;
+                    display: flex;
+                    flex: 1;
+                    .tooltip {
+                        margin: -6px 0 0 1px;
+                        svg {
+                            color: var(--blue);
+                        }
+                    }
+                }
+            }
+        }
+    }
     &-options {
         position: relative;
         padding-top: 28px;
@@ -327,7 +377,6 @@
             }
             .text {
                 overflow: hidden;
-                max-width: 440px;
                 margin-left: 10%;
             }
         }
@@ -361,7 +410,7 @@
                     &:first-child {
                         font-weight: 600;
                         font-size: 16px;
-                        padding: 0; 
+                        padding: 0;
                         span {
                             padding-right: 0;
                             margin-left: 0;
@@ -397,6 +446,17 @@
             }
         }
     }
+    .hashtags {
+        margin-top: 20px;
+        a {
+            font-weight: 400;
+            opacity: 0.5;
+            text-transform: capitalize;
+            margin-right: 11px;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+    }
 }
 
 @media (min-width: 992px) {
@@ -414,6 +474,10 @@
             padding-right: 50px;
             float: left;
             width: calc(100% - 400px);
+        }
+        &-features-car{
+            margin-left: auto;
+            width: 400px;
         }
         &-btn,
         &-options{
@@ -495,8 +559,16 @@
                 }
             }
         }
-        &-features {
+        &-features-car {
             margin-top: 63px;
+            margin-bottom: 30px;
+            .list {
+                li {
+                    .dt {
+                        width: 59%;
+                    }
+                }
+            }
         }
         &-description {
             margin-top: 50px;

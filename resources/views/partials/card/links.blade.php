@@ -1,4 +1,4 @@
-@if (isset($links) && $links && count($links) > 0)
+@if (isset($links) && count($links) > 0)
     <div class="hashtags container hidden-sm">
         @foreach($links as $link)
             <a href="{{ route('category', ['category' => $link->slug]) }}">{{ $link->title }}</a>
