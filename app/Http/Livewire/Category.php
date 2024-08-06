@@ -10,6 +10,7 @@ use App\Models\Property;
 use App\Traits\WithCustomPaginationTrait;
 
 use Artesaos\SEOTools\Facades\SEOTools;
+use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
@@ -22,26 +23,21 @@ class Category extends Component
     public \App\Models\Category|null $category = null;
     public $orderBy = [];
     public $filterQuery = null;
-
     public $by = '';
     public $sort = '';
-
     public Car|Product $currentModel;
-
     protected $cars;
-    protected $allCars = null;
-
     public $disabled = true;
 
     const BRAND_SLUG = 'brand';
 
     public function cars()
     {
-        // TODO: кешировать
-        $this->page = $this->pageNum($this->page);
+        $this->page = is_numeric($this->page) ? $this->pageNum($this->page) : 1;
         $this->getSortParams();
         $filterQuery = preg_replace('/\/filter\//', '', $this->filterQuery);
 
+        /** @var Builder $cars */
         if (!$this->category->is_index) {
             $cars = $this->category->carsOrProducts()->filtered($filterQuery);
             $this->currentModel = $cars->getRelated();
@@ -202,11 +198,14 @@ class Category extends Component
         $categoryUrl = route($this->currentModel->categoryRouteName, ['category' => $this->category->slug], false);
 
         if ($this->category->slug == \App\Models\Category::INDEX_CATEGORY_SLUG) {
-            $categoryUrl = route('avto');
-            if ($this->filterQuery) {
-                return $categoryUrl . $this->filterQuery;
+            $page = '';
+            if ($this->page > 1) {
+                $page = 'page-' . $this->page;
             }
-            return $categoryUrl;
+            if ($this->filterQuery) {
+                return route('avto', ['filter' => $this->filterQuery, 'page' => $page]);
+            }
+            return route('avto', ['page' => $page]);
         }
 
         $filterUrl = '';
@@ -222,11 +221,12 @@ class Category extends Component
      */
     public function filters()
     {
-        if ($this->category && $this->category->slug === \App\Models\Category::INDEX_CATEGORY_SLUG && $this->allCars === null) {
-            $this->allCars = Car::query()->active()->get();
+        $category = $this->category;
+        if ($this->category->slug === \App\Models\Category::INDEX_CATEGORY_SLUG) {
+            $category = null;
         }
 
-        return CarFilter::getCurrentPropertiesFilter($this->category, $this->filterQuery, $this->allCars);
+        return CarFilter::getCurrentPropertiesFilter($category, $this->filterQuery);
     }
 
     /**
@@ -254,7 +254,15 @@ class Category extends Component
         $currentUrl = URL::current();
         if (str_contains($currentUrl, CarFilter::FILTER_PREFIX)) {
             [$url, $filterQuery] = explode(CarFilter::FILTER_PREFIX, URL::current());
+            $filterQuery = preg_replace('/\/page-(.*)/', '', $filterQuery);
             $this->filterQuery = $filterQuery;
+        }
+    }
+
+    public function preparePage()
+    {
+        if (strlen($this->page) > 0 && preg_match('/page-/', $this->page) !== 0) {
+            $this->page = preg_replace('/page-(\d+)/', '$1', $this->page);
         }
     }
 
@@ -287,6 +295,7 @@ class Category extends Component
     public function mount()
     {
         $this->setFilterQueryFromUrl();
+        $this->preparePage();
         $this->setDefaultValuesForRangeParams();
         $this->enableIfExist();
 
