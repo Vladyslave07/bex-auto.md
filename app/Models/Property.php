@@ -88,7 +88,7 @@ class Property extends Model
         if (!is_array($options)) {
             $options = json_decode($options, true);
         }
-        if (json_last_error() === JSON_ERROR_NONE) {
+        if (json_last_error() === JSON_ERROR_NONE && $options) {
             array_walk($options, function ($a) use (&$return) {
                 $return[$a['value']] = $a['name'];
             });
