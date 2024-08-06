@@ -132,6 +132,13 @@ class FormResultDealerServiceCrudController extends CrudController
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-4']
         ]);
+        CRUD::addField([
+            'name' => 'utm_content',
+            'label' => 'utm_content',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
 
 
     }

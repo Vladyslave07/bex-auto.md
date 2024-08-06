@@ -21,6 +21,7 @@ class UtmMark
             'utm_medium',
             'utm_campaign',
             'utm_term',
+            'utm_content',
         ]);
 
         if(!session('checked_utm') && !empty($utmMarks)) {

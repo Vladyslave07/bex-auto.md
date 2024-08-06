@@ -52,6 +52,7 @@ class FormResultCallBackCrudController extends CrudController
         CRUD::column('utm_medium');
         CRUD::column('utm_campaign');
         CRUD::column('utm_term');
+        CRUD::column('utm_content');
 
     }
 
@@ -131,9 +132,13 @@ class FormResultCallBackCrudController extends CrudController
             'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
             'wrapperAttributes' => ['class' => 'form-group col-md-4']
         ]);
-
-
-
+        CRUD::addField([
+            'name' => 'utm_content',
+            'label' => 'utm_content',
+            'type' => 'text',
+            'attributes' => [ 'readonly' => 'readonly', 'disabled' => 'disabled'],
+            'wrapperAttributes' => ['class' => 'form-group col-md-4']
+        ]);
     }
 
     /**

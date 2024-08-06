@@ -107,6 +107,7 @@ class FormResultToB24 implements ShouldQueue
         if ($medium = $this->formResult->utm_medium) {$data['UTM_MEDIUM'] = $medium;}
         if ($campaign = $this->formResult->utm_campaign) {$data['UTM_CAMPAIGN'] = $campaign;}
         if ($term = $this->formResult->utm_term) {$data['UTM_TERM'] = $term;}
+        if ($content = $this->formResult->utm_content) {$data['UTM_CONTENT'] = $content;}
 
         return $data;
     }
