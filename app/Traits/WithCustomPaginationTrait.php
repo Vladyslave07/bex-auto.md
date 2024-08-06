@@ -56,10 +56,40 @@ trait WithCustomPaginationTrait
     public function makePaginateUrl(): string
     {
         $page = '';
-        if ($this->page != 1) {
+        if ($this->page > 1) {
             $page = 'page-' . $this->page;
         }
+        $categorySlug = $this->category->slug;
+        $routeName = 'category';
+        $filterQuery = '';
+        if ($this->filterQuery) {
+            $routeName = 'category-filter';
+            $filterQuery = $this->filterQuery;
+        }
 
-        return route('category', ['category' => $this->category->slug, 'page' => $page], false);
+        if ($this->category->slug == \App\Models\Category::INDEX_CATEGORY_SLUG) {
+            $categorySlug = null;
+            if ($this->filterQuery) {
+                $routeName = 'avto';
+                $filterQuery = $this->filterQuery;
+            }
+            if (!$this->filterQuery && $this->page > 1) {
+                $routeName = 'avto-page';
+                $page = $this->page;
+            }
+        }
+
+        $params = [];
+        if ($categorySlug) {
+            $params['category'] = $categorySlug;
+        }
+        if ($filterQuery) {
+            $params['filter'] = $filterQuery;
+        }
+        if ($page) {
+            $params['page'] = $page;
+        }
+
+        return route($routeName, $params, false);
     }
 }

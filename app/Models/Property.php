@@ -77,12 +77,16 @@ class Property extends Model
      *
      * @return array
      */
-    public function getOptions()
+    public function getOptions(): array
+    {
+        return $this->prepareOptions($this->options);
+    }
+
+    public static function prepareOptions($options): array
     {
         $return = [];
-        $options = $this->options;
-        if (!is_array($this->options)) {
-            $options = json_decode($this->options, true);
+        if (!is_array($options)) {
+            $options = json_decode($options, true);
         }
         if (json_last_error() === JSON_ERROR_NONE) {
             array_walk($options, function ($a) use (&$return) {

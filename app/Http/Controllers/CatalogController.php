@@ -14,7 +14,7 @@ class CatalogController extends Controller
 
     const COUNT_CARS_ON_PAGE = 9;
 
-    public function index(Request $request, $page = 1)
+    public function index(Request $request, $filters, $page = 1)
     {
         $category = Category::indexCategory();
 
@@ -38,13 +38,18 @@ class CatalogController extends Controller
         return view('category', compact('category', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
     }
 
+    public function indexPagination(Request $request, $page = 1)
+    {
+        return $this->index($request, null, $page);
+    }
+
     /**
      * Category method handle
      *
      * @param Category $category
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function category(Category $category, Request $request, $page = 1)
+    public function category(Category $category, $page = 1)
     {
         if ($category->id > 0 && !$category->active) {
             abort(404);
@@ -73,6 +78,11 @@ class CatalogController extends Controller
         $seoText = $category->seoText ?? SeoText::mainText();
 
         return view('category', compact('category', 'page', 'popularCars', 'brands', 'seoText', 'categories', 'faqs'));
+    }
+
+    public function filter(Category $category, $filter, $page = 1)
+    {
+        return $this->category($category, $page);
     }
 
 }
