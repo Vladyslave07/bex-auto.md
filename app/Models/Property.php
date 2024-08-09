@@ -85,7 +85,7 @@ class Property extends Model
     public static function prepareOptions($options): array
     {
         $return = [];
-        if (!is_array($options)) {
+        if ($options && !is_array($options)) {
             $options = json_decode($options, true);
         }
         if (json_last_error() === JSON_ERROR_NONE && $options) {

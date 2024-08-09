@@ -6,7 +6,6 @@ use App\filters\CarFilter;
 use App\Http\Controllers\CatalogController;
 use App\Models\Car;
 use App\Models\Product;
-use App\Models\Property;
 use App\Traits\WithCustomPaginationTrait;
 
 use Artesaos\SEOTools\Facades\SEOTools;
@@ -14,7 +13,6 @@ use Illuminate\Database\Query\Builder;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\URL;
 use Livewire\Component;
-use function Symfony\Component\String\s;
 
 class Category extends Component
 {
@@ -28,6 +26,7 @@ class Category extends Component
     public Car|Product $currentModel;
     protected $cars;
     public $disabled = true;
+    public $filters = [];
 
     const BRAND_SLUG = 'brand';
 
@@ -237,7 +236,10 @@ class Category extends Component
      */
     public function setDefaultValuesForRangeParams()
     {
-        foreach ($this->filters() as $key => $filter) {
+        if (empty($this->filters)) {
+            $this->filters = $this->filters();
+        }
+        foreach ($this->filters as $filter) {
             if ($filter['type'] !== CarFilter::FROM_TO_PROPERTY_NAME || !key_exists('values', $filter) || !$filter['values']) {
                 continue;
             }
@@ -274,7 +276,10 @@ class Category extends Component
 
     public function enableIfExist()
     {
-        foreach ($this->filters() as $filter) {
+        if (empty($this->filters)) {
+            $this->filters = $this->filters();
+        }
+        foreach ($this->filters as $filter) {
             if ($filter['slug'] === self::BRAND_SLUG) {
                 foreach ($filter['values'] as $value) {
                     if ($value['active']) {
@@ -296,6 +301,7 @@ class Category extends Component
     {
         $this->setFilterQueryFromUrl();
         $this->preparePage();
+        $this->filters = $this->filters();
         $this->setDefaultValuesForRangeParams();
         $this->enableIfExist();
 
@@ -307,7 +313,7 @@ class Category extends Component
     {
         return view('livewire.category', [
             'cars' => $this->cars(),
-            'filters' => $this->filters(),
+            'filters' => $this->filterQuery ? $this->filters() : $this->filters,
         ]);
     }
 }

@@ -10,6 +10,7 @@ use App\Models\CarModel;
 use App\Models\Category;
 use App\Models\Property;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
@@ -54,6 +55,7 @@ class CarFilter
     {
         $filter = [];
         $filters = str_contains($queryString, '_') ? explode('_', $queryString) : [$queryString];
+
         foreach ($filters as $filterPair) {
             [$key, $value] = explode(':', $filterPair);
 
@@ -224,9 +226,13 @@ class CarFilter
     public static function usualProperties(Category|null $category = null): array
     {
         $properties = [];
-        $propertiesInfo = self::defaultPropertiesQuery($category)
-        ->whereNot('properties.filter_type', self::FROM_TO_PROPERTY_NAME)
-        ->distinct()->get();
+        $cacheKey = $category . '_usual_properties';
+        $propertiesInfo = Cache::remember($cacheKey, 86400, function () use ($category) {
+            return self::defaultPropertiesQuery($category)
+                ->whereNot('properties.filter_type', self::FROM_TO_PROPERTY_NAME)
+                ->distinct()->get();
+        });
+
         foreach ($propertiesInfo as $property) {
             $properties[$property->slug]['name'] = $property->title;
             $properties[$property->slug]['type'] = $property->filter_type;
@@ -303,9 +309,13 @@ class CarFilter
     public static function rangeProperties(Category|null $category): array
     {
         $ranges = [];
-        $propertiesInfo = self::defaultPropertiesQuery($category)
-            ->where('properties.filter_type', self::FROM_TO_PROPERTY_NAME)
-            ->distinct()->get();
+        $cacheKey = $category . '_range_properties';
+        $propertiesInfo = Cache::remember($cacheKey, 86400, function () use ($category) {
+            return self::defaultPropertiesQuery($category)
+                ->where('properties.filter_type', self::FROM_TO_PROPERTY_NAME)
+                ->distinct()->get();
+        });
+
         foreach ($propertiesInfo as $property) {
             if (!is_numeric($property->value)) {
                 continue;
