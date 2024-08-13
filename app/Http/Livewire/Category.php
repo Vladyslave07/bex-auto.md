@@ -26,7 +26,7 @@ class Category extends Component
     public Car|Product $currentModel;
     protected $cars;
     public $disabled = true;
-    public $filters = [];
+    private $filters = [];
 
     const BRAND_SLUG = 'brand';
 
