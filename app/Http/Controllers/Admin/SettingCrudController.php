@@ -55,6 +55,10 @@ class SettingCrudController extends CrudController
                 'name'  => 'name',
                 'label' => trans('backpack::fields.name'),
             ],
+            [
+                'name'  => 'key',
+                'label' => trans('backpack::fields.slug'),
+            ],
         ]);
 
     }

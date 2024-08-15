@@ -14,7 +14,7 @@ use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\SluggableScopeHelpers;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Spatie\Sitemap\Contracts\Sitemapable;
@@ -136,6 +136,11 @@ class News extends Model implements Sitemapable, AdminMenuInterface
     |--------------------------------------------------------------------------
     */
 
+    public function setSlugAttribute($value)
+    {
+        $this->attributes['slug'] = mb_strtolower($value);
+    }
+
     /*
     |--------------------------------------------------------------------------
     | MUTATORS
@@ -144,7 +149,20 @@ class News extends Model implements Sitemapable, AdminMenuInterface
 
     public function getSeoMetaTitleAttribute()
     {
-        return $this->parseSnippets($this->meta_title ?: Setting::get('news_meta_title'));
+        $lang = App::getLocale();
+        if (!empty($this->getOriginal('meta_title')) && $this->getOriginal('meta_title')[$lang]) {
+            return $this->parseSnippets($this->getOriginal('meta_title')[$lang]);
+        }
+        return $this->parseSnippets(Setting::get('default_meta_title_for_article'));
+    }
+
+    public function getSeoMetaDescriptionAttribute()
+    {
+        $lang = App::getLocale();
+        if (!empty($this->getOriginal('meta_description')) && $this->getOriginal('meta_description')[$lang]) {
+            return $this->parseSnippets($this->getOriginal('meta_description')[$lang]);
+        }
+        return $this->parseSnippets(Setting::get('default_meta_description_for_article'));
     }
 
     public function getDetailTextSnippetAttribute()
@@ -170,11 +188,6 @@ class News extends Model implements Sitemapable, AdminMenuInterface
             return preg_replace('/\#call_back\#/', (new \App\View\Components\NewsCallBack)->render(), $this->detail_text);
         }
         return $this->detail_text;
-    }
-
-    public function getSeoMetaDescriptionAttribute()
-    {
-        return $this->parseSnippets($this->meta_description ?: Setting::get('news_meta_description'));
     }
 
 }

@@ -88,7 +88,13 @@ class NewsCrudController extends CrudController
         CRUD::addField(['tab' => 'Новость', 'name' => 'active', 'label' => trans('backpack::fields.active'), 'type' => 'checkbox', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
         CRUD::addField(['tab' => 'Новость', 'name' => 'sort', 'label' => trans('backpack::fields.sort'), 'type' => 'number', 'default' => '500', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
 
-        CRUD::addField(['tab' => 'Новость', 'name' => 'slug', 'label' => trans('backpack::fields.slug'), 'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6']]);
+        CRUD::addField([
+            'tab' => 'Новость',
+            'name' => 'slug',
+            'label' => trans('backpack::fields.slug'),
+            'type' => 'text', 'wrapperAttributes' => ['class' => 'form-group col-md-6'],
+            'hint' => trans('backpack::hint.news.slug'),
+        ]);
         CRUD::addField(['tab' => 'Новость', 'name' => 'title', 'label' => trans('backpack::fields.title'), 'type' => 'simplemde']);
 
 
