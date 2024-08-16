@@ -17,6 +17,16 @@ class Redirect
      */
     public function handle(Request $request, Closure $next)
     {
+        $uri = $request->path();
+        if (preg_match('/\.(jpg|jpeg|png|gif|css|js|pdf|doc|docx|xls|xlsx)$/i', $uri)) {
+            return $next($request);
+        }
+        if ($uri !== strtolower($uri)) {
+            $lowercaseUri = strtolower($uri);
+            $newUrl = url($lowercaseUri);
+            return redirect($newUrl, 301);
+        }
+
         $urlWithoutLocale = LaravelLocalization::getNonLocalizedURL();
         $redirect = \App\Models\Redirect::query()->where('url_from', $urlWithoutLocale)->first(['url_to', 'quantity', 'type']);
         if ($redirect) {

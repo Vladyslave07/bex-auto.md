@@ -42,7 +42,7 @@ class MakeSlugLowerForNews extends Command
             Redirect::create([
                 'url_from' => $domainSlug . '/' . $article->slug,
                 'url_to' => $domainSlug . '/' . strtolower($article->slug),
-                'type' => 301,
+                'type' => '301',
             ]);
             $article->slug = strtolower($article->slug);
             $article->save();

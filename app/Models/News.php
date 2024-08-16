@@ -150,7 +150,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
     public function getSeoMetaTitleAttribute()
     {
         $lang = App::getLocale();
-        if (!empty($this->getOriginal('meta_title')) && $this->getOriginal('meta_title')[$lang]) {
+        if (!empty($this->getOriginal('meta_title')) && isset($this->getOriginal('meta_title')[$lang])) {
             return $this->parseSnippets($this->getOriginal('meta_title')[$lang]);
         }
         return $this->parseSnippets(Setting::get('default_meta_title_for_article'));
@@ -159,7 +159,7 @@ class News extends Model implements Sitemapable, AdminMenuInterface
     public function getSeoMetaDescriptionAttribute()
     {
         $lang = App::getLocale();
-        if (!empty($this->getOriginal('meta_description')) && $this->getOriginal('meta_description')[$lang]) {
+        if (!empty($this->getOriginal('meta_description')) && isset($this->getOriginal('meta_description')[$lang])) {
             return $this->parseSnippets($this->getOriginal('meta_description')[$lang]);
         }
         return $this->parseSnippets(Setting::get('default_meta_description_for_article'));
