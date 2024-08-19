@@ -29,6 +29,8 @@ Route::group([
 
 function commonRoute()
 {
+    Route::get('/sitemap', [\App\Http\Controllers\SitemapController::class, 'index'])->name('sitemap');
+
     Route::get('robots.txt', RobotsController::class);
 
     Route::post('livewire/message/{name}', '\Livewire\Controllers\HttpConnectionHandler');

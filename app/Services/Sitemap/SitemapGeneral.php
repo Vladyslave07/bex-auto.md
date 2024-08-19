@@ -36,6 +36,7 @@ class SitemapGeneral
             ->add($this->getFileName('cars', $this->locale))
             ->add($this->getFileName('service', $this->locale))
             ->add($this->getFileName('news', $this->locale))
+            ->add(SitemapImagesGenerate::getFileName('images'))
             ->writeToFile(public_path($this->getSavePath('sitemap', $this->locale)));
 
         // Разделы

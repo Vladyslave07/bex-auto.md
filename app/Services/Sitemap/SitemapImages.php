@@ -1,14 +1,11 @@
 <?php
 
-
 namespace App\Services\Sitemap;
 
 
-use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Sitemap;
-use Spatie\Sitemap\Tags\Url;
 
-class SitemapCustom extends Sitemap
+class SitemapImages extends Sitemap
 {
     public function render(): string
     {
@@ -17,7 +14,8 @@ class SitemapCustom extends Sitemap
         // Удалить теги changeFrequency и priority из всех тегов
         $tags = $tags->map(function ($item, $key) {
             unset($item->priority);
-            $item->images = [];
+            unset($item->lastModificationDate);
+            unset($item->changeFrequency);
             return $item;
         });
 

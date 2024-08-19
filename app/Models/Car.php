@@ -24,6 +24,7 @@ use Illuminate\Support\Str;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use phpDocumentor\Reflection\Types\Integer;
 use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 
 class Car extends Model implements AdminMenuInterface, Sitemapable
 {
@@ -71,7 +72,13 @@ class Car extends Model implements AdminMenuInterface, Sitemapable
     public function toSitemapTag(): \Spatie\Sitemap\Tags\Url|string|array
     {
         $url = app('domain')->getDomainUrl() . route('car_detail', ['car' => $this], false);
-        return LaravelLocalization::getLocalizedURL(app()->getLocale(), $url);
+        $createdUrl = Url::create(LaravelLocalization::getLocalizedURL(app()->getLocale(), $url));
+        if (!empty($this->images)) {
+            foreach ($this->images as $image) {
+                $createdUrl->addImage(Storage::disk('public')->url($image));
+            }
+        }
+        return $createdUrl;
     }
 
     public function adminEditPath():string

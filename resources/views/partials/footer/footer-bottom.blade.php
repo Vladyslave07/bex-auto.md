@@ -5,4 +5,6 @@
 
     {{-- contacts --}}
     @include('partials.footer.contacts')
+
+    <a href="{{ route('sitemap') }}">{{ __('sitemap.sitemap') }}</a>
 </div>
