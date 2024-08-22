@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Helper\General;
 use App\Traits\DefaultScope;
 use Backpack\CRUD\app\Models\Traits\CrudTrait;
+use Backpack\CRUD\app\Models\Traits\SpatieTranslatable\HasTranslations;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
@@ -14,6 +15,7 @@ class FooterMenu extends Model
     use CrudTrait;
     use HasFactory;
     use DefaultScope;
+    use HasTranslations;
 
     /*
     |--------------------------------------------------------------------------
@@ -25,6 +27,7 @@ class FooterMenu extends Model
 
     protected $table = 'footer_menus';
     protected $fillable = ['active', 'slug', 'title', 'column', 'sort'];
+    protected $translatable = ['title'];
 
     /*
     |--------------------------------------------------------------------------
