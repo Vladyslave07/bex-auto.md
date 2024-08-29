@@ -12,3 +12,9 @@
         <button class="btn" type="submit">{{ $this->btnText }}</button>
     </form>
 </div>
+
+<script>
+    window.addEventListener('submitAutoForZSUForm', event => {
+        window.formSubmit(event.detail.phone);
+    })
+</script>

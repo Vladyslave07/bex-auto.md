@@ -51,8 +51,9 @@
             return value ? JSON.parse(value) : null;
         }
 
+        window.addEventListener('submitDiscountForm', event => {
+            window.formSubmit(event.detail.phone);
+        })
     </script>
     @endif
 </div>
-
-

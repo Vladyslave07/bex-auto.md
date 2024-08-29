@@ -25,4 +25,9 @@ export default function() {
         document.querySelector('.main-header').id = check ? '' : btn.dataset.target ?? '';
         document.body.dataset.over = check ? '' : 'modal-open';
     }));
+
+    // Аналитика
+    window.formSubmit = function (phone) {
+        dataLayer.push({'event': 'formSubmit', 'phone': event.detail.phone});
+    }
 }

@@ -44,6 +44,10 @@ class AutoForZsu extends Component implements BaseForm
 
         $data = $this->addUtmMarks($data);
 
+        $this->dispatchBrowserEvent('submitAutoForZSUForm', [
+            'phone' => '+' . $formattedPhone,
+        ]);
+
         $result = FormResult::query()->create($data);
 
         // Send result to B24

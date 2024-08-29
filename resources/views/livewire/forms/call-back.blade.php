@@ -12,3 +12,9 @@
         <button class="btn" type="submit">{{ $this->btnText ?: \Illuminate\Support\Facades\Lang::get('forms.call_back_button')}}</button>
     </form>
 </div>
+
+<script>
+    window.addEventListener('submitCallBackForm', event => {
+        window.formSubmit(event.detail.phone);
+    })
+</script>

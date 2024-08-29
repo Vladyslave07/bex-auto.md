@@ -35,3 +35,9 @@
         <button class="btn" type="submit">@lang('forms.buy-and-delivery.submit')</button>
     </form>
 </div>
+
+<script>
+    window.addEventListener('submitBuyAndDeliveryAutoForm', event => {
+        window.formSubmit(event.detail.phone);
+    })
+</script>

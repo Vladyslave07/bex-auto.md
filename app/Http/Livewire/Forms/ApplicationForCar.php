@@ -35,6 +35,7 @@ class ApplicationForCar extends Component implements BaseForm
         $this->dispatchBrowserEvent('submitCarForm', [
             'car_id' => $this->car->id,
             'price' => $this->car->price,
+            'phone' => '+' . Str::phoneNumber($fields['phone']),
         ]);
 
         $fields['phone'] = Str::phoneNumber($fields['phone']);

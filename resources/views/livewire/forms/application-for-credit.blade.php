@@ -85,6 +85,7 @@
                 }
             );
         }
+        window.formSubmit(event.detail.phone);
     })
 </script>
 

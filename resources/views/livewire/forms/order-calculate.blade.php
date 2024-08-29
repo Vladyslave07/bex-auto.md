@@ -12,3 +12,9 @@
         <button class="btn" type="submit">{{ $this->btnText ?: Lang::get('forms.order-calc.submit') }}</button>
     </form>
 </div>
+
+<script>
+    window.addEventListener('submitOrderCalculateForm', event => {
+        window.formSubmit(event.detail.phone);
+    })
+</script>

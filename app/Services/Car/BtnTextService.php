@@ -55,7 +55,7 @@ class BtnTextService
 
     public function getBtnTextByCarStatus()
     {
-        return Cache::remember(General::cacheKey($this->getCacheKey($this->getCar()->status)), 86400, function () {
+        return Cache::remember(General::cacheKey($this->getCacheKey($this->getCar()->status . '_' . app()->getLocale())), 86400, function () {
             return $this->defaultQuery()->where('car_status', $this->getCar()->status)->orderBy('sort')->first()?->btn_text;
         });
     }
@@ -64,7 +64,7 @@ class BtnTextService
     {
         $categoriesId = $this->getCar()->categories?->pluck('id')->toArray();
 
-        return Cache::remember(General::cacheKey($this->getCacheKey(implode('_', $categoriesId)) . $this->getCar()->id), 86400, function () use ($categoriesId) {
+        return Cache::remember(General::cacheKey($this->getCacheKey(implode('_', $categoriesId) . '_' . app()->getLocale()) . $this->getCar()->id), 86400, function () use ($categoriesId) {
             return $this->defaultQuery()->whereHas('categories', function ($query) use ($categoriesId) {
                 $query->whereIn('category_id', $categoriesId);
             })->orderBy('sort')->first()?->btn_text;
@@ -73,7 +73,7 @@ class BtnTextService
 
     public function getBtnTextByCar()
     {
-        return Cache::remember(General::cacheKey($this->getCacheKey($this->getCar()->id)), 86400, function () {
+        return Cache::remember(General::cacheKey($this->getCacheKey($this->getCar()->id . '_' . app()->getLocale())), 86400, function () {
             return $this->defaultQuery()->whereHas('cars', function ($query) {
                 $query->where('car_id', $this->getCar()->id);
             })->orderBy('sort')->first()?->btn_text;

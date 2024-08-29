@@ -55,6 +55,7 @@ class ApplicationForCredit extends Component implements BaseForm
         $this->dispatchBrowserEvent('submitCreditForm', [
             'car_id' => $this->car->id,
             'price' => $this->car->price,
+            'phone' => '+' . Str::phoneNumber($fields['phone']),
         ]);
     }
 
