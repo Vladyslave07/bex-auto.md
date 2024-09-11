@@ -42,16 +42,15 @@ class BuyAndDeliveryAuto extends Component implements BaseForm
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
 
-        $this->dispatchBrowserEvent('submitBuyAndDeliveryAutoForm', [
-            'phone' => '+' . Str::phoneNumber($fields['phone']),
-        ]);
-
         // Send result to B24
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
-        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
+        $this->dispatchBrowserEvent('submitBuyAndDeliveryAutoForm', [
+            'phone' => '+' . Str::phoneNumber($fields['phone']),
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')),
+        ]);
     }
 
     protected function rules()

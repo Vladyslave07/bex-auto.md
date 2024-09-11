@@ -56,6 +56,7 @@ class ApplicationForCredit extends Component implements BaseForm
             'car_id' => $this->car->id,
             'price' => $this->car->price,
             'phone' => '+' . Str::phoneNumber($fields['phone']),
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks', ['car_id' => $this->car->id])),
         ]);
     }
 

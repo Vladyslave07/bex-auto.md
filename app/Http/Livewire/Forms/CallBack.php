@@ -46,16 +46,15 @@ class CallBack extends Component implements BaseForm
 
         $result = FormResult::query()->create($data);
 
-        $this->dispatchBrowserEvent('submitCallBackForm', [
-            'phone' => '+' . $formattedPhone,
-        ]);
-
         // Send result to B24
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
-        redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
+        $this->dispatchBrowserEvent('submitCallBackForm', [
+            'phone' => '+' . $formattedPhone,
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')),
+        ]);
     }
 
     public function render()

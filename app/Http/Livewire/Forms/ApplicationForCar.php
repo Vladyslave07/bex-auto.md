@@ -32,11 +32,7 @@ class ApplicationForCar extends Component implements BaseForm
         $this->show = true;
         $fields = $this->validate();
 
-        $this->dispatchBrowserEvent('submitCarForm', [
-            'car_id' => $this->car->id,
-            'price' => $this->car->price,
-            'phone' => '+' . Str::phoneNumber($fields['phone']),
-        ]);
+
 
         $fields['phone'] = Str::phoneNumber($fields['phone']);
         $fields['car'] = $this->car->title;
@@ -50,7 +46,12 @@ class ApplicationForCar extends Component implements BaseForm
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
-        redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks', ['car_id' => $this->car->id])));
+        $this->dispatchBrowserEvent('submitCarForm', [
+            'car_id' => $this->car->id,
+            'price' => $this->car->price,
+            'phone' => '+' . Str::phoneNumber($fields['phone']),
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks', ['car_id' => $this->car->id])),
+        ]);
     }
 
     protected function rules()

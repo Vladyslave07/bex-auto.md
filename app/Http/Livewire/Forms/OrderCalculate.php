@@ -45,16 +45,16 @@ class OrderCalculate extends Component implements BaseForm
         $fields = $this->addUtmMarks($fields);
         $result = FormResult::query()->create($fields);
 
-        $this->dispatchBrowserEvent('submitOrderCalculateForm', [
-            'phone' => '+' . Str::phoneNumber($this->phone),
-        ]);
-
         // Send result to B24
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
-       redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
+        $this->dispatchBrowserEvent('submitOrderCalculateForm', [
+            'phone' => '+' . Str::phoneNumber($this->phone),
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks'))
+        ]);
+
     }
 
     protected function rules()

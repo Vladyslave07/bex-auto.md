@@ -77,16 +77,15 @@ class DiscountForm extends Component implements BaseForm
         $result = FormResult::query()->create($fields);
         $this->show = false;
 
-        $this->dispatchBrowserEvent('submitDiscountForm', [
-            'phone' => '+' . Str::phoneNumber($this->phone),
-        ]);
-
         // Send result to B24
         if ($result->id > 0) {
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
-        redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
+        $this->dispatchBrowserEvent('submitDiscountForm', [
+            'phone' => '+' . Str::phoneNumber($this->phone),
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')),
+        ]);
     }
 
     protected function rules()

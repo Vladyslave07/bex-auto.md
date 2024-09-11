@@ -44,10 +44,6 @@ class AutoForZsu extends Component implements BaseForm
 
         $data = $this->addUtmMarks($data);
 
-        $this->dispatchBrowserEvent('submitAutoForZSUForm', [
-            'phone' => '+' . $formattedPhone,
-        ]);
-
         $result = FormResult::query()->create($data);
 
         // Send result to B24
@@ -55,7 +51,10 @@ class AutoForZsu extends Component implements BaseForm
             FormResultToB24::dispatch($result->id)->onQueue('formResultToB24')->onConnection(app('domain')->getDomain()->getQueueConnection());
         }
 
-        return redirect(LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks')));
+        $this->dispatchBrowserEvent('submitAutoForZSUForm', [
+            'phone' => '+' . $formattedPhone,
+            'link' => LaravelLocalization::getLocalizedUrl(app()->getLocale(), route('thanks'))
+        ]);
     }
 
     public function render()

@@ -16,5 +16,8 @@
 <script>
     window.addEventListener('submitCallBackForm', event => {
         window.formSubmit(event.detail.phone);
+        if (event.detail.link) {
+            window.location.href = event.detail.link;
+        }
     })
 </script>
