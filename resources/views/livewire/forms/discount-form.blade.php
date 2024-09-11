@@ -7,7 +7,7 @@
                 <div class="modal-body">
                     <img width="500" height="500" src="{{ Storage::disk('public')->url($popup->image) }}" alt="" loading="lazy">
                     <!-- <p class="text-center">{{ Setting::get('discount_form_title') }}</p> -->
-                    <form wire:submit.prevent="submit" class="form-discount" novalidate autocomplete="off">
+                    <form wire:submit.prevent="submit" class="form-discount discountForm" novalidate autocomplete="off">
                         <div class="form-group">
                             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
                             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -24,6 +24,11 @@
     </div>
 
     <script>
+        document.querySelector('.discountForm').addEventListener('submit', e => {
+            let phone = e.target.querySelector('input[data-type="tel"]');
+            window.formSubmit('+' + phone.value.replace(/[^0-9]/g, ''));
+        });
+
         document.addEventListener("DOMContentLoaded", (event) => {
             window.showForm = false;
             window.addEventListener('scroll', showDiscountForm);
@@ -52,7 +57,6 @@
         }
 
         window.addEventListener('submitDiscountForm', event => {
-            window.formSubmit(event.detail.phone);
             if (event.detail.link) {
                 window.location.href = event.detail.link;
             }

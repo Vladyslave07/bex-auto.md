@@ -1,5 +1,5 @@
 <div>
-    <form class="form-choose-car" wire:submit.prevent="submit" novalidate autocomplete="off">
+    <form class="form-choose-car forZsu" wire:submit.prevent="submit" novalidate autocomplete="off">
         <div class="title">{{ $this->title }}</div>
         <div class="form-group">
             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');">
@@ -14,8 +14,12 @@
 </div>
 
 <script>
+    document.querySelector('.forZsu').addEventListener('submit', e => {
+        let phone = e.target.querySelector('input[data-type="tel"]');
+        window.formSubmit('+' + phone.value.replace(/[^0-9]/g, ''));
+    });
+
     window.addEventListener('submitAutoForZSUForm', event => {
-        window.formSubmit(event.detail.phone);
         if (event.detail.link) {
             window.location.href = event.detail.link;
         }

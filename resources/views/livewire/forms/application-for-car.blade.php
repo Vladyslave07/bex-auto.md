@@ -5,7 +5,7 @@
                 <svg class="close-modal" width="10" height="10"><use xlink:href="#close-icon"></use></svg>
                 <div class="modal-body">
                     <p class="text-center">{{ Setting::get('buy_car_from') }}</p>
-                    <form wire:submit.prevent="submit" novalidate autocomplete="off">
+                    <form wire:submit.prevent="submit" class="appForCar" novalidate autocomplete="off">
                         <div class="form-group">
                             <input wire:model.defer="name" class="form-control @error('name') is-invalid @enderror" placeholder="@lang('forms.name')" type="text" oninput="this.value = this.value.replace(/[0-9]/g, '');" required>
                             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -23,6 +23,11 @@
 </div>
 
 <script>
+    document.querySelector('.appForCar').addEventListener('submit', e => {
+        let phone = e.target.querySelector('input[data-type="tel"]');
+        window.formSubmit('+' + phone.value.replace(/[^0-9]/g, ''));
+    });
+
     window.addEventListener('submitCarForm', event => {
         if (typeof fbq == 'function') {
             fbq('track', 'AddToCart', {
@@ -33,8 +38,6 @@
                 }
             );
         }
-        window.formSubmit(event.detail.phone);
-
         if (event.detail.link) {
             window.location.href = event.detail.link;
         }

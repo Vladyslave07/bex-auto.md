@@ -1,5 +1,5 @@
 <div class="form">
-    <form wire:submit.prevent="submit" novalidate autocomplete="off">
+    <form wire:submit.prevent="submit" class="buyAndDelivery" novalidate autocomplete="off">
         <div class="form-body">
             <div class="header">
                 <h3>{{ Setting::get('buy_and_delivery_title_form') }}</h3>
@@ -37,8 +37,12 @@
 </div>
 
 <script>
+    document.querySelector('.buyAndDelivery').addEventListener('submit', e => {
+        let phone = e.target.querySelector('input[data-type="tel"]');
+        window.formSubmit('+' + phone.value.replace(/[^0-9]/g, ''));
+    });
+
     window.addEventListener('submitBuyAndDeliveryAutoForm', event => {
-        window.formSubmit(event.detail.phone);
         if (event.detail.link) {
             window.location.href = event.detail.link;
         }
