@@ -22,7 +22,9 @@ class BtnTextCrudController extends CrudController
 {
     use \Backpack\CRUD\app\Http\Controllers\Operations\ListOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\CreateOperation;
-    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation;
+    use \Backpack\CRUD\app\Http\Controllers\Operations\UpdateOperation {
+        update as traitUpdate;
+    }
     use \Backpack\CRUD\app\Http\Controllers\Operations\DeleteOperation;
     use \Backpack\CRUD\app\Http\Controllers\Operations\ShowOperation;
     use ShowOperation;
@@ -145,5 +147,21 @@ class BtnTextCrudController extends CrudController
     protected function setupUpdateOperation()
     {
         $this->setupCreateOperation();
+    }
+
+    public function update()
+    {
+        if ($categories = $this->crud->getRequest()->get('categories')) {
+            $categories = array_filter($categories, function ($value) {
+                return !is_null($value);
+            });
+            if (empty($categories)) {
+                $this->crud->getRequest()->request->set('categories', null);
+            }
+        }
+
+        $response = $this->traitUpdate();
+
+        return $response;
     }
 }
