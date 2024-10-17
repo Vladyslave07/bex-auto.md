@@ -87,13 +87,13 @@ class ImageHelper
         if ($pos) {
             return sprintf('%s %s %s', $alt, $pos, $site);
         }
-        return sprintf('%s %s', $alt, $site);
+        return sprintf('%s %s', htmlspecialchars($alt), $site);
     }
 
     public static function title($alt, $pos = ''): string
     {
         $pos = $pos ? "- $pos" : '';
-        return sprintf('%s %s', $alt, $pos);
+        return sprintf('%s %s', htmlspecialchars($alt), $pos);
     }
 
 }
