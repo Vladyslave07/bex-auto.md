@@ -6,11 +6,13 @@
                     <time class="date" datetime="2021-09-02">{{ $article->created_at->diffForHumans() }}</time>
                     <a href="{{ route('news_detail', [$article->slug]) }}">
                         {!! \App\Helper\ImageHelper::getPicture($article->image,
-                            \App\Helper\ImageHelper::alt($article->title, $loop->index, getenv(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN ? 'KZ_APP_DOMAIN' : 'APP_DOMAIN')),
-                            \App\Helper\ImageHelper::title($article->title, $loop->index)
+                            \App\Helper\ImageHelper::alt(htmlspecialchars($article->title), $loop->index, getenv(app('domain')->getDomain()->slug == \App\Models\Domain::KAZACHSTAN_SLUG_DOMAIN ? 'KZ_APP_DOMAIN' : 'APP_DOMAIN')),
+                            \App\Helper\ImageHelper::title(htmlspecialchars($article->title), $loop->index)
                             ) !!}
                     </a>
-                    <a href="{{ route('news_detail', [$article->slug]) }}" class="title">{{ $article->title }}</a>
+                    <a href="{{ route('news_detail', [$article->slug]) }}" class="title">
+                        {{ $article->title }}
+                    </a>
                     @if($article->preview_text)
                         <div class="description">{!! $article->preview_text !!}</div>
                     @endif
